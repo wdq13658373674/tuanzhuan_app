@@ -12,9 +12,9 @@ Vue.config.productionTip = false;
  */
 axios.interceptors.request.use(function (config) {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  config.headers['appid'] = 'fjhdc';
-  config.headers['auth-key'] = 'FJHDC2018';
-  config.headers['user-agent'] = 'FJH_VISITER';
+  config.headers['appid'] = 'tuanzhuan_app';
+  config.headers['auth-key'] = 'TUANZHUANW2018';
+  config.headers['user-agent'] = 'TZ_VISITER';
 
   return config;
 });
