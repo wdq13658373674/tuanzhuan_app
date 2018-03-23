@@ -1,23 +1,31 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <loading :show="loading"></loading>
+
+    <router-view  class="router-view"></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
-</script>
+  import '@/assets/js/public.js'
+  import {Loading} from 'vux'
+  import {mapState} from 'vuex'
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  export default {
+    name: 'App',
+    data(){
+      return{
+
+      }
+    },
+    components:{
+      Loading
+    },
+    computed: {
+      ...mapState(['loading'])
+    }
+  }
+</script>
+<style lang="less">
+  @import './assets/css/common.css';
 </style>
