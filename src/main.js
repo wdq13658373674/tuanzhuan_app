@@ -4,7 +4,8 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import axios from 'axios'
-
+import VueLazyload from 'vue-lazyload'
+import {  } from 'vux'
 /**
  * fastclick
  * **/
@@ -23,12 +24,20 @@ Vue.config.productionTip = false;
  */
 axios.interceptors.request.use(function (config) {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  config.headers['appid'] = 'tuanzhuan_app';
-  config.headers['auth-key'] = 'TUANZHUANW2018';
-  config.headers['user_agent'] = 'FJH_VISITER';
+  /*config.headers['appid'] = 'fjhdc';
+  config.headers['auth-key'] = 'FJHDC2018';
+  config.headers['user_agent'] = 'FJH_VISITER';*/
 
   return config;
 });
+
+/**图片懒加载**/
+Vue.use(VueLazyload,{
+  preLoad: 1.3,
+  error: '../static/images/404.png',
+  loading: '../static/images/loading.gif',
+  attempt: 1
+})
 
 /**
  * store状态管理
@@ -106,9 +115,11 @@ router.beforeEach((to,from,next)=>{
 
 router.afterEach(function (to,from) {
   isPush = false;
-   setTimeout(function () {
+   /*setTimeout(function () {
      store.commit('load',false);
-   },500)
+   },500)*/
+
+  store.commit('load',false);
 })
 
 /**

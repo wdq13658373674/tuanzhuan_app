@@ -25,6 +25,6 @@
     name: "Property",
   }
 </script>
-<style lang="less" scoped>
+<style lang="css">
   @import '../../assets/css/property.css';
 </style>

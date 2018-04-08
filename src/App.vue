@@ -26,6 +26,18 @@
     }
   }
 </script>
-<style lang="less">
+<style lang="scss">
   @import './assets/css/common.css';
+
+  @import "core/base";
+  .vux-loading{
+    .weui-toast{
+      top:50%;
+      margin-top: rem(-190);
+
+      .weui-icon_toast.weui-loading{
+       @include wh(rem(70),rem(70));
+      }
+    }
+  }
 </style>

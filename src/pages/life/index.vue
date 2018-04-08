@@ -1,0 +1,28 @@
+<template>
+  <section class="page-group">
+    <h2 class="h2"><i class="icon address mr10"></i>扬子江商务中心</h2>
+    <div class="menu-property">
+      <a class="menu" href="#">
+        <img class="img" src="@/assets/images/img/f_img1.jpg" alt="">
+        <p class="p">电费</p>
+      </a>
+      <a class="menu" href="#">
+        <img class="img" src="@/assets/images/img/f_img2.png" alt="">
+        <p class="p">水费</p>
+      </a>
+      <a class="menu" href="#">
+        <img class="img" src="@/assets/images/img/f_img3.png" alt="">
+        <p class="p">气费</p>
+      </a>
+    </div>
+  </section>
+</template>
+
+<script>
+  export default {
+    name: "Life",
+  }
+</script>
+<style lang="css" scoped>
+  @import '../../assets/css/property.css';
+</style>

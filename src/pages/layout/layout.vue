@@ -13,6 +13,14 @@
           <i class="icon phone"></i>
         </a>
       </div>
+
+      <router-link to="/" class="link pull-right" v-if="rightNav==='home'"  slot="right">
+        <i class="icon home2"></i>
+      </router-link>
+
+      <a class="link pull-right" v-if="rightNav==='cart'"  slot="right">
+        <i class="icon cart"></i>
+      </a>
     </bar-nav>
 
     <transition :name="viewTransition">
@@ -42,11 +50,24 @@
         return 'vux-pop-' + (this.direction === 'forward' ? 'in' : 'out')
       },
       title(){
+        if(this.$route.params.title){
+          return this.$route.params.title;
+        }
         return this.$route.meta.title ? this.$route.meta.title : ' '
       },
       indexNav(){
-        if(this.$route.name=="Index"){
+        if(this.$route.name=="Index" || this.$route.name=='Service'){
           return true;
+        }
+
+        return false;
+      },
+      rightNav(){
+        if(this.$route.name=="ShopDetail"){
+          return 'home';
+        }
+        if(this.$route.name=="ShopCategory"){
+          return 'cart';
         }
 
         return false;

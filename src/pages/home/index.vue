@@ -1,135 +1,209 @@
 <template>
   <div>
-    <!--section-->
     <section class="page-group">
-      <div class="content">
-        <div class="banner" style="">
-          <div class="clearfix">
-            <div class="pull-left day">14</div>
-            <div class="pull-left date">
-              <p>
-                <span class="mr10">星期三</span>
-                <span>农历二月十六</span>
+      <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
+        <div class="content">
+          <div class="banner" style="">
+            <div class="clearfix">
+              <div class="pull-left day">14</div>
+              <div class="pull-left date">
+                <p>
+                  <span class="mr10">星期三</span>
+                  <span>农历二月十六</span>
+                </p>
+                <p>2018年三月</p>
+              </div>
+            </div>
+            <div class="temp">
+              <span class="mr10">小雨</span>
+              <span>气温24°C</span>
+            </div>
+          </div>
+
+          <div class="menu-index">
+            <router-link to="/property" class="item">
+              <img class="img" src="@/assets/images/icons/menu1.svg" alt="">
+              <p class="txt">物业缴费</p>
+            </router-link>
+            <router-link to="/life" class="item">
+              <img class="img" src="@/assets/images/icons/menu2.svg" alt="">
+              <p class="txt">生活缴费</p>
+            </router-link>
+            <a href="#" class="item">
+              <img class="img" src="@/assets/images/icons/menu3.svg" alt="">
+              <p class="txt">投诉建议</p>
+            </a>
+            <a href="#" class="item">
+              <img class="img" src="@/assets/images/icons/menu4.svg" alt="">
+              <p class="txt">报事报修</p>
+            </a>
+            <a href="#" class="item">
+              <img class="img" src="@/assets/images/icons/menu5.svg" alt="">
+              <p class="txt">全部服务</p>
+            </a>
+          </div>
+
+          <div class="tips">
+            <span class="pull-left f24 mr10"><i class="icon notice mr10"></i></span>
+            <div class="pull-left">
+              <marquee>
+                <marquee-item v-for="i in 5" :key="i" class="align-middle">
+                  <router-link :to="{ path: '/article/detail', query: { id: i }}"> <span>通知:</span> 关于团转到家植树节活动的通知 {{i}}</router-link>
+                </marquee-item>
+              </marquee>
+            </div>
+
+            <router-link to="article" class="pull-right gray" append>更多<i class="ml10 icon arrow"></i></router-link>
+          </div>
+
+          <h1 class="h1">
+            <em class="pull-left">生活服务</em>
+            <a class="pull-right gray">更多<i class="ml10 icon arrow"></i></a>
+          </h1>
+
+          <div class="life-list">
+            <a href="#" class="item">
+              <div class="img-box">
+                <img class="img" src="@/assets/images/test/img3.jpg" alt="">
+              </div>
+              <p class="txt">日常保洁日常保洁日常保洁</p>
+            </a>
+            <a href="#" class="item">
+              <div class="img-box">
+                <img class="img" src="@/assets/images/test/img1.jpg" alt="">
+              </div>
+              <p class="txt">日常保洁日常保洁日常保洁</p>
+            </a>
+            <a href="#" class="item">
+              <div class="img-box">
+                <img class="img" src="@/assets/images/test/img1.jpg" alt="">
+              </div>
+              <p class="txt">日常保洁日常保洁日常保洁</p>
+            </a>
+            <a href="#" class="item">
+              <div class="img-box">
+                <img class="img" src="@/assets/images/test/img1.jpg" alt="">
+              </div>
+              <p class="txt">日常保洁日常保洁日常保洁</p>
+            </a>
+            <a href="#" class="item">
+              <div class="img-box">
+                <img class="img" src="@/assets/images/test/img1.jpg" alt="">
+              </div>
+              <p class="txt">日常保洁日常保洁日常保洁</p>
+            </a>
+          </div>
+
+        </div>
+
+        <div class="content mt20">
+          <h1 class="h1">
+            <em class="pull-left">团转商城</em>
+            <router-link to="shop" class="pull-right gray">更多<i class="ml10 icon arrow"></i></router-link>
+          </h1>
+
+          <div class="shop-list mb70">
+            <a href="#" class="item" v-for="img in list">
+              <div class="img-box">
+                <img class="img" v-lazy="img" alt="">
+              </div>
+              <p class="p1">每次章鱼陶瓷刀6寸1把(系列)每次章鱼陶瓷刀6寸1把(系列)</p>
+              <p class="p2">
+                <i class="icon tp mr10"></i>
+                <span class="orange">29.00</span>
+                <span class="shop-mark yellow-bg">满减</span>
+                <span class="shop-mark pink-bg">五折</span>
               </p>
-              <p>2018年三月</p>
-            </div>
+              <p class="p3">
+                <span class="pull-left">¥170.00</span>
+                <span class="gray pull-right">已售1096</span>
+              </p>
+            </a>
           </div>
-          <div class="temp">
-            <span class="mr10">小雨</span>
-            <span>气温24°C</span>
-          </div>
         </div>
 
-        <div class="menu-index">
-          <router-link to="/property" class="item">
-            <img class="img" src="@/assets/images/icons/menu1.svg" alt="">
-            <p class="txt">物业缴费</p>
-          </router-link>
-          <a href="#" class="item">
-            <img class="img" src="@/assets/images/icons/menu2.svg" alt="">
-            <p class="txt">生活缴费</p>
-          </a>
-          <a href="#" class="item">
-            <img class="img" src="@/assets/images/icons/menu3.svg" alt="">
-            <p class="txt">投诉建议</p>
-          </a>
-          <a href="#" class="item">
-            <img class="img" src="@/assets/images/icons/menu4.svg" alt="">
-            <p class="txt">报事报修</p>
-          </a>
-          <a href="#" class="item">
-            <img class="img" src="@/assets/images/icons/menu5.svg" alt="">
-            <p class="txt">全部服务</p>
-          </a>
-        </div>
-
-        <div class="tips">
-          <i class="icon notice"></i>
-          <a class="f24">通知： 关于团转到家植树节活动的通知</a>
-          <a class="pull-right gray">更多<i class="ml10 icon arrow"></i></a>
-        </div>
-
-        <h1 class="h1">
-          <em class="pull-left">生活服务</em>
-          <a class="pull-right gray">更多<i class="ml10 icon arrow"></i></a>
-        </h1>
-
-        <div class="life-list">
-          <a href="#" class="item">
-            <div class="img-box">
-              <img class="img" src="@/assets/images/test/img1.jpg" alt="">
-            </div>
-            <p class="txt">日常保洁日常保洁日常保洁</p>
-          </a>
-        </div>
-      </div>
-
-      <div class="content mt20">
-        <h1 class="h1">
-          <em class="pull-left">团转商城</em>
-          <a class="pull-right gray">更多<i class="ml10 icon arrow"></i></a>
-        </h1>
-
-        <div class="shop-list mb70">
-          <a href="#" class="item">
-            <div class="img-box">
-              <img class="img" src="@/assets/images/test/img1.jpg" alt="">
-            </div>
-            <p class="p1">每次章鱼陶瓷刀6寸1把(系列)每次章鱼陶瓷刀6寸1把(系列)</p>
-            <p class="p2">
-              <i class="icon tp mr10"></i>
-              <span class="orange">29.00</span>
-              <span class="shop-mark yellow-bg">满减</span>
-              <span class="shop-mark pink-bg">五折</span>
-            </p>
-            <p class="p3">
-              <span class="pull-left">¥170.00</span>
-              <span class="gray pull-right">已售1096</span>
-            </p>
-          </a>
-        </div>
+        <load-more class="load-more" tip="正在加载" v-show="busy"></load-more>
       </div>
     </section>
-
-    <!--pop-->
-    <popup v-model="showPop">
-      <div class="popup1">
-        <p style="height:300px;">hahahahahahah</p>
-      </div>
-    </popup>
-    <!--pop-->
   </div>
 </template>
 
 <script>
-  import {Marquee, MarqueeItem ,Popup } from 'vux'
+  import {Marquee, MarqueeItem , Scroller , LoadMore} from 'vux'
+  import infiniteScroll from 'vue-infinite-scroll'
 
   export default {
     name: "Index",
+    directives: {infiniteScroll},
     components:{
       Marquee,
       MarqueeItem,
-      Popup,
+      Scroller,
+      LoadMore
     },
     data(){
       return{
-        data:[],
+        list: [
+          'https://o5omsejde.qnssl.com/demo/test1.jpg',
+          'https://o5omsejde.qnssl.com/demo/test2.jpg',
+          'https://o5omsejde.qnssl.com/demo/test0.jpg',
+          'https://o5omsejde.qnssl.com/demo/test4.jpg',
+          'https://o5omsejde.qnssl.com/demo/test5.jpg',
+          'https://o5omsejde.qnssl.com/demo/test6.jpg',
+          'https://o5omsejde.qnssl.com/demo/test7.jpg',
+          'https://o5omsejde.qnssl.com/demo/test8.jpg'
+        ],
         busy:false,
-        showPop:false
+        newsLists:[]
       }
     },
+    mounted:function(){
+      this.getNewsLists();
+    },
     methods:{
-      pop:function(){
-        this.showPop=!this.showPop;
+      getNewsLists:function(){
+        const param={
+          'notic_village_id' : 1
+        }
+
+        this.$axios.get('index/House_notic/getTitle',{
+          params : param
+        }).then(res=>{
+
+          this.newsLists = res;
+
+        }).catch(err=>{
+          console.log('my err:'+err);
+        })
+      },
+      loadMore: function() {
+        this.busy = true;
+
+        setTimeout(() => {
+          for (var i = 0, j = 8; i < j; i++) {
+            this.list.push('https://o5omsejde.qnssl.com/demo/test'+i+'.jpg');
+          }
+          this.busy = false;
+        }, 1000);
       }
     }
   }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
   @import '../../assets/css/index.css';
+</style>
+<style lang="scss">
+  @import "../../core/base";
 
-  .popup1{
-    z-index: 99999;
+  .load-more{
+    &.weui-loadmore{
+      font-size:rem(24);
+      margin: rem(20) auto rem(55);
+    }
+
+    .weui-loading{
+      @include wh(rem(50),rem(50));
+    }
   }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <footer>
     <div class="footer">
-      <a href="#" class="item active">
+      <router-link to="/" class="item">
         <i class="icon icon1"></i>
         首页
-      </a>
-      <a href="#" class="item">
+      </router-link>
+      <router-link to="/service" class="item">
         <i class="icon icon2"></i>
         服务
-      </a>
+      </router-link>
       <a href="#" class="item">
         <i class="door"></i>
         一键开门
@@ -17,10 +17,10 @@
         <i class="icon icon3"></i>
         邻聚
       </a>
-      <a href="#" class="item">
+      <router-link to="/login" class="item">
         <i class="icon icon4"></i>
         我的
-      </a>
+      </router-link>
     </div>
   </footer>
 </template>

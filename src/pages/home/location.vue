@@ -1,12 +1,11 @@
 <template>
   <div>
     <section class="page-group">
-      <div class="content">
-        <div class="search pull-left">
-          <input class="input" type="text" placeholder="请输入小区名称">
-        </div>
-        <a href="#" class="search-btn pull-right">确定</a>
-      </div>
+      <search
+        class="tz-search"
+        placeholder="请输入商品名称"
+        :auto-fixed="false"
+        v-model="value"></search>
 
       <h2 class="h2">当前小区</h2>
       <ul class="cell-list">
@@ -38,10 +37,19 @@
 </template>
 
 <script>
+  import { Search } from 'vux'
   export default {
     name: "Location",
     components:{
-
+      Search
+    },
+    data () {
+      return {
+        value: 'test'
+      }
     }
   }
 </script>
+<style lang="scss">
+  @import "../../core/base";
+</style>

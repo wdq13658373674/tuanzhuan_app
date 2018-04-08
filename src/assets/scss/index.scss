@@ -1,0 +1,65 @@
+@import "../../core/base";
+
+.banner{
+  margin-top:rem(15);
+  padding:rem(24);
+  @include wh(auto,rem(304));
+  background: url('../images/test/img3.jpg') no-repeat;
+  background-size:cover;
+  color:#464646;
+
+  .day{
+    @include wh(auto,rem(74),rem(74));
+    font-size:rem(56);
+    margin-right:rem(10);
+  }
+
+  .date{
+    @include wh(auto,rem(74),rem(37));
+    font-size:rem(20);
+  }
+
+  .temp{
+    font-size: rem(24);
+    margin-top:rem(160);
+  }
+}
+
+.menu-index{
+  padding:rem(34) 0;
+  @extend %flex;
+  text-align: center;
+
+  .img{
+    @include wh(rem(68),rem(68));
+    margin-bottom:rem(10);
+  }
+}
+
+.tips{
+  @include wh(auto,rem(64),rem(64));
+  overflow: hidden;
+  border-bottom:rem(1) solid $grayLight;
+}
+
+.life-list{
+  @extend %flex;
+
+  .item{
+    @include wh(rem(120),auto);
+    text-align: center;
+    margin:rem(40) 0;
+  }
+
+  .img-box{
+    @include wh(100%,rem(138),rem(138));
+    overflow: hidden;
+  }
+
+  .txt{
+    width:100%;
+    margin-top:rem(20);
+    @extend %ellipsis-basic;
+  }
+}
+
