@@ -47,8 +47,8 @@
             <span class="pull-left f24 mr10"><i class="icon notice mr10"></i></span>
             <div class="pull-left">
               <marquee>
-                <marquee-item v-for="i in 5" :key="i" class="align-middle">
-                  <router-link :to="{ path: '/article/detail', query: { id: i }}"> <span>通知:</span> 关于团转到家植树节活动的通知 {{i}}</router-link>
+                <marquee-item v-for="item in newsLists" :key="item.id" class="align-middle">
+                  <router-link :to="{ path: '/article/detail', query: { id: item.id }}">{{item.notic_title}}</router-link>
                 </marquee-item>
               </marquee>
             </div>
@@ -131,6 +131,7 @@
 <script>
   import {Marquee, MarqueeItem , Scroller , LoadMore} from 'vux'
   import infiniteScroll from 'vue-infinite-scroll'
+  import getMap from '@/libs/bMap'
 
   export default {
     name: "Index",
@@ -154,27 +155,55 @@
           'https://o5omsejde.qnssl.com/demo/test8.jpg'
         ],
         busy:false,
-        newsLists:[]
+        newsLists:[],
+        goodsLists:[]
       }
     },
     mounted:function(){
       this.getNewsLists();
+      this.getGoodsLists();
+    },
+    computed: {
+
     },
     methods:{
       getNewsLists:function(){
-        const param={
+        /*const param={
           'notic_village_id' : 1
         }
 
         this.$axios.get('index/House_notic/getTitle',{
           params : param
         }).then(res=>{
-
-          this.newsLists = res;
-
+          res=res.data;
+          this.newsLists = res.data;
         }).catch(err=>{
           console.log('my err:'+err);
-        })
+        })*/
+      },
+      getGoodsLists:function(){
+        let self=this;
+        /*getMap(function (points) {
+          let param={
+            lat:points.lat,
+            lng:points.lng
+          }*/
+         /* let param={
+            lat:29.54460611,
+            lng:106.53063501
+          }
+
+          self.$axios.get('/index/Goods/IndexGoods',{
+            params:param
+          }).then(res=>{
+            res=res.data;
+            if(res.status==0){
+
+            }
+          }).catch(err=>{
+            console.log('my err:'+err);
+          })*/
+        // })
       },
       loadMore: function() {
         this.busy = true;
@@ -195,15 +224,4 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
-
-  .load-more{
-    &.weui-loadmore{
-      font-size:rem(24);
-      margin: rem(20) auto rem(55);
-    }
-
-    .weui-loading{
-      @include wh(rem(50),rem(50));
-    }
-  }
 </style>

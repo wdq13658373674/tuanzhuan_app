@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loading :show="loading"></loading>
+    <loading :show="loading" class="my-loading"></loading>
 
     <router-view  class="router-view"></router-view>
   </div>
@@ -30,14 +30,49 @@
   @import './assets/css/common.css';
 
   @import "core/base";
-  .vux-loading{
+  /*loading*/
+  .weui-loading_toast{
     .weui-toast{
       top:50%;
       margin-top: rem(-190);
 
       .weui-icon_toast.weui-loading{
-       @include wh(rem(70),rem(70));
+        @include wh(rem(70),rem(70));
       }
+    }
+
+    .weui-toast__content{
+      font-size:rem(24);
+    }
+  }
+
+  /*toast*/
+  .vux-toast{
+    .weui-toast_text{
+      .weui-toast__content{
+        padding:rem(20) !important;
+        font-size:rem(24);
+      }
+    }
+  }
+
+  /*alert*/
+  .vux-alert{
+    .weui-dialog{
+      width:auto;
+      min-width: 40%;
+      max-width: 80%;
+    }
+
+    .weui-dialog__bd {
+      padding: 0 1.6em 0.8em;
+      min-height:rem(40);
+      font-size:rem(28);
+    }
+
+    .weui-dialog__ft {
+      line-height: rem(80);
+      font-size:rem(28);
     }
   }
 </style>

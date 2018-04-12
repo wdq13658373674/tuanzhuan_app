@@ -15,6 +15,9 @@
           </p>
         </li>-->
         <li class="item">
+          <x-address title="" value-text-align="left" :list="addressData" placeholder="请选择地址"></x-address>
+        </li>
+        <li class="item">
           <input class="input" type="text" placeholder="请输入小区名">
         </li>
         <li class="item">
@@ -54,15 +57,16 @@
 </template>
 
 <script>
-  import {  } from 'vux'
+  import { XAddress, ChinaAddressV4Data } from 'vux'
   export default {
     name: "ShopAddAddress",
     components: {
-
+      XAddress
     },
     data () {
       return {
         sex:'ms',
+        addressData:ChinaAddressV4Data
       }
     },
     methods: {
@@ -75,4 +79,35 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
+
+  .vux-popup-picker-container{
+    .vux-popup-header {
+      height: rem(90);
+      line-height:rem(90);
+      font-size: rem(34);
+    }
+
+    .scroller-component{
+      height:rem(500);
+    }
+
+    .scroller-indicator{
+      height:rem(74);
+      top:rem(213);
+    }
+
+    .scroller-item {
+      font-size: rem(34);
+      height: rem(74);
+      line-height: rem(74);
+    }
+
+    .scroller-mask{
+      background-size: 100% rem(213);
+    }
+
+    .scroller-content{
+      top:rem(-9);
+    }
+  }
 </style>

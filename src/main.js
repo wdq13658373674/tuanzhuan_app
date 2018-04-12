@@ -1,15 +1,23 @@
 import Vue from 'vue'
 import FastClick from 'fastclick'
-import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueLazyload from 'vue-lazyload'
-import {  } from 'vux'
+import { ToastPlugin , AlertPlugin} from 'vux'
+import App from './App'
+
 /**
  * fastclick
  * **/
 FastClick.attach(document.body);
+Vue.use(ToastPlugin, {
+  position: 'top',
+  type:'text',
+  time:3000,
+  width:'auto'
+})
+Vue.use(AlertPlugin)
 
 /**
  * vuex
@@ -24,9 +32,9 @@ Vue.config.productionTip = false;
  */
 axios.interceptors.request.use(function (config) {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  /*config.headers['appid'] = 'fjhdc';
-  config.headers['auth-key'] = 'FJHDC2018';
-  config.headers['user_agent'] = 'FJH_VISITER';*/
+  /*config.headers['appid'] = 'tz_app';
+  config.headers['auth-key'] = 'tz_app2018';
+  config.headers['user_agent'] = 'tz_app_VISITER';*/
 
   return config;
 });
@@ -45,7 +53,8 @@ Vue.use(VueLazyload,{
 const store = new Vuex.Store({
   state:{
     loading:false,
-    direction:'forward'
+    direction:'forward',
+    userInfo:''
   },
   mutations:{
     load(state,loading){
@@ -53,11 +62,14 @@ const store = new Vuex.Store({
     },
     transfer(state, direction) {
       state.direction = direction
+    },
+    update_user(state,userInfo){
+      state.userInfo = userInfo
     }
   },
   actions:{
 
-  }
+  },
 })
 
 /**
@@ -81,17 +93,26 @@ methods.forEach(key => {
   }
 })
 
+const storeJs = require('storejs');
 router.beforeEach((to,from,next)=>{
   store.commit('load',true);
 
   const fromIndex = history.getItem(from.path)
   const toIndex = history.getItem(to.path)
 
-  //设置 title
-  /*if (to.meta.title) {
-    document.title = to.meta.title
-  }*/
+  /**登陆拦截**/
+  if (to.meta.requireAuth){
+    if (storeJs('userInfo')) {
+      next();
+    }else {
+      next({
+        path: '/login',
+        query: {redirect: router.currentRoute.fullPath}
+      })
+    }
+  }
 
+  /**转场动画**/
   if (toIndex) {
     if (!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
       store.commit('transfer', 'forward')
@@ -112,13 +133,8 @@ router.beforeEach((to,from,next)=>{
 
   next()
 })
-
 router.afterEach(function (to,from) {
   isPush = false;
-   /*setTimeout(function () {
-     store.commit('load',false);
-   },500)*/
-
   store.commit('load',false);
 })
 
@@ -129,6 +145,8 @@ axios.interceptors.request.use(config=>{
   store.commit('load',true);
   return config;
 },err=>{
+  store.commit('load',false);
+  Vue.$vux.toast.show('加载超时');
   return Promise.reject(err);
 })
 
@@ -136,6 +154,8 @@ axios.interceptors.response.use(response=>{
   store.commit('load',false);
   return response;
 },err=>{
+  store.commit('load',false);
+  Vue.$vux.toast.show('加载失败');
   return Promise.reject(err);
 })
 
@@ -148,4 +168,5 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
+  // render: h => h(App)
 });

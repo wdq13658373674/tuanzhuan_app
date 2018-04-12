@@ -163,6 +163,7 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
+  /*swiper*/
   .detail-swiper{
     height:rem(750);
     background: #fff;
@@ -177,36 +178,42 @@
     }
   }
 
+  /*计数*/
   .xnumber{
-    .vux-number-selector{
-      @include wh(auto,rem(50),rem(50));
-      min-width:rem(53);
-      text-align: center;
-      border:rem(1) solid $gray;
+    .vux-cell-primary>div{
+      border:1px solid #BBBBBB;
+      overflow: hidden;
+      @include border-radius(rem(10));
+    }
+    .vux-number-selector {
+      @include wh(auto,rem(50));
+      font-size: 25px;
+      border: none;
 
-      svg{
-        fill:$black;
-        width:rem(30);
-        height:rem(25);
+      svg {
+        @include wh(rem(30),rem(30));
+        margin-top:rem(10);
       }
     }
 
-    .vux-number-selector-sub{
-      padding:0;
-      border-radius: rem(8) 0 0 rem(8);
+    .vux-number-input {
+      min-width:rem(100);
+      height: rem(50);
+      font-size: rem(28);
+      color: #000;
+      border: none;
+      text-align: center;
     }
 
-    .vux-number-selector-plus{
-      padding:0;
-      border-radius: 0 rem(8) rem(8) 0;
+    .vux-number-selector-sub {
+      border-right: 1px solid #BBBBBB;
+      padding: 0 rem(20);
+      border-radius: 0;
     }
-
-    .vux-number-input{
-      width:rem(109) !important;
-      border-top:rem(1) solid $gray;
-      border-bottom:rem(1) solid $gray;
-      font-size:rem(28);
-      height:rem(50);
+    .vux-number-selector-plus {
+      border-left: 1px solid #BBBBBB;
+      padding: 0 rem(20);
+      margin-right:0;
       border-radius: 0;
     }
   }

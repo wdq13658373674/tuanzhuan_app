@@ -4,9 +4,11 @@ import Router from 'vue-router'
 import Footer from '@/pages/layout/footer'
 import Layout from '@/pages/layout/layout'
 
-import Login from '@/pages/common/login'
-import Register from '@/pages/common/register'
-import Code from '@/pages/common/code'
+import Login from '@/pages/sign/login'
+import Register from '@/pages/sign/register'
+import Password from '@/pages/sign/password'
+import Repassword from '@/pages/sign/repassword'
+import ForgetPassword from '@/pages/sign/forgetPassword'
 import Index from '@/pages/home/index'
 import Location from '@/pages/home/location'
 import Property from '@/pages/property/index'
@@ -22,6 +24,7 @@ import ShopCategorys from '@/pages/shop/categorys'
 import ShopOrder from '@/pages/shop/order'
 import ShopAddress from '@/pages/shop/address'
 import ShopAddAddress from '@/pages/shop/addAddress'
+import User from '@/pages/user/index'
 
 Vue.use(Router)
 
@@ -29,6 +32,9 @@ export default new Router({
   // mode:'history',
   saveScrollPosition : false,
   linkExactActiveClass:'active',
+  /*scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  },*/
   routes: [
     {
       path: '/',
@@ -188,9 +194,27 @@ export default new Router({
       component: Register,
     },
     {
-      path: '/code',
-      name: 'Code',
-      component: Code,
+      path: '/password/:phone/:code',
+      name: 'Password',
+      component: Password,
+    },
+    {
+      path: '/forgetPassword',
+      name: 'ForgetPassword',
+      component: ForgetPassword,
+    },
+    {
+      path: '/repassword/:phone/:code',
+      name: 'Repassword',
+      component: Repassword,
+    },
+    {
+      path: '/user',
+      name: 'User',
+      meta: {
+        requireAuth: true,
+      },
+      component: User,
     }
   ]
 })

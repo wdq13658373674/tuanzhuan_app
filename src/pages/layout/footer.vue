@@ -17,7 +17,7 @@
         <i class="icon icon3"></i>
         邻聚
       </a>
-      <router-link to="/login" class="item">
+      <router-link to="/user" class="item">
         <i class="icon icon4"></i>
         我的
       </router-link>

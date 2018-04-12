@@ -22,7 +22,7 @@
     props: ["title"],
     methods: {
       back() {
-        this.$router ? this.$router.back() : window.history.back()
+        this.$router ? this.$router.back(-1) : window.history.back()
       }
     }
   }

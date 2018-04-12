@@ -1,0 +1,82 @@
+@charset "utf-8";
+//-----------------------------------------------------
+// form scss
+// 提交按钮样式基于_btn.scss
+// 交互提示报错信息样式基于_message.scss
+//-----------------------------------------------------
+
+
+//变量
+//---------------------------------
+$formItemMargin:           10px !default; //上下元素的间距
+$formLabelWidth:           100px !default; //当label和元素同行时，label的宽度
+$formTextWidth:            200px !default; //输入框的宽度
+$formTextarea:             500px 80px !default; //文本域宽度和高度
+$formEleHeight:            28px !default; //输入框的高度，label的高度，选择框的高度...
+$formInlineMargin:         10px !default; //相邻同行元素的间距
+$formUploadBgColor:        $primary !default; //upload按钮默认背景颜色
+$formRadius:               0 !default; //圆角大小，默认0将不会产生圆角
+
+$formBasicResetSwitch:     false !default; //是否开启表单元素基本重置，如果你已经有了重置或normalize，就不用开启了。
+$formMsgSwitch:            false !default; //是否开启报错等信息，如设为true则需导入message.scss
+$formConditionSwitch:      false !default; //是否开启条件选项
+
+$formHorizontalSwitch:     false !default; //是否启用水平表单样式
+$formInlineSwitch:         false !default; //是否启用单行表单样式
+$formSimpleSwitch:         false !default; //是否启用简洁表单样式
+
+
+// 基本重置
+//---------------------------------
+@if $formBasicResetSwitch {
+	.form-text,
+	.form-select,
+	.form-raido,
+	.form-checkbox,
+	.form-textarea,
+	.form-file,
+	.formbtn {
+	    font-family: inherit;
+	    font-size: 100%;
+	    margin: 0;
+	    vertical-align: middle;
+	}
+}
+
+
+// mixin
+//---------------------------------
+// radio & checkbox 的重置
+@mixin reset-radio-checkbox{
+	margin:0 5px 0 0;
+	padding:0;
+	font-size:13px;	
+	//ie6,7得设置宽度和高度才能表现和其他浏览器一样的重置
+	//radio和checkbox的大小为13px
+	@if $lte7 {
+		width:13px;
+		height:13px;
+	}
+}
+// 默认的样式mixin定义
+// 定义了border，padding及圆角
+@mixin ele-border($borderColor:$gray, $radius:$baseRadius){
+	border: 1px solid $borderColor;
+	padding:4px;
+	@if not(unitless($formRadius)) {
+		border-radius: $formRadius;
+	}
+}
+// 边框及阴影的动画效果
+@mixin ele-border-transition(){
+	@include ele-border;
+	@include transition(border linear 0.2s, box-shadow linear 0.2s);
+	@include box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.1));
+
+	&:focus{
+		border-color: rgba(82, 168, 236, 0.8);
+		@include box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6));
+	}
+}
+
+

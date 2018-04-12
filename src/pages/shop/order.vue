@@ -20,6 +20,7 @@
           <span class="txt">期望送达时间 [预计16:29]</span>
           <span class="f60 gray"> &rsaquo; </span>
         </h4>
+
         <router-link to="/shop/address" class="order-address">
           <p class="p">重庆 重庆 渝北区 扬子江商务中心扬子江商务中心扬子江商务中心扬子江商务中心 22楼</p>
           <p class="p">
@@ -154,12 +155,12 @@
     name: "ShopOrder",
     components: {
       Popup,
-      Scroller
+      Scroller,
     },
     data () {
       return {
         popControl:false,
-        own:'one'
+        own:'one',
       }
     },
     methods: {

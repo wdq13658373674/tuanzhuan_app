@@ -4,12 +4,12 @@
       <router-link to="/shop/search" class="search-link">外套</router-link>
     </div>
     <div class="shop-filter">
-      <span class="item orange">销量优先</span>
-      <span class="item" @click="sortPrice" :class="price?'active':''">
+      <span class="item">销量优先</span>
+      <span class="item" @click="sortPrice">
         价格排序
         <i class="icon sort" :class="up"></i>
       </span>
-      <span class="item" @click="sortFilter" :class="filter?'active':''">
+      <span class="item" @click="sortFilter">
         筛选
         <i class="icon filter"></i>
       </span>

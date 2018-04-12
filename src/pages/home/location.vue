@@ -5,7 +5,10 @@
         class="tz-search"
         placeholder="请输入商品名称"
         :auto-fixed="false"
-        v-model="value"></search>
+        cancel-text="搜索"
+        @on-cancel="submit"
+        v-model="search">
+      </search>
 
       <h2 class="h2">当前小区</h2>
       <ul class="cell-list">
@@ -45,7 +48,12 @@
     },
     data () {
       return {
-        value: 'test'
+        search: 'test'
+      }
+    },
+    methods:{
+      submit:function(){
+        console.log(this.search);
       }
     }
   }

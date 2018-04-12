@@ -4,94 +4,12 @@
       <div class="classify-list">
         <scroller height="100%" lock-x>
           <ul>
-            <li class="item active">
+            <li class="item"
+                v-for="(item,index) in tabs"
+                :class="{active:index==tabIndex}"
+                @click="tab(index)">
               <p class="txt">
                 <span class="span">家居日用</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">家居日用</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">家居日用</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
-              </p>
-            </li>
-            <li class="item">
-              <p class="txt">
-                <span class="span">折扣区</span>
               </p>
             </li>
           </ul>
@@ -232,11 +150,14 @@
     },
     data () {
       return {
-
+        tabIndex:0,
+        tabs:['家居日用','折扣区','折扣区','折扣区']
       }
     },
     methods: {
-
+      tab:function(index){
+        this.tabIndex=index;
+      }
     },
   }
 </script>

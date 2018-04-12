@@ -5,6 +5,7 @@
         <i class="icon address mr10"></i>
         <span class="name">扬子江扬子江上午小区扬子江上午小区扬子江上午小区扬子江上午小区上午小区</span>
       </router-link>
+
       <div v-if="indexNav"  slot="right" class="pull-right">
         <a>
           <i class="icon ew"></i>

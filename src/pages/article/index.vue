@@ -2,7 +2,9 @@
   <section class="page-group">
     <ul class="post-list">
         <li class="item" v-for="(item,index) in newsLists" :key="index">
-        <p class="p1">
+          <router-link class="link" :to="{ path: 'detail', query: { id: item.id }}" append>
+
+          <p class="p1">
           <span class="mark-bg mr20" :style="{background:item.notic_style}" v-if="item.notic_sort!=''">{{item.notic_sort}}</span>
           <span>{{item.notic_title}}</span>
         </p>
@@ -11,16 +13,15 @@
           <span>阅读量：{{item.notic_read}}</span>
         </p>
         <p class="p3">
-          <router-link class="link" :to="{ path: 'detail', query: { id: item.id }}" append>
             查看详情
             <i class="icon arrow pull-right"></i>
-          </router-link>
         </p>
-      </li>
+          </router-link>
+        </li>
 
-      <li v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
-        <!--<load-more class="load-more" tip="正在加载" v-show="busy"></load-more>-->
-        <h3 class="no-more" v-show="busy">
+      <li v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+        <load-more class="load-more" tip="正在加载" v-show="load"></load-more>
+        <h3 class="no-more mb40" v-show="!load">
           <span class="tit">- 没有更多记录了 -</span>
         </h3>
       </li>
@@ -40,12 +41,13 @@
     data(){
       return {
         busy:false,
+        load:false,
         newsLists:[],
-        page:1
+        page:0
       }
     },
     mounted:function(){
-      this.getNewsLists();
+      this.loadMore();
     },
     methods:{
       getNewsLists(flag){
@@ -63,16 +65,19 @@
             //多次加载
             this.newsLists=this.newsLists.concat(res.data);
 
-            if(res.data.length == 0){
+            if(this.page >= res.last_page){
               this.busy=true;
+              this.load=false;
             }else {
               this.busy=false;
+              this.load=true;
             }
 
           }else {
             //第一次加载
             this.newsLists=res.data;
             this.busy=false;
+            this.load=false;
           }
 
         }).catch(err=>{
@@ -81,6 +86,7 @@
       },
       loadMore:function(){
         this.busy = true;
+        this.load = true;
         this.page++;
         this.getNewsLists(true);
       }
@@ -92,15 +98,4 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
-
-  .load-more{
-    &.weui-loadmore{
-      font-size:rem(24);
-      margin: rem(20) auto rem(55);
-    }
-
-    .weui-loading{
-      @include wh(rem(50),rem(50));
-    }
-  }
 </style>
