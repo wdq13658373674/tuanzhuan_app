@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <loading :show="loading" class="my-loading"></loading>
-
-    <router-view  class="router-view"></router-view>
+    <router-view v-transition></router-view>
+    <router-view name="footer"></router-view>
   </div>
 </template>
 
 <script>
   import '@/assets/js/public.js'
+  import getMap from '@/libs/bMap'
   import {Loading} from 'vux'
   import {mapState} from 'vuex'
 
@@ -21,6 +22,9 @@
     components:{
       Loading
     },
+    mounted(){
+      getMap();
+    },
     computed: {
       ...mapState(['loading'])
     }
@@ -28,7 +32,6 @@
 </script>
 <style lang="scss">
   @import './assets/css/common.css';
-
   @import "core/base";
   /*loading*/
   .weui-loading_toast{
@@ -74,5 +77,12 @@
       line-height: rem(80);
       font-size:rem(28);
     }
+  }
+
+  .animated{
+    position:absolute;
+    width:100%;
+    min-height:100%;
+    background-color: #f4f4f4;
   }
 </style>

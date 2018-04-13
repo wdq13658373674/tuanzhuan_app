@@ -1,27 +1,34 @@
 <template>
-  <section class="page-group">
-    <div class="content post-detail">
-      <p class="p1">
-        <span class="mark-bg mr20" :style="{background:newsDetail.notic_style}" v-if="newsDetail.notic_sort!=''">{{newsDetail.notic_sort}}</span>
-        <span>{{newsDetail.notic_title}}</span>
-      </p>
-      <p class="p2">
-        <span class="date">{{newsDetail.add_time}}</span>
-        <span>阅读量：{{newsDetail.notic_read}}</span>
-      </p>
-      <div class="con mt20 mb40">
-        {{newsDetail.notic_content}}
+  <div>
+    <barNav title="公告详情"></barNav>
+    <section class="page-group">
+      <div class="content post-detail">
+        <p class="p1">
+          <span class="mark-bg mr20" :style="{background:newsDetail.notic_style}" v-if="newsDetail.notic_sort!=''">{{newsDetail.notic_sort}}</span>
+          <span>{{newsDetail.notic_title}}</span>
+        </p>
+        <p class="p2">
+          <span class="date">{{newsDetail.add_time}}</span>
+          <span>阅读量：{{newsDetail.notic_read}}</span>
+        </p>
+        <div class="con mt20 mb40">
+          {{newsDetail.notic_content}}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 <script>
+  import barNav from '@/pages/layout/barNav'
   export default {
     name: "ArticleDetail",
     data(){
       return {
         newsDetail:[]
       }
+    },
+    components:{
+      barNav
     },
     mounted:function(){
       this.getNewDetail();

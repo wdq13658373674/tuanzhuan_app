@@ -45,6 +45,7 @@
 
         this.$axios.post('/index/index/registration',qs.stringify(params)).then(res=>{
           res=res.data;
+          console.log(res);
 
           this.$vux.toast.show({
             text: res.msg
@@ -59,7 +60,7 @@
       },
       login:function(){
         let loginParams={
-          'mobile':this.phone,
+          'mobile':this.$route.params.phone,
           'password':this.password,
         }
 
@@ -73,7 +74,8 @@
           }
 
           storeJs({
-            'userInfo':res.data.ret
+            'userInfo':res.data.user,
+            'homeInfo':res.data.room
           });
           this.$router.push('/');
         }).catch(err=>{

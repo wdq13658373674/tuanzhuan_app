@@ -15,9 +15,9 @@
       </div>
 
       <!--商家配送-->
-      <div v-show="own=='one'">
+      <div v-if="own=='one'">
         <h4 href="#" class="h4" @click="popControl=!popControl">
-          <span class="txt">期望送达时间 [预计16:29]</span>
+          <span class="txt">期望送达时间 [预计{{timeValue}}]</span>
           <span class="f60 gray"> &rsaquo; </span>
         </h4>
 
@@ -32,7 +32,7 @@
       <!--商家配送-->
 
       <!--到店自提-->
-      <h4 v-show="own=='two'" class="h4">
+      <h4 v-if="own=='two'" class="h4">
         <span class="txt">邻水县西城御府房计划售房部</span>
         <span class="f60 gray"> &rsaquo; </span>
       </h4>
@@ -123,23 +123,22 @@
         <h5 class="tit">送达时间</h5>
         <div class="time-box">
           <div class="nav-list">
-            <span class="item active">今日</span>
-            <span class="item">明日</span>
+            <span class="item"
+                  v-for="(item,index) in tabs"
+                  :class="{active:index==tabIndex}"
+                  @click="tab(index)"
+            >{{item}}</span>
           </div>
 
           <div class="con">
           <scroller height="100%" lock-x>
-            <div>
-              <p class="p">尽快送达17:15</p>
-              <p class="p">尽快送达17:15 <span class="gray">(3元配送费)</span></p>
-              <p class="p">尽快送达17:15</p>
-              <p class="p">尽快送达17:15</p>
-              <p class="p">尽快送达17:15</p>
-              <p class="p">尽快送达17:15</p>
-              <p class="p">尽快送达17:15</p>
-              <p class="p">尽快送达17:15</p>
-              <p class="p">尽快送达17:15</p>
-            </div>
+            <group>
+              <radio title="title" :options="options" v-model="timeValue" @on-change="popControl=false">
+                <template slot-scope="props" slot="each-item">
+                  尽快送达 {{ props.label }} <span class="gray">(3元配送费)</span>
+                </template>
+              </radio>
+            </group>
           </scroller>
           </div>
         </div>
@@ -150,21 +149,29 @@
 </template>
 
 <script>
-  import { Popup , Scroller} from 'vux'
+  import { Popup ,Group, Scroller,Radio} from 'vux'
   export default {
     name: "ShopOrder",
     components: {
       Popup,
+      Group,
       Scroller,
+      Radio
     },
     data () {
       return {
+        tabIndex:0,
+        tabs:['今日','明日'],
+        options:['17:15',22,3,4,5,9,19,29,39,49,59,10],
+        timeValue:'17:15',
         popControl:false,
         own:'one',
       }
     },
     methods: {
-
+      tab:function(index){
+        this.tabIndex=index;
+      },
     },
   }
 </script>
@@ -173,4 +180,18 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
+
+  .weui-cells.vux-no-group-title{
+    margin-top:0;
+  }
+  .weui-cells_radio{
+    .weui-cell{
+      padding:rem(30) rem(27) rem(30) rem(0);
+      font-size:rem(24);
+    }
+
+    .weui-check:checked+.weui-icon-checked:before {
+      font-size: .5rem !important;
+    }
+  }
 </style>

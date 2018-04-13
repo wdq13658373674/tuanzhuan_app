@@ -39,6 +39,9 @@
         password:'',
       }
     },
+    mounted(){
+      storeJs.clear();
+    },
     methods:{
       submit:function(){
         storeJs.clear();

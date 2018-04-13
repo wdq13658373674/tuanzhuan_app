@@ -3,15 +3,15 @@
     <bar-nav :title="title">
       <router-link to="location" class="link pull-left" v-if="indexNav"  slot="left">
         <i class="icon address mr10"></i>
-        <span class="name">扬子江扬子江上午小区扬子江上午小区扬子江上午小区扬子江上午小区上午小区</span>
+        <span class="name">{{village_name}}</span>
       </router-link>
 
       <div v-if="indexNav"  slot="right" class="pull-right">
-        <a>
-          <i class="icon ew"></i>
-        </a>
-        <a class="ml10">
+        <a class="ml10 pull-right">
           <i class="icon phone"></i>
+        </a>
+        <a class="pull-right">
+          <i class="icon ew"></i>
         </a>
       </div>
 
@@ -24,10 +24,7 @@
       </a>
     </bar-nav>
 
-    <transition :name="viewTransition">
-      <router-view  class="router-view"></router-view>
-    </transition>
-
+    <router-view v-transition></router-view>
     <router-view name="footer"></router-view>
   </div>
 </template>
@@ -35,11 +32,17 @@
 <script>
   import BarNav from './barNav'
   import {mapState} from 'vuex'
+  const storeJs=require('storejs');
 
   export default {
     name: 'Layout',
     components:{
       BarNav
+    },
+    data(){
+      return {
+        village_name:''
+      }
     },
     computed: {
       ...mapState(['direction']),
@@ -77,36 +80,5 @@
   }
 </script>
 <style lang="less" scoped>
-  /*转场动画*/
-  .router-view {
-    width: 100%;
-  }
-  .vux-pop-out-enter-active,
-  .vux-pop-out-leave-active,
-  .vux-pop-in-enter-active,
-  .vux-pop-in-leave-active {
-    will-change: transform;
-    transition: all 400ms ease-in-out;
-    height: 100%;
-    top:1.76rem;
-    position: absolute;
-    backface-visibility: hidden;
-    perspective: 1000;
-  }
-  .vux-pop-out-enter {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
-  .vux-pop-out-leave-active {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-  .vux-pop-in-enter {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-  }
-  .vux-pop-in-leave-active {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-  }
+
 </style>

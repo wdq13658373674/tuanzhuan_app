@@ -13,7 +13,7 @@ const options={
   duration: '0.3',
   forwardAnim: 'fadeInRight', //前进动画
   backAnim: 'fadeInLeft', //后退动画
-  sameDepthDisable: true, //url深度相同时禁用动画，默认为false
+  sameDepthDisable: false, //url深度相同时禁用动画，默认为false
   shadow:true, //值为false，转场时没有阴影的层次效果
   disable: false, //禁用转场动画，默认为false，嵌套路由默认为true
   nuxt: false //若使用后端渲染框架Nuxt，需要将此设为true，默认为false
@@ -66,21 +66,52 @@ Vue.use(VueLazyload,{
 const store = new Vuex.Store({
   state:{
     loading:false,
+    direction:'forward',
     userInfo:''
   },
   mutations:{
     load(state,loading){
       state.loading=loading;
     },
+    /*transfer(state, direction) {
+      state.direction = direction
+    },
+    update_user(state,userInfo){
+      state.userInfo = userInfo
+    }*/
   },
   actions:{
 
   },
 })
 
+/**
+ * 路由拦截
+ * **/
+/*const history = window.sessionStorage
+let historyCount = history.getItem('count') * 1 || 0
+history.setItem('/', 0)
+let isPush = false
+let endTime = Date.now()
+let methods = ['push', 'go', 'replace', 'forward', 'back']
+
+document.addEventListener('touchend', () => {
+  endTime = Date.now()
+})
+methods.forEach(key => {
+  let method = router[key].bind(router)
+  router[key] = function (...args) {
+    isPush = true
+    method.apply(null, args)
+  }
+})*/
+
 const storeJs = require('storejs');
 router.beforeEach((to,from,next)=>{
   store.commit('load',true);
+
+  /*const fromIndex = history.getItem(from.path)
+  const toIndex = history.getItem(to.path)*/
 
   /**登陆拦截**/
   if (to.meta.requireAuth){
@@ -93,9 +124,30 @@ router.beforeEach((to,from,next)=>{
       })
     }
   }
+
+  /**转场动画**/
+  /*if (toIndex) {
+    if (!fromIndex || parseInt(toIndex, 10) > parseInt(fromIndex, 10) || (toIndex === '0' && fromIndex === '0')) {
+      store.commit('transfer', 'forward')
+    } else {
+      // 判断是否是ios左滑返回
+      if (!isPush && (Date.now() - endTime) < 377) {
+        store.commit('transfer', '')
+      } else {
+        store.commit('transfer', 'reverse')
+      }
+    }
+  } else {
+    ++historyCount
+    history.setItem('count', historyCount)
+    to.path !== '/' && history.setItem(to.path, historyCount)
+    store.commit('transfer', 'forward')
+  }*/
+
   next()
 })
 router.afterEach(function (to,from) {
+  // isPush = false;
   store.commit('load',false);
 })
 

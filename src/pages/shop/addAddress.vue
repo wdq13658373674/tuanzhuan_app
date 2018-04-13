@@ -80,6 +80,12 @@
 <style lang="scss">
   @import "../../core/base";
 
+  .vux-popup-picker-select-box{
+    .vux-popup-picker-placeholder{
+      color:#bbbbbb;
+    }
+  }
+
   .vux-popup-picker-container{
     .vux-popup-header {
       height: rem(90);

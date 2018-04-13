@@ -3,7 +3,9 @@
     <div class="nav-bar">
       <slot name="left">
         <span @click="back" class="link pull-left">
-            <i class="icon arrow2"></i>
+          <slot name="leftIcon">
+               <i class="icon arrow2"></i>
+          </slot>
         </span>
       </slot>
 

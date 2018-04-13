@@ -7,22 +7,10 @@
     <swiper class="index-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
 
     <div class="menu-shop">
-      <router-link :to="{ name: 'ShopCategory', params: { title: '休闲食品' }}" class="item">
-        <img class="img" src="@/assets/images/img/d_menu1.png" alt="">
-        <p class="txt">休闲食品</p>
+      <router-link :to="{ name: 'ShopCategory', params: { title: '休闲食品' }}" class="item" v-for="item in categorys">
+        <img class="img" :src="item.type_logo" alt="">
+        <p class="txt">{{item.type_name}}</p>
       </router-link>
-      <a href="#" class="item">
-        <img class="img" src="@/assets/images/img/d_menu2.png" alt="">
-        <p class="txt">蔬菜水果</p>
-      </a>
-      <a href="#" class="item">
-        <img class="img" src="@/assets/images/img/d_menu3.png" alt="">
-        <p class="txt">粮油调味</p>
-      </a>
-      <a href="#" class="item">
-        <img class="img" src="@/assets/images/img/d_menu4.png" alt="">
-        <p class="txt">饮料酒水</p>
-      </a>
       <router-link to="categorys" class="item" append>
         <img class="img" src="@/assets/images/img/d_menu5.png" alt="">
         <p class="txt">全部分类</p>
@@ -63,53 +51,27 @@
       </p>
     </div>
 
-    <div class="content mt20">
+    <div class="content mt20" v-for="item in shopLists">
       <h3 class="h3 mt40">
-        <span class="tit">团转精选</span>
+        <span class="tit">{{item.position_name}}</span>
         <span class="tit-line"></span>
       </h3>
 
       <div class="shop-list mb40">
-        <a href="#" class="item">
+        <a href="#" class="item" v-for="goods in item.goods">
           <div class="img-box">
-            <img class="img" src="@/assets/images/test/img4.png" alt="">
+            <img class="img" v-lazy="goods.goods_logo" alt="">
           </div>
-          <p class="p1">每次章鱼陶瓷刀6寸1把(系列)每次章鱼陶瓷刀6寸1把(系列)</p>
+          <p class="p1">{{goods.goods_name}}</p>
           <p class="p2">
             <i class="icon tp mr10"></i>
-            <span class="orange">29.00</span>
-            <span class="shop-mark yellow-bg">满减</span>
-            <span class="shop-mark pink-bg">五折</span>
+            <span class="orange">{{goods.goods_tcion}}</span>
+            <!--<span class="shop-mark yellow-bg">满减</span>-->
+            <span class="shop-mark pink-bg">{{goods.goods_discount}}折</span>
           </p>
           <p class="p3">
-            <span class="pull-left">¥170.00</span>
-            <span class="gray pull-right">已售1096</span>
-          </p>
-        </a>
-      </div>
-    </div>
-
-    <div class="content mt20">
-      <h3 class="h3 mt40">
-        <span class="tit">新品首发</span>
-        <span class="tit-line"></span>
-      </h3>
-
-      <div class="shop-list mb70">
-        <a href="#" class="item">
-          <div class="img-box">
-            <img class="img" src="@/assets/images/test/img4.png" alt="">
-          </div>
-          <p class="p1">每次章鱼陶瓷刀6寸1把(系列)每次章鱼陶瓷刀6寸1把(系列)</p>
-          <p class="p2">
-            <i class="icon tp mr10"></i>
-            <span class="orange">29.00</span>
-            <span class="shop-mark yellow-bg">满减</span>
-            <span class="shop-mark pink-bg">五折</span>
-          </p>
-          <p class="p3">
-            <span class="pull-left">¥170.00</span>
-            <span class="gray pull-right">已售1096</span>
+            <span class="pull-left">¥{{goods.goods_price}}</span>
+            <span class="gray pull-right">已售{{goods.goods_sell_count}}</span>
           </p>
         </a>
       </div>
@@ -141,8 +103,52 @@
           title: '',
           fallbackImg: 'https://static.vux.li/demo/3.jpg'
         }],
+        lat:29.60335600,
+        lng:106.50352700,
+        categorys:'',
+        shopLists:''
       }
-    }
+    },
+    mounted(){
+      this.getCategorys();
+      this.getShopLists();
+    },
+    methods:{
+      getCategorys:function(){
+        let params={
+          lat:this.lat,
+          lng:this.lng,
+        }
+
+        this.$axios.get('/index/Goods/classify',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          if(res.status==0){
+              this.categorys=res.data;
+          }
+        }).catch(err=>{
+          cnsole.log('my err:'+err);
+        })
+      },
+      getShopLists:function(){
+        let params={
+          lat:this.lat,
+          lng:this.lng,
+        }
+
+        this.$axios.get('/index/Goods/position',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          if(res.status==0){
+            this.shopLists=res.data;
+          }
+        }).catch(err=>{
+          cnsole.log('my err:'+err);
+        })
+      }
+    },
   }
 </script>
 <style lang="css" scoped>

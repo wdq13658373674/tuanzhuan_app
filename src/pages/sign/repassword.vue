@@ -44,6 +44,7 @@
 
         this.$axios.post('/index/index/newPassword',qs.stringify(params)).then(res=>{
           res=res.data;
+          console.log(res);
 
           if(res.status==1){
             this.$vux.toast.show(res.msg);

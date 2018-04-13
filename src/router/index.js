@@ -36,9 +36,8 @@ export default new Router({
     return { x: 0, y: 0 }
   },*/
   routes: [
-    {
+    /*{
       path: '/',
-      name: 'Layout',
       component: Layout,
       children: [
         {
@@ -182,6 +181,146 @@ export default new Router({
           }
         },
       ]
+    },*/
+    {
+      path: '/',
+      name: 'Index',
+      components:{
+        default:Index,
+        footer:Footer
+      }
+    },
+    {
+      path: '/location',
+      name: 'Location',
+      component: Location,
+      meta: {
+        title: '选择小区'
+      }
+    },
+    {
+      path: '/property',
+      name: 'Property',
+      component: Property,
+      meta: {
+        title: '物业'
+      }
+    },
+    {
+      path: '/life',
+      name: 'Life',
+      meta: {
+        title: '生活缴费'
+      },
+      components:{
+        default:Life
+      }
+    },
+    {
+      path: '/article',
+      name: 'Article',
+      meta: {
+        title: '社区公告'
+      },
+      components:{
+        default:Article
+      }
+    },
+    {
+      path: '/article/detail',
+      name: 'ArticleDetail',
+      meta: {
+        title: '公告详情'
+      },
+      components:{
+        default:ArticleDetail
+      }
+    },
+    {
+      path: '/service',
+      name: 'Service',
+      components:{
+        default:Service,
+        footer:Footer
+      }
+    },
+    {
+      path: '/shop',
+      name: 'Shop',
+      meta: {
+        title: '团转商城'
+      },
+      components:{
+        default:Shop,
+        footer:Footer
+      }
+    },
+    {
+      path: '/shop/detail',
+      name: 'ShopDetail',
+      meta: {
+        title: '商品详情'
+      },
+      components:{
+        default:ShopDetail,
+      }
+    },
+    {
+      path: '/shop/category/:title',
+      name: 'ShopCategory',
+      components:{
+        default:ShopCategory,
+      }
+    },
+    {
+      path: '/shop/categorys',
+      name: 'ShopCategorys',
+      meta: {
+        title: '全部分类'
+      },
+      components:{
+        default:ShopCategorys,
+      }
+    },
+    {
+      path: '/shop/search',
+      name: 'ShopSearch',
+      meta: {
+        title: '搜索商品'
+      },
+      components:{
+        default:ShopSearch,
+      }
+    },
+    {
+      path: '/shop/order',
+      name: 'ShopOrder',
+      meta: {
+        title: '提交订单'
+      },
+      components:{
+        default:ShopOrder,
+      }
+    },
+    {
+      path: '/shop/address',
+      name: 'ShopAddress',
+      meta: {
+        title: '选择地址'
+      },
+      components:{
+        default:ShopAddress,
+      }
+    },
+    {
+      path: '/shop/address/add',
+      name: 'ShopAddAddress',
+      meta: {
+        title: '添加地址'
+      },
+      components:{
+        default:ShopAddAddress,
+      }
     },
     {
       path: '/login',

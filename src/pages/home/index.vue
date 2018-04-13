@@ -1,5 +1,6 @@
 <template>
   <div>
+    <indexNav></indexNav>
     <section class="page-group">
       <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
         <div class="content">
@@ -103,20 +104,20 @@
           </h1>
 
           <div class="shop-list mb70">
-            <a href="#" class="item" v-for="img in list">
+            <a href="#" class="item" v-for="item in goodsLists">
               <div class="img-box">
-                <img class="img" v-lazy="img" alt="">
+                <img class="img" v-lazy="item.goods_logo" alt="">
               </div>
-              <p class="p1">每次章鱼陶瓷刀6寸1把(系列)每次章鱼陶瓷刀6寸1把(系列)</p>
+              <p class="p1">{{item.goods_name}}</p>
               <p class="p2">
                 <i class="icon tp mr10"></i>
-                <span class="orange">29.00</span>
-                <span class="shop-mark yellow-bg">满减</span>
-                <span class="shop-mark pink-bg">五折</span>
+                <span class="orange">{{item.goods_tcion}}</span>
+                <!--<span class="shop-mark yellow-bg">满减</span>-->
+                <span class="shop-mark pink-bg">{{item.goods_discount}}折</span>
               </p>
               <p class="p3">
-                <span class="pull-left">¥170.00</span>
-                <span class="gray pull-right">已售1096</span>
+                <span class="pull-left">¥{{item.goods_price}}</span>
+                <span class="gray pull-right">已售{{item.goods_sell_count}}</span>
               </p>
             </a>
           </div>
@@ -129,14 +130,16 @@
 </template>
 
 <script>
+  import indexNav from '@/pages/layout/indexNav'
   import {Marquee, MarqueeItem , Scroller , LoadMore} from 'vux'
   import infiniteScroll from 'vue-infinite-scroll'
-  import getMap from '@/libs/bMap'
+  const storeJs=require('storejs');
 
   export default {
     name: "Index",
     directives: {infiniteScroll},
     components:{
+      indexNav,
       Marquee,
       MarqueeItem,
       Scroller,
@@ -144,7 +147,7 @@
     },
     data(){
       return{
-        list: [
+        /*list: [
           'https://o5omsejde.qnssl.com/demo/test1.jpg',
           'https://o5omsejde.qnssl.com/demo/test2.jpg',
           'https://o5omsejde.qnssl.com/demo/test0.jpg',
@@ -153,10 +156,12 @@
           'https://o5omsejde.qnssl.com/demo/test6.jpg',
           'https://o5omsejde.qnssl.com/demo/test7.jpg',
           'https://o5omsejde.qnssl.com/demo/test8.jpg'
-        ],
+        ],*/
         busy:false,
+        load:false,
+        page:0,
         newsLists:[],
-        goodsLists:[]
+        goodsLists:[],
       }
     },
     mounted:function(){
@@ -168,7 +173,7 @@
     },
     methods:{
       getNewsLists:function(){
-        /*const param={
+        const param={
           'notic_village_id' : 1
         }
 
@@ -179,41 +184,29 @@
           this.newsLists = res.data;
         }).catch(err=>{
           console.log('my err:'+err);
-        })*/
+        })
       },
       getGoodsLists:function(){
-        let self=this;
-        /*getMap(function (points) {
-          let param={
-            lat:points.lat,
-            lng:points.lng
-          }*/
-         /* let param={
-            lat:29.54460611,
-            lng:106.53063501
+         let param={
+           lat:29.60335600,
+           lng:106.50352700,
           }
 
-          self.$axios.get('/index/Goods/IndexGoods',{
+          this.$axios.get('/index/Goods/IndexGoods',{
             params:param
           }).then(res=>{
             res=res.data;
+            console.log(res);
             if(res.status==0){
-
+              this.goodsLists=res.data.goods;
             }
           }).catch(err=>{
             console.log('my err:'+err);
-          })*/
-        // })
+          })
       },
       loadMore: function() {
-        this.busy = true;
-
-        setTimeout(() => {
-          for (var i = 0, j = 8; i < j; i++) {
-            this.list.push('https://o5omsejde.qnssl.com/demo/test'+i+'.jpg');
-          }
-          this.busy = false;
-        }, 1000);
+        /*this.busy = true;
+        this.page++;*/
       }
     }
   }

@@ -7,9 +7,10 @@
             <li class="item"
                 v-for="(item,index) in tabs"
                 :class="{active:index==tabIndex}"
-                @click="tab(index)">
+                @click="tab(index)"
+            >
               <p class="txt">
-                <span class="span">家居日用</span>
+                <span class="span">{{item}}</span>
               </p>
             </li>
           </ul>
@@ -154,9 +155,30 @@
         tabs:['家居日用','折扣区','折扣区','折扣区']
       }
     },
+    mounted(){
+      this.getCategorys();
+    },
     methods: {
       tab:function(index){
         this.tabIndex=index;
+      },
+      getCategorys:function(){
+        let params={
+          lat:29.60335600,
+          lng:106.50352700,
+        }
+
+        this.$axios.get('/index/Goods/classify',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          console.log(res);
+          if(res.status==0){
+
+          }
+        }).catch(err=>{
+          cnsole.log('my err:'+err);
+        })
       }
     },
   }
