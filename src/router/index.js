@@ -113,7 +113,7 @@ export default new Router({
           }
         },
         {
-          path: '/shop/category/:title',
+          path: '/shop/category',
           name: 'ShopCategory',
           components:{
             default:ShopCategory,

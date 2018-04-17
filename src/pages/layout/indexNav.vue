@@ -34,7 +34,7 @@
     },
     methods: {
       getVillage:function(){
-        if(this.roomInfo){
+        if(this.roomInfo && this.roomInfo.village_name){
           this.village_name=this.roomInfo.village_name;
         }
       }

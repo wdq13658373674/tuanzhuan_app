@@ -1,6 +1,5 @@
 <template>
   <div>
-    <barNav title="社区公告"></barNav>
     <section class="page-group">
       <ul class="post-list">
         <li class="item" v-for="(item,index) in newsLists" :key="index">
@@ -32,7 +31,6 @@
   </div>
 </template>
 <script>
-  import barNav from '@/pages/layout/barNav'
   import infiniteScroll from 'vue-infinite-scroll'
   import { LoadMore} from 'vux'
 
@@ -40,7 +38,6 @@
     name: "Article",
     directives: {infiniteScroll},
     components:{
-      barNav,
       LoadMore
     },
     data(){

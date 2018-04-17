@@ -16,8 +16,9 @@
               </div>
             </div>
             <div class="temp">
-              <span class="mr10">小雨</span>
-              <span>气温24°C</span>
+              <span class="mr10">{{weather.weather}}</span>
+              <span>气温{{weather.temperature}}</span>
+              <span>{{weather.wind}}</span>
             </div>
           </div>
 
@@ -44,7 +45,7 @@
             </a>
           </div>
 
-          <div class="tips">
+          <div class="tips" v-if="newsLists">
             <span class="pull-left f24 mr10"><i class="icon notice mr10"></i></span>
             <div class="pull-left">
               <marquee>
@@ -123,7 +124,7 @@
           </div>
         </div>
 
-        <load-more class="load-more" tip="正在加载" v-show="busy"></load-more>
+        <!--<load-more class="load-more" tip="正在加载" v-show="busy"></load-more>-->
       </div>
     </section>
     <Footer></Footer>
@@ -137,7 +138,6 @@
   import {mapState} from 'vuex'
   import {Marquee, MarqueeItem , Scroller , LoadMore} from 'vux'
   import infiniteScroll from 'vue-infinite-scroll'
-  // const storeJs=require('storejs');
 
   export default {
     name: "Index",
@@ -165,8 +165,9 @@
         busy:false,
         load:false,
         page:0,
-        newsLists:[],
-        goodsLists:[],
+        weather:'',
+        newsLists:'',
+        goodsLists:'',
       }
     },
     computed:{
@@ -176,12 +177,36 @@
       this.getNewsLists();
       this.getGoodsLists();
       this.getMap();
+      this.getWeather();
     },
     methods:{
-      getNewsLists:function(){
-        console.log(this.roomInfo);
+      getMap:function(){
+        if(!this.roomInfo.village_name){
+          this.$router.push('/location');
+        }
+      },
+      getWeather:function(){
+        const url='https://bird.ioliu.cn/v1?url=';
+        let location=this.roomInfo.lng + ',' + this.roomInfo.lat;
+
         const param={
-          'notic_village_id' : 1
+          location:location,
+          output:'json',
+          ak:'4ChzIxMmmkgsV1uhED0baRa3XsZVG777'
+        }
+
+        this.$axios.get(url+'http://api.map.baidu.com/telematics/v3/weather',{
+          params:param
+        }).then(res=>{
+          res=res.data;
+          this.weather=res.results[0].weather_data[0];
+        }).catch(err=>{
+          console.log('my err:'+err);
+        })
+      },
+      getNewsLists:function(){
+        const param={
+          'notic_village_id' : this.roomInfo.village_id
         }
 
         this.$axios.get('index/House_notic/getTitle',{
@@ -195,8 +220,8 @@
       },
       getGoodsLists:function(){
          let param={
-           lat:29.60335600,
-           lng:106.50352700,
+           lat:this.roomInfo.lat,
+           lng:this.roomInfo.lng,
           }
 
           this.$axios.get('/index/Goods/IndexGoods',{
@@ -214,11 +239,6 @@
         /*this.busy = true;
         this.page++;*/
       },
-      getMap:function(){
-        if(!this.roomInfo){
-          this.$router.push('/location');
-        }
-      }
     }
   }
 </script>

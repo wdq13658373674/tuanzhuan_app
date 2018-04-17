@@ -7,7 +7,7 @@
         :auto-fixed="false"
         cancel-text="搜索"
         @on-cancel="submit"
-        v-model="search">
+        v-model="value">
       </search>
 
       <h2 class="h2" v-if="flag">我的小区</h2>
@@ -47,7 +47,7 @@
         flag:false,
         user_village:'',
         other_village:'',
-        search: ''
+        value:'re'
       }
     },
     computed:{
@@ -84,10 +84,12 @@
         })
       },
       changeVillage:function(item){
-        this.roomInfo.village_name=item.village_name;
-        this.roomInfo.lat=item.lat;
-        this.roomInfo.lng=item.lng;
-        this.$store.commit('update_roomInfo',this.roomInfo);
+        let roomInfo=this.roomInfo
+        roomInfo.village_name=item.village_name;
+        roomInfo.lat=item.lat;
+        roomInfo.lng=item.lng;
+        roomInfo.village_id=item.village_id;
+        this.$store.commit('update_roomInfo',roomInfo);
 
         this.$router.push('/');
       },

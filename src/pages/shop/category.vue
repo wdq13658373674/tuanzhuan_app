@@ -1,7 +1,11 @@
 <template>
   <section class="page-group">
     <div class="content">
-      <router-link to="/shop/search" class="search-link">外套</router-link>
+      <router-link :to="{path:'/shop/search',query:{
+        store_id:this.$route.query.store_id,
+        type_id:this.$route.query.type_id,
+        title:this.$route.query.title
+      }}" class="search-link">{{this.$route.query.title}}</router-link>
     </div>
     <div class="shop-filter">
       <span class="item">销量优先</span>
@@ -42,50 +46,29 @@
         <!--价格筛选-->
       </div>
     </div>
-    <masker class="masker" v-show="price || filter" :fullscreen="true"></masker>
+    <!--<masker class="masker" v-show="price || filter" :fullscreen="true"></masker>-->
 
     <ul class="shop-search-list">
-      <li class="item">
-        <a class="cell" href="#">
+      <li class="item" v-for="items in searchLists">
+        <router-link class="cell" to="">
           <div class="img-box">
-            <img class="img" src="@/assets/images/test/img4.png" alt="">
+            <img class="img" v-lazy="items.goods_logo" alt="">
           </div>
           <div class="con-box">
-            <p class="title">秋冬折扣 zara 女装 垫肩装饰夹克 基本款外套 皮外套 07894894712</p>
+            <p class="title">{{items.goods_name}}</p>
             <div>
-              <p class="mt10">
+              <!--<p class="mt10">
                 <span class="shop-mark yellow-bg">会员7折</span>
                 <span class="shop-mark pink-bg">满100减50</span>
-              </p>
+              </p>-->
               <p class="mt20">
                 <i class="icon tp mr10"></i>
-                <span class="orange">29.00</span>
-                <span>¥36.00</span>
+                <span class="orange">{{items.goods_tcion}}</span>
+                <span>¥{{items.goods_price}}</span>
               </p>
             </div>
           </div>
-        </a>
-      </li>
-      <li class="item">
-        <a class="cell" href="#">
-          <div class="img-box">
-            <img class="img" src="@/assets/images/test/img4.png" alt="">
-          </div>
-          <div class="con-box">
-            <p class="title">秋冬折扣 zara 女装 垫肩秋冬折扣 zara 女装 垫肩装秋冬折扣 zara 女装 垫肩装秋冬折扣 zara 女装 垫肩装秋冬折扣 zara 女装 垫肩装秋冬折扣 zara 女装 垫肩装秋冬折扣 zara 女装 垫肩装装饰夹克 基本款外套 皮外套 07894894712</p>
-            <div>
-              <p class="mt10">
-                <span class="shop-mark yellow-bg">会员7折</span>
-                <span class="shop-mark pink-bg">满100减50</span>
-              </p>
-              <p class="mt20">
-                <i class="icon tp mr10"></i>
-                <span class="orange">29.00</span>
-                <span>¥36.00</span>
-              </p>
-            </div>
-          </div>
-        </a>
+        </router-link>
       </li>
     </ul>
   </section>
@@ -104,9 +87,43 @@
         price: false,
         filter: false,
         up:'',
+        searchLists:''
       }
     },
+    mounted(){
+      this.getSearchLists();
+    },
     methods: {
+      getSearchLists:function(condition){
+        condition=[];
+        const query=this.$route.query;
+
+        let store_id=query.store_id
+            ,type_id=query.type_id ? query.type_id : 0;
+        if(query.keyword){
+          condition['keyword']=query.keyword;
+          condition['price']=1;
+        }
+
+        console.log(condition)
+        let params={
+          goods_store_id:store_id,
+          goods_type_id:type_id,
+          condition:condition
+        }
+
+        this.$axios.get('/index/goods/searchAll',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+
+          if(res.status==0){
+            this.searchLists=res.data.data;
+          }
+        }).catch(err=>{
+          console.log('my err:'+err);
+        })
+      },
       sortPrice:function () {
         this.filter=false;
         this.price=!this.price;

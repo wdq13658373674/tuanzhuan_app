@@ -1,6 +1,5 @@
 <template>
   <div>
-    <barNav title="公告详情"></barNav>
     <section class="page-group">
       <div class="content post-detail">
         <p class="p1">
@@ -19,16 +18,12 @@
   </div>
 </template>
 <script>
-  import barNav from '@/pages/layout/barNav'
   export default {
     name: "ArticleDetail",
     data(){
       return {
         newsDetail:[]
       }
-    },
-    components:{
-      barNav
     },
     mounted:function(){
       this.getNewDetail();
@@ -58,10 +53,6 @@
   @import "../../core/base";
 
   .post-detail{
-    position: absolute;
     min-height:100%;
-    width:100%;
-    top:0;
-    padding-top:rem(88);
   }
 </style>

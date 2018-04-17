@@ -3,8 +3,11 @@
     <search
       class="tz-search"
       placeholder="请输入商品名称"
+      cancel-text="搜索"
       :auto-fixed="false"
-      v-model="value"></search>
+      v-model="search"
+      @on-cancel="submit"
+      ></search>
 
     <h2 class="h2">历史搜索</h2>
     <div class="content">
@@ -41,14 +44,26 @@
     components: {
       Search,
     },
-    methods: {
-
-    },
     data () {
       return {
-        value: 'test'
+        search: this.$route.query.title
       }
-    }
+    },
+    methods: {
+      submit:function(){
+        let keyword=this.search;
+
+        this.$router.push({
+          path:'/shop/category',
+          query:{
+            store_id:this.$route.query.store_id,
+            type_id:this.$route.query.type_id,
+            title:this.$route.query.title,
+            keyword:keyword,
+          }
+        })
+      }
+    },
   }
 </script>
 <style lang="css" scoped>

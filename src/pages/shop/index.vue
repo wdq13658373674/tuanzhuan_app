@@ -2,13 +2,19 @@
   <div>
     <section class="page-group">
       <div class="content">
-        <router-link to="search" class="search-link" append>请输入商品名称</router-link>
+        <router-link :to="{path:'/shop/search',query:{
+          store_id:store_id
+        }}" class="search-link" append>请输入商品名称</router-link>
       </div>
 
       <swiper class="index-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
 
       <div class="menu-shop">
-        <router-link :to="{ name: 'ShopCategory', params: { title: item.type_name }}" class="item" v-for="item in categorys" :key="item.type_id">
+        <router-link :to="{ name: 'ShopCategory', query: {
+          title: item.type_name,
+          type_id: item.type_id,
+          store_id:item.type_store_id
+        }}" class="item" v-for="item in categorys" :key="item.type_id">
           <img class="img" v-lazy="item.type_logo" alt="">
           <p class="txt">{{item.type_name}}</p>
         </router-link>
@@ -83,6 +89,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import Footer from '@/pages/layout/footer'
   import {Clocker,Swiper} from 'vux'
   export default {
@@ -108,11 +115,13 @@
           title: '',
           fallbackImg: 'https://static.vux.li/demo/3.jpg'
         }],
-        lat:29.60335600,
-        lng:106.50352700,
+        store_id:'',
         categorys:'',
         shopLists:''
       }
+    },
+    computed:{
+      ...mapState(['roomInfo'])
     },
     mounted(){
       this.getCategorys();
@@ -121,8 +130,8 @@
     methods:{
       getCategorys:function(){
         let params={
-          lat:this.lat,
-          lng:this.lng,
+          lat:this.roomInfo.lat,
+          lng:this.roomInfo.lng,
         }
 
         this.$axios.get('/index/Goods/classify',{
@@ -138,8 +147,8 @@
       },
       getShopLists:function(){
         let params={
-          lat:this.lat,
-          lng:this.lng,
+          lat:this.roomInfo.lat,
+          lng:this.roomInfo.lng,
         }
 
         this.$axios.get('/index/Goods/position',{
