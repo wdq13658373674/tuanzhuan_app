@@ -17,6 +17,8 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   export default {
     name: "IndexNav",
     data(){
@@ -24,12 +26,17 @@
         village_name:''
       }
     },
+    computed:{
+      ...mapState(['roomInfo'])
+    },
     mounted(){
       this.getVillage();
     },
     methods: {
       getVillage:function(){
-
+        if(this.roomInfo){
+          this.village_name=this.roomInfo.village_name;
+        }
       }
     }
   }

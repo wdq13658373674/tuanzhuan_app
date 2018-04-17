@@ -1,6 +1,5 @@
 <template>
   <div>
-    <barNav title="加入您所在的小区"></barNav>
     <section class="page-group">
       <search
         class="tz-search"
@@ -11,9 +10,9 @@
         v-model="search">
       </search>
 
-      <h2 class="h2">我的小区</h2>
+      <h2 class="h2" v-if="flag">我的小区</h2>
       <ul class="cell-list">
-        <li class="item link" v-for="item in user_village">
+        <li class="item link" v-for="item in user_village" @click="changeVillage(item)">
           <router-link to="">
             <i class="address pull-left mr10"></i>
             {{item.village_name}}
@@ -23,7 +22,7 @@
 
       <h2 class="h2">附近小区</h2>
       <ul class="cell-list">
-        <li class="item link" v-for="item in other_village">
+        <li class="item link" v-for="item in other_village" @click="changeVillage(item)">
           <router-link to="" class="cell">
             <span class="tit">{{item.village_name}}</span>
             <span v-if="item.range">{{item.range}}m</span>
@@ -35,46 +34,38 @@
 </template>
 
 <script>
-  import barNav from '@/pages/layout/barNav'
   import { Search } from 'vux'
-  const storeJs=require('storejs');
+  import {mapState} from 'vuex'
 
   export default {
     name: "Location",
     components:{
       Search,
-      barNav
     },
     data () {
       return {
-        lat:'',
-        lng:'',
+        flag:false,
         user_village:'',
         other_village:'',
         search: ''
       }
+    },
+    computed:{
+      ...mapState(['roomInfo'])
     },
     mounted(){
        this.getRooms();
     },
     methods:{
       getRooms:function(){
-        let points=storeJs('points');
-        let roomInfo=storeJs('homeInfo');
-
-        if(roomInfo){
-          this.lat=roomInfo.lat;
-          this.lng=roomInfo.lng;
-        }else if(points){
-          this.lat=points.lat;
-          this.lng=points.lng;
+        let param={}
+        if(this.roomInfo){
+          param={
+            lat:this.roomInfo.lat,
+            lng:this.roomInfo.lng,
+            user_id:this.roomInfo.user_id
+          }
         }
-
-        let param={
-          lat:this.lat,
-          lng:this.lng,
-          user_id:0,
-        };
 
         this.$axios.get('/index/house_village/findVillage',{
           params:param
@@ -83,10 +74,22 @@
           if(res.status==0){
               this.user_village=res.data.user_village;
               this.other_village=res.data.other_village;
+
+            if(this.user_village && this.user_village.length>0){
+              this.flag=true;
+            }
           }
         }).catch(err=>{
           console.log('my err:'+err);
         })
+      },
+      changeVillage:function(item){
+        this.roomInfo.village_name=item.village_name;
+        this.roomInfo.lat=item.lat;
+        this.roomInfo.lng=item.lng;
+        this.$store.commit('update_roomInfo',this.roomInfo);
+
+        this.$router.push('/');
       },
       submit:function(){
         console.log(this.search);

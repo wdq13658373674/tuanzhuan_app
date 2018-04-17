@@ -6,135 +6,35 @@
           <ul>
             <li class="item"
                 v-for="(item,index) in tabs"
-                :class="{active:index==tabIndex}"
-                @click="tab(index)"
+                :class="{active:item.type_id==tabIndex}"
+                @click="tab(item.type_id)"
             >
               <p class="txt">
-                <span class="span">{{item}}</span>
+                <span class="span">{{item.type_name}}</span>
               </p>
             </li>
           </ul>
         </scroller>
       </div>
 
-      <scroller height="100%" lock-x>
+      <scroller height="100%" lock-x style="width:100%;">
       <div class="classify-content">
-        <h3 class="h3 mt40">
-          <span class="tit">家居分类</span>
-          <span class="tit-line"></span>
-        </h3>
-        <ul class="classify-content-list">
-          <li class="item">
-            <router-link :to="{ name: 'ShopCategory', params: { title: '床品件套' }}" class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img1.jpg" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </router-link>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img3.jpg" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img4.png" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img4.png" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-        </ul>
-
-        <h3 class="h3 mt40">
-          <span class="tit">家居分类</span>
-          <span class="tit-line"></span>
-        </h3>
-        <ul class="classify-content-list">
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img1.jpg" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img3.jpg" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img4.png" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img4.png" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-        </ul>
-
-        <h3 class="h3 mt40">
-          <span class="tit">家居分类</span>
-          <span class="tit-line"></span>
-        </h3>
-        <ul class="classify-content-list">
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img1.jpg" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img3.jpg" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img4.png" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-          <li class="item">
-            <a class="link" href="">
-              <div class="img-box">
-                <img src="@/assets/images/test/img4.png" alt="" class="img">
-              </div>
-              <p class="txt">床品件套</p>
-            </a>
-          </li>
-        </ul>
+        <div v-for="items in tabContents" :key="items.type_id">
+          <h3 class="h3 mt40">
+            <span class="tit">{{items.type_name}}</span>
+            <span class="tit-line"></span>
+          </h3>
+          <ul class="classify-content-list">
+            <li class="item" v-for="item in items.subordinate" :key="item.type_id">
+              <router-link :to="{ name: 'ShopCategory', params: { title: item.type_name }}" class="link">
+                <div class="img-box">
+                  <img class="img" v-lazy="item.type_logo" alt="">
+                </div>
+                <p class="txt">{{item.type_name}}</p>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
       </scroller>
     </div>
@@ -151,33 +51,56 @@
     },
     data () {
       return {
+        lat:29.60335600,
+        lng:106.50352700,
         tabIndex:0,
-        tabs:['家居日用','折扣区','折扣区','折扣区']
+        tabs:'',
+        tabContents:'',
       }
     },
     mounted(){
-      this.getCategorys();
+      this.getTabs();
     },
     methods: {
-      tab:function(index){
-        this.tabIndex=index;
+      tab:function(type_id){
+        this.tabIndex=type_id;
+        this.getContents(type_id);
       },
-      getCategorys:function(){
+      getTabs:function(){
         let params={
-          lat:29.60335600,
-          lng:106.50352700,
+          lat:this.lat,
+          lng:this.lng,
         }
 
         this.$axios.get('/index/Goods/classify',{
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
-          if(res.status==0){
 
+          if(res.status==0){
+             this.tabs=res.data;
+             this.tabIndex=this.tabs[0].type_id;
+             this.getContents(this.tabIndex);
           }
         }).catch(err=>{
-          cnsole.log('my err:'+err);
+          console.log('my err:'+err);
+        })
+      },
+      getContents:function(parent_id){
+        let params={
+          type_parent_id:parent_id,
+        }
+
+        this.$axios.get('/index/Goods/getclassifytwo',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+
+          if(res.status==0){
+            this.tabContents=res.data;
+          }
+        }).catch(err=>{
+          console.log('my err:'+err);
         })
       }
     },
@@ -188,6 +111,4 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
-
-
 </style>

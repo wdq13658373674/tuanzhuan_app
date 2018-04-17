@@ -2,7 +2,7 @@ import router from '@/router'
 const storeJs=require('storejs');
 
 export default function(){
-  if(storeJs('points') || storeJs('homeInfo')){
+  if(storeJs('roomInfo')){
     return;
   }else {
     const geolocation = new BMap.Geolocation();
@@ -13,11 +13,13 @@ export default function(){
           lng:r.point.lng,
         }
 
-        storeJs.set('points',point)
+        storeJs.set('roomInfo',point);
+
         router.push('/location');
       }
       else {
         console.log('定位失败！');
+        router.push('/location');
         return false;
       }
     });

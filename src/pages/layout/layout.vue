@@ -1,7 +1,7 @@
 <template>
   <div>
     <bar-nav :title="title">
-      <router-link to="location" class="link pull-left" v-if="indexNav"  slot="left">
+     <!-- <router-link to="location" class="link pull-left" v-if="indexNav"  slot="left">
         <i class="icon address mr10"></i>
         <span class="name">{{village_name}}</span>
       </router-link>
@@ -13,7 +13,7 @@
         <a class="pull-right">
           <i class="icon ew"></i>
         </a>
-      </div>
+      </div>-->
 
       <router-link to="/" class="link pull-right" v-if="rightNav==='home'"  slot="right">
         <i class="icon home2"></i>
@@ -25,7 +25,6 @@
     </bar-nav>
 
     <router-view v-transition></router-view>
-    <router-view name="footer"></router-view>
   </div>
 </template>
 
@@ -41,31 +40,31 @@
     },
     data(){
       return {
-        village_name:''
+
       }
     },
     computed: {
-      ...mapState(['direction']),
+      /*...mapState(['direction']),
       viewTransition () {
         if (!this.direction){
           return ''
         }
 
         return 'vux-pop-' + (this.direction === 'forward' ? 'in' : 'out')
-      },
+      },*/
       title(){
         if(this.$route.params.title){
           return this.$route.params.title;
         }
         return this.$route.meta.title ? this.$route.meta.title : ' '
       },
-      indexNav(){
+      /*indexNav(){
         if(this.$route.name=="Index" || this.$route.name=='Service'){
           return true;
         }
 
         return false;
-      },
+      },*/
       rightNav(){
         if(this.$route.name=="ShopDetail"){
           return 'home';

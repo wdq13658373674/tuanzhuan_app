@@ -1,5 +1,6 @@
 <template>
   <div class="reg-wrap">
+    <RegNav></RegNav>
     <h1 class="form-title">输入新密码</h1>
 
     <form action="">
@@ -16,10 +17,14 @@
   </div>
 </template>
 <script>
+  import RegNav from '@/pages/layout/regNav'
   const qs = require("querystring")
   const storeJs = require('storejs');
   export default {
     name: "Password",
+    components:{
+      RegNav
+    },
     data(){
       return {
         phone:this.$route.params.phone,

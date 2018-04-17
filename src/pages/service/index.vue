@@ -182,18 +182,21 @@
         </scroller>
       </div>
     </section>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
   import indexNav from '@/pages/layout/indexNav'
+  import Footer from '@/pages/layout/footer'
   import { Scroller } from 'vux'
 
   export default {
     name: "Service",
     components: {
       Scroller,
-      indexNav
+      indexNav,
+      Footer
     },
     data () {
       return {

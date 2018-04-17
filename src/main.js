@@ -6,9 +6,10 @@ import axios from 'axios'
 import VueLazyload from 'vue-lazyload'
 import { ToastPlugin , AlertPlugin} from 'vux'
 import App from './App'
-
+import getMap from '@/libs/bMap'
 import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
+
 const options={
   duration: '0.3',
   forwardAnim: 'fadeInRight', //前进动画
@@ -19,6 +20,8 @@ const options={
   nuxt: false //若使用后端渲染框架Nuxt，需要将此设为true，默认为false
 }
 Vue.use(vueg, router,options)
+
+getMap();
 
 /**
  * fastclick
@@ -63,14 +66,25 @@ Vue.use(VueLazyload,{
 /**
  * store状态管理
  * **/
+const storeJs=require('storejs');
+
 const store = new Vuex.Store({
   state:{
     loading:false,
-    userInfo:''
+    roomInfo:storeJs('roomInfo') || {},
+    userInfo:storeJs('userInfo')
   },
   mutations:{
     load(state,loading){
       state.loading=loading;
+    },
+    update_roomInfo(state,roomInfo){
+      state.roomInfo=roomInfo;
+      storeJs.set('roomInfo',state.roomInfo);
+    },
+    update_userInfo(state,userInfo){
+      state.userInfo=userInfo;
+      storeJs.set('userInfo',state.userInfo);
     },
   },
   actions:{
@@ -78,7 +92,6 @@ const store = new Vuex.Store({
   },
 })
 
-const storeJs = require('storejs');
 router.beforeEach((to,from,next)=>{
   store.commit('load',true);
 

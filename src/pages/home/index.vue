@@ -104,7 +104,7 @@
           </h1>
 
           <div class="shop-list mb70">
-            <a href="#" class="item" v-for="item in goodsLists">
+            <router-link :to="{path:'/shop/detail',query:{id:item.goods_id}}" class="item" v-for="item in goodsLists" :key="item.goods_id">
               <div class="img-box">
                 <img class="img" v-lazy="item.goods_logo" alt="">
               </div>
@@ -113,27 +113,31 @@
                 <i class="icon tp mr10"></i>
                 <span class="orange">{{item.goods_tcion}}</span>
                 <!--<span class="shop-mark yellow-bg">满减</span>-->
-                <span class="shop-mark pink-bg">{{item.goods_discount}}折</span>
+                <span class="shop-mark pink-bg" v-if="parseInt(item.goods_discount)>0">{{item.goods_discount}}折</span>
               </p>
               <p class="p3">
                 <span class="pull-left">¥{{item.goods_price}}</span>
                 <span class="gray pull-right">已售{{item.goods_sell_count}}</span>
               </p>
-            </a>
+            </router-link>
           </div>
         </div>
 
         <load-more class="load-more" tip="正在加载" v-show="busy"></load-more>
       </div>
     </section>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
   import indexNav from '@/pages/layout/indexNav'
+  import Footer from '@/pages/layout/footer'
+
+  import {mapState} from 'vuex'
   import {Marquee, MarqueeItem , Scroller , LoadMore} from 'vux'
   import infiniteScroll from 'vue-infinite-scroll'
-  const storeJs=require('storejs');
+  // const storeJs=require('storejs');
 
   export default {
     name: "Index",
@@ -143,7 +147,8 @@
       Marquee,
       MarqueeItem,
       Scroller,
-      LoadMore
+      LoadMore,
+      Footer
     },
     data(){
       return{
@@ -164,15 +169,17 @@
         goodsLists:[],
       }
     },
+    computed:{
+      ...mapState(['roomInfo'])
+    },
     mounted:function(){
       this.getNewsLists();
       this.getGoodsLists();
-    },
-    computed: {
-
+      this.getMap();
     },
     methods:{
       getNewsLists:function(){
+        console.log(this.roomInfo);
         const param={
           'notic_village_id' : 1
         }
@@ -196,7 +203,6 @@
             params:param
           }).then(res=>{
             res=res.data;
-            console.log(res);
             if(res.status==0){
               this.goodsLists=res.data.goods;
             }
@@ -207,6 +213,11 @@
       loadMore: function() {
         /*this.busy = true;
         this.page++;*/
+      },
+      getMap:function(){
+        if(!this.roomInfo){
+          this.$router.push('/location');
+        }
       }
     }
   }

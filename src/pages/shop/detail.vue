@@ -5,26 +5,24 @@
 
       <div class="content">
         <div class="product-msg mt20 clearfix">
-          <p class="title pull-left">秋冬折扣 zara女装 垫肩装饰夹克 基本款外套 皮外套 07894894712</p>
+          <p class="title pull-left">{{goodsDetail.goods_name}}</p>
           <p class="share pull-right">分享</p>
         </div>
         <div class="product-total">
           <i class="mr10 icon tp"></i>
-          <span class="f32 orange pull-left">8.00</span>
-          <span class="ml29">¥36.00</span>
-          <span class="pull-right gray">已售352</span>
+          <span class="f32 orange pull-left">{{goodsDetail.goods_tcion}}</span>
+          <span class="ml29">¥{{goodsDetail.goods_price}}</span>
+          <span class="pull-right gray">已售 {{goodsDetail.goods_sell_count}}</span>
         </div>
       </div>
 
-      <h4 class="h4 mt20" @click="popControl=!popControl">
+      <h4 class="h4 mt20" @click="popControl=!popControl" v-if="goodsType.length!=1 || goodsDetail.goods_property!=''">
         <span class="txt">选择规格</span>
         <span class="f60 gray"> &rsaquo; </span>
       </h4>
 
       <p class="mt20 text-center f24">继续拖动，查看图文详情</p>
-      <div class="product-content mt20">
-        <p><img src="@/assets/images/test/img6.png" alt=""></p>
-      </div>
+      <div class="product-content mt20" v-html="goodsDetail.goods_desc"></div>
     </section>
     <footer>
       <div class="bottom-fixed cell">
@@ -62,42 +60,17 @@
             </div>
           </div>
           <ul class="format-list mb70">
-            <li class="item">
-              <h5 class="tit">颜色分类</h5>
+            <li class="item" v-for="(items,index) in goodsType" v-if="items.goods_property!=''">
+              <h5 class="tit">{{items.goods_spec_title}}</h5>
               <div class="clearfix">
-                <label>
-                  <input type="radio" name="color" checked>
-                  <span class="span active">G01浅灰花纱色 NEW LIGHT GREY MEKLANGE</span>
-                </label>
-                <label>
-                  <input type="radio" name="color">
-                  <span class="span">S01 黑色Black</span>
-                </label>
-                <label>
-                  <input type="radio" name="color">
-                  <span class="span">02 新奶油色NEW CREME</span>
+                <label v-for="item in items.goods_property.split(',')">
+                  <input type="radio" :name="index">
+                  <span class="span">{{item}}</span>
                 </label>
               </div>
             </li>
             <li class="item">
-              <h5 class="tit">尺码</h5>
-              <div class="clearfix">
-                <label>
-                  <input type="radio" name="size" checked>
-                  <span class="span">55/76A/XS</span>
-                </label>
-                <label>
-                  <input type="radio" name="size">
-                  <span class="span">55/76A/XS</span>
-                </label>
-                <label>
-                  <input type="radio" name="size">
-                  <span class="span">55/76A/XS</span>
-                </label>
-              </div>
-            </li>
-            <li class="item">
-              <x-number class="mt20 xnumber" title="购买数量" :value="1" :min="1"></x-number>
+              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false"></x-number>
             </li>
           </ul>
         </div>
@@ -107,7 +80,7 @@
             <div class="shop-cart">
               <p>
                 <span class="icon cart">
-                    <i class="num">12</i>
+                    <i class="num">{{cartNum}}</i>
                 </span>
               </p>
               <p>
@@ -132,7 +105,7 @@
     components:{
       Swiper,
       Popup,
-      XNumber
+      XNumber,
     },
     data(){
       return {
@@ -150,11 +123,35 @@
           title: '',
           fallbackImg: 'https://static.vux.li/demo/3.jpg'
         }],
-        popControl:false
+
+        cartNum:1,
+        popControl:false,
+        goodsDetail:[],
+        goodsType:[],
+        goods_id:this.$route.query.id
       }
     },
+    mounted(){
+      this.getDetail();
+    },
     methods:{
+        getDetail:function(){
+          let param={
+            goods_id:this.goods_id
+          }
 
+          this.$axios.get('/index/goods/getGoodsInfo',{
+            params:param
+          }).then(res=>{
+            res=res.data;
+            if(res.status==0){
+              this.goodsDetail=res.data[0];
+              this.goodsType=res.data;
+            }
+          }).catch(err=>{
+            console.log('my err:'+ err);
+          })
+        }
     }
   }
 </script>
@@ -215,6 +212,12 @@
       padding: 0 rem(20);
       margin-right:0;
       border-radius: 0;
+    }
+  }
+
+  .product-content{
+    img{
+      max-width: 100%;
     }
   }
 </style>

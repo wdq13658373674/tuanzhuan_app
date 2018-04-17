@@ -2,13 +2,12 @@
   <div id="app">
     <loading :show="loading" class="my-loading"></loading>
     <router-view v-transition></router-view>
-    <router-view name="footer"></router-view>
+    <!--<router-view name="footer"></router-view>-->
   </div>
 </template>
 
 <script>
   import '@/assets/js/public.js'
-  import getMap from '@/libs/bMap'
   import {Loading} from 'vux'
   import {mapState} from 'vuex'
 
@@ -21,9 +20,6 @@
     },
     components:{
       Loading
-    },
-    mounted(){
-      getMap();
     },
     computed: {
       ...mapState(['loading'])

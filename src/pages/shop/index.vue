@@ -1,91 +1,96 @@
 <template>
-  <section class="page-group">
-    <div class="content">
-      <router-link to="search" class="search-link" append>请输入商品名称</router-link>
-    </div>
-
-    <swiper class="index-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
-
-    <div class="menu-shop">
-      <router-link :to="{ name: 'ShopCategory', params: { title: '休闲食品' }}" class="item" v-for="item in categorys">
-        <img class="img" :src="item.type_logo" alt="">
-        <p class="txt">{{item.type_name}}</p>
-      </router-link>
-      <router-link to="categorys" class="item" append>
-        <img class="img" src="@/assets/images/img/d_menu5.png" alt="">
-        <p class="txt">全部分类</p>
-      </router-link>
-    </div>
-
-    <div class="content mt20">
-      <div class="shop-timer mt60">
-        <span>限时购</span>
-        <clocker  time="2018-03-31 16:37">
-          <span class="timer m">%H</span>
-          <span>:</span>
-          <span class="timer s">%M</span>
-          <span>:</span>
-          <span class="timer s">%S</span>
-        </clocker>
+  <div>
+    <section class="page-group">
+      <div class="content">
+        <router-link to="search" class="search-link" append>请输入商品名称</router-link>
       </div>
 
-      <ul class="shop-limit-list">
-        <li class="item">
-          <router-link to="detail" append>
+      <swiper class="index-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
+
+      <div class="menu-shop">
+        <router-link :to="{ name: 'ShopCategory', params: { title: item.type_name }}" class="item" v-for="item in categorys" :key="item.type_id">
+          <img class="img" v-lazy="item.type_logo" alt="">
+          <p class="txt">{{item.type_name}}</p>
+        </router-link>
+        <router-link to="categorys" class="item" append>
+          <img class="img" src="@/assets/images/img/d_menu5.png" alt="">
+          <p class="txt">全部分类</p>
+        </router-link>
+      </div>
+
+      <div class="content mt20">
+        <div class="shop-timer mt60">
+          <span>限时购</span>
+          <clocker  time="2018-03-31 16:37">
+            <span class="timer m">%H</span>
+            <span>:</span>
+            <span class="timer s">%M</span>
+            <span>:</span>
+            <span class="timer s">%S</span>
+          </clocker>
+        </div>
+
+        <ul class="shop-limit-list">
+          <li class="item">
+            <router-link to="detail" append>
+              <div class="img-box">
+                <img src="@/assets/images/test/img4.png" alt="" class="img">
+              </div>
+              <p class="p1">
+                <i class="tp"></i>
+                <span>5.00</span>
+              </p>
+              <p class="p2">
+                ¥4.55
+              </p>
+            </router-link>
+          </li>
+        </ul>
+
+        <p class="mt40 mb40 text-center">
+          <a class="all" href="#">查看全部 <i class="arrow"></i></a>
+        </p>
+      </div>
+
+      <div class="content mt20" v-for="item in shopLists" :key="item.position_id">
+        <h3 class="h3 mt40">
+          <span class="tit">{{item.position_name}}</span>
+          <span class="tit-line"></span>
+        </h3>
+
+        <div class="shop-list mb40">
+          <router-link :to="{path:'/shop/detail',query:{id:goods.goods_id}}" class="item" v-for="goods in item.goods" :key="goods.goods_id" append>
             <div class="img-box">
-              <img src="@/assets/images/test/img4.png" alt="" class="img">
+              <img class="img" v-lazy="goods.goods_logo" alt="">
             </div>
-            <p class="p1">
-              <i class="tp"></i>
-              <span>5.00</span>
-            </p>
+            <p class="p1">{{goods.goods_name}}</p>
             <p class="p2">
-              ¥4.55
+              <i class="icon tp mr10"></i>
+              <span class="orange">{{goods.goods_tcion}}</span>
+              <!--<span class="shop-mark yellow-bg">满减</span>-->
+              <span class="shop-mark pink-bg" v-if="parseInt(goods.goods_discount)>0">{{goods.goods_discount}}折</span>
+            </p>
+            <p class="p3">
+              <span class="pull-left">¥{{goods.goods_price}}</span>
+              <span class="gray pull-right">已售{{goods.goods_sell_count}}</span>
             </p>
           </router-link>
-        </li>
-      </ul>
-
-      <p class="mt40 mb40 text-center">
-        <a class="all" href="#">查看全部 <i class="arrow"></i></a>
-      </p>
-    </div>
-
-    <div class="content mt20" v-for="item in shopLists">
-      <h3 class="h3 mt40">
-        <span class="tit">{{item.position_name}}</span>
-        <span class="tit-line"></span>
-      </h3>
-
-      <div class="shop-list mb40">
-        <a href="#" class="item" v-for="goods in item.goods">
-          <div class="img-box">
-            <img class="img" v-lazy="goods.goods_logo" alt="">
-          </div>
-          <p class="p1">{{goods.goods_name}}</p>
-          <p class="p2">
-            <i class="icon tp mr10"></i>
-            <span class="orange">{{goods.goods_tcion}}</span>
-            <!--<span class="shop-mark yellow-bg">满减</span>-->
-            <span class="shop-mark pink-bg">{{goods.goods_discount}}折</span>
-          </p>
-          <p class="p3">
-            <span class="pull-left">¥{{goods.goods_price}}</span>
-            <span class="gray pull-right">已售{{goods.goods_sell_count}}</span>
-          </p>
-        </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
+  import Footer from '@/pages/layout/footer'
   import {Clocker,Swiper} from 'vux'
   export default {
     name: "Shop",
     components:{
       Swiper,
       Clocker,
+      Footer
     },
     data(){
       return {

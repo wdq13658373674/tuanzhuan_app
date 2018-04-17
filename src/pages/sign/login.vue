@@ -29,7 +29,8 @@
 <script>
   import utils from '@/libs/util.js'
   const qs = require("querystring")
-  const storeJs = require('storejs');
+  const storeJs=require('storejs');
+
   export default {
     name: "Login",
     data(){
@@ -71,8 +72,11 @@
 
           storeJs({
             'userInfo':res.data.user,
-            'homeInfo':res.data.room
+            'roomInfo':res.data.room
           });
+
+          this.$store.commit('update_userInfo',storeJs('userInfo'));
+          this.$store.commit('update_roomInfo',storeJs('roomInfo'));
 
           this.$vux.toast.show('登陆成功');
           this.$router.push('/')

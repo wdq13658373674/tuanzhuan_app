@@ -1,5 +1,6 @@
 <template>
   <div class="reg-wrap">
+    <RegNav></RegNav>
     <h1 class="form-title">你的手机号码</h1>
 
     <form action="">
@@ -21,13 +22,15 @@
   </div>
 </template>
 <script>
+  import RegNav from '@/pages/layout/regNav'
   import utils from '@/libs/util.js'
   import timerBtn from '@/components/timerBtn'
   const qs = require("querystring")
   export default {
     name: "ForgetPassword",
     components:{
-      timerBtn
+      timerBtn,
+      RegNav
     },
     data(){
       return {
