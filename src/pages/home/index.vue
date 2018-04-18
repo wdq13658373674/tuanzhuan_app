@@ -6,13 +6,13 @@
         <div class="content">
           <div class="banner" style="">
             <div class="clearfix">
-              <div class="pull-left day">14</div>
+              <div class="pull-left day">{{lunarData.cDay}}</div>
               <div class="pull-left date">
                 <p>
-                  <span class="mr10">星期三</span>
-                  <span>农历二月十六</span>
+                  <span class="mr10">{{lunarData.ncWeek}}</span>
+                  <span>农历{{lunarData.monthCn}}{{lunarData.dayCn}}</span>
                 </p>
-                <p>2018年三月</p>
+                <p>{{lunarData.cYear}}年{{lunarData.cMonth}}月</p>
               </div>
             </div>
             <div class="temp">
@@ -135,6 +135,7 @@
   import indexNav from '@/pages/layout/indexNav'
   import Footer from '@/pages/layout/footer'
 
+  import solarLunar from 'solarLunar'
   import {mapState} from 'vuex'
   import {Marquee, MarqueeItem , Scroller , LoadMore} from 'vux'
   import infiniteScroll from 'vue-infinite-scroll'
@@ -168,6 +169,7 @@
         weather:'',
         newsLists:'',
         goodsLists:'',
+        lunarData:''
       }
     },
     computed:{
@@ -199,6 +201,12 @@
           params:param
         }).then(res=>{
           res=res.data;
+          const date=res.date.split('-');
+          let year=parseInt(date[0])
+            ,month=parseInt(date[1])
+            ,day=parseInt(date[2]);
+
+          this.lunarData = solarLunar.solar2lunar(year,month,day);
           this.weather=res.results[0].weather_data[0];
         }).catch(err=>{
           console.log('my err:'+err);
