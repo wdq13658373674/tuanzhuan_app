@@ -52,13 +52,14 @@
     methods: {
       submit:function(){
         let keyword=this.search;
+        const query=this.$route.query;
 
         this.$router.push({
           path:'/shop/category',
           query:{
-            store_id:this.$route.query.store_id,
-            type_id:this.$route.query.type_id,
-            title:this.$route.query.title,
+            store_id:query.store_id,
+            type_id:query.type_id,
+            title:query.title,
             keyword:keyword,
           }
         })

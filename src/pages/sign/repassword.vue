@@ -19,7 +19,6 @@
 <script>
   import RegNav from '@/pages/layout/regNav'
   const qs = require("querystring")
-  const storeJs = require('storejs');
   export default {
     name: "Password",
     components:{

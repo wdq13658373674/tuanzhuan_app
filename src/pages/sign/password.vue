@@ -19,7 +19,6 @@
 <script>
   import RegNav from '@/pages/layout/regNav'
   const qs = require("querystring")
-  const storeJs = require('storejs');
   export default {
     name: "Password",
     components:{
@@ -78,10 +77,9 @@
             return;
           }
 
-          storeJs({
-            'userInfo':res.data.user,
-            'homeInfo':res.data.room
-          });
+          this.$store.commit('update_userInfo',res.data.user);
+          this.$store.commit('update_roomInfo',res.data.room);
+          this.$vux.toast.show('组册成功');
           this.$router.push('/');
         }).catch(err=>{
           console.log('my err:'+err);

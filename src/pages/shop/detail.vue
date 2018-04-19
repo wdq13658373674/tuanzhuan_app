@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <h4 class="h4 mt20" @click="popControl=!popControl" v-if="goodsType.length!=1 || goodsDetail.goods_property!=''">
+      <h4 class="h4 mt20" @click="popControl=!popControl" v-if="goodsLists.length>1 || goodsDetail.goods_spec_title!=''">
         <span class="txt">选择规格</span>
         <span class="f60 gray"> &rsaquo; </span>
       </h4>
@@ -26,17 +26,17 @@
     </section>
     <footer>
       <div class="bottom-fixed cell">
-        <div class="shop-cart">
+        <router-link to="/shop/cart" class="shop-cart">
           <p>
-                <span class="icon cart">
-                    <i class="num">12</i>
-                </span>
+            <span class="icon cart">
+              <i class="num">12</i>
+            </span>
           </p>
           <p>
             购物车
           </p>
-        </div>
-        <a href="#" class="btn btn-yellow">加入购物车</a>
+        </router-link>
+        <router-link to="" class="btn btn-yellow">加入购物车</router-link>
         <router-link to="/shop/order" class="btn btn-orange">立刻购买</router-link>
       </div>
     </footer>
@@ -45,29 +45,43 @@
     <popup v-model="popControl">
       <div class="popup1">
         <span class="pop-close" @click="popControl=!popControl">X</span>
+
         <div class="content pop-shop-detail">
           <div class="product-detail clearfix">
             <div class="img-box">
-              <img class="img" src="@/assets/images/test/img3.jpg" alt="">
+              <img class="img" v-lazy="goods.goods_logo" alt="">
             </div>
             <div class="con-box">
               <p class="p1">
                 <i class="icon tp"></i>
-                <span>8.00</span>
+                <span>{{goods.goods_tcion}}</span>
               </p>
-              <p class="p2">¥36.00</p>
-              <p class="p3">库存：223</p>
+              <p class="p2">¥{{goods.goods_price}}</p>
+              <p class="p3">库存：{{goods.goods_stock}}</p>
             </div>
           </div>
           <ul class="format-list mb70">
-            <li class="item" v-for="(items,index) in goodsType" v-if="items.goods_property!=''">
-              <h5 class="tit">{{items.goods_spec_title}}</h5>
+            <li class="item">
+              <h5 class="tit">规格</h5>
               <div class="clearfix">
-                <label v-for="item in items.goods_property.split(',')">
-                  <input type="radio" :name="index">
+                <label v-for="(items,index) in goodsLists" :key="items.goods_id" @click="getGoods(index)">
+                  <input type="radio" name="types" :value="items.goods_spec_title" v-model="type">
+                  <span class="span">{{items.goods_spec_title}}</span>
+                </label>
+              </div>
+            </li>
+
+            <li class="item">
+              <h5 class="tit">属性</h5>
+              <div class="clearfix">
+                <label v-for="item in goodsType">
+                  <input type="radio" name="props" :value="item" v-model="prop">
                   <span class="span">{{item}}</span>
                 </label>
               </div>
+            </li>
+            <li>
+              {{type}}-{{prop}}
             </li>
             <li class="item">
               <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false"></x-number>
@@ -125,9 +139,13 @@
         }],
 
         cartNum:1,
+        type:'',
+        prop:'',
         popControl:false,
-        goodsDetail:[],
-        goodsType:[],
+        goodsLists:'',
+        goods:'',
+        goodsDetail:'',
+        goodsType:'',
         goods_id:this.$route.query.id
       }
     },
@@ -144,14 +162,22 @@
             params:param
           }).then(res=>{
             res=res.data;
+
             if(res.status==0){
+              this.goodsLists=res.data;
+              this.goods=res.data[0];
               this.goodsDetail=res.data[0];
-              this.goodsType=res.data;
+              this.goodsType=res.data[0].goods_property.split(',')
             }
           }).catch(err=>{
             console.log('my err:'+ err);
           })
-        }
+        },
+      getGoods:function(index){
+        this.goods=this.goodsLists[index];
+        this.goodsType=this.goods.goods_property.split(',');
+        this.prop='';
+      }
     }
   }
 </script>

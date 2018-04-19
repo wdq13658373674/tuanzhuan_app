@@ -23,7 +23,7 @@
     methods:{
       exit:function(){
         storeJs.clear();
-        this.$router.push('/login');
+        this.$router.push('/');
       }
     }
   }

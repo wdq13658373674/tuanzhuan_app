@@ -201,6 +201,7 @@
           params:param
         }).then(res=>{
           res=res.data;
+
           const date=res.date.split('-');
           let year=parseInt(date[0])
             ,month=parseInt(date[1])
@@ -236,8 +237,11 @@
             params:param
           }).then(res=>{
             res=res.data;
+            console.log(res);
             if(res.status==0){
               this.goodsLists=res.data.goods;
+
+              this.$store.commit('update_storeInfo',res.data.store);
             }
           }).catch(err=>{
             console.log('my err:'+err);

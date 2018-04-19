@@ -23,6 +23,7 @@ import ShopCategorys from '@/pages/shop/categorys'
 import ShopOrder from '@/pages/shop/order'
 import ShopAddress from '@/pages/shop/address'
 import ShopAddAddress from '@/pages/shop/addAddress'
+import Cart from '@/pages/shop/cart'
 import User from '@/pages/user/index'
 
 Vue.use(Router)
@@ -168,6 +169,14 @@ export default new Router({
           components:{
             default:ShopAddAddress,
           }
+        },
+        {
+          path: '/shop/cart',
+          name: 'Cart',
+          meta: {
+            title: '购物车'
+          },
+          component: Cart,
         },
       ]
     },

@@ -29,7 +29,6 @@
 <script>
   import utils from '@/libs/util.js'
   const qs = require("querystring")
-  const storeJs=require('storejs');
 
   export default {
     name: "Login",
@@ -41,11 +40,10 @@
       }
     },
     mounted(){
-      storeJs.clear();
+      this.$store.commit('update_userInfo','');
     },
     methods:{
       submit:function(){
-        storeJs.clear();
         if(this.phone == ''){
           this.$vux.toast.show('请输入手机号码');
           return;
@@ -70,13 +68,8 @@
             return;
           }
 
-          storeJs({
-            'userInfo':res.data.user,
-            'roomInfo':res.data.room
-          });
-
-          this.$store.commit('update_userInfo',storeJs('userInfo'));
-          this.$store.commit('update_roomInfo',storeJs('roomInfo'));
+          this.$store.commit('update_userInfo',res.data.user);
+          this.$store.commit('update_roomInfo',res.data.room);
 
           this.$vux.toast.show('登陆成功');
           this.$router.push('/')

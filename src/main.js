@@ -71,8 +71,9 @@ const storeJs=require('storejs');
 const store = new Vuex.Store({
   state:{
     loading:false,
-    roomInfo:storeJs('roomInfo') || {},
-    userInfo:storeJs('userInfo')
+    roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},
+    userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},
+    storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {}
   },
   mutations:{
     load(state,loading){
@@ -85,6 +86,10 @@ const store = new Vuex.Store({
     update_userInfo(state,userInfo){
       state.userInfo=userInfo;
       storeJs.set('userInfo',state.userInfo);
+    },
+    update_storeInfo(state,storeInfo){
+      state.storeInfo=storeInfo;
+      storeJs.set('storeInfo',state.storeInfo);
     },
   },
   actions:{

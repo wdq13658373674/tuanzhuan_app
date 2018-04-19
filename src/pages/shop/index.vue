@@ -121,7 +121,7 @@
       }
     },
     computed:{
-      ...mapState(['roomInfo'])
+      ...mapState(['roomInfo','storeInfo'])
     },
     mounted(){
       this.getCategorys();

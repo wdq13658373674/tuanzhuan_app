@@ -1,11 +1,7 @@
 <template>
   <section class="page-group">
     <div class="content">
-      <router-link :to="{path:'/shop/search',query:{
-        store_id:this.$route.query.store_id,
-        type_id:this.$route.query.type_id,
-        title:this.$route.query.title
-      }}" class="search-link">{{this.$route.query.title}}</router-link>
+      <router-link :to="{path:'/shop/search',query:querys}" class="search-link">{{querys.title}}</router-link>
     </div>
     <div class="shop-filter">
       <span class="item">销量优先</span>
@@ -90,26 +86,53 @@
         searchLists:''
       }
     },
+    computed:{
+      querys:function(){
+        const query=this.$route.query;
+
+        const querys={
+          store_id:query.store_id,
+          type_id:query.type_id,
+          title:query.title
+        }
+
+        return querys;
+      }
+    },
     mounted(){
       this.getSearchLists();
     },
     methods: {
       getSearchLists:function(condition){
-        condition=[];
+        condition={};
         const query=this.$route.query;
 
         let store_id=query.store_id
             ,type_id=query.type_id ? query.type_id : 0;
-        if(query.keyword){
-          condition['keyword']=query.keyword;
-          condition['price']=1;
-        }
 
-        console.log(condition)
+        if(query.keyword) {
+          condition = {
+            'keyword': query.keyword
+          }
+        }
+        /*condition={
+          // 'sales':1,
+          'keyword':'测试',
+          'price':4,
+          'goods_price':{
+            'p1':0,
+            'p2':20
+          },
+          'goods_tcion':{
+            'p1':0,
+            'p2':12
+          }
+        }*/
+
         let params={
           goods_store_id:store_id,
           goods_type_id:type_id,
-          condition:condition
+          condition:JSON.stringify(condition)
         }
 
         this.$axios.get('/index/goods/searchAll',{
