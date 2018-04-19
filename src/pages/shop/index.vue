@@ -3,7 +3,9 @@
     <section class="page-group">
       <div class="content">
         <router-link :to="{path:'/shop/search',query:{
-          store_id:store_id
+          store_id:storeInfo.store_id,
+          type_id:0,
+          title:'全部商品'
         }}" class="search-link" append>请输入商品名称</router-link>
       </div>
 
@@ -115,7 +117,6 @@
           title: '',
           fallbackImg: 'https://static.vux.li/demo/3.jpg'
         }],
-        store_id:'',
         categorys:'',
         shopLists:''
       }

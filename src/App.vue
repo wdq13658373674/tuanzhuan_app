@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <loading :show="loading" class="my-loading"></loading>
-    <router-view v-transition></router-view>
+    <router-view></router-view>
     <!--<router-view name="footer"></router-view>-->
   </div>
 </template>
@@ -75,10 +75,10 @@
     }
   }
 
-  .animated{
+  /*.page{
     position:absolute;
     width:100%;
     min-height:100%;
     background-color: #f4f4f4;
-  }
+  }*/
 </style>

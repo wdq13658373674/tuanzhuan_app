@@ -1,52 +1,58 @@
 <template>
   <section class="page-group">
-    <div class="content">
-      <router-link :to="{path:'/shop/search',query:querys}" class="search-link">{{querys.title}}</router-link>
-    </div>
-    <div class="shop-filter">
-      <span class="item">销量优先</span>
-      <span class="item" @click="sortPrice">
-        价格排序
-        <i class="icon sort" :class="up"></i>
-      </span>
-      <span class="item" @click="sortFilter">
-        筛选
-        <i class="icon filter"></i>
-      </span>
-
-      <div class="slide-down-box"  :class="price || filter?'animate':''">
-        <!--价格排序-->
-        <ul class="sort-price cell-list" v-show="price">
-          <li class="item" @click="up='down'">价格降序</li>
-          <li class="item" @click="up='up'">价格升序</li>
-          <li class="item" @click="up='down'">团票降序</li>
-          <li class="item" @click="up='up'">团票升序</li>
-        </ul>
-        <!--价格排序-->
-
-        <!--价格筛选-->
-        <ul class="sort-filter" v-show="filter">
-          <li class="item">
-            <span class="tit">价格区间</span>
-            <input type="text" placeholder="最低价"> <span class="line">——</span> <input type="text" placeholder="最高价">
-          </li>
-          <li class="item">
-            <span class="tit">团票区间</span>
-            <input type="text" placeholder="最低价"> <span class="line">——</span> <input type="text" placeholder="最高价">
-          </li>
-          <li class="bottom">
-            <span class="opera">清空</span>
-            <span class="opera orange">确认</span>
-          </li>
-        </ul>
-        <!--价格筛选-->
+    <div class="z-index" style="position: relative;">
+      <div class="content">
+        <router-link :to="{path:'/shop/search',query:querys}" class="search-link">{{querys.title}}</router-link>
       </div>
+      <div class="shop-filter">
+      <!--<span class="item"-->
+            <!--v-for="(item,index) in tabs"-->
+            <!--:class="{active:index == tabIndex}"-->
+            <!--@click="tab(index)">-->
+        <!--{{item}}-->
+      <!--</span>-->
+        <span class="item" @click="tab(0)" :class="{'active':tabIndex==0}">销量优先</span>
+        <span class="item" @click="tab(1)" :class="{'active':tabIndex==1}">
+          价格排序
+          <i class="icon sort" :class="{'up':sortIndex==1 || sortIndex==3,'down':sortIndex==0 || sortIndex==2}"></i>
+        </span>
+        <span class="item" @click="tab(2)" :class="{'active':tabIndex==2}">
+          筛选
+          <i class="icon filter"></i>
+        </span>
+      </div>
+
+      <!--价格排序-->
+      <ul class="sort-price cell-list" :class="tabIndex==1 ? 'show' : ''">
+        <li class="item"
+            v-for="(item,index) in sorts"
+            @click="sort(index)"
+            :class="{'orange':sortIndex==index}"
+        >{{item}}</li>
+      </ul>
+
+      <!--价格筛选-->
+      <ul class="sort-filter" :class="tabIndex==2 ? 'show' : ''">
+        <li class="item">
+          <span class="tit">价格区间</span>
+          <input type="text" placeholder="最低价"> <span class="line">——</span> <input type="text" placeholder="最高价">
+        </li>
+        <li class="item">
+          <span class="tit">团票区间</span>
+          <input type="text" placeholder="最低价"> <span class="line">——</span> <input type="text" placeholder="最高价">
+        </li>
+        <li class="bottom">
+          <span class="opera">清空</span>
+          <span class="opera orange">确认</span>
+        </li>
+      </ul>
     </div>
-    <!--<masker class="masker" v-show="price || filter" :fullscreen="true"></masker>-->
 
     <ul class="shop-search-list">
       <li class="item" v-for="items in searchLists">
-        <router-link class="cell" to="">
+        <router-link class="cell" :to="{path:'/shop/detail',query:{
+          id:items.goods_id
+        }}">
           <div class="img-box">
             <img class="img" v-lazy="items.goods_logo" alt="">
           </div>
@@ -67,22 +73,24 @@
         </router-link>
       </li>
     </ul>
+    <h3 class="no-more mb40" v-show="searchLists==''">
+      <span class="tit">- 暂无此商品 -</span>
+    </h3>
+    <!--mask-->
+    <div class="vux-masker vux-masker-fullscreen"  v-show="tabIndex==1 || tabIndex==2" @click="tab(10)"></div>
   </section>
 </template>
 
 <script>
-  import { Masker } from 'vux'
-
   export default {
     name: "ShopCategory",
     components: {
-      Masker
     },
     data () {
       return {
-        price: false,
-        filter: false,
-        up:'',
+        sorts:['价格降序','价格升序','团票降序','团票升序'],
+        sortIndex:10,
+        tabIndex:10,
         searchLists:''
       }
     },
@@ -147,38 +155,52 @@
           console.log('my err:'+err);
         })
       },
-      sortPrice:function () {
-        this.filter=false;
-        this.price=!this.price;
+      tab(index) {
+        this.tabIndex=index;
+        if(index==0){
+          this.sortIndex=10;
+        }
       },
-      sortFilter:function(){
-        this.price=false;
-        this.filter=!this.filter;
-      },
+      sort(index){
+        this.sortIndex=index;
+      }
     },
   }
 </script>
 <style lang="css" scoped>
   @import '../../assets/css/shopCategory.css';
-
-  .slide-down-box {
-    overflow: hidden;
-    height: 0;
-  }
-  .animate {
-    height: auto;
-  }
 </style>
 <style lang="scss">
   @import "../../core/base";
+  .nav-bar,.z-index{
+    z-index:20000;
+  }
 
-  .masker{
-    .vux-masker-fullscreen{
-      z-index:1;
-    }
+  .sort-price,.sort-filter{
+    height:0;
+    overflow: hidden;
+    @include transition(all .3s linear);
+  }
 
-    .vux-masker{
-      top:rem(270);
-    }
+  .show{
+    height:auto;
+  }
+
+  .slide-down-box{
+    background: #fff;
+  }
+
+  .vux-masker-fullscreen {
+    position: fixed;
+    z-index: 10001;
+  }
+  .vux-masker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: inherit;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 </style>

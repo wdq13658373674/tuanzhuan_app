@@ -10,7 +10,7 @@
       </a>
     </bar-nav>
 
-    <router-view v-transition></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
