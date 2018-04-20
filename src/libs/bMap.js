@@ -2,6 +2,7 @@ import router from '@/router'
 const storeJs=require('storejs');
 
 export default function(){
+  console.log(storeJs('roomInfo'));
   if(storeJs('roomInfo')){
     return;
   }else {

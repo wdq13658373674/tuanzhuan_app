@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  const storeJs = require('storejs');
+  import {mapMutations} from 'vuex'
 
   export default {
     name: "User",
@@ -21,8 +21,10 @@
       }
     },
     methods:{
+      ...mapMutations(['update_userInfo','update_roomInfo']),
       exit:function(){
-        storeJs.clear();
+        this.update_userInfo('');
+        this.update_roomInfo('');
         this.$router.push('/');
       }
     }

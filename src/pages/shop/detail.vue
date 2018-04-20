@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <h4 class="h4 mt20" @click="popControl=!popControl" v-if="goodsLists.length>1 || goodsDetail.goods_spec_title!=''">
+      <h4 class="h4 mt20" @click="popControl=!popControl" v-if="showPop">
         <span class="txt">选择规格</span>
         <span class="f60 gray"> &rsaquo; </span>
       </h4>
@@ -29,20 +29,20 @@
         <router-link to="/shop/cart" class="shop-cart">
           <p>
             <span class="icon cart">
-              <i class="num">12</i>
+              <i class="num">{{cartNumber}}</i>
             </span>
           </p>
           <p>
             购物车
           </p>
         </router-link>
-        <router-link to="" class="btn btn-yellow">加入购物车</router-link>
-        <router-link to="/shop/order" class="btn btn-orange">立刻购买</router-link>
+        <span class="btn btn-yellow" @click="addCart()">加入购物车</span>
+        <span class="btn btn-orange" @click="buy()">立刻购买</span>
       </div>
     </footer>
 
     <!--popup-->
-    <popup v-model="popControl">
+    <popup v-model="popControl" v-if="showPop">
       <div class="popup1">
         <span class="pop-close" @click="popControl=!popControl">X</span>
 
@@ -71,7 +71,7 @@
               </div>
             </li>
 
-            <li class="item">
+            <li class="item" v-if="goodsType">
               <h5 class="tit">属性</h5>
               <div class="clearfix">
                 <label v-for="item in goodsType">
@@ -81,7 +81,7 @@
               </div>
             </li>
             <li>
-              {{type}}-{{prop}}
+              {{prop}}
             </li>
             <li class="item">
               <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false"></x-number>
@@ -94,15 +94,15 @@
             <div class="shop-cart">
               <p>
                 <span class="icon cart">
-                    <i class="num">{{cartNum}}</i>
+                    <i class="num">{{cartNumber}}</i>
                 </span>
               </p>
               <p>
                 购物车
               </p>
             </div>
-            <a href="#" class="btn btn-yellow">加入购物车</a>
-            <a href="#" class="btn btn-orange">立刻购买</a>
+            <span class="btn btn-yellow" @click="addCart()">加入购物车</span>
+            <span class="btn btn-orange" @click="buy()">立刻购买</span>
           </div>
         </footer>
       </div>
@@ -112,6 +112,7 @@
 </template>
 
 <script>
+  import {mapMutations,mapState,mapGetters} from 'vuex'
   import {Swiper,Popup,XNumber} from 'vux'
 
   export default {
@@ -149,34 +150,70 @@
         goods_id:this.$route.query.id
       }
     },
+    computed:{
+      showPop:function(){
+        return this.goodsLists.length>1 || this.goodsDetail.goods_property!='';
+      },
+      ...mapState(['cartInfo']),
+      ...mapGetters(['cartNumber']),
+    },
     mounted(){
       this.getDetail();
     },
     methods:{
-        getDetail:function(){
-          let param={
-            goods_id:this.goods_id
+      getDetail:function(){
+        let param={
+          goods_id:this.goods_id
+        }
+
+        this.$axios.get('/index/goods/getGoodsInfo',{
+          params:param
+        }).then(res=>{
+          res=res.data;
+
+          if(res.status==0){
+            this.goodsLists=res.data;
+            this.goods=res.data[0];
+            this.goodsDetail=res.data[0];
+            this.goodsType=res.data[0].goods_property.split(',')
           }
-
-          this.$axios.get('/index/goods/getGoodsInfo',{
-            params:param
-          }).then(res=>{
-            res=res.data;
-
-            if(res.status==0){
-              this.goodsLists=res.data;
-              this.goods=res.data[0];
-              this.goodsDetail=res.data[0];
-              this.goodsType=res.data[0].goods_property.split(',')
-            }
-          }).catch(err=>{
-            console.log('my err:'+ err);
-          })
-        },
+        }).catch(err=>{
+          console.log('my err:'+ err);
+        })
+      },
       getGoods:function(index){
         this.goods=this.goodsLists[index];
         this.goodsType=this.goods.goods_property.split(',');
         this.prop='';
+      },
+      ...mapMutations(['add_cartInfo']),
+      addCart(){
+        if(this.selectType()){
+          this.$vux.toast.text('加入购物车成功','middle');
+          this.popControl=false;
+
+          // this.add_cartInfo(this.goods);
+          // console.log(this.$store.state.cartInfo);
+        }
+      },
+      buy(){
+        if(this.selectType()){
+          console.log('购买成功');
+        }
+      },
+      selectType:function(){
+        if(this.showPop){
+          if(this.popControl){
+            if(this.type=='' || this.prop==''){
+              this.$vux.toast.text('请选择商品规格和属性','middle');
+              return false;
+            }
+          }else if(this.type=='' || this.prop==''){
+            this.popControl=true;
+            return false;
+          }
+        }
+        return true;
       }
     }
   }

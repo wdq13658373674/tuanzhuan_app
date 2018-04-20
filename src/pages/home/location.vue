@@ -47,7 +47,7 @@
         flag:false,
         user_village:'',
         other_village:'',
-        value:'re'
+        value:''
       }
     },
     computed:{

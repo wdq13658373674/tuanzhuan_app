@@ -61,13 +61,12 @@
         this.$axios.get('/index/House_notic/getMore',{
           params:param
         }).then(res=>{
-          res=res.data.data;
+          res=res.data;
 
           if(flag){
             //多次加载
-            this.newsLists=this.newsLists.concat(res.data);
-
-            if(this.page >= res.last_page){
+            this.newsLists=this.newsLists.concat(res.data.data);
+            if(this.page >= res.data.last_page){
               this.busy=true;
               this.load=false;
             }else {

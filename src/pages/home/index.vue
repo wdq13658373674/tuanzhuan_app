@@ -32,12 +32,8 @@
               <p class="txt">生活缴费</p>
             </router-link>
             <a href="#" class="item">
-              <img class="img" src="@/assets/images/icons/menu3.svg" alt="">
-              <p class="txt">投诉建议</p>
-            </a>
-            <a href="#" class="item">
-              <img class="img" src="@/assets/images/icons/menu4.svg" alt="">
-              <p class="txt">报事报修</p>
+              <img class="img" src="@/assets/images/icons/menu6.png" alt="">
+              <p class="txt">呼叫管家</p>
             </a>
             <a href="#" class="item">
               <img class="img" src="@/assets/images/icons/menu5.svg" alt="">
@@ -237,7 +233,6 @@
             params:param
           }).then(res=>{
             res=res.data;
-            console.log(res);
             if(res.status==0){
               this.goodsLists=res.data.goods;
 

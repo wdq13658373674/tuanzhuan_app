@@ -67,13 +67,22 @@ Vue.use(VueLazyload,{
  * store状态管理
  * **/
 const storeJs=require('storejs');
-
 const store = new Vuex.Store({
   state:{
-    loading:false,
-    roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},
-    userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},
-    storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {}
+    loading:false,//加载动画
+    roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},//小区房屋信息
+    userInfo:storeJs('userInfo') ? storeJs('userInfo') : '',//用户信息
+    storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {},//商家信息
+    cartInfo:storeJs('cartInfo') ? storeJs('cartInfo') : []//购物车信息
+  },
+  getters:{
+    cartNumber:state=>{
+      let catNum=0;
+      state.cartInfo.find(item=>{
+        sum+=item.cartNum;
+      })
+      return catNum;
+    }
   },
   mutations:{
     load(state,loading){
@@ -91,18 +100,25 @@ const store = new Vuex.Store({
       state.storeInfo=storeInfo;
       storeJs.set('storeInfo',state.storeInfo);
     },
+    add_cartInfo(state,cartInfo){
+      state.cartInfo.push(cartInfo);
+      // storeJs.set('cartInfo','');
+    },
   },
   actions:{
 
   },
 })
 
+/**
+ * 路由全局拦截器
+ * **/
 router.beforeEach((to,from,next)=>{
   store.commit('load',true);
 
   /**登陆拦截**/
   if (to.meta.requireAuth){
-    if (storeJs('userInfo')) {
+    if (store.state.userInfo) {
       next();
     }else {
       next({
@@ -118,7 +134,7 @@ router.afterEach(function (to,from) {
 })
 
 /**
- * http请求拦截器
+ * http请求全局拦截
  * **/
 axios.interceptors.request.use(config=>{
   store.commit('load',true);

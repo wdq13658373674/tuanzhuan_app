@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="page-group">
-      <h2 class="h2"><i class="address pull-left mr10"></i>扬子江商务中心</h2>
+      <h2 class="h2"><i class="icon address mr10"></i>{{roomInfo.village_name}}</h2>
       <div class="menu-property">
         <router-link class="menu" to="">
           <img class="img" src="@/assets/images/img/c_img3.svg" alt="">
@@ -21,8 +21,13 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   export default {
     name: "Property",
+    computed:{
+      ...mapState(['roomInfo'])
+    }
   }
 </script>
 <style lang="css">
