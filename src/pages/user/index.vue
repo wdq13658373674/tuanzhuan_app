@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
+  import {mapMutations,mapState} from 'vuex'
 
   export default {
     name: "User",
@@ -19,6 +19,9 @@
       return {
 
       }
+    },
+    computed:{
+      ...mapState(['userInfo'])
     },
     methods:{
       ...mapMutations(['update_userInfo','update_roomInfo']),

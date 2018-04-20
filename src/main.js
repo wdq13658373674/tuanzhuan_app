@@ -71,7 +71,7 @@ const store = new Vuex.Store({
   state:{
     loading:false,//加载动画
     roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},//小区房屋信息
-    userInfo:storeJs('userInfo') ? storeJs('userInfo') : '',//用户信息
+    userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},//用户信息
     storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {},//商家信息
     cartInfo:storeJs('cartInfo') ? storeJs('cartInfo') : []//购物车信息
   },
@@ -118,7 +118,7 @@ router.beforeEach((to,from,next)=>{
 
   /**登陆拦截**/
   if (to.meta.requireAuth){
-    if (store.state.userInfo) {
+    if (store.state.userInfo.user_id) {
       next();
     }else {
       next({
