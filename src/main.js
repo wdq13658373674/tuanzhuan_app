@@ -73,16 +73,6 @@ const store = new Vuex.Store({
     roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},//小区房屋信息
     userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},//用户信息
     storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {},//商家信息
-    cartInfo:storeJs('cartInfo') ? storeJs('cartInfo') : []//购物车信息
-  },
-  getters:{
-    cartNumber:state=>{
-      let catNum=0;
-      state.cartInfo.find(item=>{
-        sum+=item.cartNum;
-      })
-      return catNum;
-    }
   },
   mutations:{
     load(state,loading){
@@ -99,10 +89,6 @@ const store = new Vuex.Store({
     update_storeInfo(state,storeInfo){
       state.storeInfo=storeInfo;
       storeJs.set('storeInfo',state.storeInfo);
-    },
-    add_cartInfo(state,cartInfo){
-      state.cartInfo.push(cartInfo);
-      // storeJs.set('cartInfo','');
     },
   },
   actions:{

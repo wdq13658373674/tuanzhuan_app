@@ -1,0 +1,85 @@
+/**
+ * Created by andy on 2018/4/23.
+ */
+import router from '@/router'
+const storeJs=require('storejs');
+
+let car={
+  //当前购物车列表数据
+  cart_list:storeJs('cart_list')||[],
+
+  //增加商品到本地储存
+  addCart(goods_info,cart_sum){
+    if(this.cart_list){
+      var check=true;
+      var stock=0;
+      this.cart_list.forEach((item,index)=>{
+        if(item.goods_id==goods_info.goods_id){
+          if(cart_sum>this.cart_list[index].goods_stock){
+            stock=1;
+            this.cart_list[index].cart_sum=this.cart_list[index].goods_stock;
+            storeJs.set('cart_list', this.cart_list);
+          }else{
+            this.cart_list[index].cart_sum=cart_sum;
+            storeJs.set('cart_list', this.cart_list);
+          }
+          check=false;
+          return false;
+        }
+      });
+
+      if(stock){
+        return -1;
+      }
+
+      if(check){
+        if(cart_sum>goods_info.goods_stock){
+          return -1;
+        }
+        this.setCartList(goods_info,cart_sum)
+      }
+
+    }else{
+      if(cart_sum>goods_info.goods_stock){
+        return -1;
+      }
+      this.setCartList(goods_info,cart_sum)
+    }
+  },
+  //增加新数据到购物车
+  setCartList(goods_info,cart_sum){
+    goods_info.cart_sum=cart_sum;
+    this.cart_list.push(goods_info);
+    storeJs.set('cart_list', this.cart_list);
+  },
+
+  /**
+   * 获取购物车数量
+   * @param goods_id 商品ID
+   * @param all  状态:false 获取指定商品数量, true 获取全部商品数量
+   * @returns {number}
+     */
+  getCartShopSum(goods_id=0,all=false){
+    let catNum=0;
+    if(all){
+      this.cart_list.find(item=>{
+        catNum+=item.cart_sum;
+      });
+      return catNum;
+    }else{
+      this.cart_list.find(item=>{
+        if(item.goods_id==goods_id){
+          catNum=item.cart_sum;
+          return false;
+        }
+      });
+
+      return catNum;
+    }
+
+  },
+};
+
+
+
+export default car;

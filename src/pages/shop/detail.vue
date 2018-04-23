@@ -84,7 +84,7 @@
               {{prop}}
             </li>
             <li class="item">
-              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false"></x-number>
+              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false" @on-change="change_num"></x-number>
             </li>
           </ul>
         </div>
@@ -114,6 +114,7 @@
 <script>
   import {mapMutations,mapState,mapGetters} from 'vuex'
   import {Swiper,Popup,XNumber} from 'vux'
+  import cart from '@/assets/js/shop/cart'
 
   export default {
     name: "ShopDetail",
@@ -143,10 +144,11 @@
         type:'',
         prop:'',
         popControl:false,
-        goodsLists:'',
-        goods:'',
+        goodsLists:[],
+        goods:[],
         goodsDetail:'',
         goodsType:'',
+        cartNumber:cart.getCartShopSum(0,true),
         goods_id:this.$route.query.id
       }
     },
@@ -154,8 +156,7 @@
       showPop:function(){
         return this.goodsLists.length>1 || this.goodsDetail.goods_property!='';
       },
-      ...mapState(['cartInfo']),
-      ...mapGetters(['cartNumber']),
+      //...mapState(['cartInfo']),
     },
     mounted(){
       this.getDetail();
@@ -183,17 +184,34 @@
       },
       getGoods:function(index){
         this.goods=this.goodsLists[index];
+        this.goods_id=this.goods.goods_id;
+        this.cartNum=cart.getCartShopSum(this.goods_id);
         this.goodsType=this.goods.goods_property.split(',');
         this.prop='';
       },
-      ...mapMutations(['add_cartInfo']),
+      //...mapMutations(['add_cartInfo']),
       addCart(){
         if(this.selectType()){
-          this.$vux.toast.text('加入购物车成功','middle');
-          this.popControl=false;
+          var check=cart.addCart(this.goods,this.cartNum+1);
+          if(check==-1){
+            this.$vux.toast.text('没有库存了','middle');
+            this.cartNum=this.goods.goods_stock;
 
-          // this.add_cartInfo(this.goods);
-          // console.log(this.$store.state.cartInfo);
+            return false;
+          }else{
+            this.$vux.toast.text('加入购物车成功','middle');
+            this.cartNumber=cart.getCartShopSum(0,true);
+            this.cartNum=cart.getCartShopSum(this.goods_id);
+            this.popControl=false;
+          }
+        }
+      },
+      //改变购物车数量
+      change_num(stock){
+        var check=cart.addCart(this.goods,stock);
+        if(check==-1){
+          this.$vux.toast.text('没有库存了','middle');
+          this.cartNum=this.goods.goods_stock;
         }
       },
       buy(){
