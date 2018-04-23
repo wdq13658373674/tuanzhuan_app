@@ -256,6 +256,12 @@
     }
   }
 
+  .product-content{
+    img{
+      max-width: 100%;
+    }
+  }
+
   /*计数*/
   .xnumber{
     .vux-cell-primary>div{
@@ -293,12 +299,6 @@
       padding: 0 rem(20);
       margin-right:0;
       border-radius: 0;
-    }
-  }
-
-  .product-content{
-    img{
-      max-width: 100%;
     }
   }
 </style>

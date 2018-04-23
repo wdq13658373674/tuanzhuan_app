@@ -32,6 +32,7 @@
               <i class="icon tp mr10"></i>
               <span class="f32 orange mr20">2289.00</span>
               <span>¥4678.00</span>
+              <x-number class="xnumber pull-right" title="" v-model="cartNum" :min="1" :fillable="false"></x-number>
             </p>
           </a>
         </li>
@@ -56,6 +57,8 @@
               <i class="icon tp mr10"></i>
               <span class="f32 orange mr20">2289.00</span>
               <span>¥4678.00</span>
+
+              <x-number class="xnumber pull-right" title="" v-model="cartNum" :min="1" :fillable="false"></x-number>
             </p>
           </a>
         </li>
@@ -85,10 +88,12 @@
 </template>
 
 <script>
+  import {XNumber} from 'vux'
+  import cart from '@/assets/js/shop/cart'
   export default {
     name: "Cart",
     components: {
-
+      XNumber
     },
     data () {
       return {
@@ -105,4 +110,46 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
+  /*计数*/
+  .weui-cell{
+    padding:0;
+  }
+  .xnumber{
+    .vux-cell-primary>div{
+      border:1px solid #BBBBBB;
+      overflow: hidden;
+      @include border-radius(rem(10));
+    }
+    .vux-number-selector {
+      @include wh(auto,rem(50));
+      font-size: 25px;
+      border: none;
+
+      svg {
+        @include wh(rem(30),rem(30));
+        margin-top:rem(10);
+      }
+    }
+
+    .vux-number-input {
+      min-width:rem(90);
+      height: rem(50);
+      font-size: rem(28);
+      color: #000;
+      border: none;
+      text-align: center;
+    }
+
+    .vux-number-selector-sub {
+      border-right: 1px solid #BBBBBB;
+      padding: 0 rem(20);
+      border-radius: 0;
+    }
+    .vux-number-selector-plus {
+      border-left: 1px solid #BBBBBB;
+      padding: 0 rem(15);
+      margin-right:0;
+      border-radius: 0;
+    }
+  }
 </style>
