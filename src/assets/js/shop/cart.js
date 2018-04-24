@@ -66,9 +66,6 @@ let car={
    * @param prop_id   规格索引,格式 goods_id_index(索引)
    */
   setCartList(goods_info,cart_sum,prop_id){
-    console.log("传进来的值:",goods_info);
-    console.log("传进来的prop:",prop_id);
-
     goods_info.cart_sum=cart_sum;
     this.cart_list.push(goods_info);
     storeJs.set('cart_list', this.cart_list);
@@ -104,6 +101,21 @@ let car={
       }
     }
     return catNum;
+  },
+
+  /**
+   * 通过Key值修改购物车数量
+   * @param stock
+   * @param key
+     */
+  setCartStock(stock,key){
+    if(stock<=0){
+      return false;
+    }else{
+      this.cart_list[key].cart_sum=stock;
+    }
+
+    storeJs.set('cart_list', this.cart_list);
   },
 
   /**

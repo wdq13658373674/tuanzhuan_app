@@ -11,7 +11,7 @@
       </div>-->
 
       <ul class="cart-shop-list">
-        <li class="item" v-for="(item,key) in cart_list">
+        <li class="item" v-for="(item,key) in cart_lists">
           <label>
             <input type="checkbox" name="cart_goods" :value="key" v-model="isCheck" />
             <div class="radio">
@@ -35,7 +35,7 @@
               <span class="f32 orange mr20">{{item.goods_tcion}}</span>
               <span>¥{{item.goods_price}}</span>
 
-              <x-number class="xnumber pull-right" title="" :min="0" :fillable="false" :value="item.cart_sum" :id="key" @click="change_sum(this,key)"></x-number>
+              <x-number class="xnumber pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
 
             </p>
           </div>
@@ -76,8 +76,7 @@
     },
     data () {
       return {
-        cartNum:1,
-        cart_list:cart.cart_list,
+        cart_lists:cart.cart_list,
         price:cart.getMoney().price,
         tcion:cart.getMoney().tcion,
         isCheck:true,
@@ -85,6 +84,7 @@
     },
     mounted(){
       console.log(cart.getMoney());
+      console.log(this.cart_list);
     },
     methods: {
       /**
@@ -106,8 +106,11 @@
       },
 
       change_sum(stock,key){
-        console.log(stock);
-        console.log(key);
+        cart.setCartStock(stock,key);
+        this.cart_lists=cart.cart_list;
+        var money=cart.getMoney();
+        this.price=money.price;
+        this.tcion=money.tcion;
       },
 
     },

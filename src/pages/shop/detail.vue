@@ -159,8 +159,6 @@
     },
     mounted(){
       this.getDetail();
-      console.log(cart.cart_list);
-      //cart.clearCart();
     },
     methods:{
       getDetail:function(){
