@@ -74,17 +74,15 @@
             <li class="item" v-if="goodsType">
               <h5 class="tit">属性</h5>
               <div class="clearfix">
-                <label v-for="item in goodsType">
+                <label v-for="(item,index) in goodsType" @click="changeProp(index)">
                   <input type="radio" name="props" :value="item" v-model="prop">
                   <span class="span">{{item}}</span>
                 </label>
               </div>
             </li>
-            <li>
-              {{prop}}
-            </li>
+
             <li class="item">
-              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false" @on-change="change_num"></x-number>
+              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="0" :fillable="false" @on-change="change_num"></x-number>
             </li>
           </ul>
         </div>
@@ -147,8 +145,9 @@
         goodsLists:[],
         goods:[],
         goodsDetail:'',
-        goodsType:'',
-        cartNumber:cart.getCartShopSum(0,true),
+        goodsType:[],
+        changeStatus:false,
+        cartNumber:cart.getCartShopSum(0,'',true),
         goods_id:this.$route.query.id
       }
     },
@@ -160,6 +159,8 @@
     },
     mounted(){
       this.getDetail();
+      console.log(cart.cart_list);
+      //cart.clearCart();
     },
     methods:{
       getDetail:function(){
@@ -184,15 +185,29 @@
       },
       getGoods:function(index){
         this.goods=this.goodsLists[index];
+
+        if(this.goods.goods_logo==""){
+          this.goods.goods_logo=this.goodsLists[0].goods_logo
+        }
+
         this.goods_id=this.goods.goods_id;
-        this.cartNum=cart.getCartShopSum(this.goods_id);
-        this.goodsType=this.goods.goods_property.split(',');
+        this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);
+        this.changeStatus=false;
+        var goods_property=this.goods.goods_property.split(',');
+        if(goods_property!=""){
+          this.goodsType=goods_property;
+        }else{
+          this.goodsType=[];
+        }
+
         this.prop='';
       },
       //...mapMutations(['add_cartInfo']),
       addCart(){
+        console.log(this.goods);
+        console.log(this.goodsLists);
         if(this.selectType()){
-          var check=cart.addCart(this.goods,this.cartNum+1);
+          var check=cart.addCart(this.goods,this.cartNum,this.prop);
           if(check==-1){
             this.$vux.toast.text('没有库存了','middle');
             this.cartNum=this.goods.goods_stock;
@@ -200,18 +215,27 @@
             return false;
           }else{
             this.$vux.toast.text('加入购物车成功','middle');
-            this.cartNumber=cart.getCartShopSum(0,true);
-            this.cartNum=cart.getCartShopSum(this.goods_id);
+            this.cartNumber=cart.getCartShopSum(0,'',true);
+            this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);
             this.popControl=false;
           }
         }
       },
+      changeProp(index) {
+        var prop_id=this.goods_id+'_'+index;
+        this.prop=prop_id;
+
+        this.goods.choose_prop=this.goodsType[index];
+        this.goods.choose_prop_id=prop_id;
+        //console.log(cart.getCartShopSum(this.goods_id,this.prop));
+        this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);
+        this.changeStatus=false;
+      },
       //改变购物车数量
       change_num(stock){
-        var check=cart.addCart(this.goods,stock);
-        if(check==-1){
-          this.$vux.toast.text('没有库存了','middle');
-          this.cartNum=this.goods.goods_stock;
+        if(stock<=0) return false;
+        if(!this.selectType()){
+          this.cartNum=stock-1;
         }
       },
       buy(){
@@ -222,7 +246,7 @@
       selectType:function(){
         if(this.showPop){
           if(this.popControl){
-            if(this.type=='' || this.prop==''){
+            if((this.type=='' || this.prop=='') && this.goods.goods_property!=""){
               this.$vux.toast.text('请选择商品规格和属性','middle');
               return false;
             }
