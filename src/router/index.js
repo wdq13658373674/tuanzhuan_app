@@ -25,6 +25,7 @@ import ShopAddress from '@/pages/shop/address'
 import ShopAddAddress from '@/pages/shop/addAddress'
 import Cart from '@/pages/shop/cart'
 import User from '@/pages/user/index'
+import UserData from '@/pages/user/userData'
 
 Vue.use(Router)
 
@@ -168,6 +169,16 @@ export default new Router({
           },
           components:{
             default:ShopAddAddress,
+          }
+        },
+        {
+          path: '/user/message',
+          name: 'UserData',
+          meta: {
+            title: '我的资料'
+          },
+          components:{
+            default:UserData,
           }
         },
       ]

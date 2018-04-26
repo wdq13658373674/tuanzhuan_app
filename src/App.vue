@@ -75,6 +75,32 @@
     }
   }
 
+  /*confirm*/
+  .vux-confirm{
+    .weui-dialog{
+      width:auto;
+      min-width:60%;
+      max-width: 80%;
+    }
+    .weui-dialog__title{
+      font-size:rem(30);
+    }
+    .weui-dialog__hd{
+      padding:rem(20) rem(20);
+    }
+    .weui-dialog__bd{
+      padding: 0 rem(20) rem(30);
+      min-height:rem(60);
+      font-size:rem(30);
+      line-height:normal;
+      color:#000;
+    }
+    .weui-dialog__ft{
+      line-height:rem(90);
+      font-size:rem(30);
+    }
+  }
+
   /*.page{
     position:absolute;
     width:100%;

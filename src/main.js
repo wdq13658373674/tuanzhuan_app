@@ -4,11 +4,11 @@ import router from './router'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueLazyload from 'vue-lazyload'
-import { ToastPlugin , AlertPlugin} from 'vux'
 import App from './App'
 import getMap from '@/libs/bMap'
 import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
+import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
 const options={
   duration: '0.3',
@@ -27,6 +27,10 @@ getMap();
  * fastclick
  * **/
 FastClick.attach(document.body);
+
+/**
+ * vux全局插件
+ * **/
 Vue.use(ToastPlugin, {
   position: 'top',
   type:'text',
@@ -34,6 +38,7 @@ Vue.use(ToastPlugin, {
   width:'auto'
 })
 Vue.use(AlertPlugin)
+Vue.use(ConfirmPlugin)
 
 /**
  * vuex
