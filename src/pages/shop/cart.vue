@@ -1,5 +1,6 @@
 <template>
   <div>
+    <cartNav :select="select"></cartNav>
     <section class="page-group">
       <!--购物车为空-->
       <!--<div class="cart-empty">
@@ -9,11 +10,10 @@
               <a href="#" class="link">去逛逛</a>
           </p>
       </div>-->
-
       <ul class="cart-shop-list">
         <li class="item" v-for="(item,key) in cart_lists">
           <label>
-            <input type="checkbox" name="cart_goods" :value="key" v-model="isCheck" />
+            <input type="checkbox" name="cart_goods" :value="key" v-model="select" />
             <div class="radio">
               <i class="check"></i>
             </div>
@@ -47,7 +47,7 @@
     <footer>
       <div class="bottom-fixed cell">
         <label class="cart-radio">
-          <input type="checkbox" name="all" checked="checked" @change="allSelect()"/>
+          <input type="checkbox" name="all" v-model="allSelect"/>
           <div class="radio">
             <i class="check"></i>
           </div>
@@ -67,19 +67,39 @@
 </template>
 
 <script>
+  import cartNav from '@/pages/layout/cartNav'
   import {XNumber} from 'vux'
   import cart from '@/assets/js/shop/cart'
   export default {
     name: "Cart",
     components: {
-      XNumber
+      XNumber,
+      cartNav
     },
     data () {
       return {
         cart_lists:cart.cart_list,
         price:cart.getMoney().price,
         tcion:cart.getMoney().tcion,
-        isCheck:true,
+        select:[]
+      }
+    },
+    computed:{
+      allSelect:{
+        /**单选功能**/
+        get(){
+          return this.select.length==this.cart_lists.length ? true : false;
+        },
+        /**全选功能**/
+        set(value){
+          var selected=[];
+          if(value){
+            this.cart_lists.forEach(function(item,index){
+              selected.push(index);
+            })
+          }
+          this.select=selected;
+        }
       }
     },
     mounted(){
@@ -87,24 +107,6 @@
       console.log(this.cart_list);
     },
     methods: {
-      /**
-       * 全选功能
-       */
-      allSelect() {
-        if(this.isCheck){
-          this.isCheck=false;
-        }else{
-          this.isCheck=true;
-        }
-
-      },
-      /**
-       * 单选操作
-       */
-      singleSelect() {
-
-      },
-
       change_sum(stock,key){
         cart.setCartStock(stock,key);
         this.cart_lists=cart.cart_list;

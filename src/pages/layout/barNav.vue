@@ -23,6 +23,7 @@
     name: "BarNav",
     props: ["title"],
     methods: {
+      /**返回**/
       back() {
         this.$router ? this.$router.back(-1) : window.history.back()
       }

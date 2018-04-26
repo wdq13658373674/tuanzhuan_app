@@ -16,8 +16,6 @@
 
 <script>
   import BarNav from './barNav'
-  import {mapState} from 'vuex'
-  const storeJs=require('storejs');
 
   export default {
     name: 'Layout',
@@ -43,7 +41,6 @@
         if(this.$route.name=="ShopCategory"){
           return 'cart';
         }
-
         return false;
       }
     }

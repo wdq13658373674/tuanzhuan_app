@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
   import {mapState} from 'vuex'
 
   export default {
@@ -25,6 +26,9 @@
       return{
         village_name:''
       }
+    },
+    components:{
+
     },
     computed:{
       ...mapState(['roomInfo'])
