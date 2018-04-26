@@ -170,15 +170,12 @@ export default new Router({
             default:ShopAddAddress,
           }
         },
-        {
-          path: '/shop/cart',
-          name: 'Cart',
-          meta: {
-            title: '购物车'
-          },
-          component: Cart,
-        },
       ]
+    },
+    {
+      path: '/shop/cart',
+      name: 'ShopCart',
+      component: Cart,
     },
     {
       path: '/service',
