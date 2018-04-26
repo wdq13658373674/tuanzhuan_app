@@ -13,7 +13,7 @@
       <ul class="cart-shop-list">
         <li class="item" v-for="(item,key) in cart_lists">
           <label>
-            <input type="checkbox" name="cart_goods" :value="key" v-model="select" />
+            <input type="checkbox" name="cart_goods" :value="key" v-model="select" @click="choose_goods" />
             <div class="radio">
               <i class="check"></i>
             </div>
@@ -103,10 +103,19 @@
       }
     },
     mounted(){
-      console.log(cart.getMoney());
-      console.log(this.cart_list);
+
+      var selected=[];
+      this.cart_lists.forEach(function(item,index){
+        selected.push(index);
+      });
+      this.select=selected;
     },
     methods: {
+      /**
+       * 操作商品数量
+       * @param stock
+       * @param key
+         */
       change_sum(stock,key){
         cart.setCartStock(stock,key);
         this.cart_lists=cart.cart_list;
@@ -114,6 +123,13 @@
         this.price=money.price;
         this.tcion=money.tcion;
       },
+
+      /**
+       * 操作商品
+       */
+      choose_goods(){
+        console.log(this.select);
+      }
 
     },
   }

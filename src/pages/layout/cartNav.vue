@@ -30,7 +30,7 @@
         if(select.length==0){
           this.$vux.toast.text('请选择要删除的商品','top');
         }else{
-          console.log(this.select);
+          console.log(cart.getMoney());
         }
       }
     }
