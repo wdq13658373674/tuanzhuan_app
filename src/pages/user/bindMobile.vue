@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import {mapState,mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
   import BarNav from '@/pages/layout/barNav'
   import timerBtn from '@/components/timerBtn'
   import utils from '@/libs/util.js'
@@ -59,7 +59,6 @@
       /**
        * 保存修改后的手机号
        * **/
-      ...mapMutations(['update_userInfo']),
       save(){
         let params={
           uid:this.userInfo.ucenter_id,
@@ -85,7 +84,6 @@
           res=res.data;
           if(res.status==0){
             this.$vux.toast.show('修改成功,请重新登陆');
-            this.update_userInfo('');
             this.$router.push('/login');
           }else{
             this.$vux.toast.show('修改失败');

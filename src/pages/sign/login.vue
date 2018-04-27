@@ -29,6 +29,7 @@
 <script>
   import utils from '@/libs/util.js'
   const qs = require("querystring")
+  import {mapMutations} from 'vuex'
 
   export default {
     name: "Login",
@@ -40,9 +41,10 @@
       }
     },
     mounted(){
-      this.$store.commit('update_userInfo','');
+      this.update_userInfo('');
     },
     methods:{
+      ...mapMutations(['update_userInfo']),
       submit:function(){
         if(this.phone == ''){
           this.$vux.toast.show('请输入手机号码');
