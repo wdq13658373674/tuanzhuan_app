@@ -193,39 +193,6 @@ export default new Router({
           }
         },
         {
-          path: '/user/name/:realname',
-          name: 'UserName',
-          meta: {
-            requireAuth: true,
-            title: '修改姓名'
-          },
-          components:{
-            default:UserName,
-          }
-        },
-        {
-          path: '/user/nickname/:nickname',
-          name: 'UserNickname',
-          meta: {
-            requireAuth: true,
-            title: '修改昵称'
-          },
-          components:{
-            default:UserNickname,
-          }
-        },
-        {
-          path: '/user/mobile/:phone',
-          name: 'BindMobile',
-          meta: {
-            requireAuth: true,
-            title: '修改手机号'
-          },
-          components:{
-            default:BindMobile,
-          }
-        },
-        {
           path: '/user/recharge',
           name: 'UserRecharge',
           meta: {
@@ -313,6 +280,39 @@ export default new Router({
         title:'我的余额'
       },
       component: UserBalance,
+    },
+    {
+      path: '/user/mobile/:old_phone',
+      name: 'BindMobile',
+      meta: {
+        requireAuth: true,
+        title: '修改手机号'
+      },
+      components:{
+        default:BindMobile,
+      }
+    },
+    {
+      path: '/user/name/:realname',
+      name: 'UserName',
+      meta: {
+        requireAuth: true,
+        title: '修改姓名'
+      },
+      components:{
+        default:UserName,
+      }
+    },
+    {
+      path: '/user/nickname/:nickname',
+      name: 'UserNickname',
+      meta: {
+        requireAuth: true,
+        title: '修改昵称'
+      },
+      components:{
+        default:UserNickname,
+      }
     }
   ]
 })

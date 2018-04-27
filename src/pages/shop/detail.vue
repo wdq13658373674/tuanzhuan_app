@@ -123,21 +123,7 @@
     },
     data(){
       return {
-        swiperList:[{
-          url: 'javascript:',
-          img: 'https://static.vux.li/demo/1.jpg',
-          title: ''
-        }, {
-          url: 'javascript:',
-          img: 'https://static.vux.li/demo/2.jpg',
-          title: ''
-        }, {
-          url: 'javascript:',
-          img: 'https://static.vux.li/demo/3.jpg',
-          title: '',
-          fallbackImg: 'https://static.vux.li/demo/3.jpg'
-        }],
-
+        swiperList:[],
         cartNum:1,
         type:'',
         prop:'',
@@ -175,7 +161,14 @@
             this.goodsLists=res.data;
             this.goods=res.data[0];
             this.goodsDetail=res.data[0];
-            this.goodsType=res.data[0].goods_property.split(',')
+            this.goodsType=res.data[0].goods_property.split(',');
+
+            let swiper=res.data[0].goods_imgs.split(',');
+            if(swiper){
+              this.swiperList=swiper.map((item)=>({
+                img:item
+              }))
+            }
           }
         }).catch(err=>{
           console.log('my err:'+ err);

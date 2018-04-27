@@ -43,7 +43,7 @@
         </li>
         <li class="item">
           <router-link class="link cell" :to="{name:'BindMobile',params:{
-            phone:userLists.user_phone
+            old_phone:userLists.user_phone
           }}">
             <span> <i class="icon icon6"></i>绑定手机</span>
             <span>{{userLists.user_phone}}</span>
@@ -174,7 +174,7 @@
     }
 
     .weui-actionsheet__cell{
-      font-size:rem(32);
+      font-size:rem(26);
       padding:rem(34) 0;
     }
   }

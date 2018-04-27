@@ -1,5 +1,10 @@
 <template>
   <div>
+    <BarNav title="修改姓名">
+      <div class="link pull-right"  slot="right" @click="save">
+        保存
+      </div>
+    </BarNav>
     <section class="page-group">
       <ul class="change-data cell-list mt20">
         <li class="item p27">
@@ -11,26 +16,33 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+  import BarNav from '@/pages/layout/barNav'
+  import { updateMessage } from '@/assets/js/user/changeMessage'
   export default {
     name: "ChangeName",
     components: {
-
+      BarNav
+    },
+    computed:{
+      ...mapState(['userInfo']),
     },
     data() {
       return {
-
+        realname:this.$route.params.realname
       }
     },
-    computed:{
-      realname:{
-        get(){
-          return this.$route.params.realname;
-        },
-        set(value){
-          if(value){
-            this.$route.params.realname=value;
-          }
+    methods:{
+      /**
+       * 保存修改后的姓名
+       * **/
+      save(){
+        let data={
+          type:5,
+          value:this.realname
         }
+
+        updateMessage(this,data);
       }
     }
   }
