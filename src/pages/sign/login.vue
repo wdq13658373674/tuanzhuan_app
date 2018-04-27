@@ -72,7 +72,7 @@
           this.$store.commit('update_roomInfo',res.data.room);
 
           this.$vux.toast.show('登陆成功');
-          this.$router.push('/')
+          this.$router.push('/user')
         }).catch(err=>{
           console.log('my err:'+err)
         })

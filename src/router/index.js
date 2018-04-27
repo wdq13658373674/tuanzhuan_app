@@ -8,6 +8,7 @@ import Register from '@/pages/sign/register'
 import Password from '@/pages/sign/password'
 import Repassword from '@/pages/sign/repassword'
 import ForgetPassword from '@/pages/sign/forgetPassword'
+
 import Index from '@/pages/home/index'
 import Location from '@/pages/home/location'
 import Property from '@/pages/property/index'
@@ -15,6 +16,7 @@ import Life from '@/pages/life/index'
 import Article from '@/pages/article/index'
 import ArticleDetail from '@/pages/article/detail'
 import Service from '@/pages/service/index'
+
 import Shop from '@/pages/shop/index'
 import ShopSearch from '@/pages/shop/search'
 import ShopDetail from '@/pages/shop/detail'
@@ -24,8 +26,16 @@ import ShopOrder from '@/pages/shop/order'
 import ShopAddress from '@/pages/shop/address'
 import ShopAddAddress from '@/pages/shop/addAddress'
 import Cart from '@/pages/shop/cart'
+
 import User from '@/pages/user/index'
-import UserData from '@/pages/user/userData'
+import UserData from '@/pages/user/message'
+import UserName from '@/pages/user/changeName'
+import UserNickname from '@/pages/user/changeNickname'
+import BindMobile from '@/pages/user/bindMobile'
+import UserBalance from '@/pages/user/balance'
+import UserRecharge from '@/pages/user/recharge'
+import UserWithdraw from '@/pages/user/withdraw'
+import UserIncome from '@/pages/user/income'
 
 Vue.use(Router)
 
@@ -175,10 +185,77 @@ export default new Router({
           path: '/user/message',
           name: 'UserData',
           meta: {
+            requireAuth: true,
             title: '我的资料'
           },
           components:{
             default:UserData,
+          }
+        },
+        {
+          path: '/user/name',
+          name: 'UserName',
+          meta: {
+            requireAuth: true,
+            title: '修改姓名'
+          },
+          components:{
+            default:UserName,
+          }
+        },
+        {
+          path: '/user/nickname',
+          name: 'UserNickname',
+          meta: {
+            requireAuth: true,
+            title: '修改昵称'
+          },
+          components:{
+            default:UserNickname,
+          }
+        },
+        {
+          path: '/user/mobile',
+          name: 'BindMobile',
+          meta: {
+            requireAuth: true,
+            title: '修改手机号'
+          },
+          components:{
+            default:BindMobile,
+          }
+        },
+        {
+          path: '/user/recharge',
+          name: 'UserRecharge',
+          meta: {
+            requireAuth: true,
+            title: '充值'
+          },
+          components:{
+            default:UserRecharge,
+          }
+        },
+        {
+          path: '/user/withdraw',
+          name: 'UserWithdraw',
+          meta: {
+            requireAuth: true,
+            title: ' 提现'
+          },
+          components:{
+            default:UserWithdraw,
+          }
+        },
+        {
+          path: '/user/income',
+          name: 'UserIncome',
+          meta: {
+            requireAuth: true,
+            title: '收支明细'
+          },
+          components:{
+            default:UserIncome,
           }
         },
       ]
@@ -227,6 +304,15 @@ export default new Router({
         requireAuth: true,
       },
       component: User,
+    },
+    {
+      path: '/user/balance',
+      name: 'UserBalance',
+      meta: {
+        requireAuth: true,
+        title:'我的余额'
+      },
+      component: UserBalance,
     }
   ]
 })

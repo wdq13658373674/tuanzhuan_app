@@ -8,6 +8,10 @@
       <a class="link pull-right" v-if="rightNav==='cart'"  slot="right">
         <i class="icon cart"></i>
       </a>
+
+      <div class="link pull-right" v-if="rightNav==='save'"  slot="right">
+        保存
+      </div>
     </bar-nav>
 
     <router-view></router-view>
@@ -35,11 +39,15 @@
         return this.$route.meta.title ? this.$route.meta.title : ' '
       },
       rightNav(){
-        if(this.$route.name=="ShopDetail"){
+        let routeName=this.$route.name;
+        if(routeName=="ShopDetail"){
           return 'home';
         }
-        if(this.$route.name=="ShopCategory"){
+        if(routeName=="ShopCategory"){
           return 'cart';
+        }
+        if(routeName=="UserName" || routeName=="UserNickname" || routeName=="BindMobile"){
+          return 'save';
         }
         return false;
       }

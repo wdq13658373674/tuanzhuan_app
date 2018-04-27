@@ -4,7 +4,7 @@
           <slot name="leftIcon">
                <i class="icon arrow4"></i>
           </slot>
-        </span>
+    </span>
   </div>
 </template>
 

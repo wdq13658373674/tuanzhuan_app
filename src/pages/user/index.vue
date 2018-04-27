@@ -3,11 +3,14 @@
     <div class="user-header">
       <div class="head-img">
         <div class="img-box">
-          <img src="@/assets/images/icons/u_head.png" alt="">
+          <img v-if="userLists.user_logo" :src="userLists.user_logo" alt="">
+          <img src="@/assets/images/icons/u_head.png" alt="" v-else>
         </div>
       </div>
-      <p class="p1">小怪兽</p>
-      <p class="p2">云鼎府邸12栋1-2</p>
+      <p v-if="userLists.user_nickname" class="p1">{{userLists.user_nickname}}</p>
+      <p v-else-if="userLists.user_phone" class="p1">{{userLists.user_phone}}</p>
+      <p v-else="userLists.user_realname" class="p1">{{userLists.user_realname}}</p>
+      <p class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
 
       <!--波浪 start-->
       <div class="waveWrapper waveAnimation">
@@ -20,52 +23,53 @@
 
     <section class="page-group">
       <div class="content user-menu">
-        <a href="#">
-          <div class="item">
-            <p class="p1 orange">9999.9</p>
+        <div class="item">
+          <a href="#">
+            <p class="p1 orange">{{userLists.user_tcion}}</p>
             <p class="p2">我的团票</p>
-          </div>
-        </a>
-        <a href="#">
-          <div class="item">
-            <p class="p1">¥888.88</p>
+          </a>
+        </div>
+        <div class="item">
+          <router-link to="/user/recharge">
+            <p class="p1">¥{{userLists.user_money}}</p>
             <p class="p2">账户余额</p>
-          </div>
-        </a>
-        <a href="#">
-          <div class="item">
-            <p class="p1">777.77</p>
+          </router-link>
+        </div>
+        <div class="item">
+          <a href="#">
+            <p class="p1">{{userLists.user_score}}</p>
             <p class="p2">我的积分</p>
-          </div>
-        </a>
+          </a>
+        </div>
       </div>
+
       <div class="content mt20">
         <ul class="user-belong-list">
           <li class="item">
-            <a href="#" class="link">
+            <a href="#">
               <p class="p1">物业账单</p>
-              <p class="p2">253.63元</p>
+              <p class="p2">0元</p>
               <i class="icon arrow"></i>
             </a>
           </li>
           <li class="item">
-            <a href="#" class="link">
+            <a href="#">
               <p class="p1">我的房屋</p>
-              <p class="p2">西城御府3栋9-8</p>
+              <p class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
               <i class="icon arrow"></i>
             </a>
           </li>
           <li class="item">
-            <a href="#" class="link">
+            <a href="#">
               <p class="p1">优惠券</p>
-              <p class="p2">共2张</p>
+              <p class="p2">共0张</p>
               <i class="icon arrow"></i>
             </a>
           </li>
           <li class="item">
-            <a href="#" class="link">
+            <a href="#">
               <p class="p1">银行卡</p>
-              <p class="p2">共1张</p>
+              <p class="p2">共0张</p>
               <i class="icon arrow"></i>
             </a>
           </li>
@@ -126,6 +130,12 @@
               <p class="p1">我的快递</p>
             </a>
           </li>
+          <li class="item">
+            <a href="#" class="link">
+              <img class="img" src="@/assets/images/icons/i_icon9.png" alt="">
+              <p class="p1">安全管理</p>
+            </a>
+          </li>
         </ul>
       </div>
     </section>
@@ -135,6 +145,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import Footer from '@/pages/layout/footer'
   export default {
     name: "User",
@@ -143,11 +154,32 @@
     },
     data(){
       return {
-
+        userLists:0,
+        roomLists:0,
       }
     },
+    computed:{
+      ...mapState(['userInfo'])
+    },
+    mounted(){
+      this.getUserLists();
+    },
     methods:{
-
+      /**获取用户数据**/
+      getUserLists(){
+        let params={
+          user_id:this.userInfo.user_id
+        }
+        this.$axios.get('/index/User/getUser',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          this.userLists=res.data.village.user;
+          this.roomLists=res.data.village.room;
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      }
     }
   }
 </script>
