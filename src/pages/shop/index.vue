@@ -127,8 +127,27 @@
     mounted(){
       this.getCategorys();
       this.getShopLists();
+      this.getSwiper();
     },
     methods:{
+      /**获取轮播图**/
+      getSwiper(){
+        let params={
+          store_id:this.storeInfo.store_id,
+        }
+
+        this.$axios.get('/index/Goods/getBanner',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          if(res.status==0){
+            console.log(res);
+          }
+        }).catch(err=>{
+          cnsole.log('my err:'+err);
+        })
+      },
+      /**获取商品种类**/
       getCategorys:function(){
         let params={
           lat:this.roomInfo.lat,
@@ -146,6 +165,7 @@
           cnsole.log('my err:'+err);
         })
       },
+      /**获取商品列表**/
       getShopLists:function(){
         let params={
           lat:this.roomInfo.lat,

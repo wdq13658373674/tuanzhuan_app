@@ -155,7 +155,6 @@ export default new Router({
           path: '/shop/order',
           name: 'ShopOrder',
           meta: {
-            requireAuth: true,
             title: '提交订单'
           },
           components:{
@@ -194,7 +193,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/name',
+          path: '/user/name/:realname',
           name: 'UserName',
           meta: {
             requireAuth: true,
@@ -205,7 +204,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/nickname',
+          path: '/user/nickname/:nickname',
           name: 'UserNickname',
           meta: {
             requireAuth: true,
@@ -216,7 +215,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/mobile',
+          path: '/user/mobile/:phone',
           name: 'BindMobile',
           meta: {
             requireAuth: true,

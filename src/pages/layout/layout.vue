@@ -9,7 +9,7 @@
         <i class="icon cart"></i>
       </a>
 
-      <div class="link pull-right" v-if="rightNav==='save'"  slot="right">
+      <div class="link pull-right" v-if="rightNav==='save'"  slot="right" @click="save">
         保存
       </div>
     </bar-nav>
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+  import { updateMessage } from '@/assets/js/user/changeMessage'
   import BarNav from './barNav'
 
   export default {
@@ -38,6 +40,7 @@
         }
         return this.$route.meta.title ? this.$route.meta.title : ' '
       },
+      ...mapState(['userInfo']),
       rightNav(){
         let routeName=this.$route.name;
         if(routeName=="ShopDetail"){
@@ -50,6 +53,30 @@
           return 'save';
         }
         return false;
+      }
+    },
+    methods:{
+      save(){
+        let params=this.$route.params;
+        let data='';
+
+        if(params.realname){
+          data={
+            type:5,
+            value:params.realname
+          }
+        }else if(params.nickname){
+          data={
+            type:4,
+            value:params.nickname
+          }
+        }
+
+        if(data){
+          updateMessage(this,data);
+        }
+
+        return;
       }
     }
   }

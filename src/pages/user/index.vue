@@ -7,9 +7,7 @@
           <img src="@/assets/images/icons/u_head.png" alt="" v-else>
         </div>
       </div>
-      <p v-if="userLists.user_nickname" class="p1">{{userLists.user_nickname}}</p>
-      <p v-else-if="userLists.user_phone" class="p1">{{userLists.user_phone}}</p>
-      <p v-else="userLists.user_realname" class="p1">{{userLists.user_realname}}</p>
+      <p class="p1">{{userLists.user_nickname || userLists.user_phone || userLists.user_realname}}</p>
       <p class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
 
       <!--波浪 start-->
@@ -25,19 +23,19 @@
       <div class="content user-menu">
         <div class="item">
           <a href="#">
-            <p class="p1 orange">{{userLists.user_tcion}}</p>
+            <p class="p1 orange">{{userLists.user_tcion || 0}}</p>
             <p class="p2">我的团票</p>
           </a>
         </div>
         <div class="item">
-          <router-link to="/user/recharge">
-            <p class="p1">¥{{userLists.user_money}}</p>
+          <router-link to="/user/balance">
+            <p class="p1">¥{{userLists.user_money || 0}}</p>
             <p class="p2">账户余额</p>
           </router-link>
         </div>
         <div class="item">
           <a href="#">
-            <p class="p1">{{userLists.user_score}}</p>
+            <p class="p1">{{userLists.user_score || 0}}</p>
             <p class="p2">我的积分</p>
           </a>
         </div>

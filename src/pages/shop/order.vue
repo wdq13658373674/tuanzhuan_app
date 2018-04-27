@@ -27,6 +27,9 @@
             <span>小怪兽</span>
             <span>18680722507</span>
           </p>
+
+          <!--为空-->
+          <p>请添加或者选择地址 <i class="icon arrow5 pull-right"></i></p>
         </router-link>
       </div>
       <!--商家配送-->

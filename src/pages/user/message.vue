@@ -6,18 +6,23 @@
           <div class="link cell">
             <span> <i class="icon icon1"></i>头像</span>
             <span class="user-img">
-              <img v-lazy="userLists.user_logo" alt="">
+              <img class="img" :src="userLists.user_logo" alt="">
             </span>
           </div>
         </li>
         <li class="item">
-          <router-link class="link cell" to="/user/name">
+          <router-link class="link cell" :to="{name:'UserName',params:{
+            realname:userLists.user_realname
+          }}">
             <span> <i class="icon icon2"></i>姓名</span>
-            <span>{{userLists.user_realname}}</span>
+            <span v-if="userLists.user_realname">{{userLists.user_realname}}</span>
+            <span v-else class="orange">待完善</span>
           </router-link>
         </li>
         <li class="item">
-          <router-link class="link cell" to="/user/nickname">
+          <router-link class="link cell" :to="{name:'UserNickname',params:{
+            nickname:userLists.user_nickname
+          }}">
             <span> <i class="icon icon3"></i>昵称</span>
             <span>{{userLists.user_nickname}}</span>
           </router-link>
@@ -33,11 +38,13 @@
         <li class="item">
           <div class="link cell" href="#">
             <span> <i class="icon icon5"></i>生日</span>
-            <datetime @on-confirm="changeBirths" v-model="changeBirth" format="YYYY年MM月DD日" :min-year=1970 clear-text="请选择您的出生日期" confirm-text="完成"></datetime>
+            <datetime @on-change="changeBirths" v-model="changeBirth" format="YYYY-MM-DD" :min-year=1970 clear-text="请选择您的出生日期" confirm-text="完成"></datetime>
           </div>
         </li>
         <li class="item">
-          <router-link class="link cell" to="/user/mobile">
+          <router-link class="link cell" :to="{name:'BindMobile',params:{
+            phone:userLists.user_phone
+          }}">
             <span> <i class="icon icon6"></i>绑定手机</span>
             <span>{{userLists.user_phone}}</span>
           </router-link>
@@ -68,6 +75,8 @@
 <script>
   import {mapMutations,mapState} from 'vuex'
   import { Actionsheet,Datetime } from 'vux'
+  import { updateMessage } from '@/assets/js/user/changeMessage'
+
   export default {
     name: "UserData",
     components: {
@@ -84,7 +93,7 @@
           1:'男',
           2:'保密',
         },
-        changeBirth:'2015年11月12日',
+        changeBirth:'2018-1-2',
         userLists:''
       }
     },
@@ -116,14 +125,26 @@
         this.$router.push('/');
       },
       /**修改性别**/
-      changeSexs(key,item){
-        console.log(key,item)
-        this.userLists.user_gender=key;
+      changeSexs(key){
+        key=parseInt(key);
+        let sex=this.userLists.user_gender;
+        if(sex!=key){
+          this.userLists.user_gender=key;
+          let data={
+            type:3,
+            value:key
+          }
+          updateMessage(this,data);
+        }
       },
       /**修改生日**/
       changeBirths(value){
-        console.log(value);
-      }
+        let data={
+          type:1,
+          value:value
+        }
+        updateMessage(this,data);
+      },
     }
   }
 </script>
