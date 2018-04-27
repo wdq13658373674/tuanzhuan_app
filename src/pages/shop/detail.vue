@@ -57,7 +57,7 @@
                 <span>{{goods.goods_tcion}}</span>
               </p>
               <p class="p2">¥{{goods.goods_price}}</p>
-              <p class="p3">库存：{{goods.goods_stock}}</p>
+              <p class="p3" v-if="goods.goods_stock!=-1">库存：{{goods.goods_stock}}</p>
             </div>
           </div>
           <ul class="format-list mb70">
@@ -82,7 +82,7 @@
             </li>
 
             <li class="item">
-              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="0" :fillable="false" @on-change="change_num"></x-number>
+              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false" @on-change="change_num"></x-number>
             </li>
           </ul>
         </div>
@@ -202,8 +202,7 @@
       },
       //...mapMutations(['add_cartInfo']),
       addCart(){
-        console.log(this.goods);
-        console.log(this.goodsLists);
+
         if(this.selectType()){
           var check=cart.addCart(this.goods,this.cartNum,this.prop);
           if(check==-1){
@@ -231,7 +230,7 @@
       },
       //改变购物车数量
       change_num(stock){
-        if(stock<=0) return false;
+        if(stock<=1) return false;
         if(!this.selectType()){
           this.cartNum=stock-1;
         }

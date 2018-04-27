@@ -109,11 +109,11 @@
         <div class="order-total">
           <p class="f32">合计:
             <i class="icon tp"></i>
-            <span class="orange">8.00</span>
+            <span class="orange">{{tcion}}</span>
           </p>
-          <p>¥16.00</p>
+          <p>¥{{money}}</p>
         </div>
-        <a href="#" class="btn btn-orange">结算</a>
+        <a href="javascript:void(0);" class="btn btn-orange" @click="getInfo">结算</a>
       </div>
     </footer>
 
@@ -150,6 +150,9 @@
 
 <script>
   import { Popup ,Group, Scroller,Radio} from 'vux'
+  import {mapState} from 'vuex'
+  import cart from '@/assets/js/shop/cart'
+
   export default {
     name: "ShopOrder",
     components: {
@@ -166,12 +169,44 @@
         timeValue:'17:15',
         popControl:false,
         own:'one',
+        money:cart.getMoney(cart.order_pay).price,
+        tcion:cart.getMoney(cart.order_pay).tcion,
       }
+    },
+    computed:{
+      ...mapState(['userInfo','storeInfo'])
+    },
+    mounted(){
+      //获取店铺配置信息
+      let param={
+        storeid:this.storeInfo.store_id,
+        user_id:this.userInfo.user_id,
+        money:this.money,
+        tcion:this.tcion
+      };
+      this.$axios.get('/index/Goods_order/getSendStatus',{
+        params:param
+      }).then(res=>{
+        res=res.data;
+        console.log(res);
+      }).catch(err=>{
+        console.log('my err:'+ err);
+      });
+
     },
     methods: {
       tab:function(index){
         this.tabIndex=index;
       },
+      getInfo(){
+
+      }
+
+
+
+
+
+
     },
   }
 </script>

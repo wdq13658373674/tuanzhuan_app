@@ -7,6 +7,7 @@ const storeJs=require('storejs');
 let car={
   //当前购物车列表数据
   cart_list:storeJs('cart_list')||[],
+  order_pay:storeJs('order_pay')||[],
 
   /**
    * 增加购物车(本地储存)
@@ -27,7 +28,7 @@ let car={
 
         if(item.goods_id==goods_info.goods_id && item.choose_prop_id==prop_id){
           //console.log("add");
-          if(cart_sum>this.cart_list[index].goods_stock){
+          if(cart_sum>this.cart_list[index].goods_stock && this.cart_list[index].goods_stock>-1){
             stock=1;
             this.cart_list[index].cart_sum=this.cart_list[index].goods_stock;
             storeJs.set('cart_list', this.cart_list);
@@ -45,14 +46,14 @@ let car={
       }
 
       if(check){
-        if(cart_sum>goods_info.goods_stock){
+        if(cart_sum>goods_info.goods_stock && goods_info.goods_stock>-1){
           return -1;
         }
         this.setCartList(goods_info,cart_sum,prop_id)
       }
 
     }else{
-      if(cart_sum>goods_info.goods_stock){
+      if(cart_sum>goods_info.goods_stock && goods_info.goods_stock>-1){
         return -1;
       }
       this.setCartList(goods_info,cart_sum,prop_id)
@@ -120,20 +121,48 @@ let car={
 
   /**
    * 获取购物车金额
-   * @param car_index 购物车索引编号,多个以','号隔开:默认为空查所有
+   * @param car_index 购物车索引编号,多个以数组传入
    * @returns {{price: number, tcion: number}}
      */
-  getMoney(car_index=""){
+  getMoney(car_index=[]){
     var price=0;
     var tcion=0;
-    if(car_index==""){
-      this.cart_list.find(item=>{
-        price+=(item.goods_price*item.cart_sum);
-        tcion+=(item.goods_tcion*item.cart_sum);
+    if(car_index.length>0){
+      car_index.find(item=>{
+        price+=(this.cart_list[item].goods_price*this.cart_list[item].cart_sum);
+        tcion+=(this.cart_list[item].goods_tcion*this.cart_list[item].cart_sum);
       });
     }
 
     return {price:price,tcion:tcion};
+  },
+
+  /**
+   * 设置提交订单
+   * @param order
+   * @returns {boolean}
+     */
+  setOrder(order=[]){
+    if(order.length>0){
+      storeJs.set('order_pay',order);
+
+      return true
+    }else{
+      return false;
+    }
+  },
+
+  /**
+   * 删除购物车指定商品
+   * @param car_index 购物车索引编号,多个以数组传入
+   * @returns {{price: number, tcion: number}}
+   */
+  delGoods(car_index=[]){
+    car_index.find(item=>{
+      this.cart_list.splice(item, 1);
+    });
+
+    storeJs.set('cart_list', this.cart_list);
   },
 
   /**

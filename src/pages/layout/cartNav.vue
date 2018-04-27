@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import cart from '@/assets/js/shop/cart'
+
   export default {
     name: "cartNav",
     props: ["select"],
@@ -30,7 +32,12 @@
         if(select.length==0){
           this.$vux.toast.text('请选择要删除的商品','top');
         }else{
-          console.log(cart.getMoney());
+          if(confirm("您确定要删除此商品吗?")){
+            cart.delGoods(select);
+            var money=cart.getMoney();
+            this.price=money.price;
+            this.tcion=money.tcion;
+          }
         }
       }
     }

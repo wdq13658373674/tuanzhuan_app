@@ -13,7 +13,7 @@
       <ul class="cart-shop-list">
         <li class="item" v-for="(item,key) in cart_lists">
           <label>
-            <input type="checkbox" name="cart_goods" :value="key" v-model="select" @click="choose_goods" />
+            <input type="checkbox" name="cart_goods" :value="key" v-model="select"/>
             <div class="radio">
               <i class="check"></i>
             </div>
@@ -60,7 +60,7 @@
           </p>
           <p>¥{{price}}</p>
         </div>
-        <a href="#" class="btn btn-orange">结算</a>
+        <a href="javascript:void(0);" class="btn btn-orange" @click="submitOrder">结算</a>
       </div>
     </footer>
   </div>
@@ -79,8 +79,8 @@
     data () {
       return {
         cart_lists:cart.cart_list,
-        price:cart.getMoney().price,
-        tcion:cart.getMoney().tcion,
+        price:0,
+        tcion:0,
         select:[]
       }
     },
@@ -103,12 +103,12 @@
       }
     },
     mounted(){
-
       var selected=[];
       this.cart_lists.forEach(function(item,index){
         selected.push(index);
       });
       this.select=selected;
+
     },
     methods: {
       /**
@@ -117,6 +117,10 @@
        * @param key
          */
       change_sum(stock,key){
+        if(stock<1){
+          this.$vux.toast.text('该商品不能再减少了哟!','middle');
+          return false;
+        }
         cart.setCartStock(stock,key);
         this.cart_lists=cart.cart_list;
         var money=cart.getMoney();
@@ -125,13 +129,30 @@
       },
 
       /**
-       * 操作商品
+       * 订单提交
        */
-      choose_goods(){
-        console.log(this.select);
+      submitOrder(){
+        if(this.select.length>0){
+          var check=cart.setOrder(this.select);
+          console.log(check);
+          if(check){
+            this.$router.push('/shop/order');
+          }else{
+            this.$vux.toast.text('亲！还没选择商品哟!','middle');
+          }
+        }else{
+          this.$vux.toast.text('亲！还没选择商品哟!','middle');
+        }
       }
 
     },
+    watch:{
+      select: function (val, oldVal) {
+        var money=cart.getMoney(val);
+        this.price=money.price;
+        this.tcion=money.tcion;
+      },
+    }
   }
 
 

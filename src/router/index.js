@@ -155,6 +155,7 @@ export default new Router({
           path: '/shop/order',
           name: 'ShopOrder',
           meta: {
+            requireAuth: true,
             title: '提交订单'
           },
           components:{
