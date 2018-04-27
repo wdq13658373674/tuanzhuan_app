@@ -119,9 +119,10 @@
         })
       },
       /**退出**/
-      ...mapMutations(['update_userInfo']),
+      ...mapMutations(['update_userInfo','update_roomInfo']),
       exit(){
         this.update_userInfo('');
+        this.update_roomInfo('');
         this.$router.push('/');
       },
       /**修改性别**/

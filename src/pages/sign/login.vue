@@ -42,9 +42,10 @@
     },
     mounted(){
       this.update_userInfo('');
+      this.update_roomInfo('');
     },
     methods:{
-      ...mapMutations(['update_userInfo']),
+      ...mapMutations(['update_userInfo','update_roomInfo']),
       submit:function(){
         if(this.phone == ''){
           this.$vux.toast.show('请输入手机号码');
