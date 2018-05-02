@@ -65,11 +65,11 @@
             </a>
           </li>
           <li class="item">
-            <a href="#">
+            <router-link to="/user/cards">
               <p class="p1">银行卡</p>
               <p class="p2">共0张</p>
               <i class="icon arrow"></i>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>

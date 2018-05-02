@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="nav-bar orange-bar">
+    <div class="nav-bar" :class="color">
       <slot name="left">
         <span @click="back" class="link pull-left">
           <slot name="leftIcon">
@@ -20,6 +20,7 @@
 
 <script>
   export default {
+    props:['color'],
     name: "BarNav",
     computed:{
       title(){

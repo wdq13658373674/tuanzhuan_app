@@ -1,10 +1,10 @@
 <template>
   <div>
-    <OrangeNav>
+    <ColorNav color="orange-bar">
       <router-link to="/user/income" class="link pull-right" slot="right" style="color:#fff;">
         明细
       </router-link>
-    </OrangeNav>
+    </ColorNav>
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">余额账户(元)</p>
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-  import OrangeNav from '@/pages/layout/orangeNav'
+  import ColorNav from '@/pages/layout/colorNav'
   export default {
     name: "Balance",
     components: {
-      OrangeNav
+      ColorNav
     },
     data() {
       return {

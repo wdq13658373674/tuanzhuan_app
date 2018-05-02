@@ -40,6 +40,7 @@ import UserBalance from '@/pages/user/balance'
 import UserRecharge from '@/pages/user/recharge'
 import UserWithdraw from '@/pages/user/withdraw'
 import UserIncome from '@/pages/user/income'
+import UserCards from '@/pages/user/cards'
 
 Vue.use(Router)
 
@@ -349,6 +350,17 @@ export default new Router({
       },
       components:{
         default:UserNickname,
+      }
+    },
+    {
+      path: '/user/cards',
+      name: 'UserCards',
+      meta: {
+        requireAuth: true,
+        title: '银行卡'
+      },
+      components:{
+        default:UserCards,
       }
     }
   ]
