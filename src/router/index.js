@@ -161,6 +161,9 @@ export default new Router({
           meta: {
             title: '提交订单'
           },
+          meta: {
+            requireAuth: true,
+          },
           components:{
             default:ShopOrder,
           }
