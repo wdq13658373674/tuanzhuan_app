@@ -18,22 +18,6 @@
         <li class="item">
           <input class="input" type="text" v-model="realname" placeholder="您的姓名">
         </li>
-        <!--<li class="item">-->
-          <!--<label class="pull-left mr20">-->
-            <!--<span>女士</span>-->
-            <!--<input type="radio" value="0" name="sex" v-model="sex">-->
-            <!--<div class="radio">-->
-              <!--<i class="check"></i>-->
-            <!--</div>-->
-          <!--</label>-->
-          <!--<label class="pull-left">-->
-            <!--<span>男士</span>-->
-            <!--<input type="radio" value="1" name="sex" v-model="sex">-->
-            <!--<div class="radio">-->
-              <!--<i class="check"></i>-->
-            <!--</div>-->
-          <!--</label>-->
-        <!--</li>-->
         <li class="item">
           <input class="input" type="text" v-model="phone" placeholder="请输入你的电话号码">
         </li>
@@ -61,7 +45,6 @@
     data () {
       return {
         addressData:ChinaAddressV4Data,
-        sex:0,
         city:[],
         community:'',
         house:'',

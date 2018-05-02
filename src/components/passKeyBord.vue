@@ -1,3 +1,4 @@
+<!--输入密码时的自定义键盘-->
 <template>
   <div>
     <div class="tz-keybord">
@@ -31,23 +32,27 @@
         val:[]
       }
     },
-    computed:{
-
+     watch:{
+       val(value){
+         this.$emit('run',value);
+       }
     },
     methods: {
       keyEnter(num){
         if(this.val.length < this.paslength){
           this.val.push(num);
-          this.$emit('enterPass',this.val);
         }
         return;
       },
       del(){
         if(this.val.length>0){
           this.val.pop();
-          this.$emit('passDelete',this.val);
         }
-      }
+      },
+      sure(){
+        if(this.val.length < this.paslength) return;
+        this.$emit('sure');
+      },
     }
   }
 </script>

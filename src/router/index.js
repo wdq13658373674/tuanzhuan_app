@@ -28,6 +28,9 @@ import ShopAddAddress from '@/pages/shop/addAddress'
 import ShopEditAddress from '@/pages/shop/editAddress'
 import Cart from '@/pages/shop/cart'
 
+import OrderPay from '@/pages/pay/index'
+import OrderPayDetail from '@/pages/pay/detail'
+
 import User from '@/pages/user/index'
 import UserData from '@/pages/user/message'
 import UserName from '@/pages/user/changeName'
@@ -234,6 +237,26 @@ export default new Router({
           },
           components:{
             default:UserIncome,
+          }
+        },
+        {
+          path: '/order/pay',
+          name: 'OrderPay',
+          meta: {
+            title: '确认支付'
+          },
+          components:{
+            default:OrderPay,
+          }
+        },
+        {
+          path: '/order/pay/detail',
+          name: 'OrderPayDetail',
+          meta: {
+            title: '支付详情'
+          },
+          components:{
+            default:OrderPayDetail,
           }
         },
       ]

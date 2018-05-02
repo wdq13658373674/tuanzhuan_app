@@ -21,7 +21,7 @@
     <!--popup 键盘-->
     <popup v-model="popshow" :show-mask="false">
       <div class="popup1">
-        <KeyBord @run="run"  @sure="sure" :money="val" ref="keyBord"></KeyBord>
+        <KeyBord @run="enterMoney" @sure="next" ref="keyBord"></KeyBord>
       </div>
     </popup>
     <!--popup-->
@@ -50,7 +50,7 @@
         </div>
       </div>
       <footer>
-        <div class="bottom-fixed btn-orange-fixed" @click="pay">立即付款</div>
+        <div class="bottom-fixed btn-orange-fixed" @click="next2">立即付款</div>
       </footer>
     </popup>
     <!--popup-->
@@ -58,21 +58,7 @@
     <!--popup 输入支付密码-->
     <popup v-model="popshow3" style="background: #fff;">
       <span class="pop-close"  @click="popshow3=!popshow3">X</span>
-      <div class="user-confirm-pay">
-        <h1 class="title">
-          请输入支付密码
-        </h1>
-
-        <ul class="pay-password-box mt60">
-          <li class="item" v-for="(key,i) in paslength" :key="i">
-            <input class="input" type="password" :value="password[i]" disabled>
-          </li>
-        </ul>
-        <div class="link-box">
-          <a href="" class="link">忘记密码？</a>
-        </div>
-        <PassKeyBord @enterPass="enterPass" @passDelete="passDelete"></PassKeyBord>
-      </div>
+      <EnterPassword></EnterPassword>
     </popup>
     <!--popup-->
   </div>
@@ -81,12 +67,12 @@
 <script>
   import {Popup} from 'vux'
   import KeyBord from '@/components/keybord'
-  import PassKeyBord from '@/components/passKeyBord'
+  import EnterPassword from '@/components/enterPassword'
   export default {
     name: "Recharge",
     components: {
       KeyBord,
-      PassKeyBord,
+      EnterPassword,
       Popup
     },
     data() {
@@ -95,51 +81,30 @@
         popshow:true,
         popshow2:false,
         popshow3:false,
-        password:[],
-        paslength:6,
       }
     },
     mounted(){
 
     },
     methods:{
-      /*输入金额*/
-      run(value){
+      /**输入金额*/
+      enterMoney(value){
         this.val=value;
       },
-      /*确定*/
-      sure(value){
-        this.val=value;
-        this.popshow=false;
-        this.popshow2=true;
-        console.log(value);
-      },
-      /*清空金额*/
+      /**清空金额*/
       empty(){
         this.val='';
         this.$refs.keyBord.empty();
       },
-      /*输入金额后下一步*/
+      /**输入金额后下一步*/
       next(){
         this.popshow=false;
         this.popshow2=true;
       },
-      /*输入密码*/
-      enterPass(value){
-          this.password=value;
-          if(this.password.length==this.paslength){
-            console.log(this.password.join(''));
-            return;
-          }
-      },
-      /*删除密码*/
-      passDelete(value){
-        this.password=value;
-      },
-      pay(){
+      next2(){
         this.popshow2=false;
         this.popshow3=true;
-      }
+      },
     }
   }
 </script>
@@ -148,8 +113,4 @@
 </style>
 <style lang="scss" scoped>
   @import "../../core/base";
-
-  .link-box{
-    margin-bottom:rem(173);
-  }
 </style>
