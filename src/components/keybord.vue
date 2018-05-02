@@ -1,6 +1,6 @@
+<!--输入money自定义键盘-->
 <template>
   <div>
-    <!--输入键盘-->
     <div class="tz-keybord">
       <ul class="number-box">
         <li v-for="item in keylist" @click="keyEnter(item)">{{item}}</li>
@@ -26,6 +26,11 @@
         val:[]
       }
     },
+    watch:{
+      val(value){
+        this.$emit('run',value.join(''));
+      }
+    },
     methods: {
       /*开始输入*/
       keyEnter(num){
@@ -42,25 +47,21 @@
             num='0.';
           }
         }
-
         /*小数点后位数2位*/
         if(this.val.indexOf('.') > -1 && this.val.length-this.val.indexOf('.') > 2 || this.val.indexOf('0.') > -1 && this.val.length-this.val.indexOf('0.') > 2) return false;
 
         this.val.push(num);
-        this.$emit('run',this.val.join(''));
       },
       /*删除*/
       del(){
         if(this.val.length>0){
           this.val.pop();
-          this.$emit('run',this.val.join(''));
         }
       },
       /*确定*/
       sure(){
         if(this.val.length==0 || parseFloat(this.val.join(''))==0) return;
-        this.$emit('sure',parseFloat(this.val.join('')).toFixed(2));
-        this.val=[];
+        this.$emit('sure');
       },
       /*清空*/
       empty(){
