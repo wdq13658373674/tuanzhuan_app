@@ -77,9 +77,10 @@
 
     },
     methods: {
-      /**添加地址表单提交**/
-      address_ajax(lat,lng){
+      /**修改地址表单提交**/
+      editress_ajax(lat,lng){
         let params={
+          address_id:this.$route.params.id,
           address_user_id:this.userInfo.user_id,
           address_user_realname:this.realname,
           address_user_phone:this.phone,
@@ -88,17 +89,18 @@
           address_comment:this.address
         }
 
-        this.$axios.post('/index/User_address/addAddress',qs.stringify(params)).then(res=>{
+        this.$axios.post('/index/User_address/editAddress',qs.stringify(params)).then(res=>{
           res=res.data;
+          console.log(res);
           if(res.status==0){
-            this.$vux.toast.text('添加成功');
+            this.$vux.toast.text('修改成功');
             this.$router.push('/shop/address');
           }
         }).catch(err=>{
           console.log('my err:'+err);
         })
       },
-      /**添加地址表单提交**/
+      /**修改地址表单提交**/
       submit(){
         let tips='';
         if(this.city==''){
@@ -123,7 +125,7 @@
 
           getPosition(self.address,function(point){
             if(point){
-              self.address_ajax(point.lat,point.lng);
+              self.editress_ajax(point.lat,point.lng);
             }else{
               self.$vux.toast.text('该地址不存在，请填写真实存在的地址');
             }

@@ -38,7 +38,7 @@
         <li class="item">
           <div class="link cell" href="#">
             <span> <i class="icon icon5"></i>生日</span>
-            <datetime @on-change="changeBirths" v-model="changeBirth" format="YYYY-MM-DD" :min-year=1970 clear-text="请选择您的出生日期" confirm-text="完成"></datetime>
+            <datetime @on-confirm="changeBirths" v-model="changeBirth" format="YYYY-MM-DD" :min-year=1970 clear-text="请选择您的出生日期" confirm-text="完成"></datetime>
           </div>
         </li>
         <li class="item">
@@ -76,6 +76,7 @@
   import {mapMutations,mapState} from 'vuex'
   import { Actionsheet,Datetime } from 'vux'
   import { updateMessage } from '@/assets/js/user/changeMessage'
+  import utils from '@/libs/util.js'
 
   export default {
     name: "UserData",
@@ -93,7 +94,7 @@
           1:'男',
           2:'保密',
         },
-        changeBirth:'2018-1-2',
+        changeBirth:'',
         userLists:''
       }
     },
@@ -114,6 +115,7 @@
         }).then(res=>{
           res=res.data;
           this.userLists=res.data.village.user;
+          this.changeBirth=utils.stampToDate(this.userLists.user_birthday);
         }).catch(err=>{
           console.log('my err:'+err)
         })
@@ -145,7 +147,7 @@
           value:value
         }
         updateMessage(this,data);
-      },
+      }
     }
   }
 </script>

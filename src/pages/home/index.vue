@@ -157,11 +157,14 @@
       this.getWeather();
     },
     methods:{
+      /**判断是否定位**/
       getMap:function(){
         if(!this.roomInfo.village_id){
+           this.$vux.toast.text('请选择小区','top')
           this.$router.push('/location');
         }
       },
+      /**获取天气日期**/
       getWeather:function(){
         const url='https://bird.ioliu.cn/v1?url=';
         let location=this.roomInfo.lng + ',' + this.roomInfo.lat;
@@ -188,6 +191,7 @@
           console.log('my err:'+err);
         })
       },
+      /**获取公告列表**/
       getNewsLists:function(){
         const param={
           'notic_village_id' : this.roomInfo.village_id
@@ -202,6 +206,7 @@
           console.log('my err:'+err);
         })
       },
+      /**获取商品列表**/
       getGoodsLists:function(){
          let param={
            lat:this.roomInfo.lat,

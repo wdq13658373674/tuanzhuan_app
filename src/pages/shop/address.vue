@@ -2,57 +2,40 @@
   <div>
     <!--section-->
     <section class="page-group address-list">
-      <div class="item">
+      <div class="item" v-for="(item,index) in addressList">
         <label class="cell">
           <div>
-            <input type="radio" name="pay">
+            <input type="radio" name="pay"  :value="item.address_id" v-model="select">
             <div class="radio">
               <i class="check"></i>
             </div>
           </div>
           <div class="txt">
             <p>
-              <span>小怪兽</span>
-              <span class="pull-right">18680722222</span>
+              <span>{{item.address_user_realname}}</span>
+              <span class="pull-right">{{item.address_user_phone}}</span>
             </p>
-            <p class="p2">重庆市渝北区龙山路冉家坝扬子江商务中心22楼02号</p>
+            <p class="p2">{{item.address_comment}}</p>
           </div>
         </label>
-        <a href="" class="link ">
+        <router-link :to="{name:'ShopEditAddress',params:{
+          id:item.address_id
+        }}" class="link" append>
           <i class="icon edit"></i>
-        </a>
-      </div>
-      <div class="item">
-        <label class="cell">
-          <div>
-            <input type="radio" name="pay">
-            <div class="radio">
-              <i class="check"></i>
-            </div>
-          </div>
-          <div class="txt">
-            <p>
-              <span>小怪兽</span>
-              <span class="pull-right">18680722222</span>
-            </p>
-            <p class="p2">重庆市渝北区龙山</p>
-          </div>
-        </label>
-        <a href="" class="link ">
-          <i class="icon edit"></i>
-        </a>
+        </router-link>
       </div>
     </section>
 
     <!--footer-->
     <footer>
-      <router-link to="add" class="bottom-fixed btn-orange-fixed" append="">添加地址</router-link>
+      <router-link to="add" class="bottom-fixed btn-orange-fixed" append>添加地址</router-link>
     </footer>
   </div>
 </template>
 
 <script>
-  import {  } from 'vux'
+  const qs = require("querystring")
+  import { mapState } from 'vuex'
   export default {
     name: "ShopAddress",
     components: {
@@ -60,11 +43,62 @@
     },
     data () {
       return {
-
+        addressList:'',
       }
     },
-    methods: {
+    computed:{
+      ...mapState(['userInfo']),
+      select:{
+        /**获取默认地址**/
+        get(){
+          var select;
+          this.addressList.forEach(function(item){
+            if(item.address_default==1){
+              select=item.address_id;
+            }
+          })
 
+          return select;
+        },
+        /**修改默认地址**/
+        set(value){
+          let params={
+            address_user_id:this.userInfo.user_id,
+            address_id:value,
+          }
+          this.$axios.post('/index/User_address/set_default',qs.stringify(params)).then(res=>{
+            res=res.data;
+            if(res.status==0){
+              this.$router.push('/shop/order');
+            }
+          }).catch(err=>{
+            console.log('my err:'+err);
+          })
+        }
+      }
+    },
+    mounted(){
+      this.getAddressList();
+    },
+    methods: {
+      /**获取地址列表**/
+      getAddressList(){
+        let params={
+          address_user_id:this.userInfo.user_id
+        }
+
+        this.$axios.get('/index/User_address/allAddress',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+
+          if(res.status==0){
+            this.addressList=res.data;
+          }
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      }
     }
   }
 </script>

@@ -5,9 +5,10 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import VueLazyload from 'vue-lazyload'
 import App from './App'
-import getMap from '@/libs/bMap'
 import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
+import {getCurrentPosition} from '@/libs/bMap'
+import * as filters from '@/libs/filter'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
 const options={
@@ -21,7 +22,17 @@ const options={
 }
 Vue.use(vueg, router,options)
 
-getMap();
+/**
+ * 定位
+ * **/
+getCurrentPosition();
+
+/**
+ * 全局过滤器
+ * **/
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 /**
  * fastclick

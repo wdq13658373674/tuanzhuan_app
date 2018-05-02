@@ -1,7 +1,10 @@
 import router from '@/router'
 const storeJs=require('storejs');
 
-export default function(){
+/**
+ * 定位获取当前地址经纬度
+ * **/
+const getCurrentPosition=function(){
   if(storeJs('roomInfo')){
     return;
   }else {
@@ -25,4 +28,16 @@ export default function(){
     });
   }
 }
+
+/**
+ * 地址解析转换经纬度
+ * **/
+const getPosition=function(address,callback){
+  var myGeo = new BMap.Geocoder();
+  myGeo.getPoint(address, function(point){
+      callback(point);
+  },'北京市');
+}
+
+export {getCurrentPosition,getPosition}
 

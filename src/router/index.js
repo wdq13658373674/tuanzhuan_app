@@ -25,6 +25,7 @@ import ShopCategorys from '@/pages/shop/categorys'
 import ShopOrder from '@/pages/shop/order'
 import ShopAddress from '@/pages/shop/address'
 import ShopAddAddress from '@/pages/shop/addAddress'
+import ShopEditAddress from '@/pages/shop/editAddress'
 import Cart from '@/pages/shop/cart'
 
 import User from '@/pages/user/index'
@@ -179,6 +180,16 @@ export default new Router({
           },
           components:{
             default:ShopAddAddress,
+          }
+        },
+        {
+          path: '/shop/address/edit/:id',
+          name: 'ShopEditAddress',
+          meta: {
+            title: '修改地址'
+          },
+          components:{
+            default:ShopEditAddress,
           }
         },
         {
