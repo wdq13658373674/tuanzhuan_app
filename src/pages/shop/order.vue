@@ -21,11 +21,11 @@
       <span class="f60 gray"> &rsaquo; </span>
     </h4>
 
-    <router-link to="/shop/address" class="order-address">
-      <p class="p" v-if="address.length>0">重庆 重庆 渝北区 扬子江商务中心扬子江商务中心扬子江商务中心扬子江商务中心 22楼</p>
-      <p class="p" v-if="address.length>0">
-        <span>小怪兽</span>
-        <span>18680722507</span>
+    <router-link to="/shop/address?from=order" class="order-address">
+      <p class="p" v-if="address.address_user_phone">{{address.address_comment}}</p>
+      <p class="p" v-if="address.address_user_phone">
+        <span>{{address.address_user_realname}}</span>
+        <span>{{address.address_user_phone}}</span>
       </p>
 
       <!--为空-->
@@ -36,7 +36,7 @@
 
   <!--到店自提-->
   <h4 v-if="send_type==2" class="h4">
-    <span class="txt">邻水县西城御府房计划售房部</span>
+    <span class="txt">{{orderInfo.pickup[0].pickup_address}}</span>
     <span class="f60 gray"> &rsaquo; </span>
   </h4>
   <!--到店自提-->
@@ -71,7 +71,7 @@
   <ul class="order-money cell-list">
     <li class="item cell">
       <span>配送费</span>
-      <span>¥ 0.00</span>
+      <span>¥ {{orderInfo.send_money}}</span>
     </li>
     <!--<li class="item cell">-->
     <!--<span>优惠活动</span>-->
@@ -95,7 +95,7 @@
     </p>
     <p>¥{{money}}</p>
   </div>
-  <a href="javascript:void(0);" class="btn btn-orange">结算</a>
+  <a href="javascript:void(0);" class="btn btn-orange" @click="seve_order">结算</a>
 </div>
 </footer>
 
@@ -134,6 +134,7 @@
 import { Popup ,Group, Scroller,Radio} from 'vux'
 import {mapState} from 'vuex'
 import cart from '@/assets/js/shop/cart'
+const qs = require("querystring");
 
 export default {
   name: "ShopOrder",
@@ -213,6 +214,65 @@ export default {
       }else{
         this.setSendTime(index);
       }
+    },
+
+    /**
+     * 提交订单
+     *
+     */
+    seve_order(){
+      var goods=[];
+
+      this.cartList.find(item=>{
+        var arr={
+          order_info_goods_id:item.goods_id,
+          order_info_goods_count:item.cart_sum,
+          order_info_goods_property:item.choose_prop
+        };
+        goods.push(arr);
+      });
+
+      var addressID=this.address.address_id;
+      if(this.send_type==2){
+        addressID=this.orderInfo.pickup[0].pickup_id
+      }
+
+      //拼接送货时间
+      var wtime=0;
+      var date = new Date();
+      if(this.tabIndex==1){
+        date.setDate(date.getDate() + 1);
+
+        wtime=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${this.timeValue}`;
+      }else if(this.tabIndex==2){
+        date.setDate(date.getDate() + 2);
+
+        wtime=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${this.timeValue}`;
+      }else{
+        wtime=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${this.timeValue}`;
+      }
+
+      let params={
+        goods:JSON.stringify(goods),
+        sendtype:this.send_type,
+        address_id:addressID,
+        storeid:this.storeInfo.store_id,
+        wtime:wtime,
+        userid:this.userInfo.user_id
+      };
+
+      this.$axios.post('/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
+        res=res.data;
+        console.log(res);
+        if(res.status==0){
+          cart.delGoods(cart.order_pay);
+//          this.$router.push('/shop/address');
+        }else {
+          this.$vux.toast.text(res.msg);
+        }
+      }).catch(err=>{
+        console.log('my err:'+err);
+      });
     },
 
     /**

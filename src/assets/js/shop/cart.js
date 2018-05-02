@@ -115,7 +115,7 @@ let car={
     }else{
       this.cart_list[key].cart_sum=stock;
     }
-
+    storeJs.remove("order_pay");
     storeJs.set('cart_list', this.cart_list);
   },
 
