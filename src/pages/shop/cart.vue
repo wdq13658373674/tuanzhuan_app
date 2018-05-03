@@ -104,11 +104,12 @@
     },
     mounted(){
       var selected=[];
-      this.cart_lists.forEach(function(item,index){
-        selected.push(index);
-      });
+      if(this.cart_lists.length>0){
+        this.cart_lists.forEach(function(item,index){
+          selected.push(index);
+        });
+      }
       this.select=selected;
-
     },
     methods: {
       /**
@@ -123,7 +124,7 @@
         }
         cart.setCartStock(stock,key);
         this.cart_lists=cart.cart_list;
-        var money=cart.getMoney();
+        var money=cart.getMoney(this.select);
         this.price=money.price;
         this.tcion=money.tcion;
       },

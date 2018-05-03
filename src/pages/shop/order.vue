@@ -163,6 +163,15 @@ export default {
     ...mapState(['userInfo','storeInfo'])
   },
   mounted(){
+    //选中购物车商品
+    if(cart.order_pay.length>0){
+      cart.order_pay.find(item=>{
+        this.cartList.push(cart.cart_list[item]);
+      });
+    }else{
+      this.$router.push('/shop/cart');
+    }
+
     //获取店铺配置信息
     let param={
       storeid:this.storeInfo.store_id,
@@ -195,14 +204,7 @@ export default {
       console.log('my err:'+ err);
     });
 
-    //选中购物车商品
-    if(cart.order_pay.length>0){
-      cart.order_pay.find(item=>{
-        this.cartList.push(cart.cart_list[item]);
-      });
-    }else{
-      this.$router.push('/shop/cart');
-    }
+
 
   },
   methods: {

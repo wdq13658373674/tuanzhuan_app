@@ -115,7 +115,7 @@ let car={
     }else{
       this.cart_list[key].cart_sum=stock;
     }
-    storeJs.remove("order_pay");
+
     storeJs.set('cart_list', this.cart_list);
   },
 
@@ -134,7 +134,7 @@ let car={
       });
     }
 
-    return {price:price,tcion:tcion};
+    return {price:price.toFixed(2),tcion:tcion.toFixed(2)};
   },
 
   /**
@@ -162,7 +162,7 @@ let car={
     car_index.find(item=>{
       this.cart_list.splice(item, 1);
     });
-
+    storeJs.remove("order_pay");
     storeJs.set('cart_list', this.cart_list);
   },
 
