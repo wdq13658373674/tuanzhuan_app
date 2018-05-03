@@ -17,7 +17,7 @@
           </div>
 
           <!--新加标签-->
-          <div class="mt10">
+          <div class="clearfix">
             <span class="shop-mark2 yellow-bg">满减</span>
             <span class="shop-mark2 pink-bg">五折</span>
             <span class="shop-mark2 yellow-bg">新春大促</span>
