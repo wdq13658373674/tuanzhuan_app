@@ -46,6 +46,7 @@ import UserCards from '@/pages/user/cards'
 import UserAddCards from '@/pages/user/addCards'
 import UserCardsMessage from '@/pages/user/cardsMessage'
 import UserSafeManage from '@/pages/user/safeManage'
+import ForgetPayPassword from '@/pages/user/forgetPayPassword'
 
 Vue.use(Router)
 
@@ -279,6 +280,17 @@ export default new Router({
           },
           components:{
             default:UserSafeManage,
+          }
+        },
+        {
+          path: '/user/forgetPayPassword',
+          name: 'ForgetPayPassword',
+          meta: {
+            requireAuth: true,
+            title: '忘记支付密码'
+          },
+          components:{
+            default:ForgetPayPassword,
           }
         },
         {
