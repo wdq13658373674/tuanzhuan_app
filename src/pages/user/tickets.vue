@@ -41,7 +41,7 @@
 <style lang="css" scoped>
   @import '../../assets/css/userPay.css';
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../core/base";
 
 </style>

@@ -52,7 +52,7 @@
 <style lang="css" scoped>
   @import '../../assets/css/userRecharge.css';
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../core/base";
 
 </style>

@@ -53,7 +53,7 @@
 <style lang="css" scoped>
   @import '../../assets/css/userSafety.css';
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../core/base";
 
   .pay-keybord{
