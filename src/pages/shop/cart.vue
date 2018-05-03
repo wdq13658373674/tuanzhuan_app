@@ -32,8 +32,8 @@
             </div>
             <p class="bottom">
               <i class="icon tp mr10"></i>
-              <span class="f32 orange mr20">{{item.goods_tcion}}</span>
-              <span>¥{{item.goods_price}}</span>
+              <span class="f32 orange mr20">{{item.now_tcion}}</span>
+              <span>¥{{item.now_price}}</span>
 
               <x-number class="xnumber pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
 
@@ -134,7 +134,6 @@
       submitOrder(){
         if(this.select.length>0){
           var check=cart.setOrder(this.select);
-          console.log(check);
           if(check){
             this.$router.push('/shop/order');
           }else{

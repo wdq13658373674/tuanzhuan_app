@@ -107,12 +107,12 @@
             <p class="p1">{{item.goods_name}}</p>
             <p class="p2">
               <i class="icon tp mr10"></i>
-              <span class="orange">{{item.goods_tcion}}</span>
+              <span class="orange">{{item.now_tcion}}</span>
               <!--<span class="shop-mark yellow-bg">满减</span>-->
               <span class="shop-mark pink-bg" v-if="parseInt(item.goods_discount)>0">{{item.goods_discount}}折</span>
             </p>
             <p class="p3">
-              <span class="pull-left">¥{{item.goods_price}}</span>
+              <span class="pull-left">¥{{item.now_price}}</span>
               <span class="gray pull-right">已售{{item.goods_sell_count}}</span>
             </p>
           </router-link>

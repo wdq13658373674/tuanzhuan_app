@@ -10,8 +10,8 @@
         </div>
         <div class="product-total">
           <i class="mr10 icon tp"></i>
-          <span class="f32 orange pull-left">{{goodsDetail.goods_tcion}}</span>
-          <span class="ml29">¥{{goodsDetail.goods_price}}</span>
+          <span class="f32 orange pull-left">{{goodsDetail.now_tcion}}</span>
+          <span class="ml29">¥{{goodsDetail.now_price}}</span>
           <span class="pull-right gray">已售 {{goodsDetail.goods_sell_count}}</span>
         </div>
       </div>
@@ -54,9 +54,9 @@
             <div class="con-box">
               <p class="p1">
                 <i class="icon tp"></i>
-                <span>{{goods.goods_tcion}}</span>
+                <span>{{goods.now_tcion}}</span>
               </p>
-              <p class="p2">¥{{goods.goods_price}}</p>
+              <p class="p2">¥{{goods.now_price}}</p>
               <p class="p3" v-if="goods.goods_stock!=-1">库存：{{goods.goods_stock}}</p>
             </div>
           </div>
@@ -145,6 +145,7 @@
     },
     mounted(){
       this.getDetail();
+
     },
     methods:{
       getDetail:function(){
@@ -180,6 +181,8 @@
         if(this.goods.goods_logo==""){
           this.goods.goods_logo=this.goodsLists[0].goods_logo
         }
+
+        console.log(this.goods);
 
         this.goods_id=this.goods.goods_id;
         this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);

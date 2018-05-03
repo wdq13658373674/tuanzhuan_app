@@ -119,6 +119,7 @@
 
 <script>
   import {Popup} from 'vux'
+  import {mapState} from 'vuex'
   import EnterPassword from '@/components/enterPassword'
   export default {
     name: "OrderPay",
@@ -128,14 +129,50 @@
     },
     data(){
       return {
-        popshow:false
+        popshow:false,
+        orderInfo:[],
+        pay_user:[],
       }
+    },
+    computed:{
+      ...mapState(['userInfo'])
+    },
+    mounted(){
+      this.getOrderInfo();
     },
     methods:{
       /*结算*/
       orderPay(){
         this.popshow=true;
-      }
+      },
+
+      /**
+       * 获取订单信息
+       */
+      getOrderInfo:function () {
+//获取店铺配置信息
+        let param={
+          goods_order_id:this.$route.query.order_id,
+          user_id:this.userInfo.user_id
+        };
+        this.$axios.get('/index/Goods_order/getOrder',{
+          params:param
+        }).then(res=>{
+          res=res.data;
+
+          if(res.status!=0){
+
+          }else{
+            this.orderInfo=res.data.order;
+            this.pay_user=res.data.user;
+          }
+
+        }).catch(err=>{
+          console.log('my err:'+ err);
+        });
+      },
+
+
     }
   }
 </script>

@@ -129,8 +129,8 @@ let car={
     var tcion=0;
     if(car_index.length>0){
       car_index.find(item=>{
-        price+=(this.cart_list[item].goods_price*this.cart_list[item].cart_sum);
-        tcion+=(this.cart_list[item].goods_tcion*this.cart_list[item].cart_sum);
+        price+=(this.cart_list[item].now_price*this.cart_list[item].cart_sum);
+        tcion+=(this.cart_list[item].now_tcion*this.cart_list[item].cart_sum);
       });
     }
 
@@ -144,6 +144,7 @@ let car={
      */
   setOrder(order=[]){
     if(order.length>0){
+      this.order_pay=order;
       storeJs.set('order_pay',order);
 
       return true

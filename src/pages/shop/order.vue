@@ -60,8 +60,8 @@
           </p>
           <p class="p3">
             <i class="icon tp mr10"></i>
-            <span class="f32 orange"> {{item.goods_tcion}} </span>
-            <em>¥{{item.goods_price}}</em>
+            <span class="f32 orange"> {{item.now_tcion}} </span>
+            <em>¥{{item.now_price}}</em>
           </p>
         </div>
       </div>
@@ -263,10 +263,9 @@ export default {
 
       this.$axios.post('/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
         res=res.data;
-        console.log(res);
         if(res.status==0){
           cart.delGoods(cart.order_pay);
-//          this.$router.push('/shop/address');
+          this.$router.push('/order/pay?order_id='+res.data.goods_order_id);
         }else {
           this.$vux.toast.text(res.msg);
         }
