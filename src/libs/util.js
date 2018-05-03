@@ -28,6 +28,29 @@ const util={
     }else{
       return Y+M+D;
     }
+  },
+  /**
+   * 去除字符串空格
+   * str:字符串
+   * is_global:('true'表示去除所有空格，否则只去除首尾空格)
+   * */
+  Trim(str,is_global) {
+    var result;
+    result = str.replace(/(^\s+)|(\s+$)/g, "");
+    if (is_global) {
+      result = result.replace(/\s/g, "");
+    }
+    return result;
+  },
+  /**格式化银行卡4位空一格
+   * v : 银行卡号
+   * */
+  formates(v){
+    if(/\S{5}/.test(v)){
+      v=v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
+    }
+
+    return v;
   }
 };
 

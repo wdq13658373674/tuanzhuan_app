@@ -4,14 +4,10 @@
       <ul class="cell-list bind-bank">
         <li class="item cell p27">
           <label>卡类型</label>
-          <input class="input text-right" value="中信银行 储蓄卡" type="text" placeholder="">
-        </li>
-        <li class="item cell p27">
-          <label>手机号码</label>
-          <input class="input text-right" value="186807222222" type="text" placeholder="">
+          <input class="input text-right" v-model="bankType" type="text" disabled>
         </li>
       </ul>
-      <a href="#" class="btn btn-orange disabled">下一步</a>
+      <div class="btn btn-orange" :class="bankType ? '' : 'disabled'" @click="next">下一步</div>
     </section>
   </div>
 </template>
@@ -26,7 +22,8 @@
     },
     data() {
       return {
-
+          bankType:this.$route.params.bankType,
+          cardsNum:this.$route.params.cardsNum,
       }
     },
     computed:{
@@ -37,7 +34,7 @@
     },
     methods:{
       /**添加银行卡*/
-      addCards(){
+      next(){
         let params={
           bank_numb:this.cardsNum,
           user_id:this.userInfo.user_id

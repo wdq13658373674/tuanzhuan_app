@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loading :show="loading" class="my-loading"></loading>
+    <loading :show="loading" text="加载中..." class="my-loading"></loading>
     <router-view v-transition></router-view>
     <!--<router-view name="footer"></router-view>-->
   </div>
@@ -58,8 +58,7 @@
   /*alert*/
   .vux-alert{
     .weui-dialog{
-      width:auto;
-      min-width: 40%;
+      width:50%;
       max-width: 80%;
     }
 
@@ -78,8 +77,7 @@
   /*confirm*/
   .vux-confirm{
     .weui-dialog{
-      width:auto;
-      min-width:60%;
+      width:60%;
       max-width: 80%;
     }
     .weui-dialog__title{

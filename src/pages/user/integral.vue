@@ -7,25 +7,11 @@
     </ColorNav>
     <section class="page-group">
       <div class="user-pay">
-        <p class="p1">余额账户(元)</p>
+        <p class="p1">剩余积分(F)</p>
         <p class="p2">6000.66</p>
       </div>
-      <ul class="user-pay-list arrow-cell-list">
-        <li class="item">
-          <router-link to="/user/recharge" class="link cell">
-            <span><i class="icon icon1"></i>充值</span>
-          </router-link>
-        </li>
-        <li class="item">
-          <router-link to="/user/withdraw" class="link cell">
-            <span><i class="icon icon2"></i>提现</span>
-          </router-link>
-        </li>
-      </ul>
-      <!--验证身份的时候显示-->
-      <div class="content user-pay-check mt20">
-        <p class="p1">验证身份后才能使用余额功能</p>
-        <a href="#" class="btn btn-orange">去验证</a>
+      <div class="connect-box">
+        <p class="bank-connect">联系客户：400-000-0034</p>
       </div>
     </section>
   </div>
@@ -34,7 +20,7 @@
 <script>
   import ColorNav from '@/pages/layout/colorNav'
   export default {
-    name: "Balance",
+    name: "Integral",
     components: {
       ColorNav
     },

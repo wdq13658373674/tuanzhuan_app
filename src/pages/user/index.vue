@@ -22,10 +22,10 @@
     <section class="page-group">
       <div class="content user-menu">
         <div class="item">
-          <a href="#">
+          <router-link to="/user/tickets">
             <p class="p1 orange">{{userLists.user_tcion || 0}}</p>
             <p class="p2">我的团票</p>
-          </a>
+          </router-link>
         </div>
         <div class="item">
           <router-link to="/user/balance">
@@ -34,10 +34,10 @@
           </router-link>
         </div>
         <div class="item">
-          <a href="#">
+          <router-link to="/user/integral">
             <p class="p1">{{userLists.user_score || 0}}</p>
             <p class="p2">我的积分</p>
-          </a>
+          </router-link>
         </div>
       </div>
 
@@ -129,10 +129,10 @@
             </a>
           </li>
           <li class="item">
-            <a href="#" class="link">
+            <router-link to="/user/safeManage" class="link">
               <img class="img" src="@/assets/images/icons/i_icon9.png" alt="">
               <p class="p1">安全管理</p>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -165,6 +165,10 @@
     methods:{
       /**获取用户数据**/
       getUserLists(){
+        /*this.$vux.confirm.show({
+          title:'提示',
+          content:'hahah'
+        })*/
         let params={
           user_id:this.userInfo.user_id
         }

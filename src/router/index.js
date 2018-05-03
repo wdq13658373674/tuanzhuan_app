@@ -37,12 +37,15 @@ import UserName from '@/pages/user/changeName'
 import UserNickname from '@/pages/user/changeNickname'
 import BindMobile from '@/pages/user/bindMobile'
 import UserBalance from '@/pages/user/balance'
+import UserIntegral from '@/pages/user/integral'
+import UserTickets from '@/pages/user/tickets'
 import UserRecharge from '@/pages/user/recharge'
 import UserWithdraw from '@/pages/user/withdraw'
 import UserIncome from '@/pages/user/income'
 import UserCards from '@/pages/user/cards'
 import UserAddCards from '@/pages/user/addCards'
 import UserCardsMessage from '@/pages/user/cardsMessage'
+import UserSafeManage from '@/pages/user/safeManage'
 
 Vue.use(Router)
 
@@ -257,7 +260,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/cards/message/:realname/:cardsNum',
+          path: '/user/cards/message/:cardsNum/:bankType',
           name: 'UserCardsMessage',
           meta: {
             requireAuth: true,
@@ -268,9 +271,21 @@ export default new Router({
           }
         },
         {
+          path: '/user/safeManage',
+          name: 'UserSafeManage',
+          meta: {
+            requireAuth: true,
+            title: '安全管理'
+          },
+          components:{
+            default:UserSafeManage,
+          }
+        },
+        {
           path: '/order/pay',
           name: 'OrderPay',
           meta: {
+            requireAuth: true,
             title: '确认支付'
           },
           components:{
@@ -281,6 +296,7 @@ export default new Router({
           path: '/order/pay/detail',
           name: 'OrderPayDetail',
           meta: {
+            requireAuth: true,
             title: '支付详情'
           },
           components:{
@@ -344,6 +360,24 @@ export default new Router({
       component: UserBalance,
     },
     {
+      path: '/user/integral',
+      name: 'UserIntegral',
+      meta: {
+        requireAuth: true,
+        title:'我的积分'
+      },
+      component: UserIntegral,
+    },
+    {
+      path: '/user/tickets',
+      name: 'UserTickets',
+      meta: {
+        requireAuth: true,
+        title:'我的团票'
+      },
+      component: UserTickets,
+    },
+    {
       path: '/user/mobile/:old_phone',
       name: 'BindMobile',
       meta: {
@@ -386,6 +420,6 @@ export default new Router({
       components:{
         default:UserCards,
       }
-    }
+    },
   ]
 })

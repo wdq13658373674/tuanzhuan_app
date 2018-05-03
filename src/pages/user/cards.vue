@@ -13,7 +13,7 @@
                 <p>重庆银行</p>
                 <p>储蓄卡</p>
               </div>
-              <a class="link" href="#">解除绑定</a>
+              <div class="link" @click="sheetShow=true">解除绑定</div>
             </div>
             <p class="card">****  ****  ****  1114</p>
           </div>
@@ -30,7 +30,7 @@
     </section>
 
     <!--银行卡解除绑定 actionSheet-->
-    <actionsheet :menus="delMenus" @on-click-menu="delCards" show-cancel></actionsheet>
+    <actionsheet class="bank-sheet" v-model="sheetShow" :menus="delMenus" @on-click-menu="delCards" show-cancel></actionsheet>
   </div>
 </template>
 
@@ -46,6 +46,7 @@
     },
     data() {
       return {
+        sheetShow:false,
         cardsLists:[],
         userLists:[],
         delMenus:['解除绑定']
@@ -96,8 +97,10 @@
           }});
       },
       /**银行卡解除绑定*/
-      delCards(key){
-
+      delCards(key,value){
+        if(value=='解除绑定'){
+          alert('解除');
+        }
       }
     }
   }
@@ -107,5 +110,20 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
+
+  .bank-sheet{
+    .weui-actionsheet{
+      background: none;
+    }
+
+    .weui-actionsheet__cell{
+      padding:rem(31) 0 ;
+      font-size:rem(30);
+    }
+
+    .weui-actionsheet__action{
+      margin-top:rem(20);
+    }
+  }
 
 </style>
