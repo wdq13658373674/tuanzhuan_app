@@ -1,4 +1,4 @@
-<!--输入密码时的自定义键盘-->
+<!--输入支付密码时的自定义键盘-->
 <template>
   <div>
     <div class="tz-keybord">
@@ -38,17 +38,20 @@
        }
     },
     methods: {
+      /**开始输入*/
       keyEnter(num){
         if(this.val.length < this.paslength){
           this.val.push(num);
         }
         return;
       },
+      /**删除*/
       del(){
         if(this.val.length>0){
           this.val.pop();
         }
       },
+      /**确定*/
       sure(){
         if(this.val.length < this.paslength) return;
         this.$emit('sure');

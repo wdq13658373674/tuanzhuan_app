@@ -35,14 +35,14 @@
       /**输入密码*/
       enterPass(value){
         this.password=value;
+      },
+      /**支付确定按钮*/
+      pay(){
         if(this.password.length==this.paslength){
           console.log(this.password.join(''));
-          return;
         }
-      },
-      /**支付成功*/
-      pay(){
-        console.log('成功')
+
+        return;
       }
     }
   }

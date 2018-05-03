@@ -32,7 +32,7 @@
       }
     },
     methods: {
-      /*开始输入*/
+      /**开始输入*/
       keyEnter(num){
         /*小数点验证*/
         if(num=='.'){
@@ -52,18 +52,18 @@
 
         this.val.push(num);
       },
-      /*删除*/
+      /**删除*/
       del(){
         if(this.val.length>0){
           this.val.pop();
         }
       },
-      /*确定*/
+      /**确定*/
       sure(){
         if(this.val.length==0 || parseFloat(this.val.join(''))==0) return;
         this.$emit('sure');
       },
-      /*清空*/
+      /**清空*/
       empty(){
         this.val=[];
       }

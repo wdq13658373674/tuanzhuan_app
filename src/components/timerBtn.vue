@@ -30,6 +30,7 @@
       }
     },
     methods:{
+      /**获取验证码*/
       getCode(){
         if(this.phone == ''){
           this.$vux.toast.show('请输入手机号码');
@@ -59,6 +60,7 @@
           console.log(err);
         })
       },
+      /**计时开始*/
       start(){
         if(!this.timer){
           this.count = parseInt(this.second);

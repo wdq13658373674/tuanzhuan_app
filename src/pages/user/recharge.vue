@@ -21,7 +21,7 @@
     <!--popup 键盘-->
     <popup v-model="popshow" :show-mask="false">
       <div class="popup1">
-        <KeyBord @run="enterMoney" @sure="next" ref="keyBord"></KeyBord>
+        <MoneyKeyBord @run="enterMoney" @sure="next" ref="keyBord"></MoneyKeyBord>
       </div>
     </popup>
     <!--popup-->
@@ -66,12 +66,12 @@
 
 <script>
   import {Popup} from 'vux'
-  import KeyBord from '@/components/keybord'
+  import MoneyKeyBord from '@/components/moneyKeyBord'
   import EnterPassword from '@/components/enterPassword'
   export default {
     name: "Recharge",
     components: {
-      KeyBord,
+      MoneyKeyBord,
       EnterPassword,
       Popup
     },

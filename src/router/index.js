@@ -41,6 +41,8 @@ import UserRecharge from '@/pages/user/recharge'
 import UserWithdraw from '@/pages/user/withdraw'
 import UserIncome from '@/pages/user/income'
 import UserCards from '@/pages/user/cards'
+import UserAddCards from '@/pages/user/addCards'
+import UserCardsMessage from '@/pages/user/cardsMessage'
 
 Vue.use(Router)
 
@@ -241,6 +243,28 @@ export default new Router({
           },
           components:{
             default:UserIncome,
+          }
+        },
+        {
+          path: '/user/cards/add/:realname',
+          name: 'UserAddCards',
+          meta: {
+            requireAuth: true,
+            title: '添加银行卡'
+          },
+          components:{
+            default:UserAddCards,
+          }
+        },
+        {
+          path: '/user/cards/message/:realname/:cardsNum',
+          name: 'UserCardsMessage',
+          meta: {
+            requireAuth: true,
+            title: '填写信息'
+          },
+          components:{
+            default:UserCardsMessage,
           }
         },
         {
