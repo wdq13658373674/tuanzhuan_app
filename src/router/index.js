@@ -283,7 +283,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/forgetPayPassword',
+          path: '/user/safeManage/forgetPayPassword',
           name: 'ForgetPayPassword',
           meta: {
             requireAuth: true,

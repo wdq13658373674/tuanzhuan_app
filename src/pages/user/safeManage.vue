@@ -8,7 +8,7 @@
           </div>
         </li>
         <li class="item">
-          <router-link class="link cell" to="/user/forgetPayPassword">
+          <router-link class="link cell" to="forgetPayPassword" append>
             <span><i class="icon icon1"></i>忘记支付密码</span>
           </router-link>
         </li>

@@ -188,10 +188,8 @@
 </script>
 <style lang="css" scoped>
   @import '../../assets/css/shop.css';
-
-
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../../core/base";
   .index-swiper{
     height:rem(310);

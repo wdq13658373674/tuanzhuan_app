@@ -189,6 +189,6 @@
   @import '../../assets/css/user.css';
   @import '../../assets/css/wave.css';
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../../core/base";
 </style>
