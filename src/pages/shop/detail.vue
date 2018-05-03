@@ -4,15 +4,26 @@
       <swiper class="detail-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
 
       <div class="content">
-        <div class="product-msg mt20 clearfix">
-          <p class="title pull-left">{{goodsDetail.goods_name}}</p>
-          <p class="share pull-right">分享</p>
-        </div>
-        <div class="product-total">
-          <i class="mr10 icon tp"></i>
-          <span class="f32 orange pull-left">{{goodsDetail.now_tcion}}</span>
-          <span class="ml29">¥{{goodsDetail.now_price}}</span>
-          <span class="pull-right gray">已售 {{goodsDetail.goods_sell_count}}</span>
+        <div class="mb30">
+          <div class="product-msg mt20 clearfix">
+            <p class="title pull-left">{{goodsDetail.goods_name}}</p>
+            <p class="share pull-right">分享</p>
+          </div>
+          <div class="product-total">
+            <i class="mr10 icon tp"></i>
+            <span class="f32 orange pull-left">{{goodsDetail.now_tcion}}</span>
+            <span class="ml29">¥{{goodsDetail.now_price}}</span>
+            <span class="pull-right gray">已售 {{goodsDetail.goods_sell_count}}</span>
+          </div>
+
+          <!--新加标签-->
+          <div class="mt10">
+            <span class="shop-mark2 yellow-bg">满减</span>
+            <span class="shop-mark2 pink-bg">五折</span>
+            <span class="shop-mark2 yellow-bg">新春大促</span>
+            <span class="shop-mark2 pink-bg">新用户特惠</span>
+          </div>
+          <!--新加标签-->
         </div>
       </div>
 
