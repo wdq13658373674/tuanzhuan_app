@@ -27,6 +27,10 @@
         <p class="p1">验证身份后才能使用余额功能</p>
         <a href="#" class="btn btn-orange">去验证</a>
       </div>
+
+      <div class="connect-box">
+        <p class="bank-connect">联系客户：400-000-0034</p>
+      </div>
     </section>
   </div>
 </template>
@@ -56,5 +60,4 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
-
 </style>

@@ -9,7 +9,7 @@
         </li>
         <li class="item">
           <router-link class="link cell" to="forgetPayPassword" append>
-            <span><i class="icon icon1"></i>忘记支付密码</span>
+            <span><i class="icon icon2"></i>忘记支付密码</span>
           </router-link>
         </li>
       </ul>
@@ -50,10 +50,10 @@
     }
   }
 </script>
-<style lang="css">
+<style lang="css" scoped>
   @import '../../assets/css/userSafety.css';
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../../core/base";
 
   .pay-keybord{

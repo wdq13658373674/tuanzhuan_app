@@ -95,7 +95,7 @@
     }
   }
 </script>
-<style lang="css">
+<style lang="css" scoped>
   @import '../../assets/css/userData.css';
 </style>
 <style lang="scss">

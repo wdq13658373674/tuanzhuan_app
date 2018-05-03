@@ -59,5 +59,4 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
-
 </style>
