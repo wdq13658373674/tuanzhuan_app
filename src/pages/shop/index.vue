@@ -5,7 +5,7 @@
         <router-link :to="{path:'/shop/search',query:{
           store_id:storeInfo.store_id,
           type_id:0,
-          title:'全部商品'
+          title:''
         }}" class="search-link" append>请输入商品名称</router-link>
       </div>
 
@@ -76,7 +76,7 @@
               <i class="icon tp mr10"></i>
               <span class="orange">{{goods.now_tcion}}</span>
               <!--<span class="shop-mark yellow-bg">满减</span>-->
-              <span class="shop-mark pink-bg" v-if="parseInt(goods.goods_discount)>0">{{goods.goods_discount}}折</span>
+              <span class="shop-mark pink-bg" v-if="10>parseInt(goods.goods_discount)>0">{{goods.goods_discount}}折</span>
             </p>
             <p class="p3">
               <span class="pull-left">¥{{goods.now_price}}</span>

@@ -7,6 +7,7 @@
       :auto-fixed="false"
       v-model="search"
       @on-cancel="submit"
+      @focus="handleFocus"
       ></search>
 
     <h2 class="h2">历史搜索</h2>

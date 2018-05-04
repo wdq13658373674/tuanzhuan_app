@@ -53,14 +53,14 @@
           <div class="con-box">
             <p class="title">{{items.goods_name}}</p>
             <div>
-              <!--<p class="mt10">
-                <span class="shop-mark yellow-bg">会员7折</span>
-                <span class="shop-mark pink-bg">满100减50</span>
-              </p>-->
+              <p class="mt10">
+                <span class="shop-mark yellow-bg" v-if="items.goods_addwords!=''">{{items.goods_addwords}}</span>
+                <span class="shop-mark pink-bg" v-if="10>parseInt(items.goods_discount)>0">{{items.goods_discount}}折</span>
+              </p>
               <p class="mt20">
                 <i class="icon tp mr10"></i>
-                <span class="orange">{{items.goods_tcion}}</span>
-                <span>¥{{items.goods_price}}</span>
+                <span class="orange">{{items.now_tcion}}</span>
+                <span>¥{{items.now_price}}</span>
               </p>
             </div>
           </div>

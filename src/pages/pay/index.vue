@@ -16,7 +16,7 @@
 
       <h2 class="h2">选择支付方式</h2>
       <div class="pay-list">
-        <label class="item">
+        <label class="item" title="团票兑换" @click="choose_pay('团票兑换','tcion')">
           <div>
             <img class="img pull-left" src="@/assets/images/img/c_pay1.svg" alt="">
             <div class="pull-left">
@@ -29,40 +29,40 @@
             <i class="tp"></i>
             <span class="f28 mr10 orange">{{pay_user.user_tcion}}</span>
 
-            <input type="radio" name="pay">
+            <input type="radio" name="pay" v-model="payType" value="tcion" />
             <div class="radio">
               <i class="check"></i>
             </div>
           </div>
         </label>
-        <label class="item">
+        <label class="item" @click="choose_pay('余额支付','money')">
           <div>
             <img class="img pull-left" src="@/assets/images/img/c_pay2.svg" alt="">
             <div class="pull-left">
               <p class="p">余额支付</p>
-              <p class="p">赠送0.10物业券</p>
+              <p class="p">赠送{{ticket}}物业券</p>
             </div>
           </div>
           <div>
             <span class="f28 mr10">我的余额</span>
             <span class="f16 gray">¥</span>
             <span class="f28 mr10">{{pay_user.user_money}}</span>
-            <input type="radio" name="pay">
+            <input type="radio" name="pay" v-model="payType" value="money" />
             <div class="radio">
               <i class="check"></i>
             </div>
           </div>
         </label>
-        <label class="item" v-for="(item,key) in pay_list">
+        <label class="item" v-for="(item,key) in pay_list"  @click="choose_pay(item.title,item.type)">
           <div>
             <img class="img pull-left" v-lazy="item.img" alt="" />
             <div class="pull-left">
               <p class="p">{{item.title}}</p>
-              <p class="p">赠送0.10物业券</p>
+              <p class="p">赠送{{ticket}}物业券</p>
             </div>
           </div>
           <div>
-            <input type="radio" name="pay" >
+            <input type="radio" name="pay" v-model="payType" v-bind:value="item.type"/>
             <div class="radio">
               <i class="check"></i>
             </div>
@@ -73,7 +73,11 @@
 
     <footer>
       <div class="bottom-fixed cell">
-        <div class="pay-money">微信支付：<span class="orange">¥1592.59</span></div>
+        <div class="pay-money">
+          {{title}}：
+          <span class="orange" v-if="payType!='tcion'">¥{{payMoney}}</span>
+          <span class="orange" v-if="payType=='tcion'">{{payMoney}}</span>
+        </div>
         <div class="btn btn-orange" @click="orderPay">结算</div>
       </div>
     </footer>
@@ -102,6 +106,11 @@
         popshow:false,
         orderInfo:[],
         pay_user:[],
+        ticket_rate:0.5,
+        ticket:0,
+        title:"团票兑换",
+        payType:"tcion",
+        payMoney:0,
         pay_list:{
           0:{
               img:"/static/img/c_pay3.svg",
@@ -130,14 +139,41 @@
     methods:{
       /*结算*/
       orderPay(){
+        if(this.payType=="tcion"){
+          if(this.pay_user.user_tcion<this.orderInfo.goods_order_tcion){
+            this.$vux.toast.text('团票余额不足,请换一种支付方式!','middle');
+            return false;
+          }
+        }
+
+        if(this.payType=="money"){
+          if(this.pay_user.user_money<this.orderInfo.goods_order_price){
+            this.$vux.toast.text('我的余额不足,请换一种支付方式!','middle');
+            return false;
+          }
+        }
+
         this.popshow=true;
+      },
+
+      /**
+       * 选择支付方式
+       */
+      choose_pay(tit,type){
+        this.title=tit;
+        this.payType=type;
+        if(type!="tcion"){
+          this.payMoney=this.orderInfo.goods_order_price
+        }else{
+          this.payMoney=this.orderInfo.goods_order_tcion
+        }
       },
 
       /**
        * 获取订单信息
        */
       getOrderInfo:function () {
-//获取店铺配置信息
+      //获取店铺配置信息
         let param={
           goods_order_id:this.$route.query.order_id,
           user_id:this.userInfo.user_id
@@ -147,13 +183,13 @@
         }).then(res=>{
           res=res.data;
 
-          console.table(res.data);
-
           if(res.status!=0){
-
+            this.$router.push('/shop/cart');
           }else{
             this.orderInfo=res.data.order;
             this.pay_user=res.data.user;
+
+            this.ticket=(res.data.order.goods_order_price*this.ticket_rate).toFixed(2);
           }
 
         }).catch(err=>{

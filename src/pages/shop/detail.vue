@@ -18,10 +18,8 @@
 
           <!--新加标签-->
           <div class="clearfix">
-            <span class="shop-mark2 yellow-bg">满减</span>
-            <span class="shop-mark2 pink-bg">五折</span>
-            <span class="shop-mark2 yellow-bg">新春大促</span>
-            <span class="shop-mark2 pink-bg">新用户特惠</span>
+            <span class="shop-mark2 pink-bg" v-if="10>parseInt(goodsDetail.goods_discount)>0">{{goodsDetail.goods_discount}}折</span>
+            <span class="shop-mark2 yellow-bg" v-if="goodsDetail.goods_addwords!=''">{{goodsDetail.goods_addwords}}</span>
           </div>
           <!--新加标签-->
         </div>
