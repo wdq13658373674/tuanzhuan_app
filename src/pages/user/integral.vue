@@ -1,14 +1,14 @@
 <template>
   <div>
     <ColorNav color="orange-bar">
-      <router-link to="/user/income" class="link pull-right" slot="right" style="color:#fff;">
+      <router-link to="/user/account/income" class="link pull-right" slot="right" style="color:#fff;">
         明细
       </router-link>
     </ColorNav>
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">剩余积分(F)</p>
-        <p class="p2">6000.66</p>
+        <p class="p2">{{total}}</p>
       </div>
       <div class="connect-box">
         <p class="bank-connect">联系客户：400-000-0034</p>
@@ -26,7 +26,7 @@
     },
     data() {
       return {
-
+        total:this.$route.query.integral
       }
     },
     mounted(){

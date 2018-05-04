@@ -22,19 +22,31 @@
     <section class="page-group">
       <div class="content user-menu">
         <div class="item">
-          <router-link to="/user/tickets">
+          <router-link :to="{path:'/user/tickets',
+            query:{
+              tp:userLists.user_tcion
+            }
+          }">
             <p class="p1 orange">{{userLists.user_tcion || 0}}</p>
             <p class="p2">我的团票</p>
           </router-link>
         </div>
         <div class="item">
-          <router-link to="/user/balance">
+          <router-link :to="{path:'/user/balance',
+            query:{
+              balance:userLists.user_money
+            }
+          }">
             <p class="p1">¥{{userLists.user_money || 0}}</p>
             <p class="p2">账户余额</p>
           </router-link>
         </div>
         <div class="item">
-          <router-link to="/user/integral">
+          <router-link :to="{path:'/user/integral',
+            query:{
+              integral:userLists.user_score
+            }
+          }">
             <p class="p1">{{userLists.user_score || 0}}</p>
             <p class="p2">我的积分</p>
           </router-link>
@@ -143,7 +155,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState,mapMutations} from 'vuex'
   import Footer from '@/pages/layout/footer'
   export default {
     name: "User",
@@ -163,6 +175,7 @@
       this.getUserLists();
     },
     methods:{
+      ...mapMutations(['update_userInfo']),
       /**获取用户数据**/
       getUserLists(){
         /*this.$vux.confirm.show({
@@ -178,6 +191,8 @@
           res=res.data;
           this.userLists=res.data.village.user;
           this.roomLists=res.data.village.room;
+
+          this.update_userInfo(this.userLists);
         }).catch(err=>{
           console.log('my err:'+err)
         })

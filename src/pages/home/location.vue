@@ -45,8 +45,8 @@
     data () {
       return {
         flag:false,
-        user_village:'',
-        other_village:'',
+        user_village:[],
+        other_village:[],
         value:''
       }
     },
@@ -57,6 +57,7 @@
        this.getRooms();
     },
     methods:{
+      /**获取房屋信息*/
       getRooms:function(){
         let param={}
         if(this.roomInfo){
@@ -72,17 +73,17 @@
         }).then(res=>{
           res=res.data;
           if(res.status==0){
-              this.user_village=res.data.user_village;
-              this.other_village=res.data.other_village;
-
             if(this.user_village && this.user_village.length>0){
+              this.user_village=res.data.user_village;
               this.flag=true;
             }
+            this.other_village=res.data.other_village;
           }
         }).catch(err=>{
           console.log('my err:'+err);
         })
       },
+      /**切换小区*/
       changeVillage:function(item){
         let roomInfo=this.roomInfo
         roomInfo.village_name=item.village_name;
@@ -93,6 +94,7 @@
 
         this.$router.push('/');
       },
+      /**搜索*/
       submit:function(){
         console.log(this.search);
       }

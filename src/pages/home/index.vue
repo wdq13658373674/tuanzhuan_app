@@ -55,7 +55,7 @@
 
         <h1 class="h1">
           <em class="pull-left">生活服务</em>
-          <a class="pull-right gray">更多<i class="ml10 icon arrow"></i></a>
+          <router-link to="/service" class="pull-right gray">更多<i class="ml10 icon arrow"></i></router-link>
         </h1>
 
         <div class="life-list">

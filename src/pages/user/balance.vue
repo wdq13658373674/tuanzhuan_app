@@ -1,31 +1,31 @@
 <template>
   <div>
     <ColorNav color="orange-bar">
-      <router-link to="/user/income" class="link pull-right" slot="right" style="color:#fff;">
+      <router-link to="/user/account/income" class="link pull-right" slot="right" style="color:#fff;">
         明细
       </router-link>
     </ColorNav>
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">余额账户(元)</p>
-        <p class="p2">6000.66</p>
+        <p class="p2">{{total}}</p>
       </div>
       <ul class="user-pay-list arrow-cell-list">
         <li class="item">
-          <router-link to="/user/recharge" class="link cell">
+          <router-link to="/user/account/recharge" class="link cell">
             <span><i class="icon icon1"></i>充值</span>
           </router-link>
         </li>
         <li class="item">
-          <router-link to="/user/withdraw" class="link cell">
+          <router-link to="/user/account/withdraw" class="link cell">
             <span><i class="icon icon2"></i>提现</span>
           </router-link>
         </li>
       </ul>
       <!--验证身份的时候显示-->
-      <div class="content user-pay-check mt20">
+      <div class="content user-pay-check mt20" v-if="!check">
         <p class="p1">验证身份后才能使用余额功能</p>
-        <a href="#" class="btn btn-orange">去验证</a>
+        <router-link to="/user/check/idCard" class="btn btn-orange">去验证</router-link>
       </div>
 
       <div class="connect-box">
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import ColorNav from '@/pages/layout/colorNav'
   export default {
     name: "Balance",
@@ -44,7 +45,17 @@
     },
     data() {
       return {
-
+        total:this.$route.query.balance
+      }
+    },
+    computed:{
+      ...mapState(['userInfo']),
+      /**验证是否实名认证*/
+      check(){
+        if(this.userInfo.user_idcard && this.userInfo.user_realname && this.userInfo.user_truename){
+          return true;
+        }
+        return false;
       }
     },
     mounted(){

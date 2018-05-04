@@ -51,6 +51,19 @@ const util={
     }
 
     return v;
+  },
+  /**[A-Za-z0-9_\-\u4e00-\u9fa5]+
+    * 身份证格式验证
+    * card: 身份证号
+  */
+  is_card(card) {
+    var reg = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+    var card = card.match(reg);
+    if (card != null) {
+     return true;  //正确
+    } else {
+      return false; //错误
+    }
   }
 };
 

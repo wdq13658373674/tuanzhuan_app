@@ -11,7 +11,11 @@ import ForgetPassword from '@/pages/sign/forgetPassword'
 
 import Index from '@/pages/home/index'
 import Location from '@/pages/home/location'
+
 import Property from '@/pages/property/index'
+import PropertyService from '@/pages/property/service'
+import ServiceDetail from '@/pages/property/detail'
+
 import Life from '@/pages/life/index'
 import Article from '@/pages/article/index'
 import ArticleDetail from '@/pages/article/detail'
@@ -47,6 +51,7 @@ import UserAddCards from '@/pages/user/addCards'
 import UserCardsMessage from '@/pages/user/cardsMessage'
 import UserSafeManage from '@/pages/user/safeManage'
 import ForgetPayPassword from '@/pages/user/forgetPayPassword'
+import CheckIdCard from '@/pages/user/checkIdCard'
 
 Vue.use(Router)
 
@@ -83,6 +88,22 @@ export default new Router({
           component: Property,
           meta: {
             title: '物业'
+          }
+        },
+        {
+          path: '/property/service',
+          name: 'PropertyService',
+          component: PropertyService,
+          meta: {
+            title: '物业服务费'
+          }
+        },
+        {
+          path: '/property/service/detail',
+          name: 'ServiceDetail',
+          component: ServiceDetail,
+          meta: {
+            title: '物业费账单'
           }
         },
         {
@@ -217,7 +238,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/recharge',
+          path: '/user/account/recharge',
           name: 'UserRecharge',
           meta: {
             requireAuth: true,
@@ -228,7 +249,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/withdraw',
+          path: '/user/account/withdraw',
           name: 'UserWithdraw',
           meta: {
             requireAuth: true,
@@ -239,7 +260,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/income',
+          path: '/user/account/income',
           name: 'UserIncome',
           meta: {
             requireAuth: true,
@@ -269,6 +290,17 @@ export default new Router({
           },
           components:{
             default:UserCardsMessage,
+          }
+        },
+        {
+          path: '/user/check/idCard',
+          name: 'CheckIdCard',
+          meta: {
+            requireAuth: true,
+            title: '验证身份'
+          },
+          components:{
+            default:CheckIdCard,
           }
         },
         {

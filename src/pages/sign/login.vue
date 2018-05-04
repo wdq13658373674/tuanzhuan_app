@@ -41,8 +41,8 @@
       }
     },
     mounted(){
-      this.update_userInfo('');
-      this.update_roomInfo('');
+      this.update_userInfo({});
+      this.update_roomInfo({});
     },
     methods:{
       ...mapMutations(['update_userInfo','update_roomInfo']),

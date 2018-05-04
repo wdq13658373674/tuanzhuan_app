@@ -1,14 +1,14 @@
 <template>
   <div>
     <ColorNav color="orange-bar">
-      <router-link to="/user/income" class="link pull-right" slot="right" style="color:#fff;">
+      <router-link to="/user/account/income" class="link pull-right" slot="right" style="color:#fff;">
         明细
       </router-link>
     </ColorNav>
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">团票余额(T)</p>
-        <p class="p2">6000.66</p>
+        <p class="p2">{{total}}</p>
       </div>
 
       <div class="connect-box">
@@ -27,7 +27,7 @@
     },
     data() {
       return {
-
+        total:this.$route.query.tp
       }
     },
     mounted(){
