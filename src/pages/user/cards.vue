@@ -5,7 +5,7 @@
       <ul class="user-bank-list">
         <li class="item" v-for="item in cardsLists">
           <div class="img-box">
-            <img src="@/assets/images/test/img7.png" alt="">
+            <img src="@/assets/images/public/bank.png" alt="">
           </div>
           <div class="msg-box">
             <div class="cell">
@@ -25,7 +25,7 @@
       </div>
 
       <div class="connect-box">
-        <p class="bank-connect">联系客户：400-000-0034</p>
+        <p class="bank-connect">联系客服：400-135-6677</p>
       </div>
     </section>
 
@@ -92,9 +92,13 @@
               realname:realname
             }});
         }else{
+          const self=this;
           this.$vux.confirm.show({
             title: '提示',
-            content: '请实名认证'
+            content: '请实名认证',
+            onConfirm(){
+              self.$router.push('/user/check/idCard');
+            }
           })
         }
       },

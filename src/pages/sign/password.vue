@@ -41,7 +41,7 @@
             return;
           }
 
-          let params={
+          const params={
             'mobile':this.phone,
             'password':this.password,
             'repassword':this.password,
@@ -51,7 +51,6 @@
 
         this.$axios.post('/index/index/registration',qs.stringify(params)).then(res=>{
           res=res.data;
-          console.log(res);
 
           this.$vux.toast.show({
             text: res.msg
@@ -67,12 +66,12 @@
       /**登陆*/
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
       login:function(){
-        let loginParams={
+        const params={
           'mobile':this.$route.params.phone,
           'password':this.password,
         }
 
-        this.$axios.post('/index/index/login',qs.stringify(loginParams)).then(res=>{
+        this.$axios.post('/index/index/login',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==1){

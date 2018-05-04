@@ -12,7 +12,7 @@
       </div>
 
       <div class="connect-box">
-        <p class="bank-connect">联系客户：400-000-0034</p>
+        <p class="bank-connect">联系客服：400-135-6677</p>
       </div>
     </section>
   </div>

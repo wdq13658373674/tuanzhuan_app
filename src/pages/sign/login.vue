@@ -58,7 +58,7 @@
           return;
         }
 
-        let params={
+        const params={
           'mobile':this.phone,
           'password':this.password,
         }
