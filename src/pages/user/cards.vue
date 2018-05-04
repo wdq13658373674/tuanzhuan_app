@@ -3,19 +3,19 @@
     <ColorNav color="black-bar"></ColorNav>
     <section class="page-group gray-bg">
       <ul class="user-bank-list">
-        <li class="item">
+        <li class="item" v-for="item in cardsLists">
           <div class="img-box">
             <img src="@/assets/images/test/img7.png" alt="">
           </div>
           <div class="msg-box">
             <div class="cell">
               <div class="name">
-                <p>重庆银行</p>
-                <p>储蓄卡</p>
+                <p>{{item.bank_name.split('-')[0]}}</p>
+                <p>{{item.bank_name.split('-')[2]}}</p>
               </div>
-              <div class="link" @click="sheetShow=true">解除绑定</div>
+              <div class="link" @click="getBankId(item.bank_id)">解除绑定</div>
             </div>
-            <p class="card">****  ****  ****  1114</p>
+            <p class="card">{{item.bank_numb | formate}}</p>
           </div>
         </li>
       </ul>
@@ -30,7 +30,7 @@
     </section>
 
     <!--银行卡解除绑定 actionSheet-->
-    <actionsheet class="bank-sheet" v-model="sheetShow" :menus="delMenus" @on-click-menu="delCards" show-cancel></actionsheet>
+    <actionsheet class="bank-sheet" v-model="sheetShow" :menus="delMenus" @on-click-menu="del" show-cancel></actionsheet>
   </div>
 </template>
 
@@ -38,6 +38,7 @@
   import ColorNav from '@/pages/layout/colorNav'
   import {mapState} from 'vuex'
   import {Actionsheet} from 'vux'
+  const qs = require("querystring")
   export default {
     name: "Cards",
     components: {
@@ -49,14 +50,15 @@
         sheetShow:false,
         cardsLists:[],
         userLists:[],
-        delMenus:['解除绑定']
+        delMenus:['解除绑定'],
+        bankId:''
       }
     },
     computed:{
       ...mapState(['userInfo'])
     },
     mounted(){
-      this.getCardsLists()
+      this.getCardsLists();
     },
     methods:{
       /**获取银行卡列表*/
@@ -69,7 +71,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==0){
             this.cardsLists=res.data.bank;
@@ -85,22 +86,61 @@
           ,idCard=this.userLists.user_idcard
           ,realname=this.userLists.user_realname;
 
-        /**验证是否实名认证*/
-        /*if(state==1 && idCard && realname){
-          this.$router.push('/user/cards/add');
+        /*验证是否实名认证*/
+        if(state==1 && idCard && realname){
+          this.$router.push({name:'UserAddCards',params:{
+              realname:realname
+            }});
         }else{
-          console.log('请实名验证 ')
-        }*/
-
-        this.$router.push({name:'UserAddCards',params:{
-            realname:realname
-          }});
+          this.$vux.confirm.show({
+            title: '提示',
+            content: '请实名认证'
+          })
+        }
+      },
+      /**获取银行卡号*/
+      getBankId(id){
+        this.sheetShow=true;
+        this.bankId=id;
       },
       /**银行卡解除绑定*/
-      delCards(key,value){
-        if(value=='解除绑定'){
-          alert('解除');
+      del(key,value){
+        const self=this;
+        const bankId=this.bankId
+
+        if(value=='解除绑定' && this.bankId){
+          this.$vux.confirm.show({
+            title:'提示',
+            content:'确定要解除该银行卡',
+            onConfirm(){
+              let params={
+                bank_id:bankId
+              }
+
+              self.$axios.post('/index/Bank/delBank',qs.stringify(params)).then(res=>{
+                res=res.data;
+
+                if(res.status==0){
+                  self.updateCards(bankId);
+                  self.$vux.toast.text('解除绑定成功');
+                }else{
+                  self.$vux.toast.text('解除绑定失败');
+                }
+              }).catch(err=>{
+                console.log('my err:'+err)
+              })
+            }
+          })
         }
+      },
+      /**更新银行卡列表*/
+      updateCards(id){
+        let cardList=this.cardsLists;
+        cardList.forEach(function(item,key){
+          if(item.bank_id==id){
+            cardList.pop(key,1);
+          }
+        })
       }
     }
   }

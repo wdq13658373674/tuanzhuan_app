@@ -8,7 +8,7 @@
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">团票余额(T)</p>
-        <p class="p2">{{total}}</p>
+        <p class="p2">{{total || '0.00'}}</p>
       </div>
 
       <div class="connect-box">

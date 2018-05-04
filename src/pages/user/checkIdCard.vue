@@ -64,7 +64,7 @@
               this.$vux.toast.text('身份认证成功');
 
               this.userInfo.user_realname=this.realname;
-              this.userInfo.user_idcard=this.user_id;
+              this.userInfo.user_idcard=this.idcard;
               this.userInfo.user_truename=1;
               this.update_userInfo(this.userInfo);
 

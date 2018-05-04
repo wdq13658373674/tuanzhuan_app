@@ -73,11 +73,12 @@
         }).then(res=>{
           res=res.data;
           if(res.status==0){
+            this.user_village=res.data.user_village;
+            this.other_village=res.data.other_village;
+
             if(this.user_village && this.user_village.length>0){
-              this.user_village=res.data.user_village;
               this.flag=true;
             }
-            this.other_village=res.data.other_village;
           }
         }).catch(err=>{
           console.log('my err:'+err);

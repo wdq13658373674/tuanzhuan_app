@@ -8,7 +8,7 @@
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">剩余积分(F)</p>
-        <p class="p2">{{total}}</p>
+        <p class="p2">{{total || '0'}}</p>
       </div>
       <div class="connect-box">
         <p class="bank-connect">联系客户：400-000-0034</p>

@@ -45,7 +45,7 @@
       this.update_roomInfo({});
     },
     methods:{
-      ...mapMutations(['update_userInfo','update_roomInfo']),
+      ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
       submit:function(){
         if(this.phone == ''){
           this.$vux.toast.show('请输入手机号码');
@@ -71,9 +71,13 @@
             return;
           }
 
-          this.$store.commit('update_userInfo',res.data.user);
-          this.$store.commit('update_roomInfo',res.data.room);
-
+          this.update_userInfo(res.data.user);
+          this.update_userInfo(res.data.token);
+          if(res.data.room){
+            this.update_roomInfo(res.data.room);
+          }else{
+            this.update_roomInfo({});
+          }
           this.$vux.toast.show('登陆成功');
           this.$router.push('/user')
         }).catch(err=>{

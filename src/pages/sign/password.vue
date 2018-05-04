@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+  import {mapMutations} from 'vuex'
   import RegNav from '@/pages/layout/regNav'
   const qs = require("querystring")
   export default {
@@ -62,6 +63,7 @@
           console.log('my err:'+err);
         })
       },
+      ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
       login:function(){
         let loginParams={
           'mobile':this.$route.params.phone,
@@ -70,17 +72,21 @@
 
         this.$axios.post('/index/index/login',qs.stringify(loginParams)).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==1){
             this.$vux.toast.show(res.msg);
             return;
           }
 
-          this.$store.commit('update_userInfo',res.data.user);
-          this.$store.commit('update_roomInfo',res.data.room);
-          this.$vux.toast.show('组册成功');
-          this.$router.push('/');
+          this.update_userInfo(res.data.user);
+          this.update_userInfo(res.data.token);
+          if(res.data.room){
+            this.update_roomInfo(res.data.room);
+          }else{
+            this.update_roomInfo({});
+          }
+          this.$vux.toast.show('注册成功');
+          this.$router.push('/user');
         }).catch(err=>{
           console.log('my err:'+err);
         })

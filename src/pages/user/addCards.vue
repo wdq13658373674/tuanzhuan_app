@@ -29,7 +29,8 @@
       return {
         realname:this.$route.params.realname,
         cardsNum:'',
-        bankType:''
+        bankType:'',
+        bankBranch:''
       }
     },
     computed:{
@@ -43,13 +44,15 @@
       getBankType(){
         let params={
           bank_car:utils.Trim(this.cardsNum,true),
+          address:'重庆'
         }
 
         this.$axios.post('/index/Bank/bankType',qs.stringify(params)).then(res=>{
           res=res.data;
 
-          if(res.status==0){
-            this.bankType=res.data;
+          if(res.data.bank_name){
+            this.bankType=res.data.bank_name;
+            this.bankBranch=res.data.bank_branch.data;
             this.next(this.bankType);
           }else{
             this.$vux.toast.text('银行卡号输入错误','top');
@@ -60,14 +63,14 @@
       },
       /**下一步
        * type : 银行卡所属银行
+       * bankBranch : 银行支行
        * */
       next(type){
         if(type && this.realname && this.cardsNum){
           this.$router.push({
             name:'UserCardsMessage',
             params:{
-              cardsNum:utils.Trim(this.cardsNum,true),
-              bankType:type
+              cardsNum:utils.Trim(this.cardsNum,true)
             }
           })
         }

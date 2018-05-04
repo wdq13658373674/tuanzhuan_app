@@ -27,7 +27,7 @@
               tp:userLists.user_tcion
             }
           }">
-            <p class="p1 orange">{{userLists.user_tcion || 0}}</p>
+            <p class="p1 orange">{{userLists.user_tcion || '0.00'}}</p>
             <p class="p2">我的团票</p>
           </router-link>
         </div>
@@ -37,7 +37,7 @@
               balance:userLists.user_money
             }
           }">
-            <p class="p1">¥{{userLists.user_money || 0}}</p>
+            <p class="p1">¥{{userLists.user_money || '0.00'}}</p>
             <p class="p2">账户余额</p>
           </router-link>
         </div>
@@ -47,7 +47,7 @@
               integral:userLists.user_score
             }
           }">
-            <p class="p1">{{userLists.user_score || 0}}</p>
+            <p class="p1">{{userLists.user_score || '0.00'}}</p>
             <p class="p2">我的积分</p>
           </router-link>
         </div>
@@ -65,7 +65,8 @@
           <li class="item">
             <a href="#">
               <p class="p1">我的房屋</p>
-              <p class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
+              <p class="p2" v-if="roomLists">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
+              <p class="p2" v-else>暂无房屋</p>
               <i class="icon arrow"></i>
             </a>
           </li>
@@ -189,10 +190,13 @@
           params:params
         }).then(res=>{
           res=res.data;
-          this.userLists=res.data.village.user;
-          this.roomLists=res.data.village.room;
+          if(res.status==0){
+            this.userLists=res.data.village.user;
 
-          this.update_userInfo(this.userLists);
+            if(res.data.village.room){
+              this.roomLists=res.data.village.room;
+            }
+          }
         }).catch(err=>{
           console.log('my err:'+err)
         })

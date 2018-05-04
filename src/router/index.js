@@ -282,7 +282,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/cards/message/:cardsNum/:bankType',
+          path: '/user/cards/message/:cardsNum',
           name: 'UserCardsMessage',
           meta: {
             requireAuth: true,

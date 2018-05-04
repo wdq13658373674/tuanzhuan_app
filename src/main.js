@@ -86,6 +86,7 @@ const storeJs=require('storejs');
 const store = new Vuex.Store({
   state:{
     loading:false,//加载动画
+    token:storeJs('token') ? storeJs('token') : {},//token值
     roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},//小区房屋信息
     userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},//用户信息
     storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {},//商家信息
@@ -105,6 +106,10 @@ const store = new Vuex.Store({
     update_storeInfo(state,storeInfo){
       state.storeInfo=storeInfo;
       storeJs.set('storeInfo',state.storeInfo);
+    },
+    update_token(state,token){
+      state.token=token;
+      storeJs.set('token',state.token);
     },
   },
   actions:{

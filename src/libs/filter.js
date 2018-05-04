@@ -20,4 +20,16 @@ let stampToDate=(time,flag)=>{
   }
 }
 
-export {stampToDate}
+/**
+ * 格式化银行卡号
+ * v：银行卡号
+ * **/
+let formate=(v)=>{
+  if(/\S{5}/.test(v)){
+    v=v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
+  }
+
+  return v;
+}
+
+export {stampToDate,formate}

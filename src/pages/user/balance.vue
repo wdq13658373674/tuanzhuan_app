@@ -8,7 +8,7 @@
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">余额账户(元)</p>
-        <p class="p2">{{total}}</p>
+        <p class="p2">{{total || '0.00'}}</p>
       </div>
       <ul class="user-pay-list arrow-cell-list">
         <li class="item">
