@@ -34,6 +34,7 @@
       }
     },
     methods:{
+      /**注册表单提交*/
       submit:function () {
           if(this.password==''){
             this.$vux.toast.show('请输入密码')
@@ -63,6 +64,7 @@
           console.log('my err:'+err);
         })
       },
+      /**登陆*/
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
       login:function(){
         let loginParams={
@@ -79,7 +81,7 @@
           }
 
           this.update_userInfo(res.data.user);
-          this.update_userInfo(res.data.token);
+          this.update_token(res.data.token);
           if(res.data.room){
             this.update_roomInfo(res.data.room);
           }else{
