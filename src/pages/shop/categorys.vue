@@ -43,6 +43,7 @@
 
 <script>
   import { Scroller } from 'vux'
+  import {mapState} from 'vuex'
 
   export default {
     name: "ShopCategorys",
@@ -51,12 +52,13 @@
     },
     data () {
       return {
-        lat:29.60335600,
-        lng:106.50352700,
         tabIndex:0,
         tabs:'',
         tabContents:'',
       }
+    },
+    computed:{
+      ...mapState(['roomInfo'])
     },
     mounted(){
       this.getTabs();
@@ -68,9 +70,9 @@
       },
       getTabs:function(){
         let params={
-          lat:this.lat,
-          lng:this.lng,
-        }
+          lat:this.roomInfo.lat,
+          lng:this.roomInfo.lng,
+        };
 
         this.$axios.get('/index/Goods/classify',{
           params:params
@@ -84,7 +86,7 @@
           }
         }).catch(err=>{
           console.log('my err:'+err);
-        })
+        });
       },
       getContents:function(parent_id){
         let params={
