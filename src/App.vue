@@ -99,6 +99,32 @@
     }
   }
 
+  /*tab*/
+  .vux-tab-wrap{
+    padding-top:rem(88) !important;
+
+    .vux-tab-container{
+      height:rem(88);
+    }
+
+    .vux-tab{
+      height:rem(88);
+
+      .vux-tab-item{
+        line-height:rem(88);
+        font-size:rem(30);
+      }
+    }
+
+    .scrollable{
+      padding-bottom:0;
+      .vux-tab-ink-bar{
+        bottom:0;
+      }
+    }
+  }
+
+  /****/
   .animated{
     position:absolute;
     width:100%;

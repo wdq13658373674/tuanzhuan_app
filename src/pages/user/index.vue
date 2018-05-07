@@ -94,10 +94,10 @@
 
         <ul class="user-func-list clearfix">
           <li class="item">
-            <a href="#" class="link">
+            <router-link to="/user/order" class="link">
               <img class="img" src="@/assets/images/icons/i_icon1.png" alt="">
               <p class="p1">我的订单</p>
-            </a>
+            </router-link>
           </li>
           <li class="item">
             <a href="#" class="link">

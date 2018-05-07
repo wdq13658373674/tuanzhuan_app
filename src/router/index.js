@@ -38,6 +38,7 @@ import OrderPayDetail from '@/pages/pay/detail'
 import User from '@/pages/user/index'
 import UserData from '@/pages/user/message'
 import UserName from '@/pages/user/changeName'
+import UserOrder from '@/pages/user/order'
 import UserNickname from '@/pages/user/changeNickname'
 import BindMobile from '@/pages/user/bindMobile'
 import UserBalance from '@/pages/user/balance'
@@ -235,6 +236,17 @@ export default new Router({
           },
           components:{
             default:UserData,
+          }
+        },
+        {
+          path: '/user/order',
+          name: 'UserOrder',
+          meta: {
+            requireAuth: true,
+            title: '我的订单'
+          },
+          components:{
+            default:UserOrder,
           }
         },
         {
