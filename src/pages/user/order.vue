@@ -27,7 +27,7 @@
               <span class="f32 orange">85.00</span>
             </div>
             <div>
-              <a href="#" class="link">查看详情</a>
+              <router-link to="/user/order/detail" class="link">查看详情</router-link>
               <a href="#" class="link">取消订单</a>
             </div>
           </div>

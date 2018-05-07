@@ -54,6 +54,7 @@ import ForgetPayPassword from '@/pages/user/forgetPayPassword'
 import CheckIdCard from '@/pages/user/checkIdCard'
 import UserOrder from '@/pages/user/order'
 import UserOrderDetail from '@/pages/user/orderDetail'
+import UserOrderSales from '@/pages/user/orderSales'
 
 Vue.use(Router)
 
@@ -259,6 +260,17 @@ export default new Router({
           },
           components:{
             default:UserOrderDetail,
+          }
+        },
+        {
+          path: '/user/order/sales',
+          name: 'UserOrderSales',
+          meta: {
+            requireAuth: true,
+            title: '售后申请'
+          },
+          components:{
+            default:UserOrderSales,
           }
         },
         {
