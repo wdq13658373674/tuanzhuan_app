@@ -1,13 +1,7 @@
 <template>
   <div>
     <section class="page-group">
-
-      <step v-model="step2" background-color='#fbf9fe' gutter="20px">
-        <step-item title="申请退货"></step-item>
-        <step-item title="退货中"></step-item>
-        <step-item title="退货完成"></step-item>
-      </step>
-
+      <step step="0"></step>
       <div class="user-after-sales">
         <h4 class="h4">订单编号：33775628</h4>
 
@@ -81,18 +75,17 @@
 </template>
 
 <script>
-  import { Step, StepItem} from 'vux'
+  import step from '@/components/step'
   import {mapState} from 'vuex'
   const qs = require("querystring")
   export default {
     name: "UserOrderSales",
     components: {
-      Step,
-      StepItem
+      step
     },
     data() {
       return {
-        step2: 0
+
       }
     },
     computed:{
