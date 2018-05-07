@@ -8,23 +8,28 @@
         <li v-for="(item,index) in orderList" class="item">
           <div class="top">
             <span class="pull-left">订单编号：{{item.goods_order_numb}}</span>
-            <span v-if="item.status === 0 && item.goods_order_is_pay === 1">
-              <span class="pull-right orange">未接单</span>
+            <span v-if="item.goods_order_status === 1">
+              <span class="pull-right orange">已取消</span>
             </span>
-            <span v-else-if="item.status === 1 && item.goods_order_is_pay === 1">
-              <span class="pull-right orange">已接单</span>
-            </span>
-            <span v-else-if="item.status === 2 && item.goods_order_is_pay === 1">
-              <span class="pull-right orange">取货中</span>
-            </span>
-            <span v-else-if="item.status === 3 && item.goods_order_is_pay === 1">
-              <span class="pull-right orange">配送中</span>
-            </span>
-            <span v-else-if="item.status === 4 && item.goods_order_is_pay === 1">
-              <span class="pull-right green">已送达</span>
-            </span>
-            <span v-else="item.goods_order_is_pay === 0">
-              <span class="pull-right orange">未支付</span>
+            <span v-else>
+              <span v-if="item.status === 0 && item.goods_order_is_pay === 1">
+                <span class="pull-right orange">未接单</span>
+              </span>
+              <span v-else-if="item.status === 1 && item.goods_order_is_pay === 1">
+                <span class="pull-right orange">已接单</span>
+              </span>
+              <span v-else-if="item.status === 2 && item.goods_order_is_pay === 1">
+                <span class="pull-right orange">取货中</span>
+              </span>
+              <span v-else-if="item.status === 3 && item.goods_order_is_pay === 1">
+                <span class="pull-right orange">配送中</span>
+              </span>
+              <span v-else-if="item.status === 4 && item.goods_order_is_pay === 1">
+                <span class="pull-right green">已送达</span>
+              </span>
+              <span v-else-if="item.goods_order_is_pay === 0">
+                <span class="pull-right orange">未支付</span>
+              </span>
             </span>
           </div>
           <a href="#"  class="pro">
@@ -41,21 +46,20 @@
             <div>
               <span>应付:</span>
               <i class="icon tp ml20"></i>
-              <span class="f32 orange">{{item.property.order_info_real_tcion}}</span>
-              <span>或 ¥{{item.property.order_info_goods_price}}</span>
+              <span class="f32 orange">{{item.goods_order_tcion}}</span>
+              <span>或 ¥{{item.goods_order_price}}</span>
             </div>
             <div class="clearfix">
-              <span v-if="item.goods_order_is_pay === 0">
-                <router-link :to="{path: '/order/pay', query: {order_id: item.goods_order_id}
-}" class="link">立即支付</router-link>
+              <span v-if="item.goods_order_status === 1">
+                <a class="link">已取消</a>
+              </span>
+              <span v-else-if="item.goods_order_status !== 1">
+                <span v-if="item.goods_order_is_pay === 0">
+                  <router-link :to="{path: '/order/pay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
               </span>
               <span v-else>
                 <a href="#" class="link">查看详情</a>
               </span>
-              <span v-if="item.goods_order_status === 1">
-                <a class="link" @click="cancelOrder(item.goods_order_id)">已取消</a>
-              </span>
-              <span v-else-if="item.goods_order_status !== 1">
                 <a class="link" @click="cancelOrder(item.goods_order_id)">取消订单</a>
               </span>
             </div>
@@ -114,7 +118,7 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
+          console.log(res.data);
           if(type){
             //多次加载
             this.orderList = res.data;
@@ -157,8 +161,8 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
           if(res.status === 0){
+            console.log(res.status);
             this.getOrderList()
           }
         }).catch(err=>{
