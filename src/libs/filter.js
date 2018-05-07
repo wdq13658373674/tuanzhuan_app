@@ -25,11 +25,11 @@ let stampToDate=(time,flag)=>{
  * v：银行卡号
  * **/
 let formate=(v)=>{
-  if(/\S{5}/.test(v)){
+  /*if(/\S{5}/.test(v)){
     v=v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
   }
 
-  return v;
+  return v;*/
 }
 
 export {stampToDate,formate}
