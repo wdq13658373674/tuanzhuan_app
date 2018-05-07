@@ -67,7 +67,7 @@
 
         <!--商家配送 start-->
         <h4 class="h4 bold mt20">配送信息</h4>
-        <ul class="cell-list">
+        <ul class="cell-list auto">
           <li class="item cell p27">
             <span>配送时间</span>
             <span>尽快送达</span>
@@ -88,7 +88,7 @@
 
         <!--自提 start-->
         <h4 class="h4 bold mt20">配送信息</h4>
-        <ul class="cell-list">
+        <ul class="cell-listm auto">
           <li class="item cell p27">
             <span>自提时间</span>
             <span>9:00-19:00</span>
