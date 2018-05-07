@@ -38,7 +38,6 @@ import OrderPayDetail from '@/pages/pay/detail'
 import User from '@/pages/user/index'
 import UserData from '@/pages/user/message'
 import UserName from '@/pages/user/changeName'
-import UserOrder from '@/pages/user/order'
 import UserNickname from '@/pages/user/changeNickname'
 import BindMobile from '@/pages/user/bindMobile'
 import UserBalance from '@/pages/user/balance'
@@ -53,6 +52,8 @@ import UserCardsMessage from '@/pages/user/cardsMessage'
 import UserSafeManage from '@/pages/user/safeManage'
 import ForgetPayPassword from '@/pages/user/forgetPayPassword'
 import CheckIdCard from '@/pages/user/checkIdCard'
+import UserOrder from '@/pages/user/order'
+import UserOrderDetail from '@/pages/user/orderDetail'
 
 Vue.use(Router)
 
@@ -247,6 +248,17 @@ export default new Router({
           },
           components:{
             default:UserOrder,
+          }
+        },
+        {
+          path: '/user/order/detail',
+          name: 'UserOrderDetail',
+          meta: {
+            requireAuth: true,
+            title: '订单详情'
+          },
+          components:{
+            default:UserOrderDetail,
           }
         },
         {
