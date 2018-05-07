@@ -63,7 +63,7 @@
           'password':this.password,
         }
 
-        this.$axios.post('/index/index/login',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/index/login',qs.stringify(params)).then(res=>{
           res=res.data;
           console.log(res);
           if(res.status==1){

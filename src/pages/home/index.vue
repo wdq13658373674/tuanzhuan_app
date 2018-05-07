@@ -127,7 +127,7 @@
   import indexNav from '@/pages/layout/indexNav'
   import Footer from '@/pages/layout/footer'
 
-  import solarLunar from 'solarLunar'
+  import solarLunar from 'solarlunar'
   import {mapState} from 'vuex'
   import {Marquee, MarqueeItem} from 'vux'
 

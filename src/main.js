@@ -20,7 +20,9 @@ const options={
   disable: false, //禁用转场动画，默认为false，嵌套路由默认为true
   nuxt: false //若使用后端渲染框架Nuxt，需要将此设为true，默认为false
 }
-Vue.use(vueg, router,options)
+Vue.use(vueg, router,options);
+
+global.API_HOST="http://192.168.1.252";
 
 /**
  * 定位
@@ -63,10 +65,10 @@ Vue.config.productionTip = false;
  * 接口请求设置
  */
 axios.interceptors.request.use(function (config) {
-  config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  /*config.headers['appid'] = 'tz_app';
-  config.headers['auth-key'] = 'tz_app2018';
-  config.headers['user_agent'] = 'tz_app_VISITER';*/
+  //config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+  //config.headers['appid'] = 'tz_app';
+  //config.headers['authkey'] = 'tz_app2018';
+  //config.headers['user_agent'] = 'tz_app_VISITER';
 
   return config;
 });
