@@ -269,14 +269,14 @@ export default new Router({
           path: '/user/order/sales',
           component:UserOrderSales,
           name: 'UserOrderSales',
-          meta: {
-            requireAuth: true,
-            title: '售后申请'
-          },
           children: [
             {
               path: 'step1',
               name: 'UserSalesStep1',
+              meta: {
+                requireAuth: true,
+                title: '售后申请'
+              },
               components:{
                 default:UserSalesStep1,
               }
@@ -284,6 +284,10 @@ export default new Router({
             {
               path: 'step2',
               name: 'UserSalesStep2',
+              meta: {
+                requireAuth: true,
+                title: '售后申请'
+              },
               components:{
                 default:UserSalesStep2,
               }
@@ -291,6 +295,10 @@ export default new Router({
             {
               path: 'step3',
               name: 'UserSalesStep3',
+              meta: {
+                requireAuth: true,
+                title: '售后申请'
+              },
               components:{
                 default:UserSalesStep3,
               }

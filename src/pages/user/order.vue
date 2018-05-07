@@ -86,6 +86,34 @@
             </div>
           </div>
         </li>
+        <li class="item">
+          <div class="top">
+            <span class="pull-left">订单编号：33775628</span>
+            <span class="pull-right orange">未支付</span>
+          </div>
+          <a href="#"  class="pro">
+            <div class="img-box">
+              <img src="@/assets/images/test/img7.png" alt="">
+            </div>
+            <div class="con-box">
+              <p class="p1">团转制造小旋风风扇</p>
+              <p class="p2">磨砂白; 9寸</p>
+              <p class="p3">数量：x1</p>
+            </div>
+          </a>
+          <div class="bottom2">
+            <div>
+              <span>应付:</span>
+              <i class="icon tp ml20"></i>
+              <span class="f32 orange">85.00</span>
+              <span>或 ¥99999.99</span>
+            </div>
+            <div class="clearfix">
+              <a href="#" class="link">查看详情</a>
+              <a href="#" class="link">取消订单</a>
+            </div>
+          </div>
+        </li>
       </ul>
     </section>
   </div>
