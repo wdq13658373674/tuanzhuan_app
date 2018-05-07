@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="page-group">
-      <step step="0"></step>
+      <step :step="steps"></step>
       <div class="user-after-sales">
         <h4 class="h4">订单编号：33775628</h4>
 
@@ -64,20 +64,14 @@
           </li>
         </ul>
 
-        <h5 class="h5 mt20">退货原因 <span class="gray">（至少说明一个原因）</span></h5>
-        <textarea name="" id="" rows="6" class="textarea" placeholder="请说明退货原因"></textarea>
+        <router-view></router-view>
       </div>
     </section>
-    <footer>
-      <a href="#" class="bottom-fixed btn-orange-fixed">提交</a>
-    </footer>
   </div>
 </template>
 
 <script>
   import step from '@/components/step'
-  import {mapState} from 'vuex'
-  const qs = require("querystring")
   export default {
     name: "UserOrderSales",
     components: {
@@ -89,7 +83,14 @@
       }
     },
     computed:{
-      ...mapState(['userInfo'])
+      steps(){
+        if(this.$route.name=='UserSalesStep2'){
+          return 1;
+        }else if(this.$route.name=='UserSalesStep3'){
+          return 2;
+        }
+        return 0;
+      }
     },
     mounted(){
 
@@ -99,7 +100,7 @@
     }
   }
 </script>
-<style lang="css" scoped>
+<style lang="css">
   @import '../../assets/css/salesApply.css';
 </style>
 <style lang="scss">

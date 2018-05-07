@@ -125,7 +125,7 @@
       <div class="bottom-fixed btn-orange-fixed">
         <a class="link" href="#">确认收货</a>
         <a class="link" href="#">联系商家</a>
-        <a class="link" href="#">售后申请</a>
+        <router-link class="link" to="/user/order/sales/step1">售后申请</router-link>
       </div>
     </footer>
   </div>

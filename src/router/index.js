@@ -55,6 +55,9 @@ import CheckIdCard from '@/pages/user/checkIdCard'
 import UserOrder from '@/pages/user/order'
 import UserOrderDetail from '@/pages/user/orderDetail'
 import UserOrderSales from '@/pages/user/orderSales'
+import UserSalesStep1 from '@/pages/user/salesStep1'
+import UserSalesStep2 from '@/pages/user/salesStep2'
+import UserSalesStep3 from '@/pages/user/salesStep3'
 
 Vue.use(Router)
 
@@ -264,14 +267,35 @@ export default new Router({
         },
         {
           path: '/user/order/sales',
+          component:UserOrderSales,
           name: 'UserOrderSales',
           meta: {
             requireAuth: true,
             title: '售后申请'
           },
-          components:{
-            default:UserOrderSales,
-          }
+          children: [
+            {
+              path: 'step1',
+              name: 'UserSalesStep1',
+              components:{
+                default:UserSalesStep1,
+              }
+            },
+            {
+              path: 'step2',
+              name: 'UserSalesStep2',
+              components:{
+                default:UserSalesStep2,
+              }
+            },
+            {
+              path: 'step3',
+              name: 'UserSalesStep3',
+              components:{
+                default:UserSalesStep3,
+              }
+            },
+          ]
         },
         {
           path: '/user/account/recharge',
