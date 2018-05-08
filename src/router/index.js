@@ -17,6 +17,10 @@ import PropertyService from '@/pages/property/service'
 import ServiceDetail from '@/pages/property/detail'
 
 import Life from '@/pages/life/index'
+import LifeCheck from '@/pages/life/check'
+import LifeCheckDetail from '@/pages/life/detail'
+import LifePay from '@/pages/life/pay'
+
 import Article from '@/pages/article/index'
 import ArticleDetail from '@/pages/article/detail'
 import Service from '@/pages/service/index'
@@ -138,6 +142,36 @@ export default new Router({
           },
           components:{
             default:Life
+          }
+        },
+        {
+          path: '/life/check',
+          name: 'LifeCheck',
+          meta: {
+            title: '生活缴费'
+          },
+          components:{
+            default:LifeCheck
+          }
+        },
+        {
+          path: '/life/check/detail',
+          name: 'LifeCheckDetail',
+          meta: {
+            title: '生活缴费'
+          },
+          components:{
+            default:LifeCheckDetail
+          }
+        },
+        {
+          path: '/life/select/pay/:type',
+          name: 'LifePay',
+          meta: {
+            title: '生活缴费'
+          },
+          components:{
+            default:LifePay
           }
         },
         {
