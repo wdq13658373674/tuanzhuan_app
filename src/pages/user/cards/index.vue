@@ -15,7 +15,7 @@
               </div>
               <div class="link" @click="getBankId(item.bank_id)">解除绑定</div>
             </div>
-            <p class="card">{{item.bank_numb | formate}}</p>
+            <p class="card">{{item.bank_numb}}</p>
           </div>
         </li>
       </ul>
@@ -150,10 +150,10 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userBank.css';
+  @import '../../../assets/css/userBank.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 
   .bank-sheet{
     .weui-actionsheet{

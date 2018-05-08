@@ -57,10 +57,10 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userBindBank.css';
+  @import '../../../assets/css/userBindBank.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 
   .form-code.disabled{
     background: none;

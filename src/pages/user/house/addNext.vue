@@ -35,9 +35,9 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/getCode.css';
+  @import '../../../assets/css/getCode.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 
 </style>

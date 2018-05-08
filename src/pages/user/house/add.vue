@@ -35,9 +35,9 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/bindRoom.css';
+  @import '../../../assets/css/bindRoom.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 
 </style>

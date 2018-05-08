@@ -109,8 +109,8 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userRecharge.css';
+  @import '../../../assets/css/userRecharge.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 </style>

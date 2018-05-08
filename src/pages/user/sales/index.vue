@@ -101,8 +101,8 @@
   }
 </script>
 <style lang="css">
-  @import '../../assets/css/salesApply.css';
+  @import '../../../assets/css/salesApply.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 </style>

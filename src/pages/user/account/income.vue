@@ -56,9 +56,9 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userIncome.css';
+  @import '../../../assets/css/userIncome.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 
 </style>

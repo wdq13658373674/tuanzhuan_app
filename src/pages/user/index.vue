@@ -100,10 +100,10 @@
             </router-link>
           </li>
           <li class="item">
-            <a href="#" class="link">
+            <router-link to="/user/ordain" class="link">
               <img class="img" src="@/assets/images/icons/i_icon2.png" alt="">
               <p class="p1">我的预约</p>
-            </a>
+            </router-link>
           </li>
           <li class="item">
             <a href="#" class="link">
@@ -142,7 +142,7 @@
             </a>
           </li>
           <li class="item">
-            <router-link to="/user/safeManage" class="link">
+            <router-link to="/user/safe" class="link">
               <img class="img" src="@/assets/images/icons/i_icon9.png" alt="">
               <p class="p1">安全管理</p>
             </router-link>

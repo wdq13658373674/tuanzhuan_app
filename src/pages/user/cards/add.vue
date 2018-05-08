@@ -68,7 +68,7 @@
       next(type){
         if(type && this.realname && this.cardsNum){
           this.$router.push({
-            name:'UserCardsMessage',
+            name:'UserAddCardsNext',
             params:{
               cardsNum:utils.Trim(this.cardsNum,true)
             }
@@ -84,9 +84,9 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userBindBank.css';
+  @import '../../../assets/css/userBindBank.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 
 </style>

@@ -39,31 +39,40 @@ import User from '@/pages/user/index'
 import UserData from '@/pages/user/message'
 import UserName from '@/pages/user/changeName'
 import UserNickname from '@/pages/user/changeNickname'
+
 import BindMobile from '@/pages/user/bindMobile'
-import UserBalance from '@/pages/user/balance'
-import UserIntegral from '@/pages/user/integral'
-import UserTickets from '@/pages/user/tickets'
-import UserRecharge from '@/pages/user/recharge'
-import UserWithdraw from '@/pages/user/withdraw'
-import UserIncome from '@/pages/user/income'
-import UserCards from '@/pages/user/cards'
-import UserAddCards from '@/pages/user/addCards'
-import UserCardsMessage from '@/pages/user/cardsMessage'
-import UserSafeManage from '@/pages/user/safeManage'
-import ForgetPayPassword from '@/pages/user/forgetPayPassword'
 import CheckIdCard from '@/pages/user/checkIdCard'
+
+import UserBalance from '@/pages/user/account/balance'
+import UserIntegral from '@/pages/user/account/integral'
+import UserTickets from '@/pages/user/account/tickets'
+import UserRecharge from '@/pages/user/account/recharge'
+import UserWithdraw from '@/pages/user/account/withdraw'
+import UserIncome from '@/pages/user/account/income'
+
+import UserCards from '@/pages/user/cards/index'
+import UserAddCards from '@/pages/user/cards/add'
+import UserAddCardsNext from '@/pages/user/cards/addNext'
+
+import UserSafeManage from '@/pages/user/safe/index'
+import ForgetPayPassword from '@/pages/user/safe/forgetPayPassword'
+
 import UserOrder from '@/pages/user/order'
 import UserOrderDetail from '@/pages/user/orderDetail'
-import UserOrderSales from '@/pages/user/orderSales'
-import UserSalesStep1 from '@/pages/user/salesStep1'
-import UserSalesStep2 from '@/pages/user/salesStep2'
-import UserSalesStep3 from '@/pages/user/salesStep3'
 
-import UserHouse from '@/pages/house/index'
-import AddHouse from '@/pages/house/add'
-import AddHouseNext from '@/pages/house/addNext'
-import HouseHolders from '@/pages/house/holders'
-import HouseInvite from '@/pages/house/invite'
+import UserOrderSales from '@/pages/user/sales/index'
+import UserSalesStep1 from '@/pages/user/sales/step1'
+import UserSalesStep2 from '@/pages/user/sales/step2'
+import UserSalesStep3 from '@/pages/user/sales/step3'
+
+import UserOrdain from '@/pages/user/ordain/index'
+import UserOrdainDetail from '@/pages/user/ordain/detail'
+
+import UserHouse from '@/pages/user/house/index'
+import UserAddHouse from '@/pages/user/house/add'
+import UserAddHouseNext from '@/pages/user/house/addNext'
+import UserHouseHolders from '@/pages/user/house/holders'
+import UserHouseInvite from '@/pages/user/house/invite'
 
 Vue.use(Router)
 
@@ -282,39 +291,57 @@ export default new Router({
         },
         {
           path: '/user/house/add',
-          name: 'AddHouse',
+          name: 'UserAddHouse',
           meta: {
             requireAuth: true,
             title:'绑定房屋'
           },
-          component: AddHouse,
+          component: UserAddHouse,
         },
         {
           path: '/user/house/add/next',
-          name: 'AddHouseNext',
+          name: 'UserAddHouseNext',
           meta: {
             requireAuth: true,
             title:'绑定房屋'
           },
-          component: AddHouseNext,
+          component: UserAddHouseNext,
         },
         {
           path: '/user/holders',
-          name: 'HouseHolders',
+          name: 'UserHouseHolders',
           meta: {
             requireAuth: true,
             title:'管理房屋'
           },
-          component: HouseHolders,
+          component: UserHouseHolders,
         },
         {
           path: '/user/holders/invite',
-          name: 'HouseInvite',
+          name: 'UserHouseInvite',
           meta: {
             requireAuth: true,
             title:'入住邀请'
           },
-          component: HouseInvite,
+          component: UserHouseInvite,
+        },
+        {
+          path: '/user/ordain',
+          name: 'UserOrdain',
+          meta: {
+            requireAuth: true,
+            title:'预约服务'
+          },
+          component: UserOrdain,
+        },
+        {
+          path: '/user/ordain/detail',
+          name: 'UserOrdainDetail',
+          meta: {
+            requireAuth: true,
+            title:'预约详情'
+          },
+          component: UserOrdainDetail,
         },
         {
           path: '/user/order/sales',
@@ -400,14 +427,14 @@ export default new Router({
           }
         },
         {
-          path: '/user/cards/message/:cardsNum',
-          name: 'UserCardsMessage',
+          path: '/user/cards/add/next/:cardsNum',
+          name: 'UserAddCardsNext',
           meta: {
             requireAuth: true,
             title: '填写信息'
           },
           components:{
-            default:UserCardsMessage,
+            default:UserAddCardsNext,
           }
         },
         {
@@ -422,7 +449,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/safeManage',
+          path: '/user/safe',
           name: 'UserSafeManage',
           meta: {
             requireAuth: true,
@@ -433,7 +460,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/safeManage/forgetPayPassword',
+          path: '/user/safe/payPassword',
           name: 'ForgetPayPassword',
           meta: {
             requireAuth: true,
