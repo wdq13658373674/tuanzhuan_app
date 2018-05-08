@@ -9,7 +9,7 @@
         <i class="icon cart"></i>
       </a>
 
-      <router-link to="/user/house/add" class="link pull-right" v-if="rightNav==='add'"  slot="right">
+      <router-link to="/user/house/community" class="link pull-right" v-if="rightNav==='add'"  slot="right">
         添加
       </router-link>
     </bar-nav>

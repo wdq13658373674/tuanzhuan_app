@@ -73,6 +73,9 @@ import UserAddHouse from '@/pages/user/house/add'
 import UserAddHouseNext from '@/pages/user/house/addNext'
 import UserHouseHolders from '@/pages/user/house/holders'
 import UserHouseInvite from '@/pages/user/house/invite'
+import UserHouseCommunity from '@/pages/user/house/community'
+import UserHouseFloor from '@/pages/user/house/floor'
+import UserHouseRoom from '@/pages/user/house/room'
 
 Vue.use(Router)
 
@@ -306,6 +309,33 @@ export default new Router({
             title:'绑定房屋'
           },
           component: UserAddHouseNext,
+        },
+        {
+          path: '/user/house/community',
+          name: 'UserHouseCommunity',
+          meta: {
+            requireAuth: true,
+            title:'绑定房屋'
+          },
+          component: UserHouseCommunity,
+        },
+        {
+          path: '/user/house/community/floor',
+          name: 'UserHouseFloor',
+          meta: {
+            requireAuth: true,
+            title:'绑定房屋'
+          },
+          component: UserHouseFloor,
+        },
+        {
+          path: '/user/house/community/floor/room',
+          name: 'UserHouseRoom',
+          meta: {
+            requireAuth: true,
+            title:'绑定房屋'
+          },
+          component: UserHouseRoom,
         },
         {
           path: '/user/holders',
