@@ -8,6 +8,10 @@
       <a class="link pull-right" v-if="rightNav==='cart'"  slot="right">
         <i class="icon cart"></i>
       </a>
+
+      <router-link to="/user/house/add" class="link pull-right" v-if="rightNav==='add'"  slot="right">
+        添加
+      </router-link>
     </bar-nav>
 
     <router-view v-transition></router-view>
@@ -41,6 +45,9 @@
         }
         if(routeName=="ShopCategory"){
           return 'cart';
+        }
+        if(routeName=="UserHouse"){
+          return 'add';
         }
         return false;
       }

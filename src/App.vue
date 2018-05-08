@@ -2,7 +2,6 @@
   <div id="app">
     <loading :show="loading" text="加载中..." class="my-loading"></loading>
     <router-view v-transition></router-view>
-    <!--<router-view name="footer"></router-view>-->
   </div>
 </template>
 
@@ -23,6 +22,12 @@
     },
     computed: {
       ...mapState(['loading'])
+    },
+    mounted(){
+
+    },
+    methods:{
+
     }
   }
 </script>

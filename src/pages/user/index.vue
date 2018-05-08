@@ -63,12 +63,12 @@
             </a>
           </li>
           <li class="item">
-            <a href="#">
+            <router-link to="/user/house">
               <p class="p1">我的房屋</p>
               <p class="p2" v-if="roomLists">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
               <p class="p2" v-else>暂无房屋</p>
               <i class="icon arrow"></i>
-            </a>
+            </router-link>
           </li>
           <li class="item">
             <a href="#">
@@ -130,10 +130,10 @@
             </a>
           </li>
           <li class="item">
-            <a href="#" class="link">
+            <router-link to="/user/holders" class="link">
               <img class="img" src="@/assets/images/icons/i_icon7.png" alt="">
               <p class="p1">房屋住户</p>
-            </a>
+            </router-link>
           </li>
           <li class="item">
             <a href="#" class="link">

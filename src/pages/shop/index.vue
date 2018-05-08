@@ -11,7 +11,7 @@
 
       <swiper class="index-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
 
-      <div class="menu-shop">
+      <div class="menu-shop clearfix">
         <router-link :to="{ name: 'ShopCategory', query: {
           title: item.type_name,
           type_id: item.type_id,

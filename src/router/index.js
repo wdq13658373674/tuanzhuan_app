@@ -59,6 +59,12 @@ import UserSalesStep1 from '@/pages/user/salesStep1'
 import UserSalesStep2 from '@/pages/user/salesStep2'
 import UserSalesStep3 from '@/pages/user/salesStep3'
 
+import UserHouse from '@/pages/house/index'
+import AddHouse from '@/pages/house/add'
+import AddHouseNext from '@/pages/house/addNext'
+import HouseHolders from '@/pages/house/holders'
+import HouseInvite from '@/pages/house/invite'
+
 Vue.use(Router)
 
 export default new Router({
@@ -266,9 +272,53 @@ export default new Router({
           }
         },
         {
+          path: '/user/house',
+          name: 'UserHouse',
+          meta: {
+            requireAuth: true,
+            title:'我的房屋'
+          },
+          component: UserHouse,
+        },
+        {
+          path: '/user/house/add',
+          name: 'AddHouse',
+          meta: {
+            requireAuth: true,
+            title:'绑定房屋'
+          },
+          component: AddHouse,
+        },
+        {
+          path: '/user/house/add/next',
+          name: 'AddHouseNext',
+          meta: {
+            requireAuth: true,
+            title:'绑定房屋'
+          },
+          component: AddHouseNext,
+        },
+        {
+          path: '/user/holders',
+          name: 'HouseHolders',
+          meta: {
+            requireAuth: true,
+            title:'管理房屋'
+          },
+          component: HouseHolders,
+        },
+        {
+          path: '/user/holders/invite',
+          name: 'HouseInvite',
+          meta: {
+            requireAuth: true,
+            title:'入住邀请'
+          },
+          component: HouseInvite,
+        },
+        {
           path: '/user/order/sales',
           component:UserOrderSales,
-          name: 'UserOrderSales',
           children: [
             {
               path: 'step1',
