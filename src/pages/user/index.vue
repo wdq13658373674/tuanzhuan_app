@@ -72,8 +72,8 @@
           </li>
           <li class="item">
             <a href="#">
-              <p class="p1">优惠券</p>
-              <p class="p2">共0张</p>
+              <p class="p1">物业券</p>
+              <p class="p2">0.00</p>
               <i class="icon arrow"></i>
             </a>
           </li>
@@ -105,12 +105,12 @@
               <p class="p1">我的预约</p>
             </router-link>
           </li>
-          <li class="item">
-            <a href="#" class="link">
-              <img class="img" src="@/assets/images/icons/i_icon3.png" alt="">
-              <p class="p1">我的收藏</p>
-            </a>
-          </li>
+          <!--<li class="item">-->
+            <!--<a href="#" class="link">-->
+              <!--<img class="img" src="@/assets/images/icons/i_icon3.png" alt="">-->
+              <!--<p class="p1">我的收藏</p>-->
+            <!--</a>-->
+          <!--</li>-->
           <li class="item">
             <a href="#" class="link">
               <img class="img" src="@/assets/images/icons/i_icon4.png" alt="">
@@ -123,24 +123,24 @@
               <p class="p1">账号管理</p>
             </router-link>
           </li>
-          <li class="item">
-            <a href="#" class="link">
-              <img class="img" src="@/assets/images/icons/i_icon6.png" alt="">
-              <p class="p1">优惠券</p>
-            </a>
-          </li>
+          <!--<li class="item">-->
+            <!--<a href="#" class="link">-->
+              <!--<img class="img" src="@/assets/images/icons/i_icon6.png" alt="">-->
+              <!--<p class="p1">优惠券</p>-->
+            <!--</a>-->
+          <!--</li>-->
           <li class="item">
             <router-link to="/user/holders" class="link">
               <img class="img" src="@/assets/images/icons/i_icon7.png" alt="">
               <p class="p1">房屋住户</p>
             </router-link>
           </li>
-          <li class="item">
-            <a href="#" class="link">
-              <img class="img" src="@/assets/images/icons/i_icon8.png" alt="">
-              <p class="p1">我的快递</p>
-            </a>
-          </li>
+          <!--<li class="item">-->
+            <!--<a href="#" class="link">-->
+              <!--<img class="img" src="@/assets/images/icons/i_icon8.png" alt="">-->
+              <!--<p class="p1">我的快递</p>-->
+            <!--</a>-->
+          <!--</li>-->
           <li class="item">
             <router-link to="/user/safe" class="link">
               <img class="img" src="@/assets/images/icons/i_icon9.png" alt="">
