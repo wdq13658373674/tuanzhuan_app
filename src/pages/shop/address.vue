@@ -66,7 +66,7 @@
             address_user_id:this.userInfo.user_id,
             address_id:value,
           }
-          this.$axios.post('/index/User_address/set_default',qs.stringify(params)).then(res=>{
+          this.$axios.post(global.API_HOST+'/index/User_address/set_default',qs.stringify(params)).then(res=>{
             res=res.data;
             if(res.status==0){
               this.$router.push('/shop/order');
@@ -87,7 +87,7 @@
           address_user_id:this.userInfo.user_id
         }
 
-        this.$axios.get('/index/User_address/allAddress',{
+        this.$axios.get(global.API_HOST+'/index/User_address/allAddress',{
           params:params
         }).then(res=>{
           res=res.data;

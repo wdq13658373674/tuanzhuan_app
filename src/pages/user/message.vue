@@ -110,7 +110,7 @@
         let params={
           user_id:this.userInfo.user_id
         }
-        this.$axios.get('/index/User/getUser',{
+        this.$axios.get(global.API_HOST+'/index/User/getUser',{
           params:params
         }).then(res=>{
           res=res.data;

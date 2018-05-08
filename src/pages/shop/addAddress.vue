@@ -71,7 +71,7 @@
           address_comment:this.address
         }
 
-        this.$axios.post('/index/User_address/addAddress',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/User_address/addAddress',qs.stringify(params)).then(res=>{
           res=res.data;
           if(res.status==0){
             this.$vux.toast.text('添加成功');

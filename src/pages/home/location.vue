@@ -68,7 +68,7 @@
           }
         }
 
-        this.$axios.get('/index/house_village/findVillage',{
+        this.$axios.get(global.API_HOST+'/index/house_village/findVillage',{
           params:param
         }).then(res=>{
           res=res.data;

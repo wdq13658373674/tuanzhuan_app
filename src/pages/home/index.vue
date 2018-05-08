@@ -175,7 +175,7 @@
           ak:'4ChzIxMmmkgsV1uhED0baRa3XsZVG777'
         }
 
-        this.$axios.get(url+'http://api.map.baidu.com/telematics/v3/weather',{
+        this.$axios.get(global.API_HOST+url+'http://api.map.baidu.com/telematics/v3/weather',{
           params:param
         }).then(res=>{
           res=res.data;
@@ -197,7 +197,7 @@
           'notic_village_id' : this.roomInfo.village_id
         }
 
-        this.$axios.get('index/House_notic/getTitle',{
+        this.$axios.get(global.API_HOST+'index/House_notic/getTitle',{
           params : param
         }).then(res=>{
           res=res.data;
@@ -213,7 +213,7 @@
            lng:this.roomInfo.lng,
           }
 
-          this.$axios.get('/index/Goods/IndexGoods',{
+          this.$axios.get(global.API_HOST+'/index/Goods/IndexGoods',{
             params:param
           }).then(res=>{
             res=res.data;

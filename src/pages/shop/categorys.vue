@@ -74,7 +74,7 @@
           lng:this.roomInfo.lng,
         };
 
-        this.$axios.get('/index/Goods/classify',{
+        this.$axios.get(global.API_HOST+'/index/Goods/classify',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -93,7 +93,7 @@
           type_parent_id:parent_id,
         }
 
-        this.$axios.get('/index/Goods/getclassifytwo',{
+        this.$axios.get(global.API_HOST+'/index/Goods/getclassifytwo',{
           params:params
         }).then(res=>{
           res=res.data;

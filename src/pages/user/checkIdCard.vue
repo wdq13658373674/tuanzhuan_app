@@ -57,7 +57,7 @@
             user_id:this.userInfo.user_id
           }
 
-          this.$axios.post('/index/User/CheckUser',qs.stringify(params)).then(res=>{
+          this.$axios.post(global.API_HOST+'/index/User/CheckUser',qs.stringify(params)).then(res=>{
             res=res.data;
 
             if(res.status==0){

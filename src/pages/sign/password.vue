@@ -49,7 +49,7 @@
             'rule':1
           }
 
-        this.$axios.post('/index/index/registration',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/index/registration',qs.stringify(params)).then(res=>{
           res=res.data;
 
           this.$vux.toast.show({
@@ -71,7 +71,7 @@
           'password':this.password,
         }
 
-        this.$axios.post('/index/index/login',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/index/login',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==1){

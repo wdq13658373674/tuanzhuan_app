@@ -67,7 +67,7 @@
           user_id:this.userInfo.user_id
         }
 
-        this.$axios.get('/index/Bank/getUserBankAll',{
+        this.$axios.get(global.API_HOST+'/index/Bank/getUserBankAll',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -121,7 +121,7 @@
                 bank_id:bankId
               }
 
-              self.$axios.post('/index/Bank/delBank',qs.stringify(params)).then(res=>{
+              self.$axios.post(global.API_HOST+'/index/Bank/delBank',qs.stringify(params)).then(res=>{
                 res=res.data;
 
                 if(res.status==0){

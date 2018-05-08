@@ -34,7 +34,7 @@
           'notic_id' : this.$route.query.id
         }
 
-        this.$axios.get('/index/House_notic/getInfo',{
+        this.$axios.get(global.API_HOST+'/index/House_notic/getInfo',{
           params:param
         }).then(res=>{
           res=res.data

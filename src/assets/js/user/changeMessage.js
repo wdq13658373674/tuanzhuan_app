@@ -10,7 +10,7 @@ const updateMessage=function(self,data){
     ...data
   }
 
-  self.$axios.post('/index/User/setUser',qs.stringify(params)).then(res=>{
+  self.$axios.post(global.API_HOST+'/index/User/setUser',qs.stringify(params)).then(res=>{
     res=res.data;
     if(res.status==0){
       self.$vux.toast.text('修改成功','top');

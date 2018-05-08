@@ -137,7 +137,7 @@
           condition:JSON.stringify(this.condition)
         }
 
-        this.$axios.get('/index/goods/searchAll',{
+        this.$axios.get(global.API_HOST+'/index/goods/searchAll',{
           params:params
         }).then(res=>{
           res=res.data;

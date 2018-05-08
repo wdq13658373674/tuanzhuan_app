@@ -178,7 +178,7 @@
           goods_order_id:this.$route.query.order_id,
           user_id:this.userInfo.user_id
         };
-        this.$axios.get('/index/Goods_order/getOrder',{
+        this.$axios.get(global.API_HOST+'/index/Goods_order/getOrder',{
           params:param
         }).then(res=>{
           res=res.data;

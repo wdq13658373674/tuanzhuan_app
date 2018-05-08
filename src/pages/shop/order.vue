@@ -179,7 +179,7 @@ export default {
       money:this.money,
       tcion:this.tcion
     };
-    this.$axios.get('/index/Goods_order/getSendStatus',{
+    this.$axios.get(global.API_HOST+'/index/Goods_order/getSendStatus',{
       params:param
     }).then(res=>{
       res=res.data.data;
@@ -263,7 +263,7 @@ export default {
         userid:this.userInfo.user_id
       };
 
-      this.$axios.post('/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
+      this.$axios.post(global.API_HOST+'/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
         res=res.data;
         if(res.status==0){
           cart.delGoods(cart.order_pay);

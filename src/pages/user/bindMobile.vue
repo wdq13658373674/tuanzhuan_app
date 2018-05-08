@@ -80,7 +80,7 @@
           return;
         }
 
-        this.$axios.post('/index/index/setmobile',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/index/setmobile',qs.stringify(params)).then(res=>{
           res=res.data;
           if(res.status==0){
             this.$vux.toast.show('修改成功,请重新登陆');

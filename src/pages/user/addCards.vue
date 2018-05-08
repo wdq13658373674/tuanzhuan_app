@@ -47,7 +47,7 @@
           address:'重庆'
         }
 
-        this.$axios.post('/index/Bank/bankType',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/Bank/bankType',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.data.bank_name){

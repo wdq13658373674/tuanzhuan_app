@@ -162,7 +162,7 @@
           goods_id:this.goods_id
         }
 
-        this.$axios.get('/index/goods/getGoodsInfo',{
+        this.$axios.get(global.API_HOST+'/index/goods/getGoodsInfo',{
           params:param
         }).then(res=>{
           res=res.data;

@@ -114,7 +114,7 @@
           page: this.page,
           type: type
         };
-        this.$axios.get('index/Goods_order/UserListOrder',{
+        this.$axios.get(global.API_HOST+'index/Goods_order/UserListOrder',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -157,7 +157,7 @@
           user_id: this.userInfo.user_id
         };
 
-        this.$axios.get('index/Goods_order/cancelOrder',{
+        this.$axios.get(global.API_HOST+'index/Goods_order/cancelOrder',{
           params:params
         }).then(res=>{
           res=res.data;

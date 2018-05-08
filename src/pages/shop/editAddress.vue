@@ -72,7 +72,7 @@
           address_comment:this.address
         }
 
-        this.$axios.post('/index/User_address/editAddress',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/User_address/editAddress',qs.stringify(params)).then(res=>{
           res=res.data;
           console.log(res);
           if(res.status==0){
