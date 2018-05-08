@@ -73,13 +73,13 @@ import UserOrdain from '@/pages/user/ordain/index'
 import UserOrdainDetail from '@/pages/user/ordain/detail'
 
 import UserHouse from '@/pages/user/house/index'
-import UserAddHouse from '@/pages/user/house/add'
-import UserAddHouseNext from '@/pages/user/house/addNext'
 import UserHouseHolders from '@/pages/user/house/holders'
 import UserHouseInvite from '@/pages/user/house/invite'
-import UserHouseCommunity from '@/pages/user/house/community'
+/*import UserAddHouse from '@/pages/user/house/add'
+import UserAddHouseNext from '@/pages/user/house/addNext'*/
+/*import UserHouseCommunity from '@/pages/user/house/community'
 import UserHouseFloor from '@/pages/user/house/floor'
-import UserHouseRoom from '@/pages/user/house/room'
+import UserHouseRoom from '@/pages/user/house/room'*/
 
 Vue.use(Router)
 
@@ -326,7 +326,7 @@ export default new Router({
           },
           component: UserHouse,
         },
-        {
+        /*{
           path: '/user/house/add',
           name: 'UserAddHouse',
           meta: {
@@ -370,7 +370,7 @@ export default new Router({
             title:'绑定房屋'
           },
           component: UserHouseRoom,
-        },
+        },*/
         {
           path: '/user/holders',
           name: 'UserHouseHolders',

@@ -56,11 +56,11 @@
       <div class="content mt20">
         <ul class="user-belong-list">
           <li class="item">
-            <a href="#">
+            <router-link to="/property/service/detail">
               <p class="p1">物业账单</p>
               <p class="p2">0元</p>
               <i class="icon arrow"></i>
-            </a>
+            </router-link>
           </li>
           <li class="item">
             <router-link to="/user/house">
@@ -129,12 +129,12 @@
               <!--<p class="p1">优惠券</p>-->
             <!--</a>-->
           <!--</li>-->
-          <li class="item">
+          <!--<li class="item">
             <router-link to="/user/holders" class="link">
               <img class="img" src="@/assets/images/icons/i_icon7.png" alt="">
               <p class="p1">房屋住户</p>
             </router-link>
-          </li>
+          </li>-->
           <!--<li class="item">-->
             <!--<a href="#" class="link">-->
               <!--<img class="img" src="@/assets/images/icons/i_icon8.png" alt="">-->
