@@ -3,53 +3,50 @@
     <section class="page-group">
       <ul class="user-rooms-list">
         <li class="item">
-          <div class="cell">
-            <div>
-              <span>扬子江商务中心</span>
-              <span class="gray ml20">1组团-3栋-302</span>
+          <router-link to="/user/house/holders">
+            <div class="cell">
+              <div>
+                <span>扬子江商务中心</span>
+                <span class="gray ml20">1组团-3栋-302</span>
+              </div>
+              <span>共2人</span>
             </div>
-            <span>共2人</span>
-          </div>
-          <div class="cell mt50">
-            <span class="f30">身份：业主</span>
+            <div class="cell mt50">
+              <span class="f30">身份：业主</span>
 
-            <div>
-              <a href="" class="link set">设置</a>
-              <a href="" class="link del">删除</a>
+              <div>
+                <span class="state">当前默认房屋</span>
+              </div>
             </div>
-          </div>
+          </router-link>
         </li>
         <li class="item">
-          <div class="cell">
-            <div>
-              <span>东樾府</span>
-              <span class="gray ml20">1组团-3栋-302</span>
+          <a href="#">
+            <div class="cell">
+              <div>
+                <span>东樾府</span>
+                <span class="gray ml20">1组团-3栋-302</span>
+              </div>
+              <span>共2人</span>
             </div>
-            <span>共2人</span>
-          </div>
-          <div class="cell mt50">
-            <span class="f30">身份：亲友</span>
-
-            <div>
-              <a href="" class="link del">删除</a>
+            <div class="cell mt50">
+              <span class="f30">身份：亲友</span>
             </div>
-          </div>
+          </a>
         </li>
         <li class="item">
-          <div class="cell">
-            <div>
-              <span>诚远御府</span>
-              <span class="gray ml20">1组团-3栋-302</span>
+          <a href="#">
+            <div class="cell">
+              <div>
+                <span>诚远御府</span>
+                <span class="gray ml20">1组团-3栋-302</span>
+              </div>
+              <span>共2人</span>
             </div>
-            <span>共2人</span>
-          </div>
-          <div class="cell mt50">
-            <span class="f30">身份：租户</span>
-
-            <div>
-              <a href="" class="link del">删除</a>
+            <div class="cell mt50">
+              <span class="f30">身份：租户</span>
             </div>
-          </div>
+          </a>
         </li>
       </ul>
 

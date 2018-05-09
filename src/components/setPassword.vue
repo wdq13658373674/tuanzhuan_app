@@ -1,4 +1,4 @@
-<!--输入支付密码-->
+<!--设置支付密码-->
 <template>
   <div class="user-pay-password">
     <slot name="title"></slot>
