@@ -9,6 +9,7 @@ import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
 import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
+import utils from '@/libs/util.js'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
 const options={

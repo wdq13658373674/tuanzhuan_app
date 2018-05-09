@@ -27,7 +27,6 @@
   </div>
 </template>
 <script>
-  import utils from '@/libs/util.js'
   const qs = require("querystring")
   import {mapMutations} from 'vuex'
 
