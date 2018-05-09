@@ -51,7 +51,7 @@
       getBankType(){
         let params={
           bank_car:this.cardsNum,
-          address:'重庆'
+          address:''/*例如；重庆*/
         }
 
         this.$axios.post(global.API_HOST+'/index/Bank/bankType',qs.stringify(params)).then(res=>{

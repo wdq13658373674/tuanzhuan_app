@@ -98,16 +98,16 @@
 
         <footer>
           <div class="bottom-fixed cell">
-            <div class="shop-cart">
+            <!--<router-link to="/shop/cart" class="shop-cart">
               <p>
-                <span class="icon cart">
-                    <i class="num">{{cartNumber}}</i>
-                </span>
+            <span class="icon cart">
+              <i class="num">{{cartNumber}}</i>
+            </span>
               </p>
               <p>
                 购物车
               </p>
-            </div>
+            </router-link>-->
             <span class="btn btn-yellow" @click="addCart()">加入购物车</span>
             <span class="btn btn-orange" @click="buy()">立刻购买</span>
           </div>

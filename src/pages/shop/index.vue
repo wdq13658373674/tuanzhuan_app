@@ -5,7 +5,7 @@
         <router-link :to="{path:'/shop/search',query:{
           store_id:storeInfo.store_id,
           type_id:0,
-          title:''
+          title:'全部'
         }}" class="search-link" append>请输入商品名称</router-link>
       </div>
 
