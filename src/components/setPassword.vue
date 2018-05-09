@@ -35,13 +35,5 @@
 </style>
 <style lang="scss" scoped>
   @import "../core/base";
-
-  .user-pay-password{
-    position: absolute;
-    min-height:100%;
-    background: #fff;
-    margin-top:rem(-88);
-    padding-top:rem(88);
-  }
 </style>
 

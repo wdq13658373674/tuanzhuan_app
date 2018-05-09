@@ -1,23 +1,28 @@
 <template>
-  <div>
+  <div class="tz-justify">
     <setPassword :value="password" :length="paslength">
       <div slot="title">
         <p class="p1">设置支付密码</p>
         <p class="p2">请设置支付密码，用于支付验证。</p>
       </div>
     </setPassword>
-    <PassKeyBord @run="enterPass" @sure="refer" class="pay-keybord"></PassKeyBord>
+
+    <popup v-model="popshow1" :show-mask="false">
+      <PassKeyBord @run="enterPass" @sure="refer" class="pay-keybord"></PassKeyBord>
+    </popup>
 
    <!--支付密码确认-->
-    <popup v-model="popshow" :show-mask="false" height="100%" style="background: #fff;">
+    <popup v-model="popshow2" :show-mask="false" height="100%" style="background: #fff;">
       <span class="pop-close" @click="close">X</span>
-      <setPassword :value="repassword" :length="paslength">
-        <div slot="title">
-          <p class="p1">确认支付密码</p>
-          <p class="p2">请再次填写以确认</p>
-        </div>
-      </setPassword>
-      <PassKeyBord ref="keybord" @run="enterRePass" @sure="check" class="pay-keybord"></PassKeyBord>
+      <div class="tz-justify">
+        <setPassword :value="repassword" :length="paslength">
+          <div slot="title">
+            <p class="p1">确认支付密码</p>
+            <p class="p2">请再次填写以确认</p>
+          </div>
+        </setPassword>
+        <PassKeyBord ref="keybord" @run="enterRePass" @sure="check" class="pay-keybord"></PassKeyBord>
+      </div>
     </popup>
     <!--支付密码确认-->
   </div>
@@ -39,7 +44,8 @@
     },
     data() {
       return {
-        popshow:false,
+        popshow1:true,
+        popshow2:false,
         password:[],
         repassword:[],
         paslength:6,
@@ -56,7 +62,7 @@
       /**输入密码确定*/
       refer(){
         if(this.password.length==this.paslength){
-          this.popshow=true;
+          this.popshow2=true;
         }
         return;
       },
@@ -94,7 +100,7 @@
       },
       /**关闭确认密码弹层**/
       close(){
-        this.popshow=false;
+        this.popshow2=false;
         this.$refs.keybord.empty();
       }
     }
@@ -105,4 +111,11 @@
 </style>
 <style lang="scss">
   @import "../../../core/base";
+
+  .tz-justify{
+    @extend %flex;
+    @include flex-direction();
+    background: #fff;
+    height:100%;
+  }
 </style>
