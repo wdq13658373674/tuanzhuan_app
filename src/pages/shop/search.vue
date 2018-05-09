@@ -55,7 +55,7 @@
         const query=this.$route.query;
 
         this.$router.push({
-          path:'/shop/category',
+          path:'/shop/search/category',
           query:{
             store_id:query.store_id,
             type_id:query.type_id,

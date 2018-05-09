@@ -2,7 +2,7 @@
   <section class="page-group">
     <div class="z-index" style="position: relative;">
       <div class="content">
-        <router-link :to="{path:'/shop/search',query:querys}" class="search-link">{{querys.title}}</router-link>
+        <router-link :to="{path:'/shop/search',query:querys}" class="search-link">{{querys.keyword || querys.title}}</router-link>
       </div>
       <div class="shop-filter">
         <span class="item" @click="tab(0)" :class="{'active':tabIndex==0}">销量优先</span>
@@ -111,7 +111,8 @@
         const querys={
           store_id:query.store_id,
           type_id:query.type_id,
-          title:query.title
+          title:query.title,
+          keyword:query.keyword
         }
 
         return querys;
