@@ -47,8 +47,8 @@
               integral:userLists.user_score
             }
           }">
-            <p class="p1">{{userLists.user_score || '0.00'}}</p>
-            <p class="p2">我的积分</p>
+            <p class="p1">{{userLists.user_ticket || '0.00'}}</p>
+            <p class="p2">我的物业券</p>
           </router-link>
         </div>
       </div>
@@ -71,11 +71,11 @@
             </router-link>
           </li>
           <li class="item">
-            <a href="#">
-              <p class="p1">物业券</p>
-              <p class="p2">0.00</p>
+            <router-link to="/user/order">
+              <p class="p1">我的订单</p>
+              <p class="p2">0个</p>
               <i class="icon arrow"></i>
-            </a>
+            </router-link>
           </li>
           <li class="item">
             <router-link to="/user/cards">

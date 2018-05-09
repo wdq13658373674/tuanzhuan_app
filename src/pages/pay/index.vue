@@ -158,6 +158,19 @@
           }
         }
 
+        if(!that.userInfo.set_paypassword){
+          const self=this;
+          this.$vux.confirm.show({
+            title: '提示',
+            content: '您没有设置支付密码,是否现在设置!',
+            onConfirm(){
+              self.$router.push('/user/safe/setPayPassword');
+            }
+          });
+
+          return false;
+        }
+
         if(that.payType=="tcion" || that.payType=="money"){
           let param={
             user_id:that.userInfo.user_id,
