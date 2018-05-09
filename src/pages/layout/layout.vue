@@ -8,11 +8,11 @@
       <a class="link pull-right" v-if="rightNav==='cart'"  slot="right">
         <i class="icon cart"></i>
       </a>
-    </bar-nav>
 
-    <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right">
-      设为默认
-    </div>
+      <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right">
+        设为默认
+      </div>
+    </bar-nav>
 
     <div class="layout-page">
       <router-view v-transition></router-view>

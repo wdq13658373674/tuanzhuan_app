@@ -374,7 +374,7 @@ export default new Router({
           component: UserHouseRoom,
         },*/
         {
-          path: '/user/holders',
+          path: '/user/house/holders',
           name: 'UserHouseHolders',
           meta: {
             requireAuth: true,
@@ -383,7 +383,7 @@ export default new Router({
           component: UserHouseHolders,
         },
         {
-          path: '/user/holders/invite',
+          path: '/user/holders/invite/:id',
           name: 'UserHouseInvite',
           meta: {
             requireAuth: true,

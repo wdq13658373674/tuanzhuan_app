@@ -96,8 +96,8 @@
               </p>
             </div>
           </li>
-          <li class="owner active">
-            <span class="f30">+ 邀请住户</span>
+          <li>
+            <router-link to="/user/holders/invite/1" class="owner active f30">+ 邀请住户</router-link>
           </li>
         </ul>
 
