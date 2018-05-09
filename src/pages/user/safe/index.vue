@@ -3,12 +3,12 @@
     <section class="page-group">
       <ul class="user-safety-list arrow-cell-list">
         <li class="item">
-          <div class="link cell" @click="popshow=true">
+          <router-link class="link cell" to="setPayPassword" append>
             <span><i class="icon icon1"></i>修改支付密码</span>
-          </div>
+          </router-link>
         </li>
         <li class="item">
-          <router-link class="link cell" to="payPassword" append>
+          <router-link class="link cell" to="forgetPayPassword" append>
             <span><i class="icon icon2"></i>忘记支付密码</span>
           </router-link>
         </li>
@@ -16,27 +16,27 @@
     </section>
 
     <!--popup 设置支付密码-->
-    <popup v-model="popshow" :show-mask="false" height="100%" style="z-index:999999;background: #fff;">
+    <!--<popup v-model="popshow" :show-mask="false" height="100%" style="z-index:999999;background: #fff;">
       <span class="pop-close" @click="popshow=!popshow">X</span>
       <setPassword></setPassword>
-    </popup>
+    </popup>-->
     <!--popup-->
   </div>
 </template>
 
 <script>
-  import setPassword from '@/components/setPassword'
-  import {Popup} from 'vux'
+  /*import setPassword from '@/components/setPassword'
+  import {Popup} from 'vux'*/
 
   export default {
     name: "SafeManage",
     components: {
-      setPassword,
-      Popup
+      /*setPassword,
+      Popup*/
     },
     data() {
       return {
-        popshow:false,
+        /*popshow:false,*/
       }
     },
     computed:{
@@ -56,7 +56,7 @@
 <style lang="scss">
   @import "../../../core/base";
 
-  .pay-keybord{
+  /*.pay-keybord{
     position:absolute;
     bottom:0;
     left:0;
@@ -65,5 +65,5 @@
 
   .pop-close{
     z-index: 10;
-  }
+  }*/
 </style>

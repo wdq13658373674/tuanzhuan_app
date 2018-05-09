@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <loading :show="loading" text="加载中..." class="my-loading"></loading>
+
     <router-view v-transition></router-view>
   </div>
 </template>

@@ -13,7 +13,6 @@
       <popup v-model="popshow" :show-mask="false">
         <PassKeyBord @run="enterPass" @sure="pay" class="pay-keybord"></PassKeyBord>
       </popup>
-
     </div>
   </div>
 </template>
@@ -31,7 +30,6 @@
       return {
         password:[],
         paslength:6,
-        popshow:true
       }
     },
     methods: {
@@ -52,10 +50,10 @@
 </script>
 
 <style lang="css" scoped>
-  @import '../assets/css/userPayPassword.css';
+  @import '../../../assets/css/userPayPassword.css';
 </style>
 <style lang="scss" scoped>
-  @import "../core/base";
+  @import "../../../core/base";
 
   /*确认付款*/
   .tz-password-pay{
