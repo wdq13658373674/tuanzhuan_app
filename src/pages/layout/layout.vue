@@ -56,7 +56,6 @@
     .animated{
       top:0;
       padding-top:rem(88);
-      background: #fff;
     }
   }
 </style>

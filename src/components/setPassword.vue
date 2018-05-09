@@ -36,27 +36,12 @@
 <style lang="scss" scoped>
   @import "../core/base";
 
-  /*确认付款*/
-  .tz-password-pay{
+  .user-pay-password{
+    position: absolute;
+    min-height:100%;
     background: #fff;
-
-    .title{
-      @include wh(auto,rem(90),rem(90));
-      font-size:rem(32);
-      text-align: center;
-      border-bottom:1px solid $grayLight;
-    }
-    .link-box{
-      text-align: right;
-      padding:0 rem(27);
-      margin-top:rem(20);
-      margin-bottom:rem(173);
-
-      .link{
-        color:#5CB85C;
-        font-size:rem(24);
-      }
-    }
+    margin-top:rem(-88);
+    padding-top:rem(88);
   }
 </style>
 
