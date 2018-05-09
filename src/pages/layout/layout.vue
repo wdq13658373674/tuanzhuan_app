@@ -10,7 +10,9 @@
       </a>
     </bar-nav>
 
-    <router-view v-transition></router-view>
+    <div class="layout-page">
+      <router-view v-transition></router-view>
+    </div>
   </div>
 </template>
 
@@ -47,6 +49,14 @@
     },
   }
 </script>
-<style lang="less" scoped>
+<style lang="scss">
+  @import "../../core/base";
 
+  .layout-page{
+    .animated{
+      top:0;
+      padding-top:rem(88);
+      background: #fff;
+    }
+  }
 </style>

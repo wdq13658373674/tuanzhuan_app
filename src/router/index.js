@@ -61,6 +61,8 @@ import UserAddCardsNext from '@/pages/user/cards/addNext'
 
 import UserSafeManage from '@/pages/user/safe/index'
 import ForgetPayPassword from '@/pages/user/safe/forgetPayPassword'
+import SetPayPassword from '@/pages/user/safe/setPayPassword'
+import CheckPayPassword from '@/pages/user/safe/checkPayPassword'
 
 import UserOrder from '@/pages/user/order'
 import UserOrderDetail from '@/pages/user/orderDetail'
@@ -536,7 +538,7 @@ export default new Router({
           }
         },
         {
-          path: '/user/safe/payPassword',
+          path: '/user/safe/forgetPayPassword',
           name: 'ForgetPayPassword',
           meta: {
             requireAuth: true,
@@ -544,6 +546,28 @@ export default new Router({
           },
           components:{
             default:ForgetPayPassword,
+          }
+        },
+        {
+          path: '/user/safe/setPayPassword',
+          name: 'SetPayPassword',
+          meta: {
+            requireAuth: true,
+            title: '设置支付密码'
+          },
+          components:{
+            default:SetPayPassword,
+          }
+        },
+        {
+          path: '/user/safe/checkPayPassword',
+          name: 'CheckPayPassword',
+          meta: {
+            requireAuth: true,
+            title: '确认支付密码'
+          },
+          components:{
+            default:CheckPayPassword,
           }
         },
         {

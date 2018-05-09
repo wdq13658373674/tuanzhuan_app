@@ -122,41 +122,4 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
-
-  .vux-popup-picker-select-box{
-    .vux-popup-picker-placeholder{
-      color:#bbbbbb;
-    }
-  }
-
-  .vux-popup-picker-container{
-    .vux-popup-header {
-      height: rem(90);
-      line-height:rem(90);
-      font-size: rem(34);
-    }
-
-    .scroller-component{
-      height:rem(500);
-    }
-
-    .scroller-indicator{
-      height:rem(74);
-      top:rem(213);
-    }
-
-    .scroller-item {
-      font-size: rem(34);
-      height: rem(74);
-      line-height: rem(74);
-    }
-
-    .scroller-mask{
-      background-size: 100% rem(213);
-    }
-
-    .scroller-content{
-      top:rem(-9);
-    }
-  }
 </style>
