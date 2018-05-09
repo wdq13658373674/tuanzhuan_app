@@ -9,6 +9,7 @@ import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
 import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
+// import utils from '@/libs/util.js'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
 const options={
@@ -36,6 +37,11 @@ getCurrentPosition();
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+
+/**
+ * 全局工具函数
+ * **/
+// Vue.use(utils);
 
 /**
  * fastclick

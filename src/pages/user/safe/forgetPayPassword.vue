@@ -13,15 +13,8 @@
           <timer-btn class="form-code orange" second="5" :phone="phone" type="4" @run="getCode"></timer-btn>
         </li>
       </ul>
-      <div class="btn btn-orange radius mt60" :class="{'disabled':!finish}" @click="popshow=true">下一步</div>
+      <div class="btn btn-orange radius mt60" :class="{disabled:!this.phone || !this.code}" @click="next">下一步</div>
     </section>
-
-    <!--popup 设置支付密码-->
-    <popup v-model="popshow" :show-mask="false" height="100%" style="z-index:999999;background: #fff;">
-      <span class="pop-close" @click="popshow=!popshow">X</span>
-      <setPassword></setPassword>
-    </popup>
-    <!--popup-->
   </div>
 </template>
 
@@ -29,6 +22,7 @@
   import {mapState} from 'vuex'
   import timerBtn from '@/components/timerBtn'
   import setPassword from '@/components/setPassword'
+  import utils from '@/libs/util.js'
   import {Popup} from 'vux'
   const qs = require("querystring");
   export default {

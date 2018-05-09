@@ -91,7 +91,7 @@
 
           if(res.status==0) {
             this.$vux.toast.text('设置密码成功');
-            this.userInfo.set_paypassword=true;
+            this.userInfo.user_paypass=1;
             this.update_userInfo(this.userInfo);
 
             this.$router.back();
