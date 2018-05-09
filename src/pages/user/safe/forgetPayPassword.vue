@@ -53,7 +53,31 @@
       },
       /**下一步**/
       next(){
+        if(this.code!=this.verify){
+          this.$vux.toast.text('验证码输入错误');
+          return;
+        }else{
+          this.payPassword_ajax();
+        }
+      },
+      /**修改支付密码验证用户手机号码接口**/
+      payPassword_ajax(){
+        const params={
+          user_id:this.userInfo.user_id,
+          mobile:this.phone,
+          code:this.code,
+        }
 
+        this.$axios.post(global.API_HOST+'/index/index/newPayPassword',qs.stringify(params)).then(res=>{
+          res=res.data;
+          if(res.status==0) {
+            this.$router.push('/user/safe/setPayPassword');
+          }else{
+            this.$vux.toast.text('请使用当前登陆的电话号码');
+          }
+        }).catch(err=>{
+          console.log('my err:'+err);
+        })
       }
     }
   }
