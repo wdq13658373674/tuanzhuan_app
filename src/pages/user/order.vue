@@ -9,18 +9,11 @@
           <div class="top">
             <span class="pull-left">订单编号：{{item.goods_order_numb}}</span>
 
-            <!--<span v-if="orderDetail.order.goods_order_status === 4">-->
-            <!--{{sendStatus[orderDetail.order.goods_order_status][orderDetail.order.goods_order_send_status]}}-->
-          <!--</span>-->
-            <!--<span v-else>-->
-            <!--{{sendStatus[orderDetail.order.goods_order_status]}}-->
-          <!--</span>-->
-
             <span v-if="item.goods_order_status === 4">
-              <span class="pull-right" :class="item.goods_order_send_status == 4?'orange':'green'">{{sendStatus[item.goods_order_status][item.goods_order_send_status]}}</span>
+              <span class="pull-right" :class="item.goods_order_send_status === 4?'green':'orange'">{{sendStatus[item.goods_order_status][item.goods_order_send_status]}}</span>
             </span>
             <span v-else>
-              <span class="pull-right orange">{{sendStatus[item.goods_order_status]}}</span>
+              <span class="pull-right" :class="item.goods_order_status === 5?'green':'orange'">{{sendStatus[item.goods_order_status]}}</span>
             </span>
           </div>
             <div v-for="(goods,i) in item.property" class="pro">
@@ -42,16 +35,15 @@
               <span>或 ¥{{item.goods_order_price}}</span>
             </div>
             <div class="clearfix">
-              <span v-if="item.goods_order_status == 1">
-                <a class="link">已取消</a>
-              </span>
-              <span v-else-if="item.goods_order_status != 1">
+              <span v-if="item.goods_order_status !== 1">
                 <span v-if="item.goods_order_is_pay === 0">
                   <router-link :to="{path: '/order/pay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
-                  <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
+                </span>
+                <a v-if="item.goods_order_is_pay === 1 && item.goods_order_send_status === 4" class="link" @click="cancelOrder(item.goods_order_id,index)">确认收货</a>
+
+                <a v-else-if="item.goods_order_is_pay === 1 && item.goods_order_status === 4" class="link" @click="cancelOrder(item.goods_order_id,index)">取消订单</a>
               </span>
-                <a class="link" @click="cancelOrder(item.goods_order_id,index)">取消订单</a>
-              </span>
+              <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
             </div>
           </div>
         </li>
@@ -83,7 +75,13 @@
     data() {
       return {
         tabMenus:['全部','未完成','已完成','售后申请'],
-        orderList:{},
+        orderList:{
+          property:{
+            goods_info:{
+              goods_name: ''
+            }
+          }
+        },
         page: 0,
         type: 0,
         busy:false,
@@ -129,7 +127,7 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
+          // console.log(res.data);
           if(flag){
             //多次加载
             for(let i in res.data){
@@ -191,8 +189,8 @@
         }).catch(err=>{
           console.log('my err:'+err)
         })
-
-      }
+      },
+      /*确认收货*/
     }
   }
 </script>

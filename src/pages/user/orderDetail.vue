@@ -117,13 +117,14 @@
       <div class="bottom-fixed btn-orange-fixed">
         <a v-if="orderDetail.order.goods_order_status === 4" class="link" @click="collect">确认收货</a>
         <!--<a class="link" @click="collect">确认收货</a>-->
+        <span v-if="orderDetail.order.goods_order_status !== 1">
+          <router-link v-if="orderDetail.order.goods_order_is_pay === 0" class="link" :to="{path: '/order/pay', query: {order_id: this.$route.query.id}}">立即支付</router-link>
 
-        <router-link v-if="orderDetail.order.goods_order_is_pay === 0" class="link" :to="{path: '/order/pay', query: {order_id: this.$route.query.id}}">立即支付</router-link>
-        <a class="link" href="#">联系商家</a>
+          <a class="link" href="#">联系商家</a>
 
-        <router-link class="link" :to="{path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id}}">申请退货</router-link>
+          <a v-if="orderDetail.order.goods_order_status === 5 || orderDetail.order.goods_order_status === 9" class="link" @click="tejected">申请退货</a>
+        </span>
 
-        <router-link v-if="orderDetail.order.goods_order_status === 5" class="link" :to="{path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id}}">申请退货</router-link>
       </div>
     </footer>
   </div>
@@ -198,8 +199,12 @@
           console.log('my err:'+err)
         })
       },
-      collect(){
-        alert(1);
+      tejected(){
+        if(this.orderDetail.order.goods_order_status === 4 && this.orderDetail.order.goods_order_send_status === 4){
+          this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id}});
+        }else {
+          this.$router.push({path: '/user/order/sales/step2', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id}});
+        }
       }
     }
   }
