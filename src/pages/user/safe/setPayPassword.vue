@@ -89,14 +89,14 @@
         this.$axios.post(global.API_HOST+'/index/user/setpaypwd',qs.stringify(params)).then(res=>{
           res=res.data;
 
-          if(res.status==0) {
+          if(res.status==1) {
+            this.$vux.toast.text('与原密码相同,设置密码失败');
+          }else{
             this.$vux.toast.text('设置密码成功');
             this.userInfo.user_paypass=1;
             this.update_userInfo(this.userInfo);
 
             this.$router.back();
-          }else{
-            this.$vux.toast.text('与原密码相同,设置密码失败');
           }
         }).catch(err=>{
           console.log('my err:'+err);
