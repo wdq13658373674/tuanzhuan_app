@@ -5,7 +5,7 @@
       <div class="tz-keybord">
         <ul class="number-box">
           <li v-for="item in keylist" @click="keyEnter(item)">{{item}}</li>
-          <li>键盘</li>
+          <li @click="empty">清空</li>
         </ul>
 
         <ul class="opera-box">
@@ -63,6 +63,10 @@
         if(this.val.length < this.paslength) return;
         this.$emit('sure');
       },
+      /**清空*/
+      empty(){
+        this.val=[];
+      }
     }
   }
 </script>
