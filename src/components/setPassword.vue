@@ -2,7 +2,7 @@
 <template>
   <div>
     <div class="user-pay-password">
-      <p class="p1">设置支付密码</p>
+      <p class="p1">{{title}}</p>
       <p class="p2">请设置支付密码，用于支付验证。</p>
       <ul class="pay-password-box mt60">
         <li class="item" v-for="(key,i) in paslength" :key="i">
@@ -13,7 +13,6 @@
       <popup v-model="popshow" :show-mask="false">
         <PassKeyBord @run="enterPass" @sure="pay" class="pay-keybord"></PassKeyBord>
       </popup>
-
     </div>
   </div>
 </template>
@@ -22,6 +21,7 @@
   import PassKeyBord from '@/components/passKeyBord'
   import {Popup} from 'vux'
   export default {
+    props:['title'],
     name: "setPassword",
     components:{
       Popup,

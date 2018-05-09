@@ -187,33 +187,5 @@
     width:100%;
     text-align: right;
   }
-  /*vux-datetime*/
-  .dp-container{
-    .dp-header .dp-item {
-      color: #000;
-      font-size: rem(26);
-      height: rem(90);
-      line-height:rem(90);
-      cursor: pointer;
-    }
 
-    .scroller-component{
-      height:rem(518);
-    }
-
-    .scroller-indicator{
-      height:rem(74);
-      top:rem(222);
-    }
-
-    .scroller-item {
-      font-size:rem(32);
-      height:rem(74);
-      line-height:rem(74);
-    }
-
-    .scroller-mask{
-      background-size: 100% rem(222);
-    }
-  }
 </style>
