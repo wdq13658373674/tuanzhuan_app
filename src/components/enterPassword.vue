@@ -11,14 +11,16 @@
       </li>
     </ul>
     <div class="link-box">
-      <a href="" class="link">忘记密码？</a>
+      <router-link to="/user/safe/forgetPayPassword" class="link">忘记密码？</router-link>
     </div>
     <PassKeyBord @run="enterPass" @sure="pay"></PassKeyBord>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import PassKeyBord from '@/components/passKeyBord'
+  const qs = require("querystring")
 
   export default {
     name: "enterPassword",
@@ -31,6 +33,9 @@
         paslength:6,
       }
     },
+    computed:{
+      ...mapState(['userInfo'])
+    },
     methods: {
       /**输入密码*/
       enterPass(value){
@@ -39,7 +44,22 @@
       /**支付确定按钮*/
       pay(){
         if(this.password.length==this.paslength){
-          console.log(this.password.join(''));
+          const params={
+            user_id:this.userInfo.user_id,
+            pay:this.password.join(''),
+          }
+
+          this.$axios.post('/index/user/getpaypwd',qs.stringify(params)).then(res=>{
+            res=res.data;
+
+            if(res.status==0) {
+              this.$vux.toast.text('成功');
+            }else{
+              this.$vux.toast.text('密码错误');
+            }
+          }).catch(err=>{
+            console.log('my err:'+err);
+          })
         }
 
         return;

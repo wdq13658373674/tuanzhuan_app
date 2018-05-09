@@ -22,13 +22,33 @@
       Loading
     },
     computed: {
-      ...mapState(['loading'])
+      ...mapState(['loading','userInfo','token'])
     },
-    mounted(){
 
+    mounted(){
+        cordovaLoader(function () {
+          this.load_cord();
+        },"./static/cordova/");
     },
     methods:{
+      load_cord(){
+        cordova.plugins.notification.local.schedule({title:'您好欢迎使用团转到家1'});
 
+        //及时通信初始化
+        var that=this;
+
+        if(that.userInfo.user_id){
+          wsocket.init(
+            function(){
+              /*websocket登录*/
+              wsocket.doSend({controller:'index',action:'login',result:{user_phone:that.userInfo.user_phone,logintime:that.token.logintime}});
+              /*websocket加入组*/
+              wsocket.doSend({controller:'index',action:'joinGroup',result:{groupname:'house'}});
+            },
+            {url:'ws://192.168.1.252:8282',token:{token:that.token.token},jsdoc:'./static/wm/'}
+          );
+        }
+      }
     }
   }
 </script>

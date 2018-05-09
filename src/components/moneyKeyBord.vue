@@ -1,19 +1,17 @@
 <!--输入money自定义键盘-->
 <template>
-  <div>
-    <div class="tz-keybord">
-      <ul class="number-box">
-        <li v-for="item in keylist" @click="keyEnter(item)">{{item}}</li>
-        <li>键盘</li>
-      </ul>
+  <div class="tz-keybord">
+    <ul class="number-box">
+      <li v-for="item in keylist" @click="keyEnter(item)">{{item}}</li>
+      <li>键盘</li>
+    </ul>
 
-      <ul class="opera-box">
-        <li class="delete" @click="del()">
-          <img class="img" src="@/assets/images/icons/del2.png" alt="">
-        </li>
-        <li class="sure" @click="sure()">确定</li>
-      </ul>
-    </div>
+    <ul class="opera-box">
+      <li class="delete" @click="del()">
+        <img class="img" src="@/assets/images/icons/del2.png" alt="">
+      </li>
+      <li class="sure" @click="sure()">确定</li>
+    </ul>
   </div>
 </template>
 

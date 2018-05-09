@@ -61,7 +61,7 @@ import UserAddCardsNext from '@/pages/user/cards/addNext'
 
 import UserSafeManage from '@/pages/user/safe/index'
 import ForgetPayPassword from '@/pages/user/safe/forgetPayPassword'
-import SetPayPassword from '@/pages/user/safe/SetPayPassword'
+import SetPayPassword from '@/pages/user/safe/setPayPassword'
 
 import UserOrder from '@/pages/user/order'
 import UserOrderDetail from '@/pages/user/orderDetail'
