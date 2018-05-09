@@ -46,6 +46,7 @@ import UserNickname from '@/pages/user/changeNickname'
 
 import BindMobile from '@/pages/user/bindMobile'
 import CheckIdCard from '@/pages/user/checkIdCard'
+import Call from '@/pages/call/index'
 
 import UserBalance from '@/pages/user/account/balance'
 import UserIntegral from '@/pages/user/account/integral'
@@ -510,6 +511,17 @@ export default new Router({
           },
           components:{
             default:CheckIdCard,
+          }
+        },
+        {
+          path: '/call',
+          name: 'Call',
+          meta: {
+            requireAuth: true,
+            title: '呼叫管家'
+          },
+          components:{
+            default:Call,
           }
         },
         {
