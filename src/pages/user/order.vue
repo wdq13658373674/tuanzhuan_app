@@ -50,7 +50,6 @@
                   <router-link :to="{path: '/order/pay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
                   <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
               </span>
-                <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
                 <a class="link" @click="cancelOrder(item.goods_order_id,index)">取消订单</a>
               </span>
             </div>
