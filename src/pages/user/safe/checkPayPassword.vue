@@ -3,7 +3,7 @@
     <setPassword :value="password" :length="paslength">
       <div slot="title">
         <p class="p1">设置支付密码</p>
-        <p class="p2">请设置支付密码，用于支付验证。</p>
+        <p class="p2">请再次填写以确认</p>
       </div>
     </setPassword>
     <PassKeyBord @run="enterPass" @sure="pay" class="pay-keybord"></PassKeyBord>
@@ -41,17 +41,16 @@
         if(this.password.length==this.paslength){
           const params={
             user_id:this.userInfo.user_id,
-            pay:this.password.join(''),
+            pay:this.password,
           }
 
-          this.$axios.post('/index/user/setpaypwd',qs.stringify(params)).then(res=>{
+          this.$axios.post('/index/user/getpaypwd',qs.stringify(params)).then(res=>{
             res=res.data;
-            console.log(res);
-
-            if(res.status==0) {
-              this.$router.push('/user/safe/checkPayPassword');
+            if(res.status==0){
+              this.$vux.toast.text('设置密码成功');
+              this.$router.push('/user/safe');
             }else{
-              this.$vux.toast.text('与原密码相同,设置密码失败');
+              this.$vux.toast.text('两次密码不一致');
             }
           }).catch(err=>{
             console.log('my err:'+err);
