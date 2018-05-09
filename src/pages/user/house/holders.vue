@@ -96,8 +96,8 @@
               </p>
             </div>
           </li>
-          <li>
-            <router-link to="/user/holders/invite" class="owner active f30">+ 邀请住户</router-link>
+          <li class="owner active">
+            <span class="f30">+ 邀请住户</span>
           </li>
         </ul>
 
@@ -130,5 +130,4 @@
 </style>
 <style lang="scss">
   @import "../../../core/base";
-
 </style>

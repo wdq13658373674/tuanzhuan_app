@@ -1,4 +1,4 @@
-<!--输入支付密码-->
+<!--输入支付密码弹层-->
 <template>
   <div class="tz-password-pay">
     <h1 class="title">
@@ -49,7 +49,7 @@
             pay:this.password.join(''),
           }
 
-          this.$axios.post('/index/user/getpaypwd',qs.stringify(params)).then(res=>{
+          this.$axios.post(global.API_HOST+'/index/user/getpaypwd',qs.stringify(params)).then(res=>{
             res=res.data;
 
             if(res.status==0) {

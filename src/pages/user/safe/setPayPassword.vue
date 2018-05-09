@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState,mapMutations} from 'vuex'
   import SetPassword from '@/components/setPassword'
   import PassKeyBord from '@/components/passKeyBord'
   import {Popup} from 'vux'
@@ -79,17 +79,21 @@
         }
       },
       /**设置密码接口**/
+      ...mapMutations(['update_userInfo']),
       password_ajax(){
         const params={
           user_id:this.userInfo.user_id,
           pay:this.password.join(''),
         }
 
-        this.$axios.post('/index/user/setpaypwd',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/user/setpaypwd',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==0) {
             this.$vux.toast.text('设置密码成功');
+            this.userInfo.set_paypassword=true;
+            this.update_userInfo(this.userInfo);
+
             this.$router.back();
           }else{
             this.$vux.toast.text('与原密码相同,设置密码失败');

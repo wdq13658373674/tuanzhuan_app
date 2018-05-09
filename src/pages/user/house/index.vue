@@ -1,63 +1,17 @@
 <template>
   <div>
     <section class="page-group">
-      <ul class="user-rooms-list">
-        <li class="item">
-          <div class="cell">
-            <div>
-              <span>扬子江商务中心</span>
-              <span class="gray ml20">1组团-3栋-302</span>
-            </div>
-            <span>共2人</span>
-          </div>
-          <div class="cell mt50">
-            <span class="f30">身份：业主</span>
-
-            <div>
-              <a href="" class="link set">设置</a>
-              <a href="" class="link del">删除</a>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="cell">
-            <div>
-              <span>东樾府</span>
-              <span class="gray ml20">1组团-3栋-302</span>
-            </div>
-            <span>共2人</span>
-          </div>
-          <div class="cell mt50">
-            <span class="f30">身份：亲友</span>
-
-            <div>
-              <a href="" class="link del">删除</a>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <div class="cell">
-            <div>
-              <span>诚远御府</span>
-              <span class="gray ml20">1组团-3栋-302</span>
-            </div>
-            <span>共2人</span>
-          </div>
-          <div class="cell mt50">
-            <span class="f30">身份：租户</span>
-
-            <div>
-              <a href="" class="link del">删除</a>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-      <!--为空时-->
-      <!--<div class="user-room-empty">
-          <img src="../../images/img/room_empty.png" alt="">
-          <p>未绑定房屋</p>
-      </div>-->
+      <div class="user-bind-rooms">
+        <h5 class="h5 bold">请输入业主手机号码</h5>
+        <ul class="cell-list">
+          <li class="item cell p27">
+            <label>手机号码</label>
+            <input type="text" class="input text-right" value="186807222222" placeholder="请输入手机号码">
+          </li>
+        </ul>
+        <p class="tips">*若业主已更换手机号码，请联系我们</p>
+        <a href="#" class="btn btn-orange radius disabled">下一步</a>
+      </div>
     </section>
   </div>
 </template>

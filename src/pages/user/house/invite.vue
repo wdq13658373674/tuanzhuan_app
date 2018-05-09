@@ -12,6 +12,10 @@
           <input class="input text-right" value="中信银行 储蓄卡" type="text" placeholder="">
         </li>
         <li class="item cell p27">
+          <label class="w150">业主姓名</label>
+          <input class="input text-right" value="小怪兽" type="text" placeholder="">
+        </li>
+        <li class="item cell p27">
           <label class="w150">入住身份</label>
           <span>业主</span>
         </li>

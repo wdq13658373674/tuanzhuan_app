@@ -10,6 +10,10 @@
       </a>
     </bar-nav>
 
+    <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right">
+      设为默认
+    </div>
+
     <div class="layout-page">
       <router-view v-transition></router-view>
     </div>
@@ -43,6 +47,9 @@
         }
         if(routeName=="ShopCategory"){
           return 'cart';
+        }
+        if(routeName=="UserHouseHolders"){
+          return 'default';
         }
         return false;
       }
