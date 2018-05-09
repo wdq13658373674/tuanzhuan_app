@@ -39,7 +39,7 @@
       /**支付确定按钮*/
       pay(){
         if(this.password.length==this.paslength){
-          const params={
+          /*const params={
             user_id:this.userInfo.user_id,
             pay:this.password,
           }
@@ -54,7 +54,7 @@
             }
           }).catch(err=>{
             console.log('my err:'+err);
-          })
+          })*/
         }
 
         return;
