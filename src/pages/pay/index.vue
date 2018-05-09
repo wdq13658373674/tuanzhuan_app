@@ -95,6 +95,8 @@
   import {Popup} from 'vux'
   import {mapState} from 'vuex'
   import EnterPassword from '@/components/enterPassword'
+  const qs = require("querystring");
+
   export default {
     name: "OrderPay",
     components:{
@@ -104,6 +106,7 @@
     data(){
       return {
         popshow:false,
+        order_id:this.$route.query.order_id,
         orderInfo:[],
         pay_user:[],
         ticket_rate:0.5,
@@ -139,23 +142,42 @@
     methods:{
       /*结算*/
       orderPay(){
-        console.log(this.pay_user.user_tcion);
-        console.log(this.orderInfo.goods_order_tcion);
-        if(this.payType=="tcion"){
-          if(parseFloat(this.pay_user.user_tcion)<parseFloat(this.orderInfo.goods_order_tcion)){
+        var that=this;
+
+        if(that.payType=="tcion"){
+          if(parseFloat(that.pay_user.user_tcion)<parseFloat(that.orderInfo.goods_order_tcion)){
             this.$vux.toast.text('团票余额不足,请换一种支付方式!','middle');
             return false;
           }
         }
 
-        if(this.payType=="money"){
-          if(parseFloat(this.pay_user.user_money)<parseFloat(this.orderInfo.goods_order_price)){
+        if(that.payType=="money"){
+          if(parseFloat(that.pay_user.user_money)<parseFloat(that.orderInfo.goods_order_price)){
             this.$vux.toast.text('我的余额不足,请换一种支付方式!','middle');
             return false;
           }
         }
 
-        this.popshow=true;
+        if(that.payType=="tcion" || that.payType=="money"){
+          let param={
+            user_id:that.userInfo.user_id,
+            order_id:that.$route.query.order_id,
+            type:that.payType
+          };
+          this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
+            res=res.data;
+            if(res.status==0){
+              this.$router.push('/order/pay/detail?order_id='+that.order_id);
+            }else {
+              this.$vux.toast.text(res.msg);
+            }
+          }).catch(err=>{
+              console.log('my err:'+err);
+          });
+        }
+
+        //支付密码
+        that.popshow=true;
       },
 
       /**
@@ -176,9 +198,10 @@
        */
       getOrderInfo:function () {
       //获取店铺配置信息
+        var that=this;
         let param={
-          goods_order_id:this.$route.query.order_id,
-          user_id:this.userInfo.user_id
+          goods_order_id:that.$route.query.order_id,
+          user_id:that.userInfo.user_id
         };
         this.$axios.get(global.API_HOST+'/index/Goods_order/getOrder',{
           params:param
@@ -188,10 +211,17 @@
           if(res.status!=0){
             this.$router.push('/shop/cart');
           }else{
-            this.orderInfo=res.data.order;
-            this.pay_user=res.data.user;
+            if(res.data.order.goods_order_is_pay==1){
+              this.$router.push('/user/order');
+              return false;
+            }
 
-            this.ticket=(res.data.order.goods_order_price*this.ticket_rate).toFixed(2);
+            that.orderInfo=res.data.order;
+            that.pay_user=res.data.user;
+
+            that.payMoney=this.orderInfo.goods_order_tcion
+
+            that.ticket=(res.data.order.goods_order_price*that.ticket_rate).toFixed(2);
           }
 
         }).catch(err=>{
