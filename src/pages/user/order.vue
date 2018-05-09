@@ -8,40 +8,32 @@
         <li v-for="(item,index) in orderList" class="item">
           <div class="top">
             <span class="pull-left">订单编号：{{item.goods_order_numb}}</span>
-            <span v-if="item.goods_order_status === 1">
-              <span class="pull-right orange">已取消</span>
+
+            <!--<span v-if="orderDetail.order.goods_order_status === 4">-->
+            <!--{{sendStatus[orderDetail.order.goods_order_status][orderDetail.order.goods_order_send_status]}}-->
+          <!--</span>-->
+            <!--<span v-else>-->
+            <!--{{sendStatus[orderDetail.order.goods_order_status]}}-->
+          <!--</span>-->
+
+            <span v-if="item.goods_order_status === 4">
+              <span class="pull-right" :class="item.goods_order_send_status == 4?'orange':'green'">{{sendStatus[item.goods_order_status][item.goods_order_send_status]}}</span>
             </span>
             <span v-else>
-              <span v-if="item.status === 0 && item.goods_order_is_pay === 1">
-                <span class="pull-right orange">未接单</span>
-              </span>
-              <span v-else-if="item.status === 1 && item.goods_order_is_pay === 1">
-                <span class="pull-right orange">已接单</span>
-              </span>
-              <span v-else-if="item.status === 2 && item.goods_order_is_pay === 1">
-                <span class="pull-right orange">取货中</span>
-              </span>
-              <span v-else-if="item.status === 3 && item.goods_order_is_pay === 1">
-                <span class="pull-right orange">配送中</span>
-              </span>
-              <span v-else-if="item.status === 4 && item.goods_order_is_pay === 1">
-                <span class="pull-right green">已送达</span>
-              </span>
-              <span v-else-if="item.goods_order_is_pay === 0">
-                <span class="pull-right orange">未支付</span>
-              </span>
+              <span class="pull-right orange">{{sendStatus[item.goods_order_status]}}</span>
             </span>
           </div>
-          <a href="#"  class="pro">
-            <div class="img-box">
-              <img class="img" v-lazy="item.goods_info.goods_logo" alt="" />
+            <div v-for="(goods,i) in item.property" class="pro">
+              <div class="img-box">
+                <router-link :to="{path: '/shop/detail', query: {id: item.goods_id}}"  ><img class="img" v-lazy="goods.goods_info.goods_logo" alt="" /></router-link>
+              </div>
+              <div class="con-box">
+                <p class="p1">{{goods.goods_info.goods_name}}</p>
+                <p class="p2">{{goods.goods_info.goods_spec_title}};{{goods.order_info_goods_property}}</p>
+                <p class="p3">数量：x{{goods.order_info_goods_count}}</p>
+              </div>
             </div>
-            <div class="con-box">
-              <p class="p1">{{item.goods_info.goods_name}}</p>
-              <p class="p2">{{item.goods_info.goods_spec_title}}; {{item.property.order_info_goods_property}}</p>
-              <p class="p3">数量：x{{item.goods_order_goods_count}}</p>
-            </div>
-          </a>
+
           <div class="bottom2">
             <div>
               <span>应付:</span>
@@ -50,17 +42,16 @@
               <span>或 ¥{{item.goods_order_price}}</span>
             </div>
             <div class="clearfix">
-              <span v-if="item.goods_order_status === 1">
+              <span v-if="item.goods_order_status == 1">
                 <a class="link">已取消</a>
               </span>
-              <span v-else-if="item.goods_order_status !== 1">
+              <span v-else-if="item.goods_order_status != 1">
                 <span v-if="item.goods_order_is_pay === 0">
                   <router-link :to="{path: '/order/pay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
+                  <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
               </span>
-              <span v-else>
-                <a href="#" class="link">查看详情</a>
-              </span>
-                <a class="link" @click="cancelOrder(item.goods_order_id)">取消订单</a>
+                <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
+                <a class="link" @click="cancelOrder(item.goods_order_id,index)">取消订单</a>
               </span>
             </div>
           </div>
@@ -93,22 +84,43 @@
     data() {
       return {
         tabMenus:['全部','未完成','已完成','售后申请'],
-        orderList:'',
+        orderList:{},
         page: 0,
         type: 0,
         busy:false,
         load:false,
+        flag: false,
+        sendStatus: {
+          0:"未确认",
+          1:"已取消",
+          2:"已退款",
+          3:"已退货",
+          4:{
+            0:"揽件中",
+            1:"已揽件",
+            2:"取货中",
+            3:"配送中",
+            4:"已送达"
+          },
+          5:"已收货",
+          6:"自提点待收货",
+          7:"自提点已提货",
+          8:"已评论",
+          9:"申请退货中",
+          10:"正在退货",
+          11:"拒绝退货"
+        },
       }
     },
     computed:{
       ...mapState(['userInfo'])
     },
     mounted(){
-      this.getOrderList(this.type, this.flag);
       this.loadMore();
     },
     methods:{
-      getOrderList(type){
+      /*获取订单列表*/
+      getOrderList(type, flag){
         let params={
           user_id: this.userInfo.user_id,
           page: this.page,
@@ -119,22 +131,28 @@
         }).then(res=>{
           res=res.data;
           console.log(res.data);
-          if(type){
+          if(flag){
             //多次加载
-            this.orderList = res.data;
+            for(let i in res.data){
+              this.orderList.push(res.data[i]);
+            }
+            console.log(this.orderList);
             let currentPage = Math.ceil(this.orderList.length/10);
             if(this.page >= currentPage){
               this.busy=true;
               this.load=false;
+              this.flag = false;
             }else {
               this.busy=false;
               this.load=true;
+              this.flag = false;
             }
           }else {
             //第一次加载
             this.orderList=res.data;
             this.busy=false;
             this.load=false;
+            this.flag = true;
           }
 
         }).catch(err=>{
@@ -144,14 +162,20 @@
       tab(type){
         /*选项卡切换*/
         this.getOrderList(type);
+        this.type = type;
+        this.page = 0;
+        this.flag = false;
+        this.orderList=[];
       },
+      /*下拉加载*/
       loadMore:function(){
         this.busy = true;
         this.load = true;
         this.page++;
-        this.getOrderList(true);
+        this.getOrderList(this.type, this.flag);
       },
-      cancelOrder(order_id) {
+      /*取消订单*/
+      cancelOrder(order_id,index) {
         let params={
           order_id: order_id,
           user_id: this.userInfo.user_id
@@ -161,13 +185,14 @@
           params:params
         }).then(res=>{
           res=res.data;
+
           if(res.status === 0){
-            console.log(res.status);
-            this.getOrderList()
+            this.orderList[index].goods_order_status = 1;
           }
         }).catch(err=>{
           console.log('my err:'+err)
         })
+
       }
     }
   }

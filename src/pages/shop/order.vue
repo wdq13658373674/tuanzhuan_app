@@ -226,6 +226,9 @@ export default {
       var goods=[];
 
       this.cartList.find(item=>{
+        if(!item.choose_prop){
+          item.choose_prop = ' ';
+        }
         var arr={
           order_info_goods_id:item.goods_id,
           order_info_goods_count:item.cart_sum,
@@ -263,7 +266,7 @@ export default {
         userid:this.userInfo.user_id
       };
 
-      this.$axios.post(global.API_HOST+'/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
+      this.$axios.post('/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
         res=res.data;
         if(res.status==0){
           cart.delGoods(cart.order_pay);

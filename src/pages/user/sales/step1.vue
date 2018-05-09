@@ -1,11 +1,18 @@
 <template>
   <div>
-    <h5 class="h5 mt20">退货原因 <span class="gray">（至少说明一个原因）</span></h5>
-    <textarea name="" id="" rows="6" class="textarea" placeholder="请说明退货原因"></textarea>
-
+    <div v-if="status === 0">
+      <h5 class="h5 mt20">退货原因 <span class="gray">（至少说明一个原因）</span></h5>
+      <textarea name="" id="" rows="6" class="textarea" placeholder="请说明退货原因" v-model="reason"></textarea>
     <footer>
-      <router-link to="/user/order/sales/step2" class="bottom-fixed btn-orange-fixed">提交</router-link>
+      <!--to="/user/order/sales/step2"-->
+      <span class="bottom-fixed btn-orange-fixed" @click="postRefundOrder">提交申请</span>
     </footer>
+  </div>
+  <div v-else>
+    <div class="content sales-back">
+      <em>退货申请已提交等商家确认</em>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -19,7 +26,8 @@
     },
     data() {
       return {
-
+        reason:'',
+        status: 0
       }
     },
     computed:{
@@ -29,7 +37,30 @@
 
     },
     methods:{
-
+      postRefundOrder(){
+        let params={
+          goods_order_id:this.$route.query.order_id,
+          user_id:this.userInfo.user_id,
+          goods_order_cancel_reason: this.reason
+        };
+        if(this.reason !== ''){
+          this.$axios.get(global.API_HOST+'index/Goods_order/refundOrder',{
+            params:params
+          }).then(res=>{
+            res=res.data;
+            if(res.status === 1){
+              this.$vux.toast.text(res.msg);
+            }else {
+              this.$vux.toast.text("退货提交成功，等待商家处理");
+              this.status = 1;
+            }
+          }).catch(err=>{
+            console.log('my err:'+err)
+          })
+        }else{
+          this.$vux.toast.text("至少说明一个原因");
+        }
+      }
     }
   }
 </script>

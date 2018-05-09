@@ -139,15 +139,17 @@
     methods:{
       /*结算*/
       orderPay(){
+        console.log(this.pay_user.user_tcion);
+        console.log(this.orderInfo.goods_order_tcion);
         if(this.payType=="tcion"){
-          if(this.pay_user.user_tcion<this.orderInfo.goods_order_tcion){
+          if(parseFloat(this.pay_user.user_tcion)<parseFloat(this.orderInfo.goods_order_tcion)){
             this.$vux.toast.text('团票余额不足,请换一种支付方式!','middle');
             return false;
           }
         }
 
         if(this.payType=="money"){
-          if(this.pay_user.user_money<this.orderInfo.goods_order_price){
+          if(parseFloat(this.pay_user.user_money)<parseFloat(this.orderInfo.goods_order_price)){
             this.$vux.toast.text('我的余额不足,请换一种支付方式!','middle');
             return false;
           }

@@ -3,64 +3,44 @@
     <section class="page-group">
       <step :step="steps"></step>
       <div class="user-after-sales">
-        <h4 class="h4">订单编号：33775628</h4>
+        <h4 class="h4">订单编号：{{getSalesData.order.goods_order_numb}}</h4>
 
         <ul class="sales-list">
-          <li class="item">
-            <a href="#" class="link">
+          <li v-for="item in getSalesData.order_info" class="item">
+            <router-link :to="{path: '/shop/detail', query: {id: item.goods.goods_id}}" class="link">
               <div class="img-box">
-                <img src="@/assets/images/test/img7.png" alt="">
+                <img class="img" v-lazy="item.goods_logo" alt="" />
               </div>
               <div class="con-box">
                 <p class="p1 clearfix">
-                  <span class="tit">团转制造小旋风风团转制造小旋风风扇团转制造小旋风风扇团转制造小旋风风扇团转制造小旋风风扇扇</span>
-                  <span class="num">x1</span>
+                  <span class="tit">{{item.goods.goods_name}}</span>
+                  <span class="num">x{{item.order_info_goods_count}}</span>
                 </p>
-                <p class="p2">磨砂白; 9寸</p>
+                <p class="p2">{{item.goods.goods_spec_title}}; {{item.order_info_goods_property}}</p>
                 <p class="p3">
                   <i class="icon tp mr10"></i>
-                  <em>85.00</em>
-                  <span>¥170.66</span>
-                  <span class="span">¥250.66</span>
+                  <em>{{item.order_info_real_tcion}}</em>
+                  <span>¥{{item.order_info_goods_price}}</span>
+                  <span class="span">¥{{item.order_info_goods_money}}</span>
                 </p>
               </div>
-            </a>
-          </li>
-          <li class="item">
-            <a href="#" class="link">
-              <div class="img-box">
-                <img src="@/assets/images/test/img7.png" alt="">
-              </div>
-              <div class="con-box">
-                <p class="p1 clearfix">
-                  <span class="tit">团转制造小旋风风团转制造小旋风风扇团转制造小旋风风扇团转制造小旋风风扇团转制造小旋风风扇扇</span>
-                  <span class="num">x1</span>
-                </p>
-                <p class="p2">磨砂白; 9寸</p>
-                <p class="p3">
-                  <i class="icon tp mr10"></i>
-                  <em>85.00</em>
-                  <span>¥170.66</span>
-                  <span class="span">¥250.66</span>
-                </p>
-              </div>
-            </a>
+            </router-link>
           </li>
         </ul>
         <div class="sales-total">
           实付:<i class="icon tp ml10"></i>
-          <span class="orange f32">170.00</span>
+          <span class="orange f32">{{total.toFixed(2)}}</span>
         </div>
 
         <h4 class="h4 bold mt20">订单信息</h4>
         <ul class="cell-list">
           <li class="item cell p27">
             <span>支付方式</span>
-            <span>团票支付</span>
+            <span>{{getSalesData.order.goods_order_pay_type}}</span>
           </li>
           <li class="item cell p27">
             <span>下单时间</span>
-            <span>2018.05.04 10:07</span>
+            <span>{{getSalesData.order.goods_order_create_time | stampToDate(true)}}</span>
           </li>
         </ul>
 
@@ -72,6 +52,7 @@
 
 <script>
   import step from '@/components/step'
+  import {mapState} from 'vuex'
   export default {
     name: "UserOrderSales",
     components: {
@@ -79,10 +60,17 @@
     },
     data() {
       return {
-
+        getSalesData:{
+          order: {
+            goods_order_numb: 0
+          },
+          order_info: {}
+        },
+        total:0
       }
     },
     computed:{
+      ...mapState(['userInfo']),
       steps(){
         if(this.$route.name=='UserSalesStep2'){
           return 1;
@@ -93,10 +81,28 @@
       }
     },
     mounted(){
-
+      this.getSales();
     },
     methods:{
+      getSales(){
+        let params={
+          order_id: this.$route.query.order_id,
+          user_id: this.userInfo.user_id
+        };
+        // console.log(params);
+        this.$axios.get(global.API_HOST+'index/goods_order/afterSale',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          this.getSalesData = res.data;
 
+          for(let i in this.getSalesData.order_info){
+            this.total += parseFloat(this.getSalesData.order_info[i].order_info_real_tcion);
+          }
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      }
     }
   }
 </script>
