@@ -122,7 +122,7 @@
 
           <a class="link" href="#">联系商家</a>
 
-          <a v-if="orderDetail.order.goods_order_status === 5 || orderDetail.order.goods_order_status === 9" class="link" @click="tejected">申请退货</a>
+          <a v-if="orderDetail.order.goods_order_status === 5 || orderDetail.order.goods_order_status === 9 || orderDetail.order.goods_order_status === 10" class="link" @click="tejected">申请退货</a>
         </span>
 
       </div>
@@ -145,6 +145,7 @@
         orderDetail:{
           order:{
             goods_order_status:0,
+            goods_order_refund_numb:0,
             pickup: {
               pickup_address: ''
             }
@@ -200,10 +201,14 @@
         })
       },
       tejected(){
-        if(this.orderDetail.order.goods_order_status === 4 && this.orderDetail.order.goods_order_send_status === 4){
-          this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id}});
-        }else {
-          this.$router.push({path: '/user/order/sales/step2', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id}});
+        if(this.orderDetail.order.goods_order_status === 5 && this.orderDetail.order.goods_order_send_status === 4){
+          this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 0}});
+        }else if(this.orderDetail.order.goods_order_status === 9){
+          this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 1}});
+        }/*else if(this.orderDetail.order.goods_order_status === 10){
+          this.$router.push({path: '/user/order/sales/step3',query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id}});
+        }*/else {
+          this.$router.push({path: '/user/order/sales/step2', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: this.orderDetail.order.goods_order_status,refund_num:this.orderDetail.order.goods_order_refund_time}});
         }
       }
     }

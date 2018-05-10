@@ -18,7 +18,7 @@
           </div>
             <div v-for="(goods,i) in item.property" class="pro">
               <div class="img-box">
-                <router-link :to="{path: '/shop/detail', query: {id: item.goods_id}}"  ><img class="img" v-lazy="goods.goods_info.goods_logo" alt="" /></router-link>
+                <router-link :to="{path: '/shop/detail', query: {id: goods.goods_info.goods_id}}"  ><img class="img" v-lazy="goods.goods_info.goods_logo" alt="" /></router-link>
               </div>
               <div class="con-box">
                 <p class="p1">{{goods.goods_info.goods_name}}</p>
@@ -36,12 +36,11 @@
             </div>
             <div class="clearfix">
               <span v-if="item.goods_order_status !== 1">
-                <span v-if="item.goods_order_is_pay === 0">
-                  <router-link :to="{path: '/order/pay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
-                </span>
-                <a v-if="item.goods_order_is_pay === 1 && item.goods_order_send_status === 4" class="link" @click="cancelOrder(item.goods_order_id,index)">确认收货</a>
+                <router-link v-if="item.goods_order_is_pay === 0" :to="{path: '/order/pay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
 
-                <a v-else-if="item.goods_order_is_pay === 1 && item.goods_order_status === 4" class="link" @click="cancelOrder(item.goods_order_id,index)">取消订单</a>
+                <a v-if="item.goods_order_is_pay === 1 && item.goods_order_status === 4" class="link" @click="confirmGoods(item.goods_order_id,index)">确认收货</a>
+
+                <a v-else-if="item.goods_order_is_pay === 0 && item.goods_order_status < 4" class="link" @click="cancelOrder(item.goods_order_id,index)">取消订单</a>
               </span>
               <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
             </div>
@@ -127,13 +126,12 @@
           params:params
         }).then(res=>{
           res=res.data;
-          // console.log(res.data);
+          console.log(res.data);
           if(flag){
             //多次加载
             for(let i in res.data){
               this.orderList.push(res.data[i]);
             }
-            console.log(this.orderList);
             let currentPage = Math.ceil(this.orderList.length/10);
             if(this.page >= currentPage){
               this.busy=true;
@@ -160,7 +158,7 @@
         /*选项卡切换*/
         this.getOrderList(type);
         this.type = type;
-        this.page = 0;
+        this.page = 1;
         this.flag = false;
         this.orderList=[];
       },
@@ -191,6 +189,25 @@
         })
       },
       /*确认收货*/
+      confirmGoods(order_id, index){
+        let params={
+          goods_order_id: order_id,
+          user_id: this.userInfo.user_id
+        };
+
+        this.$axios.get(global.API_HOST+'index/goods_order/ConfirmGoods',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          if(res.status === 0){
+            this.orderList[index].goods_order_status = 5;
+          }else {
+            this.$vux.toast.text(res.msg);
+          }
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      }
     }
   }
 </script>
