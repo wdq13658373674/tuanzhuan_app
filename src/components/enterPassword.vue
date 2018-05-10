@@ -53,7 +53,9 @@
             res=res.data;
 
             if(res.status==0) {
-              this.$vux.toast.text('成功');
+              // this.$vux.toast.text('成功');
+
+              this.$emit('run',1);
             }else{
               this.$vux.toast.text('密码错误');
             }

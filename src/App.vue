@@ -225,4 +225,17 @@
       background-size: 100% rem(222);
     }
   }
+
+  /**cell**/
+  .weui-cell{
+    padding:0;
+
+    &:before{
+      border:0;
+    }
+  }
+  .weui-cell_access .weui-cell__ft{
+    padding-right:0;
+    color:#000;
+  }
 </style>
