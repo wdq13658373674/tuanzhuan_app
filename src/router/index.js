@@ -77,11 +77,6 @@ import UserOrdainDetail from '@/pages/user/ordain/detail'
 import UserHouse from '@/pages/user/house/index'
 import UserHouseHolders from '@/pages/user/house/holders'
 import UserHouseInvite from '@/pages/user/house/invite'
-/*import UserAddHouse from '@/pages/user/house/add'
-import UserAddHouseNext from '@/pages/user/house/addNext'*/
-/*import UserHouseCommunity from '@/pages/user/house/community'
-import UserHouseFloor from '@/pages/user/house/floor'
-import UserHouseRoom from '@/pages/user/house/room'*/
 
 Vue.use(Router)
 
@@ -217,7 +212,7 @@ export default new Router({
           }
         },
         {
-          path: '/shop/search/category',
+          path: '/shop/category',
           name: 'ShopCategory',
           components:{
             default:ShopCategory,
@@ -234,7 +229,7 @@ export default new Router({
           }
         },
         {
-          path: '/shop/search',
+          path: '/shop/category/search',
           name: 'ShopSearch',
           meta: {
             title: '搜索商品'
@@ -328,51 +323,6 @@ export default new Router({
           },
           component: UserHouse,
         },
-        /*{
-          path: '/user/house/add',
-          name: 'UserAddHouse',
-          meta: {
-            requireAuth: true,
-            title:'绑定房屋'
-          },
-          component: UserAddHouse,
-        },
-        {
-          path: '/user/house/add/next',
-          name: 'UserAddHouseNext',
-          meta: {
-            requireAuth: true,
-            title:'绑定房屋'
-          },
-          component: UserAddHouseNext,
-        },
-        {
-          path: '/user/house/community',
-          name: 'UserHouseCommunity',
-          meta: {
-            requireAuth: true,
-            title:'绑定房屋'
-          },
-          component: UserHouseCommunity,
-        },
-        {
-          path: '/user/house/community/floor',
-          name: 'UserHouseFloor',
-          meta: {
-            requireAuth: true,
-            title:'绑定房屋'
-          },
-          component: UserHouseFloor,
-        },
-        {
-          path: '/user/house/community/floor/room',
-          name: 'UserHouseRoom',
-          meta: {
-            requireAuth: true,
-            title:'绑定房屋'
-          },
-          component: UserHouseRoom,
-        },*/
         {
           path: '/user/house/holders',
           name: 'UserHouseHolders',

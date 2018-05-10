@@ -2,7 +2,7 @@
   <div>
     <section class="page-group">
       <div class="content">
-        <router-link :to="{path:'/shop/search',query:{
+        <router-link :to="{path:'/shop/category/search',query:{
           store_id:storeInfo.store_id,
           type_id:0,
           title:'全部'
