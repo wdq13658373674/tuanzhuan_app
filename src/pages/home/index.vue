@@ -141,7 +141,6 @@
         this.$axios.get(global.API_HOST+'index/service/serviceIndex').then(res=>{
           res=res.data;
           this.serviceList = res.data;
-          console.log(this.serviceList);
         }).catch(err=>{
           console.log('my err:'+err);
         })

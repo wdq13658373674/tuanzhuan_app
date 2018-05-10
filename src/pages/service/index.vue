@@ -80,7 +80,6 @@
         this.$axios.get(global.API_HOST+'index/service/getServiceList').then(res=>{
           res=res.data;
           this.serviceList = res.data;
-          console.log(this.serviceList);
           for(let i in this.serviceList){
             this.tabs.push(res.data[i].service_title);
           }

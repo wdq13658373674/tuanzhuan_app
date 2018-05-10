@@ -170,7 +170,14 @@
         roomLists:0,
         bankNum:0,
         orderNum:0,
-        roomInfo:{}
+        roomInfo:{
+          0:{
+            village_name:'',
+            unit_name:'',
+            floor_name:'',
+            floor_code:''
+          }
+        }
       }
     },
     computed:{
