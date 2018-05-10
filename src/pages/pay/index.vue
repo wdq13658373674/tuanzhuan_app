@@ -85,7 +85,7 @@
     <!--popup 输入支付密码-->
     <popup v-model="popshow" style="background: #fff;">
       <span class="pop-close"  @click="popshow=!popshow">X</span>
-      <EnterPassword></EnterPassword>
+      <EnterPassword @run="checkPwd"></EnterPassword>
     </popup>
     <!--popup-->
   </div>
@@ -158,7 +158,7 @@
           }
         }
 
-        if(!that.userInfo.set_paypassword){
+        if(that.userInfo.user_paypass!=1){
           const self=this;
           this.$vux.confirm.show({
             title: '提示',
@@ -171,26 +171,36 @@
           return false;
         }
 
-        if(that.payType=="tcion" || that.payType=="money"){
-          let param={
-            user_id:that.userInfo.user_id,
-            order_id:that.$route.query.order_id,
-            type:that.payType
-          };
-          this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
-            res=res.data;
-            if(res.status==0){
-              this.$router.push('/order/pay/detail?order_id='+that.order_id);
-            }else {
-              this.$vux.toast.text(res.msg);
-            }
-          }).catch(err=>{
-              console.log('my err:'+err);
-          });
-        }
-
         //支付密码
         that.popshow=true;
+      },
+
+        /**
+         * 支付密码回调
+         */
+      checkPwd(code){
+        var that=this;
+
+        if(code==1){
+          if(that.payType=="tcion" || that.payType=="money"){
+              let param={
+                user_id:that.userInfo.user_id,
+                order_id:that.$route.query.order_id,
+                type:that.payType
+              };
+              this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
+                res=res.data;
+              if(res.status==0){
+                this.$router.push('/order/pay/detail?order_id='+that.order_id);
+              }else {
+                this.$vux.toast.text(res.msg);
+              }
+            }).catch(err=>{
+                console.log('my err:'+err);
+            });
+          }
+        }
+
       },
 
       /**
