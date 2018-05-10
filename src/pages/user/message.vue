@@ -188,4 +188,21 @@
     text-align: right;
   }
 
+  /**cell**/
+  .weui-cell{
+    padding:0;
+
+    &:before{
+      border:0;
+    }
+
+    .vux-cell-value{
+      color:#000;
+    }
+
+    &.weui-cell_access .weui-cell__ft{
+      padding-right:0;
+      color:#000;
+    }
+  }
 </style>

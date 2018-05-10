@@ -49,18 +49,19 @@
         search: this.$route.query.title
       }
     },
+    computed:{
+
+    },
     methods: {
       submit:function(){
         let keyword=this.search;
-        const query=this.$route.query;
 
         this.$router.push({
-          path:'/shop/category',
+          name:'ShopCategory',
           query:{
-            store_id:query.store_id,
-            type_id:query.type_id,
-            title:query.title,
-            keyword:keyword,
+            id:this.$route.query.id || 0,
+            title:this.$route.query.title,
+            keyword:keyword
           }
         })
       }

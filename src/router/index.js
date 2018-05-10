@@ -335,7 +335,7 @@ export default new Router({
           component: UserHouseHolders,
         },
         {
-          path: '/user/holders/invite/:id',
+          path: '/user/house/holders/invite',
           name: 'UserHouseInvite',
           meta: {
             requireAuth: true,

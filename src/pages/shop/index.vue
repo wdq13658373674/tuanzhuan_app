@@ -2,9 +2,7 @@
   <div>
     <section class="page-group">
       <div class="content">
-        <router-link :to="{path:'/shop/category/search',query:{
-          store_id:storeInfo.store_id,
-          type_id:0,
+        <router-link :to="{name:'ShopSearch',query:{
           title:'全部'
         }}" class="search-link" append>请输入商品名称</router-link>
       </div>
@@ -13,9 +11,8 @@
 
       <div class="menu-shop clearfix">
         <router-link :to="{ name: 'ShopCategory', query: {
-          title: item.type_name,
-          type_id: item.type_id,
-          store_id:item.type_store_id
+          id: item.type_id,
+          title: item.type_name
         }}" class="item" v-for="item in categorys" :key="item.type_id">
           <img class="img" v-lazy="item.type_logo" alt="">
           <p class="txt">{{item.type_name}}</p>

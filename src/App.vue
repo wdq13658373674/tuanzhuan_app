@@ -32,7 +32,24 @@
     },
     methods:{
       load_cord(){
-        cordova.plugins.notification.local.schedule({title:'您好欢迎使用团转到家1'});
+        //cordova.plugins.notification.local.schedule({title:'您好欢迎使用团转到家1'});
+
+        cordova.plugins.notification.local.setDefaults({
+          led: { color: '#FD4915', on: 500, off: 500 },
+          vibrate: true
+        });
+        cordova.plugins.notification.local.on("click", function(notifications,eopt){
+          if(typeof notifications.data.outurl != 'undefined' && notifications.data.outurl != ''){
+            cordova.InAppBrowser.open(notifications.data.outurl, '_blank', 'location=yes,hideurlbar=yes');
+          }else if(typeof notifications.data.url != 'undefined' && notifications.data.url != ''){
+            location.href = notifications.data.url;
+          }else{
+            //其他逻辑
+            console.log(notifications);
+            //eopt.text为推送通知输入框提交内容
+            console.log(eopt);
+          }
+        });
 
         //及时通信初始化
         var that=this;
@@ -224,18 +241,5 @@
     .scroller-mask{
       background-size: 100% rem(222);
     }
-  }
-
-  /**cell**/
-  .weui-cell{
-    padding:0;
-
-    &:before{
-      border:0;
-    }
-  }
-  .weui-cell_access .weui-cell__ft{
-    padding-right:0;
-    color:#000;
   }
 </style>
