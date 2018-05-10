@@ -9,7 +9,7 @@
         <i class="icon cart"></i>
       </a>
 
-      <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right">
+      <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right" @click="setDefault">
         设为默认
       </div>
     </bar-nav>
@@ -22,6 +22,8 @@
 
 <script>
   import BarNav from './barNav'
+  import {mapState} from 'vuex'
+  const qs = require("querystring")
 
   export default {
     name: 'Layout',
@@ -34,6 +36,7 @@
       }
     },
     computed: {
+      ...mapState(['userInfo']),
       title(){
         if(this.$route.query.title){
           return this.$route.query.title;
@@ -54,6 +57,29 @@
         return false;
       }
     },
+    methods:{
+      /**
+       * 我的房屋设置默认值
+       * **/
+      setDefault(){
+        const params={
+          user_id:this.userInfo.user_id,
+          room_id:this.$route.query.id
+        }
+
+        this.$axios.post(global.API_HOST+'/index/House_user_bind_info_view/set_default',qs.stringify(params)).then(res=>{
+          res=res.data;
+
+          if(res.status==0){
+            this.$vux.toast.text('设置成功');
+          }else{
+            this.$vux.toast.text('当前房屋已经设为默认');
+          }
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      }
+    }
   }
 </script>
 <style lang="scss">

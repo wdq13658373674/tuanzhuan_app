@@ -15,7 +15,7 @@
               </div>
               <div class="link" @click="getBankId(item.bank_id)">解除绑定</div>
             </div>
-            <p class="card">{{item.bank_numb}}</p>
+            <p class="card">{{item.bank_numb | formatCards}}</p>
           </div>
         </li>
       </ul>
@@ -169,5 +169,4 @@
       margin-top:rem(20);
     }
   }
-
 </style>

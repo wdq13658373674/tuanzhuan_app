@@ -2,31 +2,26 @@
   <div>
     <section class="page-group">
       <ul class="user-rooms-list">
-        <li class="item" v-for="(item,index) in houseLists">
-          <router-link :to="{path:'/user/house/holders',query:{
-            id:item.room_id,
-            type:item.bind_type,
-          }}">
-            <div class="cell">
-              <div>
-                <span>{{item.village_name}}</span>
-                <span class="gray ml20">{{item.unit_name}}-{{item.floor_name}}-{{item.floor_code}}</span>
-              </div>
+        <li class="item" v-for="(item,index) in houseLists" @click="jump(item)">
+          <div class="cell">
+            <div>
+              <span>{{item.village_name}}</span>
+              <span class="gray ml20">{{item.unit_name}}-{{item.floor_name}}-{{item.floor_code}}</span>
             </div>
-            <div class="cell mt50">
-              <div class="f30">身份：
-                <span v-if="item.bind_type==1">产权房主</span>
-                <span v-else-if="item.bind_type==2">产权人</span>
-                <span v-else-if="item.bind_type==3">亲友</span>
-                <span v-else-if="item.bind_type==4">租客</span>
-                <span v-else>审核中</span>
-              </div>
+          </div>
+          <div class="cell mt50">
+            <div class="f30">身份：
+              <span v-if="item.bind_type==1">产权房主</span>
+              <span v-else-if="item.bind_type==2">产权人</span>
+              <span v-else-if="item.bind_type==3">亲友</span>
+              <span v-else-if="item.bind_type==4">租客</span>
+              <span v-else>审核中</span>
+            </div>
 
-              <div v-if="index==0">
-                <span class="state">当前默认房屋</span>
-              </div>
+            <div v-if="index==0">
+              <span class="state">当前默认房屋</span>
             </div>
-          </router-link>
+          </div>
         </li>
       </ul>
 
@@ -68,14 +63,29 @@
           user_id:this.userInfo.user_id
         }
 
-        this.$axios.post('/index/House_user_bind_info_view/getUserHouse',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'/index/House_user_bind_info_view/getUserHouse',qs.stringify(params)).then(res=>{
           res=res.data;
-
           if(res.status==0){
             this.houseLists=res.data;
           }
         }).catch(err=>{
           console.log('my err:'+err)
+        })
+      },
+      /**
+       * 房屋链接
+       * **/
+      jump(item){
+        const unit=item.unit_name +'-'+item.floor_name +'-' + item.floor_code;
+
+        this.$router.push({
+          name:'UserHouseHolders',
+          query:{
+            id:item.room_id,
+            type:item.bind_type,
+            village:item.village_name,
+            unit:unit
+          }
         })
       }
     }

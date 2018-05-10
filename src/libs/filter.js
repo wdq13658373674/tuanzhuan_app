@@ -21,25 +21,22 @@ let stampToDate=(time,flag)=>{
 
 /**
  * 格式化银行卡号星号并4个数字空格分割
- * v：银行卡号
+ * cards：银行卡号
  * **/
-let formate=(v)=>{
-  /*if(/\S{5}/.test(v)){
-    v=v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
-  }
-
-  return v;*/
+let formatCards=(cards)=>{
+  cards=cards.substr(0,4)+"********"+cards.substr(-4);
+  return cards;
 }
 
 /**
  * 格式化电话号码星号代替
  * mobile： 电话号码
  * **/
-let regMobile=(mobile)=> {
+let formatMobile=(mobile)=> {
   if (mobile.length > 7) {
     var new_mobile = mobile.substr(0, 3) + '****' + mobile.substr(7)
   }
   return new_mobile
 }
 
-export {stampToDate,formate,regMobile}
+export {stampToDate,formatCards,formatMobile}
