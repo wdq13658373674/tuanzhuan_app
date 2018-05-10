@@ -122,4 +122,8 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
+
+  .weui-cell{
+    padding:0;
+  }
 </style>

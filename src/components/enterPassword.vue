@@ -48,17 +48,19 @@
             user_id:this.userInfo.user_id,
             pay:this.password.join(''),
           }
+          let result=0;
 
           this.$axios.post(global.API_HOST+'/index/user/getpaypwd',qs.stringify(params)).then(res=>{
             res=res.data;
 
             if(res.status==0) {
-              // this.$vux.toast.text('成功');
-
-              this.$emit('run',1);
+              result=1;
             }else{
-              this.$vux.toast.text('密码错误');
+              result=0;
             }
+
+            //传递给父元素回调
+            this.$emit('run',result);
           }).catch(err=>{
             console.log('my err:'+err);
           })
