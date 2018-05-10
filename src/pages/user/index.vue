@@ -58,14 +58,14 @@
           <li class="item">
             <router-link to="/property/service/detail">
               <p class="p1">物业账单</p>
-              <p class="p2">0元</p>
+              <!--<p class="p2">0元</p>-->
               <i class="icon arrow"></i>
             </router-link>
           </li>
           <li class="item">
             <router-link to="/user/house">
               <p class="p1">我的房屋</p>
-              <p class="p2" v-if="roomLists">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
+              <p class="p2" v-if="roomInfo">{{roomInfo[0].village_name}}{{roomInfo[0].unit_name}}{{roomInfo[0].floor_name}}{{roomInfo[0].floor_code}}</p>
               <p class="p2" v-else>暂无房屋</p>
               <i class="icon arrow"></i>
             </router-link>
@@ -73,14 +73,14 @@
           <li class="item">
             <router-link to="/user/order">
               <p class="p1">我的订单</p>
-              <p class="p2">0个</p>
+              <p class="p2">{{orderNum}}个</p>
               <i class="icon arrow"></i>
             </router-link>
           </li>
           <li class="item">
             <router-link to="/user/cards">
               <p class="p1">银行卡</p>
-              <p class="p2">共0张</p>
+              <p class="p2">共{{bankNum}}张</p>
               <i class="icon arrow"></i>
             </router-link>
           </li>
@@ -118,6 +118,12 @@
             </a>
           </li>
           <li class="item">
+            <router-link to="/user/safe" class="link">
+              <img class="img" src="@/assets/images/icons/i_icon9.png" alt="">
+              <p class="p1">安全管理</p>
+            </router-link>
+          </li>
+          <li class="item">
             <router-link to="/user/message" class="link">
               <img class="img" src="@/assets/images/icons/i_icon5.png" alt="">
               <p class="p1">账号管理</p>
@@ -141,12 +147,7 @@
               <!--<p class="p1">我的快递</p>-->
             <!--</a>-->
           <!--</li>-->
-          <li class="item">
-            <router-link to="/user/safe" class="link">
-              <img class="img" src="@/assets/images/icons/i_icon9.png" alt="">
-              <p class="p1">安全管理</p>
-            </router-link>
-          </li>
+
         </ul>
       </div>
     </section>
@@ -167,6 +168,9 @@
       return {
         userLists:0,
         roomLists:0,
+        bankNum:0,
+        orderNum:0,
+        roomInfo:{}
       }
     },
     computed:{
@@ -185,14 +189,17 @@
         })*/
         let params={
           user_id:this.userInfo.user_id
-        }
+        };
         this.$axios.get(global.API_HOST+'/index/User/getUser',{
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           if(res.status==0){
             this.userLists=res.data.village.user;
-
+            this.bankNum = res.data.bank_num;
+            this.orderNum = res.data.order;
+            this.roomInfo = res.data.room_info;
             if(res.data.village.room){
               this.roomLists=res.data.village.room;
             }

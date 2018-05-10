@@ -29,7 +29,7 @@
               </h3>
               <ul class="classify-content-list">
                 <li v-for="two_level in item.two_level" class="item">
-                  <router-link class="link" :to="two_lecel.service_url">
+                  <router-link class="link" :to="{path: two_level.service_url}">
                     <div class="img-box">
                       <img class="img" v-lazy="two_level.service_logo" alt="" />
                     </div>
