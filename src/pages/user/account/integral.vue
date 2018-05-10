@@ -1,7 +1,7 @@
 <template>
   <div>
     <ColorNav color="orange-bar">
-      <router-link to="/user/account/income" class="link pull-right" slot="right" style="color:#fff;">
+      <router-link to="/user/account/score/income" class="link pull-right" slot="right" style="color:#fff;">
         明细
       </router-link>
     </ColorNav>

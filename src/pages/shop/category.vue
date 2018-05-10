@@ -2,7 +2,10 @@
   <section class="page-group">
     <div class="z-index" style="position: relative;">
       <div class="content">
-        <router-link :to="{path:'/shop/category/search',query:querys}" class="search-link">{{querys.keyword || querys.title}}</router-link>
+        <router-link :to="{path:'/shop/category/search',query:{
+          id:type_id,
+          title:title
+        }}" class="search-link">{{keyword || title}}</router-link>
       </div>
       <div class="shop-filter">
         <span class="item" @click="tab(0)" :class="{'active':tabIndex==0}">销量优先</span>
@@ -80,6 +83,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import infiniteScroll from 'vue-infinite-scroll'
   import { LoadMore} from 'vux'
   export default {
@@ -90,6 +94,10 @@
     },
     data () {
       return {
+        type_id:this.$route.query.id,
+        title:this.$route.query.title,
+        keyword:this.$route.query.keyword || '',
+        condition:{},
         busy:false,
         load:false,
         page:0,
@@ -97,7 +105,6 @@
         sortIndex:10,
         tabIndex:10,
         searchLists:[],
-        condition:{},
         p1:'',
         p2:'',
         p3:'',
@@ -105,36 +112,22 @@
       }
     },
     computed:{
-      querys:function(){
-        const query=this.$route.query;
-
-        const querys={
-          store_id:query.store_id,
-          type_id:query.type_id,
-          title:query.title,
-          keyword:query.keyword
-        }
-
-        return querys;
-      }
+      ...mapState(['storeInfo']),
     },
     mounted(){
       this.loadMore();
     },
     methods: {
+      /**
+       * 获取分类搜索列表
+       * flag:(true : 表示下拉加载)
+       * **/
       getSearchLists(flag){
-        const query=this.$route.query;
-
-        let store_id=query.store_id
-          ,type_id=query.type_id ? query.type_id : 0;
-
-        if(query.keyword) {
-          this.condition.keyword=query.keyword;
-        }
+        this.condition.keyword=this.keyword;
 
         let params={
-          goods_store_id:store_id,
-          goods_type_id:type_id,
+          goods_store_id:this.storeInfo.store_id,
+          goods_type_id:this.type_id || 0,
           condition:JSON.stringify(this.condition)
         }
 
@@ -166,6 +159,18 @@
           console.log('my err:'+err);
         })
       },
+      /**
+       * 下拉加载更多
+       * **/
+      loadMore(){
+        this.busy = true;
+        this.load = true;
+        this.page++;
+        this.getSearchLists(true);
+      },
+      /**
+       * 筛选切换
+       * **/
       tab(index) {
         this.tabIndex=index;
         if(index==0){
@@ -176,6 +181,9 @@
           this.loadMore();
         }
       },
+      /**
+       * 价格排序
+       * **/
       sort(index){
         this.tabIndex=10;
         this.sortIndex=index;
@@ -186,6 +194,9 @@
         this.reset();
         this.loadMore();
       },
+      /**
+       * 筛选
+       * **/
       filter(){
         this.tabIndex=10;
         this.p1=this.p1 || 0;
@@ -210,18 +221,18 @@
         this.reset();
         this.loadMore();
       },
-      loadMore(){
-        this.busy = true;
-        this.load = true;
-        this.page++;
-        this.getSearchLists(true);
-      },
+      /**
+       * 重置
+       * **/
       reset(){
         this.busy=false;
         this.load=false;
         this.searchLists=[];
         this.page=0;
       },
+      /***
+       * 筛选清空
+       * */
       empty(){
         this.p1='';
         this.p2='';

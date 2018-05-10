@@ -9,12 +9,12 @@
       <ul class="cell-list mt20">
         <li class="item cell p27">
           <label class="w150">手机号码</label>
-          <input class="input text-right" value="中信银行 储蓄卡" type="text" placeholder="">
+          <input class="input text-right" v-model="phone" type="text" placeholder="请输入手机号码">
         </li>
-        <li class="item cell p27">
-          <label class="w150">业主姓名</label>
-          <input class="input text-right" value="小怪兽" type="text" placeholder="">
-        </li>
+        <!--<li class="item cell p27">-->
+          <!--<label class="w150">业主姓名</label>-->
+          <!--<input class="input text-right" value="小怪兽" type="text" placeholder="">-->
+        <!--</li>-->
         <li class="item cell p27">
           <label class="w150">入住身份</label>
           <span>业主</span>
@@ -32,7 +32,7 @@
     },
     data() {
       return {
-
+        phone:''
       }
     },
     mounted(){

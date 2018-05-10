@@ -53,7 +53,9 @@ import UserIntegral from '@/pages/user/account/integral'
 import UserTickets from '@/pages/user/account/tickets'
 import UserRecharge from '@/pages/user/account/recharge'
 import UserWithdraw from '@/pages/user/account/withdraw'
-import UserIncome from '@/pages/user/account/income'
+import UserIncomeMoney from '@/pages/user/account/income_money'
+import UserIncomeTcion from '@/pages/user/account/income_tcion'
+import UserIncomeScore from '@/pages/user/account/income_score'
 
 import UserCards from '@/pages/user/cards/index'
 import UserAddCards from '@/pages/user/cards/add'
@@ -333,7 +335,7 @@ export default new Router({
           component: UserHouseHolders,
         },
         {
-          path: '/user/holders/invite/:id',
+          path: '/user/house/holders/invite',
           name: 'UserHouseInvite',
           meta: {
             requireAuth: true,
@@ -421,14 +423,36 @@ export default new Router({
           }
         },
         {
-          path: '/user/account/income',
-          name: 'UserIncome',
+          path: '/user/account/money/income',
+          name: 'UserIncomeMoney',
           meta: {
             requireAuth: true,
-            title: '收支明细'
+            title: '余额收支明细'
           },
           components:{
-            default:UserIncome,
+            default:UserIncomeMoney,
+          }
+        },
+        {
+          path: '/user/account/tcion/income',
+          name: 'UserIncomeTcion',
+          meta: {
+            requireAuth: true,
+            title: '团票收支明细'
+          },
+          components:{
+            default:UserIncomeTcion,
+          }
+        },
+        {
+          path: '/user/account/score/income',
+          name: 'UserIncomeScore',
+          meta: {
+            requireAuth: true,
+            title: '积分收支明细'
+          },
+          components:{
+            default:UserIncomeScore,
           }
         },
         {

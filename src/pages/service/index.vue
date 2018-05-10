@@ -19,163 +19,25 @@
           </scroller>
         </div>
 
-        <scroller height="100%" lock-x ref="scroller" @on-scroll="onScroll" @on-scroll-bottom="onScrollBottom">
+        <scroller height="100%" lock-x ref="scroller" @on-scroll="onScroll" @on-scroll-bottom="onScrollBottom" style="width: 100%">
           <div class="classify-content">
-            <h3 class="h3 mt40" id="tabCon0">
-              <span class="tit">生活服务</span>
-              <span class="tit-line"></span>
-            </h3>
-            <ul class="classify-content-list">
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img1.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img3.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-            </ul>
 
-            <h3 class="h3 mt40" id="tabCon1">
-              <span class="tit">生活服务2</span>
-              <span class="tit-line"></span>
-            </h3>
-            <ul class="classify-content-list">
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img1.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img3.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-            </ul>
-
-            <h3 class="h3 mt40" id="tabCon2">
-              <span class="tit">生活服务3</span>
-              <span class="tit-line"></span>
-            </h3>
-            <ul class="classify-content-list">
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img1.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img3.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-            </ul>
-
-            <h3 class="h3 mt40" id="tabCon3">
-              <span class="tit">生活服务3</span>
-              <span class="tit-line"></span>
-            </h3>
-            <ul class="classify-content-list">
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img1.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img3.jpg" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-              <li class="item">
-                <a class="link" href="">
-                  <div class="img-box">
-                    <img src="@/assets/images/test/img4.png" alt="" class="img">
-                  </div>
-                  <p class="txt">床品件套</p>
-                </a>
-              </li>
-            </ul>
+            <div v-for="(item, index) in serviceList">
+              <h3 class="h3 mt40" :id="'tabCon' + index">
+                <span class="tit">{{item.service_title}}</span>
+                <span class="tit-line"></span>
+              </h3>
+              <ul class="classify-content-list">
+                <li v-for="two_level in item.two_level" class="item">
+                  <router-link class="link" :to="two_lecel.service_url">
+                    <div class="img-box">
+                      <img class="img" v-lazy="two_level.service_logo" alt="" />
+                    </div>
+                    <p class="txt">{{two_level.service_title}}</p>
+                  </router-link>
+                </li>
+              </ul>
+            </div>
 
             <div class="bottom-h"></div>
           </div>
@@ -201,17 +63,31 @@
     data () {
       return {
         tabIndex:0,
-        tabs:['物业服务','生活缴费','生活服务','团转商城'],
+        tabs:[],
         onFetching: true,
-        scrollTop:0
+        scrollTop:0,
+        serviceList:{}
       }
     },
     mounted () {
+      this.getServiceList();
       this.$nextTick(() => {
         this.$refs.scroller.reset({top: 0})
       })
     },
     methods: {
+      getServiceList(){
+        this.$axios.get(global.API_HOST+'index/service/getServiceList').then(res=>{
+          res=res.data;
+          this.serviceList = res.data;
+          console.log(this.serviceList);
+          for(let i in this.serviceList){
+            this.tabs.push(res.data[i].service_title);
+          }
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      },
       onScrollBottom () {
         console.log()
       },
