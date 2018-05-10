@@ -26,7 +26,10 @@
           </h3>
           <ul class="classify-content-list">
             <li class="item" v-for="item in items.subordinate" :key="item.type_id">
-              <router-link :to="{ name: 'ShopCategory', params: { title: item.type_name }}" class="link">
+              <router-link :to="{ name: 'ShopCategory', query: {
+                id:item.type_id,
+                title: item.type_name,
+              }}" class="link">
                 <div class="img-box">
                   <img class="img" v-lazy="item.type_logo" alt="">
                 </div>
