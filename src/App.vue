@@ -26,8 +26,26 @@
     },
 
     mounted(){
+        //及时通信初始化
+        var that=this;
+
+        if(that.userInfo.user_id){
+          wsocket.init(
+            function(){
+              /*websocket登录*/
+              wsocket.doSend({controller:'index',action:'login',result:{user_phone:that.userInfo.user_phone,logintime:that.token.logintime}});
+              /*websocket加入组*/
+              wsocket.doSend({controller:'index',action:'joinGroup',result:{groupname:'house'}});
+            },
+            {url:'ws://192.168.1.252:8282',token:{token:that.token.token},jsdoc:'./static/wm/'}
+          );
+        }
+
+        //vConsole
+        var vConsole = new VConsole();
+
         cordovaLoader(function () {
-          this.load_cord();
+          that.load_cord();
         },"./static/cordova/");
     },
     methods:{
@@ -50,21 +68,6 @@
             console.log(eopt);
           }
         });
-
-        //及时通信初始化
-        var that=this;
-
-        if(that.userInfo.user_id){
-          wsocket.init(
-            function(){
-              /*websocket登录*/
-              wsocket.doSend({controller:'index',action:'login',result:{user_phone:that.userInfo.user_phone,logintime:that.token.logintime}});
-              /*websocket加入组*/
-              wsocket.doSend({controller:'index',action:'joinGroup',result:{groupname:'house'}});
-            },
-            {url:'ws://192.168.1.252:8282',token:{token:that.token.token},jsdoc:'./static/wm/'}
-          );
-        }
       }
     }
   }
