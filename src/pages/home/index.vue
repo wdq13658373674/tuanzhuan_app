@@ -59,36 +59,13 @@
         </h1>
 
         <div class="life-list">
-          <a href="#" class="item">
+          <router-link v-for="item in serviceList" :to="item.service_url" class="item">
             <div class="img-box">
-              <img class="img" src="@/assets/images/test/img3.jpg" alt="">
+              <img class="img" v-lazy="item.service_logo" alt="" />
+              <!--<img class="img" src="@/assets/images/test/img3.jpg" alt="">-->
             </div>
-            <p class="txt">日常保洁日常保洁日常保洁</p>
-          </a>
-          <a href="#" class="item">
-            <div class="img-box">
-              <img class="img" src="@/assets/images/test/img1.jpg" alt="">
-            </div>
-            <p class="txt">日常保洁日常保洁日常保洁</p>
-          </a>
-          <a href="#" class="item">
-            <div class="img-box">
-              <img class="img" src="@/assets/images/test/img1.jpg" alt="">
-            </div>
-            <p class="txt">日常保洁日常保洁日常保洁</p>
-          </a>
-          <a href="#" class="item">
-            <div class="img-box">
-              <img class="img" src="@/assets/images/test/img1.jpg" alt="">
-            </div>
-            <p class="txt">日常保洁日常保洁日常保洁</p>
-          </a>
-          <a href="#" class="item">
-            <div class="img-box">
-              <img class="img" src="@/assets/images/test/img1.jpg" alt="">
-            </div>
-            <p class="txt">日常保洁日常保洁日常保洁</p>
-          </a>
+            <p class="txt">{{item.service_title}}</p>
+          </router-link>
         </div>
 
       </div>
@@ -144,19 +121,31 @@
         weather:'',
         newsLists:'',
         goodsLists:'',
-        lunarData:''
+        lunarData:'',
+        serviceList:{}
       }
     },
     computed:{
       ...mapState(['roomInfo'])
     },
     mounted:function(){
+      this.getserviceIndex();
       this.getNewsLists();
       this.getGoodsLists();
       this.getMap();
       this.getWeather();
     },
     methods:{
+      /*获取服务*/
+      getserviceIndex(){
+        this.$axios.get(global.API_HOST+'index/service/serviceIndex').then(res=>{
+          res=res.data;
+          this.serviceList = res.data;
+          console.log(this.serviceList);
+        }).catch(err=>{
+          console.log('my err:'+err);
+        })
+      },
       /**判断是否定位**/
       getMap:function(){
         if(!this.roomInfo.village_id){
