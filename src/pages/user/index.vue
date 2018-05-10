@@ -65,7 +65,7 @@
           <li class="item">
             <router-link to="/user/house">
               <p class="p1">我的房屋</p>
-              <p class="p2" v-if="roomInfo">{{roomInfo[0].village_name}}{{roomInfo[0].unit_name}}{{roomInfo[0].floor_name}}{{roomInfo[0].floor_code}}</p>
+              <p class="p2" v-if="roomInfo.length">{{roomInfo[0].village_name}}{{roomInfo[0].unit_name}}{{roomInfo[0].floor_name}}{{roomInfo[0].floor_code}}</p>
               <p class="p2" v-else>暂无房屋</p>
               <i class="icon arrow"></i>
             </router-link>
