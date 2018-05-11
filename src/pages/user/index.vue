@@ -55,35 +55,26 @@
 
       <div class="content mt20">
         <ul class="user-belong-list">
-          <li class="item">
-            <router-link to="/property/service/detail">
-              <p class="p1">物业账单</p>
-              <!--<p class="p2">0元</p>-->
-              <i class="icon arrow"></i>
-            </router-link>
-          </li>
-          <li class="item">
-            <router-link to="/user/house">
-              <p class="p1">我的房屋</p>
-              <p class="p2" v-if="roomInfo.length">{{roomInfo[0].village_name}}{{roomInfo[0].unit_name}}{{roomInfo[0].floor_name}}{{roomInfo[0].floor_code}}</p>
-              <p class="p2" v-else>暂无房屋</p>
-              <i class="icon arrow"></i>
-            </router-link>
-          </li>
-          <li class="item">
-            <router-link to="/user/order">
-              <p class="p1">我的订单</p>
-              <p class="p2">{{orderNum}}个</p>
-              <i class="icon arrow"></i>
-            </router-link>
-          </li>
-          <li class="item">
-            <router-link to="/user/cards">
-              <p class="p1">银行卡</p>
-              <p class="p2">共{{bankNum}}张</p>
-              <i class="icon arrow"></i>
-            </router-link>
-          </li>
+          <router-link class="item" to="/property/service/detail" tag="li">
+            <p class="p1">物业账单</p>
+            <!--<p class="p2">0元</p>-->
+            <i class="icon arrow"></i>
+          </router-link>
+          <router-link class="item" to="/user/house" tag="li">
+            <p class="p1">我的房屋</p>
+            <p class="p2">{{roomInfo[0].village_name}}{{roomInfo[0].unit_name}}{{roomInfo[0].floor_name}}{{roomInfo[0].floor_code}}</p>
+            <i class="icon arrow"></i>
+          </router-link>
+          <router-link class="item" to="/user/order" tag="li">
+            <p class="p1">我的订单</p>
+            <p class="p2">{{orderNum}}个</p>
+            <i class="icon arrow"></i>
+          </router-link>
+          <router-link class="item" to="/user/cards" tag="li">
+            <p class="p1">银行卡</p>
+            <p class="p2">共{{bankNum}}张</p>
+            <i class="icon arrow"></i>
+          </router-link>
         </ul>
       </div>
 

@@ -99,4 +99,12 @@
   .tz-selecter{
     text-align: right;
   }
+
+  .weui-cell_select .weui-cell__bd:after{
+    border-style:none;
+  }
+
+  .weui-cell_select .weui-select{
+    padding-right:0;
+  }
 </style>
