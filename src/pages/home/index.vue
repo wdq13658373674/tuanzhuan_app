@@ -34,10 +34,10 @@
             <img class="img" src="@/assets/images/icons/menu6.png" alt="">
             <p class="txt">呼叫管家</p>
           </router-link>
-          <a href="#" class="item">
+          <router-link to="/service" class="item">
             <img class="img" src="@/assets/images/icons/menu5.svg" alt="">
             <p class="txt">全部服务</p>
-          </a>
+          </router-link>
         </div>
 
         <div class="tips" v-if="newsLists">
