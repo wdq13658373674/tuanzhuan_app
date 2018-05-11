@@ -59,8 +59,8 @@
         </h1>
 
         <div class="life-list">
-          <div v-for="item in serviceList">
-            <router-link  :to="item.service_url" class="item">
+          <div v-for="item in serviceList" class="item">
+            <router-link  :to="item.service_url">
               <div class="img-box">
                 <img class="img" v-lazy="item.service_logo" alt="" />
                 <!--<img class="img" src="@/assets/images/test/img3.jpg" alt="">-->

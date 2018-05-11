@@ -79,7 +79,7 @@
           res=res.data;
           if(res.status==0){
             this.$vux.toast.text('绑定成功');
-            this.$router.push('/user/cards');
+            this.$router.go(-2);
           }else{
             this.$vux.toast.text(res.msg);
           }
@@ -98,13 +98,5 @@
 
   .tz-selecter{
     text-align: right;
-  }
-
-  .weui-cell_select .weui-cell__bd:after{
-    border-style:none;
-  }
-
-  .weui-cell_select .weui-select{
-    padding-right:0;
   }
 </style>

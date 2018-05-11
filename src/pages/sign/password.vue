@@ -87,7 +87,7 @@
             this.update_roomInfo({});
           }
           this.$vux.toast.show('注册成功');
-          this.$router.push('/user');
+          this.$router.replace('/user');
         }).catch(err=>{
           console.log('my err:'+err);
         })

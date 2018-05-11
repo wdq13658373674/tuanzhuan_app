@@ -17,7 +17,9 @@ import PropertyService from '@/pages/property/service'
 import ServiceDetail from '@/pages/property/detail'
 
 import Life from '@/pages/life/index'
-import LifeCheck from '@/pages/life/check'
+import LifeElectricity from '@/pages/life/electricity'
+import LifeWater from '@/pages/life/water'
+import LifeGas from '@/pages/life/gas'
 import LifeCheckDetail from '@/pages/life/detail'
 import LifePay from '@/pages/life/pay'
 
@@ -122,6 +124,7 @@ export default new Router({
           name: 'PropertyService',
           component: PropertyService,
           meta: {
+            requireAuth: true,
             title: '物业服务费'
           }
         },
@@ -130,6 +133,7 @@ export default new Router({
           name: 'ServiceDetail',
           component: ServiceDetail,
           meta: {
+            requireAuth: true,
             title: '物业费账单'
           }
         },
@@ -144,13 +148,33 @@ export default new Router({
           }
         },
         {
-          path: '/life/check',
-          name: 'LifeCheck',
+          path: '/life/electricity',
+          name: 'LifeElectricity',
           meta: {
             title: '生活缴费'
           },
           components:{
-            default:LifeCheck
+            default:LifeElectricity
+          }
+        },
+        {
+          path: '/life/water',
+          name: 'LifeWater',
+          meta: {
+            title: '生活缴费'
+          },
+          components:{
+            default:LifeWater
+          }
+        },
+        {
+          path: '/life/gas',
+          name: 'LifeGas',
+          meta: {
+            title: '生活缴费'
+          },
+          components:{
+            default:LifeGas
           }
         },
         {

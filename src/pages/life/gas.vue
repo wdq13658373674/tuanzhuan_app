@@ -2,7 +2,7 @@
   <section class="page-group">
     <ul class="arrow-cell-list">
       <li class="item">
-        <span class="link cell">重庆市自来电费</span>
+        <span class="link cell">重庆燃气集团</span>
       </li>
     </ul>
 
@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <router-link to="/life/check/detail" class="btn btn-orange radius mt60">查询账单</router-link>
+    <!--<router-link :to="{path:'/life/check/detail'" class="btn btn-orange radius mt60">查询账单</router-link>-->
     <p class="text-center mt20">点击即表示同意 <a href="#" class="green">《团转到家自助缴费协议》</a></p>
   </section>
 </template>

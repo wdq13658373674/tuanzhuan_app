@@ -74,6 +74,7 @@
             this.$router.push('/user/safe/setPayPassword');
           }else{
             this.$vux.toast.text('请使用当前登陆的电话号码');
+            this.code='';
           }
         }).catch(err=>{
           console.log('my err:'+err);

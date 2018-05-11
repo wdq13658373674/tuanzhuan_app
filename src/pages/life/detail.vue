@@ -24,7 +24,7 @@
         </li>
         <li class="item">
           <span>缴费单位</span>
-          <span class="gray">重庆市中法电费</span>
+          <span class="gray">{{$route.query.type}}</span>
         </li>
       </ul>
     </div>
