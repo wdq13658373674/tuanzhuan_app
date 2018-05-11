@@ -62,7 +62,8 @@
           </router-link>
           <router-link class="item" to="/user/house" tag="li">
             <p class="p1">我的房屋</p>
-            <p class="p2">{{roomInfo[0].village_name}}{{roomInfo[0].unit_name}}{{roomInfo[0].floor_name}}{{roomInfo[0].floor_code}}</p>
+            <p class="p2" v-if="roomInfo.length !== 0">{{roomInfo.village_name}}{{roomInfo.unit_name}}{{roomInfo.floor_name}}{{roomInfo.floor_code}}</p>
+            <p v-else>{{roomInfo.notFloor}}</p>
             <i class="icon arrow"></i>
           </router-link>
           <router-link class="item" to="/user/order" tag="li">
@@ -162,12 +163,11 @@
         bankNum:0,
         orderNum:0,
         roomInfo:{
-          0:{
-            village_name:'',
-            unit_name:'',
-            floor_name:'',
-            floor_code:''
-          }
+          village_name:'',
+          unit_name:'',
+          floor_name:'',
+          floor_code:'',
+          notFloor:''
         }
       }
     },
@@ -192,12 +192,15 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
-          if(res.status==0){
+          if(res.status === 0){
             this.userLists=res.data.village.user;
             this.bankNum = res.data.bank_num;
             this.orderNum = res.data.order;
-            this.roomInfo = res.data.room_info;
+            if(res.data.room_info.length !== 0){
+              this.roomInfo = res.data.room_info[0];
+            }else {
+              this.roomInfo.notFloor = '暂无房屋';
+            }
             if(res.data.village.room){
               this.roomLists=res.data.village.room;
             }
