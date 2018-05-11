@@ -34,6 +34,7 @@
       }
     },
     methods:{
+      ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
       /**注册表单提交*/
       submit:function () {
           if(this.password==''){
@@ -52,46 +53,18 @@
         this.$axios.post(global.API_HOST+'/index/index/registration',qs.stringify(params)).then(res=>{
           res=res.data;
 
-          this.$vux.toast.show({
-            text: res.msg
-          })
-
           if(res.status==0){
-            this.login();
+            this.$vux.toast.text('注册成功,请登陆!');
+            this.$router.replace('/login');
+          }else{
+            this.$vux.toast.show({
+              text: res.msg
+            })
           }
         }).catch(err=>{
           console.log('my err:'+err);
         })
       },
-      /**登陆*/
-      ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
-      login:function(){
-        const params={
-          'mobile':this.$route.params.phone,
-          'password':this.password,
-        }
-
-        this.$axios.post(global.API_HOST+'/index/index/login',qs.stringify(params)).then(res=>{
-          res=res.data;
-
-          if(res.status==1){
-            this.$vux.toast.show(res.msg);
-            return;
-          }
-
-          this.update_userInfo(res.data.user);
-          this.update_token(res.data.token);
-          if(res.data.room){
-            this.update_roomInfo(res.data.room);
-          }else{
-            this.update_roomInfo({});
-          }
-          this.$vux.toast.show('注册成功');
-          this.$router.replace('/user');
-        }).catch(err=>{
-          console.log('my err:'+err);
-        })
-      }
     }
   }
 </script>

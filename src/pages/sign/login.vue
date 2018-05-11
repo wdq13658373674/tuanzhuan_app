@@ -38,6 +38,7 @@
         area:86,
         phone:'',
         password:'',
+        tips:''
       }
     },
     mounted(){
@@ -48,17 +49,9 @@
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
       /**登陆提交**/
       submit:function(){
-        if(this.phone == ''){
-          this.$vux.toast.show('请输入手机号码');
-          return;
-        }else if(!utils.is_mobile(this.phone)){
-          this.$vux.toast.show('手机号码格式不正确');
-          return;
-        }else if(this.password== ''){
-          this.$vux.toast.show('请输入密码');
+        if(!this.check()){
           return;
         }
-
         const params={
           'mobile':this.phone,
           'password':this.password,
@@ -66,24 +59,43 @@
 
         this.$axios.post(global.API_HOST+'/index/index/login',qs.stringify(params)).then(res=>{
           res=res.data;
-          console.log(res);
+          // console.log(res);
+
           if(res.status==1){
             this.$vux.toast.show(res.msg);
             return;
-          }
-
-          this.update_userInfo(res.data.user);
-          this.update_token(res.data.token);
-          if(res.data.room){
-            this.update_roomInfo(res.data.room);
           }else{
-            this.update_roomInfo({});
+            this.update_userInfo(res.data.user);
+            this.update_token(res.data.token);
+            if(res.data.room){
+              this.update_roomInfo(res.data.room);
+            }else{
+              this.update_roomInfo({});
+            }
+            this.$vux.toast.show('登陆成功');
+            this.$router.replace('/user');
           }
-          this.$vux.toast.show('登陆成功');
-          this.$router.go(-1);
         }).catch(err=>{
           console.log('my err:'+err)
         })
+      },
+      /**表单验证**/
+      check(){
+        this.tips='';
+        if(this.phone == ''){
+          this.tips='请输入手机号码';
+        }else if(!utils.is_mobile(this.phone)){
+          this.tips='手机号码格式不正确';
+        }else if(this.password== ''){
+          this.tips='请输入密码';
+        }
+
+        if(this.tips!=''){
+          this.$vux.toast.text(this.tips);
+          return false;
+        }else{
+          return true;
+        }
       }
     }
   }
