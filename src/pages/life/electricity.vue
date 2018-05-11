@@ -13,7 +13,9 @@
       </div>
     </div>
 
-    <router-link to="/life/check/detail" class="btn btn-orange radius mt60">查询账单</router-link>
+    <router-link :to="{path:'/life/check/detail',query:{
+      type:'国网重庆市电力公司'
+    }}" class="btn btn-orange radius mt60">查询账单</router-link>
     <p class="text-center mt20">点击即表示同意 <a href="#" class="green">《团转到家自助缴费协议》</a></p>
   </section>
 </template>
