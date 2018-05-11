@@ -1,14 +1,14 @@
 <template>
   <div>
     <section class="page-group">
-      <search
+      <!--<search
         class="tz-search"
         placeholder="请输入商品名称"
         :auto-fixed="false"
         cancel-text="搜索"
         @on-cancel="submit"
         v-model="value">
-      </search>
+      </search>-->
 
       <h2 class="h2" v-if="flag">我的小区</h2>
       <ul class="cell-list">
@@ -92,9 +92,9 @@
         this.$router.replace('/');
       },
       /**搜索*/
-      submit:function(){
-        // console.log(this.search);
-      }
+      /*submit:function(){
+        console.log(this.search);
+      }*/
     }
   }
 </script>
