@@ -24,7 +24,7 @@ import cart from '@/assets/js/shop/cart'
     props: ["select"],
     methods: {
       back() {
-        this.$router ? this.$router.back(-1) : window.history.back()
+        this.$router ? this.$router.go(-1) : window.history.back()
       },
       /**删除购物车选中商品**/
       del(){

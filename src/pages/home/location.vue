@@ -93,7 +93,7 @@
         roomInfo.village_id=item.village_id;
         this.$store.commit('update_roomInfo',roomInfo);
 
-        this.$router.push('/');
+        this.$router.replace('/');
       },
       /**搜索*/
       submit:function(){
