@@ -132,7 +132,6 @@
             goods_order_refund_numb:''
           };
         }
-        console.log(params);
         this.disable = false;
         this.$axios.get(global.API_HOST+'index/goods_order/refundOrderInfo',{
           params:params

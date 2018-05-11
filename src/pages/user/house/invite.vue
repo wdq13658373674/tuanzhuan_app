@@ -81,7 +81,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==0){
             this.$vux.toast.text('添加成功');

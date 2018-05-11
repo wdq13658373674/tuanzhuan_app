@@ -74,7 +74,6 @@
 
         this.$axios.post(global.API_HOST+'/index/User_address/editAddress',qs.stringify(params)).then(res=>{
           res=res.data;
-          console.log(res);
           if(res.status==0){
             this.$vux.toast.text('修改成功');
             this.$router.push('/shop/address');

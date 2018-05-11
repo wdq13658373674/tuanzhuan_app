@@ -97,7 +97,7 @@
       },
       /**搜索*/
       submit:function(){
-        console.log(this.search);
+        // console.log(this.search);
       }
     }
   }

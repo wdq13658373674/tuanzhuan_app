@@ -195,7 +195,6 @@ export default {
         if(i>1) back;
         this.tabs.push(day[i]);
       }
-      console.log(res);
       //初始化送货时间
       this.setSendTime();
       this.timeValue=this.options[0];

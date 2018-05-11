@@ -191,7 +191,6 @@
           this.goods.goods_logo=this.goodsLists[0].goods_logo
         }
 
-        console.log(this.goods);
 
         this.goods_id=this.goods.goods_id;
         this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);

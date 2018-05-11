@@ -138,7 +138,7 @@
         }).then(res=>{
           res=res.data;
           if(res.status==0){
-            console.log(res);
+            // console.log(res);
           }
         }).catch(err=>{
           cnsole.log('my err:'+err);

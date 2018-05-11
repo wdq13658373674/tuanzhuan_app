@@ -192,7 +192,6 @@
         }).then(res=>{
           res=res.data;
           this.orderDetail = res.data;
-          console.log(this.orderDetail);
           for(let i in this.orderDetail.order_info){
             this.total += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
           }

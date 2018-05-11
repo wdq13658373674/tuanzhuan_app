@@ -100,7 +100,6 @@
 
         this.$axios.post(global.API_HOST+'/index/House_user_bind_info_view/getUserType',qs.stringify(params)).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==0){
             this.house=res.data;//房屋

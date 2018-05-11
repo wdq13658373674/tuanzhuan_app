@@ -88,7 +88,7 @@
         })
       },
       onScrollBottom () {
-        console.log()
+        // console.log()
       },
       onScroll (pos) {
         this.scrollTop = pos.top

@@ -43,7 +43,6 @@
           user_id:this.userInfo.user_id,
           goods_order_cancel_reason: this.reason
         };
-        console.log(params);
         if(this.reason !== ''){
           this.$axios.get(global.API_HOST+'index/Goods_order/refundOrder',{
             params:params
