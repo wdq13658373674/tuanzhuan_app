@@ -59,13 +59,15 @@
         </h1>
 
         <div class="life-list">
-          <router-link v-for="item in serviceList" :to="item.service_url" class="item">
-            <div class="img-box">
-              <img class="img" v-lazy="item.service_logo" alt="" />
-              <!--<img class="img" src="@/assets/images/test/img3.jpg" alt="">-->
-            </div>
-            <p class="txt">{{item.service_title}}</p>
-          </router-link>
+          <div v-for="items in serviceList">
+            <router-link  :to="items.service_url" class="item">
+              <div class="img-box">
+                <img class="img" v-lazy="items.service_logo" alt="" />
+                <!--<img class="img" src="@/assets/images/test/img3.jpg" alt="">-->
+              </div>
+              <p class="txt">{{items.service_title}}</p>
+            </router-link>
+          </div>
         </div>
 
       </div>
