@@ -15,7 +15,7 @@
         <li class="item link" v-for="item in user_village" @click="changeVillage(item)">
           <router-link to="">
             <i class="address pull-left mr10"></i>
-            {{item.village_name}}-{{item.room_id}}
+            {{item.village_name}}
           </router-link>
         </li>
       </ul>
@@ -88,14 +88,7 @@
       /**切换小区*/
       changeVillage:function(item){
         let roomInfo=item;
-
-        /*roomInfo.village_name=item.village_name;
-        roomInfo.lat=item.lat;
-        roomInfo.lng=item.lng;
-        roomInfo.village_id=item.village_id;*/
-
         this.$store.commit('update_roomInfo',roomInfo);
-
         this.$router.replace('/');
       },
       /**搜索*/
