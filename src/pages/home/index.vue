@@ -72,7 +72,7 @@
 
       </div>
 
-      <div class="content mt20">
+      <div class="content mt20" v-if="goodsLists.length!=0">
         <h1 class="h1">
           <em class="pull-left">团转商城</em>
           <router-link to="shop" class="pull-right gray">更多<i class="ml10 icon arrow"></i></router-link>
@@ -122,7 +122,7 @@
       return{
         weather:'',
         newsLists:'',
-        goodsLists:'',
+        goodsLists:[],
         lunarData:'',
         serviceList:{}
       }
@@ -138,7 +138,7 @@
       this.getWeather();
     },
     methods:{
-      /*获取服务*/
+      /**获取服务*/
       getserviceIndex(){
         this.$axios.get(global.API_HOST+'index/service/serviceIndex').then(res=>{
           res=res.data;
