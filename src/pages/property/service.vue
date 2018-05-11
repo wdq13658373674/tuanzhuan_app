@@ -78,10 +78,38 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: "PropertyService",
+    data(){
+      return {
+        propertyList:{}
+      }
+    },
     computed:{
+      ...mapState(['roomInfo'])
+    },
+    mounted(){
+      this.getUserPropertyList();
+    },
+    methods:{
+      getUserPropertyList(){
+        //console.log(this.roomInfo);
+        let params={
+          village_id: this.roomInfo.village_id,
+          room_id: this.roomInfo.room_id
+        };
+        this.$axios.get(global.API_HOST+'index/property/getUserPropertyList',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          this.propertyList = res.data;
+          console.log(this.propertyList);
 
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      }
     }
   }
 </script>
