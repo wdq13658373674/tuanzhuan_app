@@ -3,75 +3,65 @@
     <section class="page-group">
       <h2 class="h2">
         <i class="home pull-left"></i>
-        <span class="mr10">扬子江商务中心</span>
-        <span class="mr10">二期2号楼</span>
-        <span class="mr10">2单元0406</span>
+        <span class="mr10">{{room.version_name}}</span>
+        <span class="mr10">{{room.version_name}}</span>
+        <span class="mr10">{{room.unit_name}}{{room.room_code}}</span>
       </h2>
 
       <div class="content">
-        <table class="table">
-          <thead>
-          <tr>
-            <td>操作</td>
-            <td class="text-center">日期</td>
-            <td class="text-center">总计</td>
-            <td></td>
-          </tr>
-          </thead>
+        <div v-if="propertyList.length == 0 || propertyList == 'undefined'">
+          <p>暂无服务费</p>
+        </div>
+        <div v-else-if="propertyList.length != 0">
+          <table class="table">
+            <thead>
+            <tr>
+              <td>操作</td>
+              <td class="text-center">日期</td>
+              <td class="text-center">总计</td>
+              <td></td>
+            </tr>
+            </thead>
 
-          <tbody>
-          <tr>
-            <td>
-              <label>
-                <input type="checkbox" name="pay">
-                <div class="radio">
-                  <i class="check"></i>
-                </div>
-              </label>
-            </td>
-            <td class="text-center">2018年02月</td>
-            <td class="text-center">280.99</td>
-            <td>
-              <router-link class="link" to="/property/service/detail">
-                <img class="img" src="@/assets/images/icons/arrow3.svg" alt="">
-              </router-link>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>
-                <input type="checkbox" name="pay">
-                <div class="radio">
-                  <i class="check"></i>
-                </div>
-              </label>
-            </td>
-            <td class="text-center">2018年02月</td>
-            <td class="text-center">280.99</td>
-            <td>
-              <a class="link" href="#">
-                <img class="img" src="@/assets/images/icons/arrow3.svg" alt="">
-              </a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+            <tbody>
+            <tr v-for="(item, index) in propertyList">
+              <td>
+                <label @click="currClick(item,index)">
+                  <input type="checkbox" name="pay" :value="index" v-model="checkboxModel">
+                  <div class="radio">
+                    <i class="check"></i>
+                  </div>
+                </label>
+              </td>
+              <td class="text-center">{{item.property_year}}年{{item.property_month_begin}}月</td>
+              <td class="text-center propertyMoney">{{item.property_money}}</td>
+              <td>
+                <router-link class="link" :to="{path:'/property/service/detail',query:{property_id:item.property_id}}">
+                  <img class="img" src="@/assets/images/icons/arrow3.svg" alt="">
+                </router-link>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+
       </div>
     </section>
     <footer>
       <div class="bottom-fixed cell">
         <div class="property-pay-money">
-          <label class="pull-left mr50">
-            <input type="checkbox" name="pay">
+          <label class="pull-left mr50" >
+            <input type="checkbox" name="pay" v-model="checkAll">
             <div class="radio">
               <i class="check"></i>
             </div>
             <span>全选</span>
           </label>
 
-          合计：<span class="orange">¥1592.59</span>
+          合计：<span class="orange">¥{{totalMoney}}</span>
         </div>
-        <a href="#" class="btn btn-orange">结算</a>
+        <a href="#" class="btn btn-orange" @click="pay">结算</a>
       </div>
     </footer>
   </div>
@@ -83,11 +73,49 @@
     name: "PropertyService",
     data(){
       return {
-        propertyList:{}
+        propertyList:{},
+        room:{},
+        propertyTotal: [],
+        checkboxModel:[]
       }
     },
     computed:{
-      ...mapState(['roomInfo'])
+      ...mapState(['roomInfo']),
+      totalMoney:function(item,index){
+        let sum = 0;
+        for(let i=0;i<this.propertyTotal.length;i++){
+          sum += this.propertyTotal[i];
+        };
+        return sum.toFixed(2);
+      },
+      checkAll: {
+        get: function() {
+          return this.checkboxModel.length === this.propertyList.length;
+        },
+        set: function(value){
+          let _this = this;
+          if (value) {
+            this.propertyTotal = [];
+            this.propertyList.map(function(item,index) {
+              _this.checkboxModel.push(index);
+              item.checked = true;
+              let total = parseFloat(item.property_money);
+              _this.propertyTotal.push(total);
+            })
+          }else{
+            this.checkboxModel = [];
+            this.propertyTotal=[];
+            this.propertyList.forEach(function(item,index){
+              item.checked = false;
+            });
+          }
+        }
+      },
+      checkedCount: {
+        get: function() {
+          return this.checkboxModel.length;
+        }
+      }
     },
     mounted(){
       this.getUserPropertyList();
@@ -99,16 +127,51 @@
           village_id: this.roomInfo.village_id,
           room_id: this.roomInfo.room_id
         };
-        this.$axios.get(global.API_HOST+'index/property/getUserPropertyList',{
-          params:params
-        }).then(res=>{
-          res=res.data;
-          this.propertyList = res.data;
-          console.log(this.propertyList);
 
-        }).catch(err=>{
-          console.log('my err:'+err)
-        })
+        if(this.roomInfo.room_id){
+          this.$axios.get(global.API_HOST+'index/property/getUserPropertyList',{
+            params:params
+          }).then(res=>{
+            res=res.data;
+            this.room = res.data.room;
+            this.propertyList = res.data.property;
+            console.log(this.propertyList);
+          }).catch(err=>{
+            console.log('my err:'+err)
+          });
+        }else{
+          console.log(this.propertyList.length);
+        }
+      },
+      currClick(item,index){
+        let _this = this;
+        if(typeof item.checked === 'undefined'){
+          this.$set(item,'checked',true);
+          let total = parseFloat(item.property_money);
+          this.propertyTotal.push(total);
+        }else{
+          item.checked = !item.checked;
+          if(item.checked){
+            this.propertyTotal = [];
+            this.propertyList.forEach(function(item,index){
+              if(item.checked){
+                let total = parseFloat(item.property_money);
+                _this.propertyTotal.push(total);
+              }
+            });
+          }else{
+            this.propertyTotal = [];
+            this.propertyList.forEach(function(item,index){
+              if(item.checked){
+                let total = parseFloat(item.property_money);
+                _this.propertyTotal.push(total);
+              }
+            });
+          }
+        }
+      },
+      pay(){
+
       }
     }
   }
