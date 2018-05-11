@@ -201,7 +201,7 @@ export default new Router({
           path: '/article',
           name: 'Article',
           meta: {
-            title: '社区公告'
+            title: '通知'
           },
           components:{
             default:Article

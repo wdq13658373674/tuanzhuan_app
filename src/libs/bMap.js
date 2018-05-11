@@ -31,6 +31,8 @@ const getCurrentPosition=function(){
 
 /**
  * 地址解析转换经纬度
+ * address : 地址名称
+ * callback : 回调函数
  * **/
 const getPosition=function(address,callback){
   var myGeo = new BMap.Geocoder();

@@ -62,6 +62,7 @@
           params:param
         }).then(res=>{
           res=res.data;
+          console.log(res);
 
           if(flag){
             //多次加载

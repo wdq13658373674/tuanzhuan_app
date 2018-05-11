@@ -138,7 +138,13 @@
         }).then(res=>{
           res=res.data;
           if(res.status==0){
-            // console.log(res);
+            /**
+             * todo 轮播图获取
+             * **/
+            /*let swiper=res.data[0].goods_imgs.split(',');
+            this.swiperList=swiper.map((item)=>({
+              img:item
+            }))*/
           }
         }).catch(err=>{
           cnsole.log('my err:'+err);

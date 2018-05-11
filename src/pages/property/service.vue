@@ -2,7 +2,7 @@
   <div>
     <section class="page-group">
       <h2 class="h2">
-        <i class="home pull-left"></i>
+        <i class="icon home"></i>
         <span class="mr10">扬子江商务中心</span>
         <span class="mr10">二期2号楼</span>
         <span class="mr10">2单元0406</span>

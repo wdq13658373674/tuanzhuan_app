@@ -9,9 +9,12 @@ import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
 import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
-// import utils from '@/libs/util.js'
+import utils from '@/libs/util.js'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
+/**
+ * 路由转场动画
+ * **/
 const options={
   duration: '0.3',
   forwardAnim: 'fadeInRight', //前进动画
@@ -41,7 +44,7 @@ Object.keys(filters).forEach(key => {
 /**
  * 全局工具函数
  * **/
-// Vue.use(utils);
+Vue.use(utils);
 
 /**
  * fastclick
