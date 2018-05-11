@@ -59,13 +59,13 @@
         </h1>
 
         <div class="life-list">
-          <div v-for="items in serviceList">
-            <router-link  :to="items.service_url" class="item">
+          <div v-for="item in serviceList">
+            <router-link  :to="item.service_url" class="item">
               <div class="img-box">
-                <img class="img" v-lazy="items.service_logo" alt="" />
+                <img class="img" v-lazy="item.service_logo" alt="" />
                 <!--<img class="img" src="@/assets/images/test/img3.jpg" alt="">-->
               </div>
-              <p class="txt">{{items.service_title}}</p>
+              <p class="txt">{{item.service_title}}</p>
             </router-link>
           </div>
         </div>
