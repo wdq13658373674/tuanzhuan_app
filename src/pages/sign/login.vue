@@ -46,6 +46,7 @@
     },
     methods:{
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
+      /**登陆提交**/
       submit:function(){
         if(this.phone == ''){
           this.$vux.toast.show('请输入手机号码');

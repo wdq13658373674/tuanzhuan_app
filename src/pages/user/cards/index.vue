@@ -2,23 +2,26 @@
   <div>
     <ColorNav color="black-bar"></ColorNav>
     <section class="page-group gray-bg">
-      <ul class="user-bank-list">
-        <li class="item" v-for="item in cardsLists">
-          <div class="img-box">
-            <img src="@/assets/images/public/bank.png" alt="">
-          </div>
-          <div class="msg-box">
-            <div class="cell">
-              <div class="name">
-                <p>{{item.bank_name.split('-')[0]}}</p>
-                <p>{{item.bank_name.split('-')[2]}}</p>
-              </div>
-              <div class="link" @click="getBankId(item.bank_id)">解除绑定</div>
+      <transition-group class="user-bank-list" name="fade" tag="ul"
+                        enter-active-class="tz-animated fadeIn"
+                        leave-active-class="tz-animated slideOutUp"
+      >
+          <li class="item" v-for="(item,index) in cardsLists" :key="index">
+            <div class="img-box">
+              <img src="@/assets/images/public/bank.png" alt="">
             </div>
-            <p class="card">{{item.bank_numb | formatCards}}</p>
-          </div>
-        </li>
-      </ul>
+            <div class="msg-box">
+              <div class="cell">
+                <div class="name">
+                  <p>{{item.bank_name.split('-')[0]}}</p>
+                  <p>{{item.bank_name.split('-')[2]}}</p>
+                </div>
+                <div class="link" @click="getBankId(item.bank_id)">解除绑定</div>
+              </div>
+              <p class="card">{{item.bank_numb | formatCards}}</p>
+            </div>
+          </li>
+      </transition-group>
       <div class="user-add-bank" @click="addCards">
         <span class="add">+</span>
         添加银行卡
@@ -155,6 +158,7 @@
 <style lang="scss">
   @import "../../../core/base";
 
+  /*sheet*/
   .bank-sheet{
     .weui-actionsheet{
       background: none;

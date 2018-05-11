@@ -66,8 +66,4 @@ const util={
   },
 };
 
-/*exports.install = function (Vue, options) {
-  Vue.prototype.util = util
-};*/
-
 export default util;

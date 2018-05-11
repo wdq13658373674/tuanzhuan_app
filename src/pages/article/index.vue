@@ -52,6 +52,9 @@
       this.loadMore();
     },
     methods:{
+      /**
+       * 获取公告列表
+       * **/
       getNewsLists(flag){
         const param = {
           'notic_village_id' : 1,
@@ -85,6 +88,9 @@
           console.log("my error:"+err);
         });
       },
+      /**
+       * 下拉加载更多
+       * **/
       loadMore:function(){
         this.busy = true;
         this.load = true;

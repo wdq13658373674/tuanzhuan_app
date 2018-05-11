@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        nickname:this.$route.params.nickname
+        nickname:this.$route.query.nickname
       }
     },
     computed:{

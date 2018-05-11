@@ -245,4 +245,10 @@
       background-size: 100% rem(222);
     }
   }
+
+  /*动画*/
+  .tz-animated {
+    animation-duration:.6s;
+    animation-fill-mode: both;
+  }
 </style>

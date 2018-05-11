@@ -201,7 +201,7 @@ export default new Router({
           path: '/article',
           name: 'Article',
           meta: {
-            title: '社区公告'
+            title: '通知'
           },
           components:{
             default:Article
@@ -664,7 +664,7 @@ export default new Router({
       }
     },
     {
-      path: '/user/name/:realname',
+      path: '/user/name',
       name: 'UserName',
       meta: {
         requireAuth: true,
@@ -675,7 +675,7 @@ export default new Router({
       }
     },
     {
-      path: '/user/change/nickname/:nickname',
+      path: '/user/change/nickname',
       name: 'UserNickname',
       meta: {
         requireAuth: true,

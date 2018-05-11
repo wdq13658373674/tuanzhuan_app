@@ -9,14 +9,17 @@ import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
 import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
-// import utils from '@/libs/util.js'
+import utils from '@/libs/util.js'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
+/**
+ * 路由转场动画
+ * **/
 const options={
   duration: '0.3',
   forwardAnim: 'fadeInRight', //前进动画
   backAnim: 'fadeInLeft', //后退动画
-  sameDepthDisable: true, //url深度相同时禁用动画，默认为false
+  sameDepthDisable: false, //url深度相同时禁用动画，默认为false
   shadow:true, //值为false，转场时没有阴影的层次效果
   disable: false, //禁用转场动画，默认为false，嵌套路由默认为true
   nuxt: false //若使用后端渲染框架Nuxt，需要将此设为true，默认为false
@@ -41,7 +44,7 @@ Object.keys(filters).forEach(key => {
 /**
  * 全局工具函数
  * **/
-// Vue.use(utils);
+Vue.use(utils);
 
 /**
  * fastclick
