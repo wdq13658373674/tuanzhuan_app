@@ -46,6 +46,7 @@
         type:3,
         sheetShow:false,
         identity:{
+          2:'产权人',
           3:'亲友',
           4:'租客',
         },

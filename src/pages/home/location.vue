@@ -15,7 +15,7 @@
         <li class="item link" v-for="item in user_village" @click="changeVillage(item)">
           <router-link to="">
             <i class="address pull-left mr10"></i>
-            {{item.village_name}}
+            {{item.village_name}}-{{item.room_id}}
           </router-link>
         </li>
       </ul>
@@ -51,7 +51,7 @@
       }
     },
     computed:{
-      ...mapState(['roomInfo'])
+      ...mapState(['roomInfo','userInfo'])
     },
     mounted(){
        this.getRooms();
@@ -64,7 +64,7 @@
           param={
             lat:this.roomInfo.lat,
             lng:this.roomInfo.lng,
-            user_id:this.roomInfo.user_id
+            user_id:this.userInfo.user_id
           }
         }
 
@@ -72,6 +72,7 @@
           params:param
         }).then(res=>{
           res=res.data;
+
           if(res.status==0){
             this.user_village=res.data.user_village;
             this.other_village=res.data.other_village;
@@ -86,11 +87,13 @@
       },
       /**切换小区*/
       changeVillage:function(item){
-        let roomInfo=this.roomInfo
-        roomInfo.village_name=item.village_name;
+        let roomInfo=item;
+
+        /*roomInfo.village_name=item.village_name;
         roomInfo.lat=item.lat;
         roomInfo.lng=item.lng;
-        roomInfo.village_id=item.village_id;
+        roomInfo.village_id=item.village_id;*/
+
         this.$store.commit('update_roomInfo',roomInfo);
 
         this.$router.replace('/');

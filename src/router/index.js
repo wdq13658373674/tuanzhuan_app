@@ -88,9 +88,9 @@ export default new Router({
   // mode:'history',
   saveScrollPosition : false,
   linkExactActiveClass:'active',
-  /*scrollBehavior (to, from, savedPosition) {
+  scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
-  },*/
+  },
   routes: [
     {
       path: '/',
@@ -675,7 +675,7 @@ export default new Router({
       }
     },
     {
-      path: '/user/nickname/:nickname',
+      path: '/user/change/nickname/:nickname',
       name: 'UserNickname',
       meta: {
         requireAuth: true,
