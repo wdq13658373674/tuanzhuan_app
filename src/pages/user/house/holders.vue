@@ -26,28 +26,33 @@
           </div>
 
           <ul class="owner-list">
-            <li class="owner" v-for="(item,index) in holders">
-              <label>
-                <input type="radio" :name="index" :value="item" v-model="select">
-                <div class="radio pull-left mr20">
-                  <i class="check"></i>
+            <transition-group
+              enter-active-class="tz-animated fadeIn"
+              leave-active-class="tz-animated slideOutUp"
+            >
+              <li class="owner" v-for="(item,index) in holders" :key="index">
+                <label>
+                  <input type="radio" :name="index" :value="item" v-model="select">
+                  <div class="radio pull-left mr20">
+                    <i class="check"></i>
+                  </div>
+                </label>
+                <div class="img-box">
+                  <img class="img" v-if="item.user.user_logo" :src="item.user.user_logo" alt="">
+                  <img class="img" src="@/assets/images/public/404.png" alt="" v-else>
                 </div>
-              </label>
-              <div class="img-box">
-                <img class="img" v-if="item.user.user_logo" :src="item.user.user_logo" alt="">
-                <img class="img" src="@/assets/images/public/404.png" alt="" v-else>
-              </div>
-              <div class="con-box">
-                <p>{{item.user.user_nickname || item.user.user_realname}}</p>
-                <p>
-                  <span v-if="item.bind_type==1">产权房主</span>
-                  <span v-else-if="item.bind_type==2">产权人</span>
-                  <span v-else-if="item.bind_type==3">亲友</span>
-                  <span v-else-if="item.bind_type==4">租客</span>
-                  <span class="gray ml20">{{item.user.user_phone | formatMobile}}</span>
-                </p>
-              </div>
-            </li>
+                <div class="con-box">
+                  <p>{{item.user.user_nickname || item.user.user_realname}}</p>
+                  <p>
+                    <span v-if="item.bind_type==1">产权房主</span>
+                    <span v-else-if="item.bind_type==2">产权人</span>
+                    <span v-else-if="item.bind_type==3">亲友</span>
+                    <span v-else-if="item.bind_type==4">租客</span>
+                    <span class="gray ml20">{{item.user.user_phone | formatMobile}}</span>
+                  </p>
+                </div>
+              </li>
+            </transition-group>
             <li>
               <router-link :to="{name:'UserHouseInvite',query:{
                 id:room_id,
@@ -137,6 +142,7 @@
 
           if(res.status==0){
             this.$vux.toast.text('移除成功');
+            this.select='';
             this.holders.splice(this.select,1);
           }else{
             this.$vux.toast.text('移除失败');

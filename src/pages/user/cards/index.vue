@@ -2,9 +2,11 @@
   <div>
     <ColorNav color="black-bar"></ColorNav>
     <section class="page-group gray-bg">
-      <ul class="user-bank-list">
-        <!--<transition name="fade">-->
-          <li class="item" v-for="item in cardsLists">
+      <transition-group class="user-bank-list" name="fade" tag="ul"
+                        enter-active-class="tz-animated fadeIn"
+                        leave-active-class="tz-animated slideOutUp"
+      >
+          <li class="item" v-for="(item,index) in cardsLists" :key="index">
             <div class="img-box">
               <img src="@/assets/images/public/bank.png" alt="">
             </div>
@@ -19,8 +21,7 @@
               <p class="card">{{item.bank_numb | formatCards}}</p>
             </div>
           </li>
-        <!--</transition>-->
-      </ul>
+      </transition-group>
       <div class="user-add-bank" @click="addCards">
         <span class="add">+</span>
         添加银行卡
@@ -172,11 +173,4 @@
       margin-top:rem(20);
     }
   }
-
-  /*.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to !* .fade-leave-active below version 2.1.8 *! {
-    opacity: 0;
-  }*/
 </style>
