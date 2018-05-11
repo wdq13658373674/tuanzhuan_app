@@ -11,7 +11,7 @@
           </div>
         </li>
         <li class="item">
-          <router-link class="link cell" :to="{name:'UserName',params:{
+          <router-link class="link cell" :to="{name:'UserName',query:{
             realname:userLists.user_realname
           }}">
             <span> <i class="icon icon2"></i>姓名</span>
@@ -20,11 +20,11 @@
           </router-link>
         </li>
         <li class="item">
-          <router-link class="link cell" :to="{name:'UserNickname',params:{
+          <router-link class="link cell" :to="{name:'UserNickname',query:{
             nickname:userLists.user_nickname
           }}">
             <span> <i class="icon icon3"></i>昵称</span>
-            <span>{{userLists.user_nickname}}</span>
+            <span>{{userLists.user_nickname || '暂无'}}</span>
           </router-link>
         </li>
         <li class="item" @click="changeSex=true">

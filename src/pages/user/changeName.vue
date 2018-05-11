@@ -29,7 +29,7 @@
     },
     data() {
       return {
-        realname:this.$route.params.realname
+        realname:this.$route.query.realname
       }
     },
     methods:{
