@@ -61,7 +61,7 @@
 
           合计：<span class="orange">¥{{totalMoney}}</span>
         </div>
-        <a href="#" class="btn btn-orange" @click="pay">结算</a>
+        <a href="#" class="btn btn-orange" @click="pay" :class="checkboxModel.length==0?'disabled':''">结算</a>
       </div>
     </footer>
   </div>
