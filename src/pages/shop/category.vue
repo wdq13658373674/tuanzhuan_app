@@ -1,6 +1,6 @@
 <template>
   <section class="page-group">
-    <div class="z-index" style="position: relative;">
+    <div class="z-index" style="position: relative;z-index:20;">
       <div class="content">
         <router-link :to="{path:'/shop/category/search',query:{
           id:type_id,
@@ -247,27 +247,26 @@
 </style>
 <style lang="scss">
   @import "../../core/base";
-  .nav-bar,.z-index{
-    z-index:20000;
+  .nav-bar{
+    z-index:30;
   }
 
   .sort-price,.sort-filter{
     height:0;
     overflow: hidden;
-    @include transition(all .3s linear);
 
     &.show{
       height:auto;
     }
   }
 
-  .slide-down-box{
+  /*.slide-down-box{
     background: #fff;
-  }
+  }*/
 
   .vux-masker-fullscreen {
     position: fixed;
-    z-index: 10001;
+    z-index: 10;
   }
   .vux-masker {
     position: absolute;
