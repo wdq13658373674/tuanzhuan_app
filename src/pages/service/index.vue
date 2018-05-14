@@ -27,7 +27,7 @@
                 <span class="tit">{{item.service_title}}</span>
                 <span class="tit-line"></span>
               </h3>
-              <ul class="classify-content-list">
+              <ul class="classify-content-list clearfix">
                 <li v-for="two_level in item.two_level" class="item">
                   <router-link class="link" :to="{path: two_level.service_url}">
                     <div class="img-box">

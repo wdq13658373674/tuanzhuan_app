@@ -24,7 +24,7 @@
             <span class="tit">{{items.type_name}}</span>
             <span class="tit-line"></span>
           </h3>
-          <ul class="classify-content-list">
+          <ul class="classify-content-list clearfix">
             <li class="item" v-for="item in items.subordinate" :key="item.type_id">
               <router-link :to="{ name: 'ShopCategory', query: {
                 id:item.type_id,
