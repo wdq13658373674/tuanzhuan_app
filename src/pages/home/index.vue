@@ -58,7 +58,7 @@
           <router-link to="/service" class="pull-right gray">更多<i class="ml10 icon arrow"></i></router-link>
         </h1>
 
-        <div class="life-list">
+        <div class="life-list clearfix">
           <div v-for="item in serviceList" class="item">
             <router-link  :to="item.service_url">
               <div class="img-box">
