@@ -37,7 +37,7 @@
     </section>
 
     <footer>
-      <a href="#" class="bottom-fixed btn-orange-fixed" :class="select?'disabled':''">我要缴费</a>
+      <router-link :to="{path:'/order/pay',query:{type:'property',property_id:property_id}}" class="bottom-fixed btn-orange-fixed" :class="select?'disabled':''">我要缴费</router-link>
     </footer>
   </div>
 </template>
@@ -55,7 +55,8 @@
         property_month_end: '',
         property_year: '',
         property_money: 0,
-        select: false
+        select: false,
+        property_id:0
       }
     },
     mounted(){
@@ -75,7 +76,7 @@
           this.property_month_end = res.data.property_month_end;
           this.property_year = res.data.property_year;
           this.property_money = res.data.property_money;
-
+          this.property_id = res.data.property_id;
         }).catch(err=>{
           console.log('my err:'+err)
         })

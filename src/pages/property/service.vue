@@ -59,7 +59,7 @@
 
           合计：<span class="orange">¥{{totalMoney}}</span>
         </div>
-        <a href="#" class="btn btn-orange" @click="pay" :class="checkboxModel.length==0?'disabled':''">结算</a>
+        <router-link :to="{path:'/order/pay',query:{type:'property',property_id:property_id}}" class="btn btn-orange" :class="checkboxModel.length==0?'disabled':''" @click="pay">结算</router-link>
       </div>
     </footer>
   </div>
@@ -75,7 +75,8 @@
         room:{},
         propertyTotal: [],
         checkboxModel:[],
-        isData: true
+        isData: true,
+        property_id: {}
       }
     },
     computed:{
@@ -95,11 +96,14 @@
           let _this = this;
           if (value) {
             this.propertyTotal = [];
+            this.property_id = [];
             this.propertyList.map(function(item,index) {
               _this.checkboxModel.push(index);
               item.checked = true;
               let total = parseFloat(item.property_money);
+              let propertyId = item.property_id;
               _this.propertyTotal.push(total);
+              _this.property_id.push(propertyId);
             })
           }else{
             this.checkboxModel = [];
@@ -121,7 +125,6 @@
     },
     methods:{
       getUserPropertyList(){
-        //console.log(this.roomInfo);
         let params={
           village_id: this.roomInfo.village_id,
           room_id: this.roomInfo.room_id
@@ -138,32 +141,40 @@
             console.log('my err:'+err)
           });
         }else{
-          console.log(this.propertyList.length);
           this.isData = false;
         }
       },
       currClick(item,index){
+
         let _this = this;
         if(typeof item.checked === 'undefined'){
           this.$set(item,'checked',true);
           let total = parseFloat(item.property_money);
+          let propertyId = item.property_id;
           this.propertyTotal.push(total);
+          this.property_id.push(propertyId);
         }else{
           item.checked = !item.checked;
           if(item.checked){
             this.propertyTotal = [];
+            this.property_id = [];
             this.propertyList.forEach(function(item,index){
               if(item.checked){
                 let total = parseFloat(item.property_money);
+                let propertyId = item.property_id;
                 _this.propertyTotal.push(total);
+                _this.property_id.push(propertyId);
               }
             });
           }else{
             this.propertyTotal = [];
+            this.property_id = [];
             this.propertyList.forEach(function(item,index){
               if(item.checked){
                 let total = parseFloat(item.property_money);
+                let propertyId = item.property_id;
                 _this.propertyTotal.push(total);
+                _this.property_id.push(propertyId);
               }
             });
           }

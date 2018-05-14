@@ -6,9 +6,9 @@
           <p class="f30 mt40">订单总额</p>
           <p class="mt40">
             <i class="tp"></i>
-            <span class="f40 orange">{{orderInfo.goods_order_tcion}}</span>
+            <span class="f40 orange">{{orderType?orderInfo.goods_order_tcion:property_tcion}}</span>
             <span class="f32 gray ml20 mr20">或</span>
-            <span class="f40">¥{{orderInfo.goods_order_price}}</span>
+            <span class="f40">¥{{orderType?orderInfo.goods_order_price:property_money_sum}}</span>
           </p>
           <p class="mt60 mb40 gray">*您可以选择用团票兑换或者人民币支付</p>
         </div>
@@ -21,7 +21,7 @@
             <img class="img pull-left" src="@/assets/images/img/c_pay1.svg" alt="">
             <div class="pull-left">
               <p class="p">团票兑换</p>
-              <p class="p">节省{{orderInfo.goods_order_price}}元</p>
+              <p class="p">节省{{orderType?orderInfo.goods_order_price:property_tcion}}元</p>
             </div>
           </div>
           <div class="cell">
@@ -130,14 +130,22 @@
               title:"线下支付",
               type:"lixian",
           }
-        }
+        },
+        orderType: true,
+        property_money_sum:0,
+        property_tcion:0
       }
     },
     computed:{
       ...mapState(['userInfo'])
     },
     mounted(){
-      this.getOrderInfo();
+
+      if(this.$route.query.type){
+        this.getProperty();
+      }else{
+        this.getOrderInfo();
+      }
     },
     methods:{
       /*结算*/
@@ -210,9 +218,17 @@
         this.title=tit;
         this.payType=type;
         if(type!="tcion"){
-          this.payMoney=this.orderInfo.goods_order_price
+          if(this.orderInfo.goods_order_price){
+            this.payMoney=this.orderInfo.goods_order_price;
+          }else{
+            this.payMoney = this.property_money_sum;
+          }
         }else{
-          this.payMoney=this.orderInfo.goods_order_tcion
+          if(this.orderInfo.goods_order_tcion){
+            this.payMoney=this.orderInfo.goods_order_tcion;
+          }else{
+            this.payMoney=this.property_tcion;
+          }
         }
       },
 
@@ -242,7 +258,7 @@
             that.orderInfo=res.data.order;
             that.pay_user=res.data.user;
 
-            that.payMoney=this.orderInfo.goods_order_tcion
+            that.payMoney=this.orderInfo.goods_order_tcion;
 
             that.ticket=(res.data.order.goods_order_price*that.ticket_rate).toFixed(2);
           }
@@ -251,8 +267,37 @@
           console.log('my err:'+ err);
         });
       },
-
-
+      /** 物业服务费 **/
+      getProperty(){
+        this.orderType = false;
+        let propertyId;
+        //判断传过来的数据是否是数组
+        if(this.$route.query.property_id instanceof Array){
+          propertyId = {};
+          for (let x in this.$route.query.property_id){
+            propertyId[x] = this.$route.query.property_id[x];
+          }
+        }else{
+          propertyId = this.$route.query.property_id;
+        }
+        let params={
+          data:propertyId,
+          user_id:this.userInfo.user_id
+        };
+        this.$axios.get(global.API_HOST+'index/property/getPropertyMoeny',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          this.orderInfo=res.data.order;
+          this.property_money_sum = res.data.property_money_sum;
+          this.property_tcion = res.data.property_tcion;
+          this.pay_user=res.data.user;
+          this.payMoney=this.property_tcion;
+          this.ticket=(res.data.property_money_sum*this.ticket_rate).toFixed(2);
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      }
     }
   }
 </script>
