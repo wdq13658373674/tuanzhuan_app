@@ -8,15 +8,12 @@
         <span class="mr10">{{room.unit_name}}{{room.room_code}}</span>
       </h2>
 
-      <div class="content">
-        <div v-if="propertyList.length == 0 || propertyList == 'undefined'">
-          <p>暂无服务费</p>
-        </div>
-        <div v-else-if="propertyList.length != 0">
+      <div v-if="isData" class="content">
+        <div>
           <table class="table">
             <thead>
             <tr>
-              <td>操作</td>
+              <td>操作 {{propertyList.length}}</td>
               <td class="text-center">日期</td>
               <td class="text-center">总计</td>
               <td></td>
@@ -44,11 +41,12 @@
             </tbody>
           </table>
         </div>
-
-
+      </div>
+      <div v-else style="background-color: #f4f4f4;">
+        <p style="text-align: center;background-color: #f4f4f4;">暂无服务费</p>
       </div>
     </section>
-    <footer>
+    <footer v-if="isData">
       <div class="bottom-fixed cell">
         <div class="property-pay-money">
           <label class="pull-left mr50" >
@@ -76,7 +74,8 @@
         propertyList:{},
         room:{},
         propertyTotal: [],
-        checkboxModel:[]
+        checkboxModel:[],
+        isData: true
       }
     },
     computed:{
@@ -139,7 +138,8 @@
             console.log('my err:'+err)
           });
         }else{
-          //console.log(this.propertyList.length);
+          console.log(this.propertyList.length);
+          this.isData = false;
         }
       },
       currClick(item,index){
