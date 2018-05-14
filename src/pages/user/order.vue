@@ -126,21 +126,15 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           if(flag){
             //多次加载
             for(let i in res.data){
               this.orderList.push(res.data[i]);
             }
-            let currentPage = Math.ceil(this.orderList.length/10);
-            if(this.page >= currentPage){
-              this.busy=true;
-              this.load=false;
-              this.flag = false;
-            }else {
-              this.busy=false;
-              this.load=true;
-              this.flag = false;
-            }
+            this.busy=true;
+            this.load=false;
+            this.flag = false;
           }else {
             //第一次加载
             this.orderList=res.data;
@@ -157,7 +151,7 @@
         /*选项卡切换*/
         this.getOrderList(type);
         this.type = type;
-        this.page = 1;
+        this.page = 0;
         this.flag = false;
         this.orderList=[];
       },
