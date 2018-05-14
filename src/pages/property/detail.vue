@@ -4,18 +4,19 @@
       <div class="content">
         <div class="bill">
           <p>
-            <span class="f32 mr10">3月账单</span>
-            <span>03/01-03/31</span>
+            <span class="f32 mr10">{{property_month_end}}月账单</span>
+            <span>{{property_year}}/{{property_month_begin}}-{{property_month_end}}/31</span>
             <span class="pull-right">单位：元</span>
           </p>
-          <p>未缴纳</p>
-          <p>¥305.04</p>
+          <p v-if="property_finished == 0">未缴纳</p>
+          <p v-else>已缴费</p>
+          <p>¥ {{property_money}}</p>
           <p>账单总金额</p>
         </div>
 
         <div class="radio-title">
           <label>
-            <input type="checkbox" name="pay" checked>
+            <input type="checkbox" name="pay" v-bind:checked="select?'':'checked'" @click="check">
             <div class="radio pull-left mr20">
               <i class="check"></i>
             </div>
@@ -26,15 +27,7 @@
         <ul class="cell-list ml53" style="list-style: disc;">
           <li class="item">
             <span class="tit">物业服务费</span>
-            <span>¥303.78</span>
-          </li>
-          <li class="item">
-            <span class="tit">物业服务费</span>
-            <span>¥303.78</span>
-          </li>
-          <li class="item">
-            <span class="tit">物业服务费</span>
-            <span>¥303.78</span>
+            <span>¥ {{property_money}}</span>
           </li>
         </ul>
       </div>
@@ -44,7 +37,7 @@
     </section>
 
     <footer>
-      <a href="#" class="bottom-fixed btn-orange-fixed">我要缴费</a>
+      <a href="#" class="bottom-fixed btn-orange-fixed" :class="select?'disabled':''">我要缴费</a>
     </footer>
   </div>
 </template>
@@ -54,6 +47,42 @@
     name: "ServiceDetail",
     computed:{
 
+    },
+    data() {
+      return {
+        property_finished: 0,
+        property_month_begin: '',
+        property_month_end: '',
+        property_year: '',
+        property_money: 0,
+        select: false
+      }
+    },
+    mounted(){
+      this.getPropertyDetail();
+    },
+    methods:{
+      getPropertyDetail(){
+        let params={
+          property_id:this.$route.query.property_id
+        };
+        this.$axios.get(global.API_HOST+'index/property/getPropertyList',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          this.property_finished = res.data.property_finished;
+          this.property_month_begin = res.data.property_month_begin;
+          this.property_month_end = res.data.property_month_end;
+          this.property_year = res.data.property_year;
+          this.property_money = res.data.property_money;
+
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      },
+      check(){
+        this.select = !this.select;
+      }
     }
   }
 </script>

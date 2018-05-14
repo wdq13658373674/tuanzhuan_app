@@ -135,12 +135,11 @@
             res=res.data;
             this.room = res.data.room;
             this.propertyList = res.data.property;
-            console.log(this.propertyList);
           }).catch(err=>{
             console.log('my err:'+err)
           });
         }else{
-          console.log(this.propertyList.length);
+          //console.log(this.propertyList.length);
         }
       },
       currClick(item,index){
