@@ -22,31 +22,19 @@
     <section class="page-group">
       <div class="content user-menu">
         <div class="item">
-          <router-link :to="{path:'/user/tickets',
-            query:{
-              tp:userLists.user_tcion
-            }
-          }">
+          <router-link :to="{path:'/user/tickets'}">
             <p class="p1 orange">{{userLists.user_tcion || '0.00'}}</p>
             <p class="p2">我的团票</p>
           </router-link>
         </div>
         <div class="item">
-          <router-link :to="{path:'/user/balance',
-            query:{
-              balance:userLists.user_money
-            }
-          }">
+          <router-link :to="{path:'/user/balance'}">
             <p class="p1">¥{{userLists.user_money || '0.00'}}</p>
             <p class="p2">账户余额</p>
           </router-link>
         </div>
         <div class="item">
-          <router-link :to="{path:'/user/integral',
-            query:{
-              integral:userLists.user_score
-            }
-          }">
+          <router-link :to="{path:'/user/integral'}">
             <p class="p1">{{userLists.user_ticket || '0.00'}}</p>
             <p class="p2">我的物业券</p>
           </router-link>
@@ -178,13 +166,8 @@
       this.getUserLists();
     },
     methods:{
-      ...mapMutations(['update_userInfo']),
       /**获取用户数据**/
       getUserLists(){
-        /*this.$vux.confirm.show({
-          title:'提示',
-          content:'hahah'
-        })*/
         let params={
           user_id:this.userInfo.user_id
         };
@@ -192,10 +175,12 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res);
           if(res.status === 0){
             this.userLists=res.data.village.user;
             this.bankNum = res.data.bank_num;
             this.orderNum = res.data.order;
+
             if(res.data.room_info.length !== 0){
               this.roomInfo = res.data.room_info[0];
             }else {

@@ -89,7 +89,9 @@
       allSelect:{
         /**单选功能**/
         get(){
-          return this.select.length==this.cart_lists.length ? true : false;
+          if(this.select.length!=0){
+            return this.select.length==this.cart_lists.length ? true : false;
+          }
         },
         /**全选功能**/
         set(value){
