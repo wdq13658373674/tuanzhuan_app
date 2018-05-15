@@ -65,9 +65,19 @@ const util={
     return v;
   },
   /**
-   *
+   *获取 字符长度
+   * str:字符串（中文:2个字符，英文:1个字符）
    * **/
+  getStrLength(str){
+    var realLength = 0, len = str.length, charCode = -1;
 
+    for (var i = 0; i < len; i++) {
+      charCode = str.charCodeAt(i);
+      if (charCode >= 0 && charCode <= 128) realLength += 1;
+      else realLength += 2;
+    }
+    return realLength;
+  }
 };
 
 export default util;

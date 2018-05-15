@@ -19,6 +19,7 @@
   import {mapState} from 'vuex'
   import BarNav from '@/pages/layout/barNav'
   import { updateMessage } from '@/assets/js/user/changeMessage'
+  import utils from '@/libs/util.js'
   export default {
     name: "ChangeName",
     components: {
@@ -29,7 +30,8 @@
     },
     data() {
       return {
-        realname:this.$route.query.realname
+        realname:this.$route.query.realname,
+        tips:''
       }
     },
     methods:{
@@ -37,12 +39,36 @@
        * 保存修改后的姓名
        * **/
       save(){
+        if(!this.check()){
+          return;
+        }
         let data={
           type:5,
           value:this.realname
         }
 
         updateMessage(this,data);
+        this.$router.replace('/user/message');
+      },
+      /**
+       * 输入验证：
+       * ---不能为空
+       * ---输入长度不能超过8个字符
+       * **/
+      check(){
+        this.tips='';
+        if(this.realname==''){
+          this.tips='输入不能为空,修改失败';
+        }else if(utils.getStrLength(this.realname) > 8){
+          this.tips='姓名不能超过8个字符,修改失败';
+        }
+
+        if(this.tips!=''){
+          this.$vux.toast.text(this.tips);
+          return false
+        }else{
+          return true;
+        }
       }
     }
   }
