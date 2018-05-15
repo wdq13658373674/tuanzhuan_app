@@ -16,9 +16,11 @@ var user = {
 
       store.set('msgDB', msgDB);
 
-      var tpl=$("#moban").html();
-      tpl =tpl.replace('{msg}',data.result.text);
-      $("#msgbox").append(tpl);
+      if($("#moban")){
+        var tpl=$("#moban").html();
+        tpl =tpl.replace('{msg}',data.result.text);
+        $("#msgbox").append(tpl);
+      }
         //接受到的文本消息处理 data.result.message为消息内容,data.result.uid为消息来源用户UID,发送消息时需要带此参数
         //console.log(data);
     },
