@@ -157,6 +157,9 @@
 
     },
     methods:{
+      /**
+       * 获取商品详情
+       * **/
       getDetail:function(){
         let param={
           goods_id:this.goods_id
@@ -184,6 +187,9 @@
           console.log('my err:'+ err);
         })
       },
+      /**
+       * 获取当前规格选中商品信息
+       * **/
       getGoods:function(index){
         this.goods=this.goodsLists[index];
 
@@ -205,6 +211,9 @@
         this.prop='';
       },
       //...mapMutations(['add_cartInfo']),
+      /**
+       * 加入购物车
+       * **/
       addCart(){
 
         if(this.selectType()){
@@ -222,6 +231,9 @@
           }
         }
       },
+      /**
+       * 选择规格
+       * **/
       changeProp(index) {
         var prop_id=this.goods_id+'_'+index;
         this.prop=prop_id;
@@ -244,6 +256,9 @@
           console.log('购买成功');
         }
       },
+      /**
+       * 加入购物车商品验证规格是否选择
+       * **/
       selectType:function(){
         if(this.showPop){
           if(this.popControl){

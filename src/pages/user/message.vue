@@ -6,7 +6,8 @@
           <div class="link cell">
             <span> <i class="icon icon1"></i>头像</span>
             <span class="user-img">
-              <img class="img" :src="userLists.user_logo" alt="">
+              <img v-if="userLists.user_logo" class="img" :src="userLists.user_logo" alt="">
+              <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
             </span>
           </div>
         </li>
