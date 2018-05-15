@@ -81,7 +81,7 @@
             }
           }
         },
-        page: 0,
+        page: 1,
         type: 0,
         busy:false,
         load:false,
@@ -117,6 +117,7 @@
     methods:{
       /*获取订单列表*/
       getOrderList(type, flag){
+        console.log('defaultPage:'+this.page);
         let params={
           user_id: this.userInfo.user_id,
           page: this.page,
@@ -126,8 +127,11 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
+          //console.log(res.data);
+          console.log(params);
+          console.log('loadPage:'+this.page);
           if(flag){
+            // console.log(this.page);
             //多次加载
             for(let i in res.data){
               this.orderList.push(res.data[i]);
@@ -145,21 +149,23 @@
 
         }).catch(err=>{
           console.log('my err:'+err)
-        })
+        });
+        this.page++;
       },
       tab(type){
         /*选项卡切换*/
-        this.getOrderList(type);
         this.type = type;
-        this.page = 0;
+        this.page = 1;
         this.flag = false;
         this.orderList=[];
+        this.getOrderList(type);
+        console.log('tabPage:'+this.page);
+        console.log('type:'+this.type);
       },
       /*下拉加载*/
       loadMore:function(){
         this.busy = true;
         this.load = true;
-        this.page++;
         this.getOrderList(this.type, this.flag);
       },
       /*取消订单*/
