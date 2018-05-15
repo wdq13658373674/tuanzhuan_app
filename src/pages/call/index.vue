@@ -23,7 +23,7 @@
             <!--</div>-->
           <!--</li>-->
           <template v-for="(item,key) in myMsg">
-            <li>
+            <li v-if="item.time">
               <div class="tip">
                 <span>{{item.time | stampToDate(true)}}</span>
               </div>
@@ -61,7 +61,7 @@
               <p>拍摄</p>
             </li>
             <li class="item">
-              <a href="#">
+              <a href="tel:400-135-6677">
                 <img class="img" src="@/assets/images/img/j_icon3.png" alt="">
                 <p>呼叫</p>
               </a>
@@ -133,12 +133,10 @@
         if(that.msgBox==""){
           return false;
         }
-        var timestamp = Date.parse(new Date());
         var msg=that.msgBox;
         var arr={
           msg:msg,
           status:1,
-          time:timestamp/1000,
           type:true,
         };
 
