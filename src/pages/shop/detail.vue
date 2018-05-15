@@ -146,6 +146,14 @@
         goods_id:this.$route.query.id
       }
     },
+    updated() {
+      /**
+       * 修改v-html 商品详情的样式
+       * **/
+      $('.product-content').find('img').css({
+        width:'100%'
+      });
+    },
     computed:{
       showPop:function(){
         return this.goodsLists.length>1 || this.goodsDetail.goods_property!='';
@@ -215,7 +223,6 @@
        * 加入购物车
        * **/
       addCart(){
-
         if(this.selectType()){
           var check=cart.addCart(this.goods,this.cartNum,this.prop);
           if(check==-1){
@@ -293,12 +300,6 @@
     .vux-icon-dot{
       background-color: #fff;
       border:rem(1) solid $primary;
-    }
-  }
-
-  .product-content{
-    img{
-      max-width: 100%;
     }
   }
 

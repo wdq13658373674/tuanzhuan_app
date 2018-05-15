@@ -29,11 +29,11 @@
       /**返回**/
       back() {
         if(this.$route.name=='UserOrder'){
-          this.$router.redirect('/user');
+          this.$router.push('/user');
           return;
         }
-        if(this.$route.name=='PropertyService'){
-          this.$router.redirect('/property');
+        if(this.$route.name=='OrderPayDetail'){
+          this.$router.go(-2);
           return;
         }
 
