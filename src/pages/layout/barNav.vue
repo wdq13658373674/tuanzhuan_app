@@ -29,9 +29,14 @@
       /**返回**/
       back() {
         if(this.$route.name=='UserOrder'){
-          this.$router.push('/user');
+          this.$router.replace('/user');
           return;
         }
+        if(this.$route.name=='PropertyService'){
+          this.$router.go(-4);
+          return;
+        }
+
         this.$router ? this.$router.go(-1) : window.history.back()
       }
     }
