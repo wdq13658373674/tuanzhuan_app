@@ -27,8 +27,8 @@
               <img v-if="user_logo" :src="user_logo" alt="">
               <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
             </div>
-            <div class="con-box">
-              {{item}}
+            <div class="con-box" style="position:relative;">
+              <inline-loading class="tz-msg-loading"></inline-loading> {{item}}
             </div>
           </li>
 
@@ -76,13 +76,14 @@
 </template>
 <script>
   import {mapState} from 'vuex'
+  import { InlineLoading } from 'vux'
 
   var svrMsg=[];
 
   export default {
     name: "Call",
     components:{
-
+      InlineLoading
     },
     data(){
       return {
@@ -132,5 +133,12 @@
   .animated{
     margin-top:rem(-88);
     padding-top:rem(88);
+  }
+
+  /*加载图标*/
+  .tz-msg-loading{
+    position:absolute;
+    left:rem(-50);
+    @include wh(rem(40),rem(40));
   }
 </style>
