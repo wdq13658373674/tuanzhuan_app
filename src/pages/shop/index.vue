@@ -165,7 +165,7 @@
               this.categorys=res.data;
           }
         }).catch(err=>{
-          cnsole.log('my err:'+err);
+          console.warn('my err:'+err);
         })
       },
       /**获取商品列表**/
@@ -173,17 +173,17 @@
         let params={
           lat:this.roomInfo.lat,
           lng:this.roomInfo.lng,
-        }
-
+        };
         this.$axios.get(global.API_HOST+'/index/Goods/position',{
           params:params
         }).then(res=>{
+
           res=res.data;
           if(res.status==0){
             this.shopLists=res.data;
           }
         }).catch(err=>{
-          cnsole.log('my err:'+err);
+          console.warn('my err:'+err);
         })
       }
     },

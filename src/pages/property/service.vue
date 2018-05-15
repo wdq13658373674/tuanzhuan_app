@@ -135,8 +135,12 @@
             params:params
           }).then(res=>{
             res=res.data;
-            this.room = res.data.room;
-            this.propertyList = res.data.property;
+            if(res.data == ''){
+              this.isData = false;
+            }else {
+              this.room = res.data.room;
+              this.propertyList = res.data.property;
+            }
           }).catch(err=>{
             console.log('my err:'+err)
           });
