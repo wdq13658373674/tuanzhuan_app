@@ -22,9 +22,16 @@
   export default {
     name: "BarNav",
     props: ["title"],
+    mounted(){
+      console.log(this.$route.name)
+    },
     methods: {
       /**返回**/
       back() {
+        if(this.$route.name=='UserOrder'){
+          this.$router.push('/user');
+          return;
+        }
         this.$router ? this.$router.go(-1) : window.history.back()
       }
     }

@@ -28,16 +28,14 @@
     },
     data() {
       return {
-        total:''
+        total:this.$route.query.total
       }
     },
     computed:{
       ...mapState(['userInfo']),
     },
     mounted(){
-      this.$nextTick(()=>{
-        this.total=this.userInfo.user_tcion;
-      })
+
     },
     methods:{
 

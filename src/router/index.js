@@ -664,7 +664,7 @@ export default new Router({
       }
     },
     {
-      path: '/user/name',
+      path: '/user/change/name',
       name: 'UserName',
       meta: {
         requireAuth: true,
