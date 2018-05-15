@@ -131,7 +131,7 @@
               type:"lixian",
           }
         },
-        orderType: true,
+        orderType: true,  //true:默认商品订单支付，false:物业服务费
         property_money_sum:0,
         property_tcion:0
       }
@@ -190,7 +190,9 @@
         var that=this;
 
         if(code==1){
-          if(that.payType=="tcion" || that.payType=="money"){
+          if(this.orderType){
+
+            if(that.payType=="tcion" || that.payType=="money"){
               let param={
                 user_id:that.userInfo.user_id,
                 order_id:that.$route.query.order_id,
@@ -198,14 +200,47 @@
               };
               this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
-              if(res.status==0){
-                this.$router.push('/order/pay/detail?order_id='+that.order_id);
-              }else {
-                this.$vux.toast.text(res.msg);
-              }
-            }).catch(err=>{
+                if(res.status==0){
+                  this.$router.push('/order/pay/detail?order_id='+that.order_id);
+                }else {
+                  this.$vux.toast.text(res.msg);
+                }
+              }).catch(err=>{
                 console.log('my err:'+err);
-            });
+              });
+            }
+          }else {
+            let propertyId;
+            //判断传过来的数据是否是数组
+            if(this.$route.query.property_id instanceof Array){
+              propertyId = {};
+              for (let x in this.$route.query.property_id){
+                propertyId[x] = this.$route.query.property_id[x];
+              }
+            }else{
+              propertyId = this.$route.query.property_id;
+            }
+
+            if(that.payType=="tcion" || that.payType=="money"){
+              let param={
+                user_id:that.userInfo.user_id,
+                property:propertyId,
+                type:that.payType
+              };
+              this.$axios.post('index/property/pay_money',qs.stringify(param)).then(res=>{
+                res=res.data;
+                if(res.status==0){
+                  this.$router.push('/property/service');
+                  this.$vux.toast.text("支付成功");
+                }else {
+                  this.$vux.toast.text(res.msg);
+                }
+              }).catch(err=>{
+                console.log('my err:'+err);
+              });
+            }else {
+              console.log("支付接口");
+            }
           }
         }
 
