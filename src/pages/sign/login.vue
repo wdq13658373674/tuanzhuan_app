@@ -9,7 +9,7 @@
           <input class="input w100" type="text" v-model="area" autocomplete="off">
         </div>
         <div class="input-box">
-          <input class="input" type="text" v-model="phone" autocomplete="off" placeholder="手机号码">
+          <input class="input" type="tel" v-model="phone" autocomplete="off" placeholder="手机号码">
         </div>
       </div>
 
@@ -57,24 +57,26 @@
           'password':this.password,
         }
 
+        console.log(params);
+
         this.$axios.post(global.API_HOST+'/index/index/login',qs.stringify(params)).then(res=>{
           res=res.data;
-          // console.log(res);
+          console.log(res);
 
           if(res.status==1){
             this.$vux.toast.show(res.msg);
             return;
-          }else{
-            this.update_userInfo(res.data.user);
-            this.update_token(res.data.token);
-            if(res.data.room){
-              this.update_roomInfo(res.data.room);
-            }else{
-              this.update_roomInfo({});
-            }
-            this.$vux.toast.show('登陆成功');
-            this.$router.replace('/user');
           }
+
+          this.update_userInfo(res.data.user);
+          this.update_token(res.data.token);
+          if(res.data.room){
+            this.update_roomInfo(res.data.room);
+          }else{
+            this.update_roomInfo({});
+          }
+          this.$vux.toast.show('登陆成功');
+          this.$router.replace('/user');
         }).catch(err=>{
           console.log('my err:'+err)
         })

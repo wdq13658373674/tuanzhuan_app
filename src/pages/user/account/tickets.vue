@@ -20,6 +20,7 @@
 
 <script>
   import ColorNav from '@/pages/layout/colorNav'
+  import {mapState} from 'vuex'
   export default {
     name: "Integral",
     components: {
@@ -27,11 +28,16 @@
     },
     data() {
       return {
-        total:this.$route.query.tp
+        total:''
       }
     },
+    computed:{
+      ...mapState(['userInfo']),
+    },
     mounted(){
-
+      this.$nextTick(()=>{
+        this.total=this.userInfo.user_tcion;
+      })
     },
     methods:{
 

@@ -98,10 +98,10 @@
         <div class="bottom">
           <div class="enter-box">
             <div class="input-group">
-              <input type="text" class="input">
+              <textarea name="" id="" cols="30" rows="10" class="input"></textarea>
             </div>
-            <i class="icon icon1"></i>
             <i class="icon icon2" @click="uitlshow=!uitlshow"></i>
+            <div class="send">发送</div>
           </div>
 
           <ul class="util-box-list clearfix" :class="{active:uitlshow}">

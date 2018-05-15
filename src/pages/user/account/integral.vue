@@ -7,7 +7,7 @@
     </ColorNav>
     <section class="page-group">
       <div class="user-pay">
-        <p class="p1">剩余积分(F)</p>
+        <p class="p1">我的物业券</p>
         <p class="p2">{{total || '0'}}</p>
       </div>
       <div class="connect-box">
@@ -19,6 +19,7 @@
 
 <script>
   import ColorNav from '@/pages/layout/colorNav'
+  import {mapState} from 'vuex'
   export default {
     name: "Integral",
     components: {
@@ -26,11 +27,16 @@
     },
     data() {
       return {
-        total:this.$route.query.integral
+        total:''
       }
     },
+    computed:{
+      ...mapState(['userInfo']),
+    },
     mounted(){
-
+      this.$nextTick(()=>{
+        this.total=this.userInfo.user_ticket;
+      })
     },
     methods:{
 

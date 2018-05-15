@@ -45,7 +45,7 @@
     },
     data() {
       return {
-        total:this.$route.query.balance
+        total:''
       }
     },
     computed:{
@@ -59,7 +59,9 @@
       }
     },
     mounted(){
-
+      this.$nextTick(()=>{
+        this.total=this.userInfo.user_money;
+      })
     },
     methods:{
 
