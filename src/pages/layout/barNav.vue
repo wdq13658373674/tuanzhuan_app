@@ -29,11 +29,11 @@
       /**返回**/
       back() {
         if(this.$route.name=='UserOrder'){
-          this.$router.replace('/user');
+          this.$router.redirect('/user');
           return;
         }
         if(this.$route.name=='PropertyService'){
-          this.$router.go(-4);
+          this.$router.redirect('/property');
           return;
         }
 
