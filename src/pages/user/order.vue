@@ -117,7 +117,6 @@
     methods:{
       /*获取订单列表*/
       getOrderList(type, flag){
-        console.log('defaultPage:'+this.page);
         let params={
           user_id: this.userInfo.user_id,
           page: this.page,
