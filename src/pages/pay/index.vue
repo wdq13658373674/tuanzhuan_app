@@ -150,6 +150,7 @@
     methods:{
       /*结算*/
       orderPay(){
+
         var that=this;
 
         if(that.payType=="tcion"){
@@ -178,7 +179,6 @@
 
           return false;
         }
-
         //支付密码
         that.popshow=true;
       },
@@ -200,6 +200,7 @@
               };
               this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
+                console.log(res);
                 if(res.status==0){
                   this.$router.push('/order/pay/detail?order_id='+that.order_id);
                 }else {
@@ -210,38 +211,31 @@
               });
             }
           }else {
-            let propertyId;
-            //判断传过来的数据是否是数组
-            if(this.$route.query.property_id instanceof Array){
-              propertyId = {};
-              for (let x in this.$route.query.property_id){
-                propertyId[x] = this.$route.query.property_id[x];
-              }
-            }else{
-              propertyId = this.$route.query.property_id;
-            }
-
-            if(that.payType=="tcion" || that.payType=="money"){
+            if(this.payType=="tcion" || this.payType=="money"){
               let param={
-                user_id:that.userInfo.user_id,
-                property:propertyId,
-                type:that.payType
+                user_id: this.userInfo.user_id,
+                property: JSON.stringify( this.$route.query.property_id ),
+                type: this.payType
               };
+              console.log(param);
               this.$axios.post('index/property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
-                if(res.status==0){
-                  this.$router.push('/property/service');
-                  this.$vux.toast.text("支付成功");
-                }else {
-                  this.$vux.toast.text(res.msg);
-                }
+                console.log(res);
+                // if(res.status==0){
+                //   this.$router.push('/property/service');
+                //   this.$vux.toast.text("支付成功");
+                // }else {
+                //   this.$vux.toast.text(res.msg);
+                // }
               }).catch(err=>{
                 console.log('my err:'+err);
               });
             }else {
-              console.log("支付接口");
+             console.log("支付接口");
             }
           }
+        }else {
+          this.$vux.toast.text("支付密码错误");
         }
 
       },

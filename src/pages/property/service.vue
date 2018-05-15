@@ -76,7 +76,7 @@
         propertyTotal: [],
         checkboxModel:[],
         isData: true,
-        property_id: {}
+        property_id: []
       }
     },
     computed:{
