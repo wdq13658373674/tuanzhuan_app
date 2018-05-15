@@ -127,11 +127,7 @@
           params:params
         }).then(res=>{
           res=res.data;
-          //console.log(res.data);
-          console.log(params);
-          console.log('loadPage:'+this.page);
           if(flag){
-            // console.log(this.page);
             //多次加载
             for(let i in res.data){
               this.orderList.push(res.data[i]);
@@ -159,8 +155,6 @@
         this.flag = false;
         this.orderList=[];
         this.getOrderList(type);
-        console.log('tabPage:'+this.page);
-        console.log('type:'+this.type);
       },
       /*下拉加载*/
       loadMore:function(){
