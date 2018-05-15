@@ -220,13 +220,12 @@
               console.log(param);
               this.$axios.post('index/property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
-                console.log(res);
-                // if(res.status==0){
-                //   this.$router.push('/property/service');
-                //   this.$vux.toast.text("支付成功");
-                // }else {
-                //   this.$vux.toast.text(res.msg);
-                // }
+                if(res.status==0){
+                  this.$router.push('/property/service');
+                  this.$vux.toast.text("支付成功");
+                }else {
+                  this.$vux.toast.text(res.msg);
+                }
               }).catch(err=>{
                 console.log('my err:'+err);
               });
