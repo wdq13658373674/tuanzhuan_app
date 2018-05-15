@@ -2,45 +2,48 @@
   <div>
     <section class="page-group">
       <div class="tz-communication">
-        <ul class="tz-communication-list clearfix" id="msgbox">
-          <!--<li>-->
+        <div class="tz-communication-wrap" ref="msgbox">
+          <ul class="tz-communication-list clearfix" id="msgbox">
+            <!--<li>-->
             <!--<div class="tip">-->
-              <!--<span>房计划管家<em>小雪</em>为您服务</span>-->
+            <!--<span>房计划管家<em>小雪</em>为您服务</span>-->
             <!--</div>-->
-          <!--</li>-->
-          <!--<li class="customer">-->
+            <!--</li>-->
+            <!--<li class="customer">-->
             <!--<div class="img-box">-->
-              <!--<img src="@/assets/images/test/img6.png" alt="">-->
+            <!--<img src="@/assets/images/test/img6.png" alt="">-->
             <!--</div>-->
             <!--<div class="con-box">-->
-              <!--你好，我家楼上漏水了，麻烦尽快-->
-              <!--维修。-->
+            <!--你好，我家楼上漏水了，麻烦尽快-->
+            <!--维修。-->
             <!--</div>-->
-          <!--</li>-->
-          <!--<li>-->
+            <!--</li>-->
+            <!--<li>-->
             <!--<div class="tip">-->
-              <!--<span>10:24</span>-->
+            <!--<span>10:24</span>-->
             <!--</div>-->
-          <!--</li>-->
-          <template v-for="(item,key) in myMsg">
-            <li v-if="item.time">
-              <div class="tip">
-                <span>{{item.time | stampToDate(true)}}</span>
-              </div>
-            </li>
+            <!--</li>-->
+            <template v-for="(item,key) in myMsg">
+              <li v-if="item.time">
+                <div class="tip">
+                  <span>{{item.time | stampToDate(true)}}</span>
+                </div>
+              </li>
 
-            <li v-bind:class="listClass[item.status]">
-              <div class="img-box">
-                <img v-if="user_logo" :src="user_logo" alt="">
-                <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
-              </div>
-              <div class="con-box" style="position:relative;">
-                <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading> {{item.msg}}
-              </div>
-            </li>
-          </template>
+              <li v-bind:class="listClass[item.status]">
+                <div class="img-box">
+                  <img v-if="user_logo" :src="user_logo" alt="">
+                  <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
+                </div>
+                <div class="con-box" style="position:relative;">
+                  <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading> {{item.msg}}
+                </div>
+              </li>
+            </template>
 
-        </ul>
+          </ul>
+        </div>
+
 
         <div class="bottom">
           <div class="enter-box">
@@ -107,7 +110,6 @@
           0:'customer',
           1:''
         },
-        welcome:'<li><div class="tip"><span>房计划管家<em></em>为您服务</span></div></li>',
         uitlshow:false,
         user_logo:"",
         msgBox:"",
@@ -124,6 +126,7 @@
 
       setTimeout(function(){
         $("#msgbox").append($("#welcome").html());
+        that.scrollBottom();
       },100);
     },
     methods: {
@@ -152,7 +155,19 @@
             village_id:that.roomInfo.village_id
           }
         });
+
+        this.scrollBottom();
       },
+      /**
+       * 发送消息后重置滚动条保持在底部
+       * **/
+      scrollBottom(){
+        var that=this;
+        setTimeout(function(){
+          that.$refs.msgbox.scrollTop=that.$refs.msgbox.scrollHeight;
+        },100);
+
+      }
     }
   }
 </script>
