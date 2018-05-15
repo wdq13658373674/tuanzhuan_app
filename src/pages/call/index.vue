@@ -22,15 +22,23 @@
               <!--<span>10:24</span>-->
             <!--</div>-->
           <!--</li>-->
-          <li v-for="(item,key) in myMsg">
-            <div class="img-box">
-              <img v-if="user_logo" :src="user_logo" alt="">
-              <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
-            </div>
-            <div class="con-box" style="position:relative;">
-              <inline-loading class="tz-msg-loading"></inline-loading> {{item}}
-            </div>
-          </li>
+          <template v-for="(item,key) in myMsg">
+            <li>
+              <div class="tip">
+                <span>{{item.time | stampToDate(true)}}</span>
+              </div>
+            </li>
+
+            <li v-bind:class="listClass[item.status]">
+              <div class="img-box">
+                <img v-if="user_logo" :src="user_logo" alt="">
+                <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
+              </div>
+              <div class="con-box" style="position:relative;">
+                <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading> {{item.msg}}
+              </div>
+            </li>
+          </template>
 
         </ul>
 
@@ -63,12 +71,19 @@
       </div>
 
       <div style="display: none" id="moban">
-      <li class="customer">
-        <div class="img-box">
-          <img src="@/assets/images/test/img6.png" alt="">
-        </div>
-        <div class="con-box">{msg}</div>
-      </li>
+        <li class="customer">
+          <div class="img-box">
+            <img src="@/assets/images/test/img6.png" alt="">
+          </div>
+          <div class="con-box">{msg}</div>
+        </li>
+      </div>
+      <div style="display: none" id="welcome">
+        <li>
+          <div class="tip">
+            <span>房计划管家<em>小雪</em>为您服务</span>
+          </div>
+        </li>
       </div>
     </section>
   </div>
@@ -77,6 +92,7 @@
 <script>
   import {mapState} from 'vuex'
   import { InlineLoading } from 'vux'
+  const storeJs=require('storejs');
 
   var svrMsg=[];
 
@@ -87,6 +103,11 @@
     },
     data(){
       return {
+        listClass:{
+          0:'customer',
+          1:''
+        },
+        welcome:'<li><div class="tip"><span>房计划管家<em></em>为您服务</span></div></li>',
         uitlshow:false,
         user_logo:"",
         msgBox:"",
@@ -97,7 +118,13 @@
       ...mapState(['roomInfo','userInfo'])
     },
     mounted(){
-      this.user_logo=this.userInfo.user_logo;
+      var that=this;
+      that.user_logo=that.userInfo.user_logo;
+      that.myMsg=storeJs("msgDB");
+
+      setTimeout(function(){
+        $("#msgbox").append($("#welcome").html());
+      },100);
     },
     methods: {
       sendMsg:function(){
@@ -106,10 +133,17 @@
         if(that.msgBox==""){
           return false;
         }
+        var timestamp = Date.parse(new Date());
         var msg=that.msgBox;
+        var arr={
+          msg:msg,
+          status:1,
+          time:timestamp/1000,
+          type:true,
+        };
 
 
-        that.myMsg.push(msg);
+        that.myMsg.push(arr);
         that.msgBox="";
 
         wsocket.doSend({

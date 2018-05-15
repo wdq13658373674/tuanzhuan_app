@@ -1,8 +1,21 @@
+var msgDB=(store("msgDB"))?store("msgDB"):[];
+
 var user = {
     //发送消息给社区方法 wsocket.doSend({controller:'index',action:'sendToVillage',result:{message:'消息内容',village_id:'小区ID'}});
     //发送消息给用户方法 wsocket.doSend({controller:'index',action:'sendToUid',result:{message:'消息内容',uid:'用户的UID/手机账号名'}});
     //发送成功后没有回调,发送错误时回传index的error方法
     showmessage: function(data){
+      var timestamp = Date.parse(new Date());
+
+      var arr={
+        msg:data.result.text,
+        time:timestamp/1000,
+        status:0
+      };
+      msgDB.push(arr);
+
+      store.set('msgDB', msgDB);
+
       var tpl=$("#moban").html();
       tpl =tpl.replace('{msg}',data.result.text);
       $("#msgbox").append(tpl);
@@ -10,8 +23,19 @@ var user = {
         //console.log(data);
     },
     sendsuccess:function(data){
+      var timestamp = Date.parse(new Date());
+
+      var arr={
+        msg:data.result.text,
+        time:timestamp/1000,
+        status:1
+      };
+      msgDB.push(arr);
+
+      store.set('msgDB', msgDB);
+
         //发送文本消息成功后的回传方法
-      $(".a").remove();
+      $(".tz-msg-loading").remove();
         console.log(data);
     },
     senderror:function(data){

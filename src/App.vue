@@ -42,7 +42,7 @@
         }
 
         //vConsole
-        var vConsole = new VConsole();
+        //var vConsole = new VConsole();
 
         cordovaLoader(function () {
           that.load_cord();

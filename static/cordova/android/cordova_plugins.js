@@ -17,6 +17,14 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-badge.Badge",
+    "file": "plugins/cordova-plugin-badge/www/badge.js",
+    "pluginId": "cordova-plugin-badge",
+    "clobbers": [
+      "cordova.plugins.notification.badge"
+    ]
+  },
+  {
     "id": "cordova-plugin-bluetooth-status.BluetoothStatus",
     "file": "plugins/cordova-plugin-bluetooth-status/BluetoothStatus.js",
     "pluginId": "cordova-plugin-bluetooth-status",
@@ -165,49 +173,6 @@ module.exports = [
     "pluginId": "cordova-plugin-dialogs",
     "merges": [
       "navigator.notification"
-    ]
-  },
-  {
-    "id": "cordova-plugin-inappbrowser.inappbrowser",
-    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-    "pluginId": "cordova-plugin-inappbrowser",
-    "clobbers": [
-      "cordova.InAppBrowser.open",
-      "window.open"
-    ]
-  },
-  {
-    "id": "cordova-plugin-badge.Badge",
-    "file": "plugins/cordova-plugin-badge/www/badge.js",
-    "pluginId": "cordova-plugin-badge",
-    "clobbers": [
-      "cordova.plugins.notification.badge"
-    ]
-  },
-  {
-    "id": "cordova-plugin-local-notification.LocalNotification",
-    "file": "plugins/cordova-plugin-local-notification/www/local-notification.js",
-    "pluginId": "cordova-plugin-local-notification",
-    "clobbers": [
-      "cordova.plugins.notification.local"
-    ]
-  },
-  {
-    "id": "cordova-plugin-local-notification.LocalNotification.Core",
-    "file": "plugins/cordova-plugin-local-notification/www/local-notification-core.js",
-    "pluginId": "cordova-plugin-local-notification",
-    "clobbers": [
-      "cordova.plugins.notification.local.core",
-      "plugin.notification.local.core"
-    ]
-  },
-  {
-    "id": "cordova-plugin-local-notification.LocalNotification.Util",
-    "file": "plugins/cordova-plugin-local-notification/www/local-notification-util.js",
-    "pluginId": "cordova-plugin-local-notification",
-    "merges": [
-      "cordova.plugins.notification.local.core",
-      "plugin.notification.local.core"
     ]
   },
   {
@@ -384,6 +349,41 @@ module.exports = [
     "runs": true
   },
   {
+    "id": "cordova-plugin-inappbrowser.inappbrowser",
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "pluginId": "cordova-plugin-inappbrowser",
+    "clobbers": [
+      "cordova.InAppBrowser.open",
+      "window.open"
+    ]
+  },
+  {
+    "id": "cordova-plugin-local-notification.LocalNotification",
+    "file": "plugins/cordova-plugin-local-notification/www/local-notification.js",
+    "pluginId": "cordova-plugin-local-notification",
+    "clobbers": [
+      "cordova.plugins.notification.local"
+    ]
+  },
+  {
+    "id": "cordova-plugin-local-notification.LocalNotification.Core",
+    "file": "plugins/cordova-plugin-local-notification/www/local-notification-core.js",
+    "pluginId": "cordova-plugin-local-notification",
+    "clobbers": [
+      "cordova.plugins.notification.local.core",
+      "plugin.notification.local.core"
+    ]
+  },
+  {
+    "id": "cordova-plugin-local-notification.LocalNotification.Util",
+    "file": "plugins/cordova-plugin-local-notification/www/local-notification-util.js",
+    "pluginId": "cordova-plugin-local-notification",
+    "merges": [
+      "cordova.plugins.notification.local.core",
+      "plugin.notification.local.core"
+    ]
+  },
+  {
     "id": "cordova-plugin-media.MediaError",
     "file": "plugins/cordova-plugin-media/www/MediaError.js",
     "pluginId": "cordova-plugin-media",
@@ -449,6 +449,20 @@ module.exports = [
     ]
   },
   {
+    "id": "es6-promise-plugin.Promise",
+    "file": "plugins/es6-promise-plugin/www/promise.js",
+    "pluginId": "es6-promise-plugin",
+    "runs": true
+  },
+  {
+    "id": "cordova-plugin-x-socialsharing.SocialSharing",
+    "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+    "pluginId": "cordova-plugin-x-socialsharing",
+    "clobbers": [
+      "window.plugins.socialsharing"
+    ]
+  },
+  {
     "id": "cordova-sqlite-storage.SQLitePlugin",
     "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
     "pluginId": "cordova-sqlite-storage",
@@ -470,6 +484,7 @@ module.exports.metadata =
 {
   "cordova-alipay-chenyu": "1.1.2",
   "cordova-plugin-armsoft-datepicker": "0.8.9",
+  "cordova-plugin-badge": "0.8.7",
   "cordova-plugin-bluetooth-status": "1.0.4",
   "cordova-plugin-bluetoothle": "4.4.3",
   "cordova-plugin-camera": "4.0.3",
@@ -480,19 +495,20 @@ module.exports.metadata =
   "cordova-plugin-device-motion": "2.0.1",
   "cordova-plugin-device-orientation": "2.0.1",
   "cordova-plugin-dialogs": "2.0.1",
-  "cordova-plugin-inappbrowser": "3.0.0",
-  "cordova-plugin-badge": "0.8.7",
-  "cordova-plugin-local-notification": "0.9.0-beta.2",
   "cordova-plugin-file": "6.0.1",
+  "cordova-plugin-inappbrowser": "3.0.0",
+  "cordova-plugin-local-notification": "0.9.0-beta.2",
   "cordova-plugin-media": "5.0.2",
   "cordova-plugin-navimap": "1.2.3",
   "cordova-plugin-network-information-with-connection-update": "2.0.2",
   "cordova-plugin-push-baidu": "5.6.1",
   "cordova-plugin-statusbar": "2.4.2",
   "cordova-plugin-wechatv2": "2.1.2",
+  "cordova-plugin-whitelist": "1.3.3",
+  "es6-promise-plugin": "4.2.2",
+  "cordova-plugin-x-socialsharing": "5.4.0",
   "cordova-sqlite-storage": "2.3.1",
-  "phonegap-plugin-barcodescanner": "7.1.2",
-  "cordova-plugin-whitelist": "1.3.3"
+  "phonegap-plugin-barcodescanner": "7.1.2"
 };
 // BOTTOM OF METADATA
 });
