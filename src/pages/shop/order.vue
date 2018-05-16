@@ -176,8 +176,6 @@ export default {
       if(cart.order_pay.length>0){
         cart.order_pay.find(item=>{
           this.cartList.push(cart.cart_list[item]);
-          console.log(this.cartList);
-
         });
       }else{
         this.$router.push('/shop/cart');

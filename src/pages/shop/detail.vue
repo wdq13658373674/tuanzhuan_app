@@ -265,7 +265,6 @@
           goods_list.push(this.goods);
           goods_list[0].cart_sum = this.cartNum;
           storeJs.set('buy_goods', goods_list);
-
           this.$router.push({path: '/shop/order',query:{ type:'isbuy'}});
         }
       },
