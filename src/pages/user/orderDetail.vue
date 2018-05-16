@@ -27,7 +27,7 @@
           <li v-for="item in orderDetail.order_info" class="item">
             <router-link :to="{path: '/user/order/detail', query: {id: item.goods_order_id}}" class="link">
               <div class="img-box">
-                <img class="img" v-lazy="item.goods_logo" alt="" />
+                <img class="img" v-lazy="item.goods.goods_logo" alt="" />
               </div>
               <div class="con-box">
                 <p class="p1 clearfix">
@@ -103,7 +103,12 @@
           <li class="item cell p27">
             <span>支付方式</span>
             <span v-if="orderDetail.order.goods_order_is_pay === 0">未支付</span>
-            <span v-else>{{orderDetail.order.goods_order_pay_type}}</span>
+            <span v-else-if="orderDetail.order.goods_order_pay_type == 'tcion'">团票</span>
+            <span v-else-if="orderDetail.order.goods_order_pay_type == 'alipay'">支付宝</span>
+            <span v-else-if="orderDetail.order.goods_order_pay_type == 'weixin'">微信</span>
+            <span v-else-if="orderDetail.order.goods_order_pay_type == 'balancce'">余额</span>
+            <span v-else-if="orderDetail.order.goods_order_pay_type == 'arrival'">到付</span>
+            <span v-else>线下</span>
           </li>
           <li class="item cell p27">
             <span>下单时间</span>
@@ -191,6 +196,7 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           this.orderDetail = res.data;
           for(let i in this.orderDetail.order_info){
             this.total += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
@@ -204,9 +210,7 @@
           this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 0}});
         }else if(this.orderDetail.order.goods_order_status === 9){
           this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 1}});
-        }/*else if(this.orderDetail.order.goods_order_status === 10){
-          this.$router.push({path: '/user/order/sales/step3',query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id}});
-        }*/else {
+        }else {
           this.$router.push({path: '/user/order/sales/step2', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: this.orderDetail.order.goods_order_status,refund_num:this.orderDetail.order.goods_order_refund_time}});
         }
       }
