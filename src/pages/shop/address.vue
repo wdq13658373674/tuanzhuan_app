@@ -2,6 +2,7 @@
   <div>
     <!--section-->
     <section class="page-group address-list">
+      <!--<div v-if="addressList">暂无地址</div>-->
       <div class="item" v-for="(item,index) in addressList">
         <label class="cell">
           <div>

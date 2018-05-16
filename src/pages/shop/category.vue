@@ -222,7 +222,7 @@
         this.loadMore();
       },
       /**
-       * 重置
+       * 重置下拉
        * **/
       reset(){
         this.busy=false;
@@ -238,6 +238,15 @@
         this.p2='';
         this.p3='';
         this.p4='';
+
+        this.condition.goods_price={
+          p1:this.p1,
+          p2:this.p2,
+        };
+        this.condition.goods_tcion={
+          p1:this.p3,
+          p2:this.p4,
+        };
       }
     },
   }
