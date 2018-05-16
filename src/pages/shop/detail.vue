@@ -121,6 +121,7 @@
 <script>
   import {mapMutations,mapState,mapGetters} from 'vuex'
   import {Swiper,Popup,XNumber} from 'vux'
+  import storeJs from 'storejs'
   import cart from '@/assets/js/shop/cart'
 
   export default {
@@ -260,7 +261,12 @@
       },
       buy(){
         if(this.selectType()){
-          console.log('购买成功');
+          let goods_list = [];
+          goods_list.push(this.goods);
+          goods_list[0].cart_sum = this.cartNum;
+          storeJs.set('buy_goods', goods_list);
+
+          this.$router.push({path: '/shop/order',query:{ type:'isbuy'}});
         }
       },
       /**

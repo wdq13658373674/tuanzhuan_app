@@ -134,6 +134,7 @@
 import { Popup ,Group, Scroller,Radio} from 'vux'
 import {mapState} from 'vuex'
 import cart from '@/assets/js/shop/cart'
+import storeJs from 'storejs'
 const qs = require("querystring");
 
 export default {
@@ -153,8 +154,8 @@ export default {
       popControl:false,
       cartList:[],
       send_type:1,
-      money:cart.getMoney(cart.order_pay).price,
-      tcion:cart.getMoney(cart.order_pay).tcion,
+      money:0,
+      tcion:0,
       orderInfo:[],
       address:[],
     }
@@ -163,14 +164,27 @@ export default {
     ...mapState(['userInfo','storeInfo'])
   },
   mounted(){
-    //选中购物车商品
-    if(cart.order_pay.length>0){
-      cart.order_pay.find(item=>{
-        this.cartList.push(cart.cart_list[item]);
-      });
+    if(this.$route.query.type){
+      //立即购买
+      this.cartList = storeJs.get('buy_goods');
+      this.money = this.cartList[0].now_price;
+      this.tcion = this.cartList[0].now_tcion;
     }else{
-      this.$router.push('/shop/cart');
+      //选中购物车商品
+      this.money = cart.getMoney(cart.order_pay).price;
+      this.tcion = cart.getMoney(cart.order_pay).tcion;
+      if(cart.order_pay.length>0){
+        cart.order_pay.find(item=>{
+          this.cartList.push(cart.cart_list[item]);
+          console.log(this.cartList);
+
+        });
+      }else{
+        this.$router.push('/shop/cart');
+      }
     }
+
+
 
     //获取店铺配置信息
     let param={
