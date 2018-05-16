@@ -12,7 +12,7 @@
     <h2 class="h2">历史搜索</h2>
     <div class="content">
       <div class="search-history clearfix">
-        <p v-if="!history" class="text-center">暂无历史记录</p>
+        <p v-if="history.length==0">暂无历史记录</p>
         <router-link :to="{name:'ShopCategory',query:{
           id:$route.query.id || 0,
           title:$route.query.title,
