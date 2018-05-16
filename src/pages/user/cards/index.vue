@@ -22,6 +22,7 @@
             </div>
           </li>
       </transition-group>
+
       <div class="user-add-bank" @click="addCards">
         <span class="add">+</span>
         添加银行卡

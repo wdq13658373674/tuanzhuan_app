@@ -2,7 +2,7 @@
   <div>
     <!--section-->
     <section class="page-group address-list">
-      <!--<div v-if="addressList">暂无地址</div>-->
+      <p class="tz-default-empty" v-if="addressList==''">你还没有添加地址</p>
       <div class="item" v-for="(item,index) in addressList">
         <label class="cell">
           <div>
