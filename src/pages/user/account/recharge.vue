@@ -21,7 +21,7 @@
     <!--popup 键盘-->
     <popup v-model="popshow" :show-mask="false">
       <div class="popup1">
-        <MoneyKeyBord @run="enterMoney" @sure="next" ref="keyBord"></MoneyKeyBord>
+        <PassKeyBord @run="enterMoney" ref="keyBord" :paslength="9999999"></PassKeyBord>
       </div>
     </popup>
     <!--popup-->
@@ -66,12 +66,12 @@
 
 <script>
   import {Popup} from 'vux'
-  import MoneyKeyBord from '@/components/moneyKeyBord'
+  import PassKeyBord from '@/components/passKeyBord'
   import EnterPassword from '@/components/enterPassword'
   export default {
     name: "Recharge",
     components: {
-      MoneyKeyBord,
+      PassKeyBord,
       EnterPassword,
       Popup
     },
@@ -89,7 +89,13 @@
     methods:{
       /**输入金额*/
       enterMoney(value){
-        this.val=value;
+        console.log(value);
+        if(value[0] != 0){
+          this.val=value.join('');
+        }else {
+          this.val='';
+          this.$refs.keyBord.empty();
+        }
       },
       /**清空金额*/
       empty(){
