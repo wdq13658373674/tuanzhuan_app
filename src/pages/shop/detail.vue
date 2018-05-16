@@ -13,7 +13,7 @@
             <i class="mr10 icon tp"></i>
             <span class="f32 orange pull-left">{{goodsDetail.now_tcion}}</span>
             <span class="ml29">¥{{goodsDetail.now_price}}</span>
-            <span class="pull-right gray">已售 {{goodsDetail.goods_sell_count}}</span>
+            <span class="pull-right gray">已售 {{goodsDetail.goods_sell_count || goodsDetail.goods_sell_fenit || 0}}</span>
           </div>
 
           <!--新加标签-->
