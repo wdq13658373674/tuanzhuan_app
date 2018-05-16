@@ -32,12 +32,21 @@
     methods: {
       /**开始输入*/
       keyEnter(num){
+        /*小数点验证*/
+        if(num=='.'){
+          if (this.val.indexOf('.') > -1 || this.val.indexOf('0.') > -1) return false;
+          if(!this.val.length){
+            num='0.';
+          }
+        }
         /*首位输入0时*/
         if(num==0){
           if(!this.val.length){
-            return false;
+            num='0.';
           }
         }
+        /*小数点后位数2位*/
+        if(this.val.indexOf('.') > -1 && this.val.length-this.val.indexOf('.') > 2 || this.val.indexOf('0.') > -1 && this.val.length-this.val.indexOf('0.') > 2) return false;
 
         this.val.push(num);
       },
