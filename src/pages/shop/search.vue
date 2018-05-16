@@ -12,13 +12,11 @@
     <h2 class="h2">历史搜索</h2>
     <div class="content">
       <div class="search-history clearfix">
-        <a href="#" class="link">可乐</a>
-        <a href="#" class="link">短袖</a>
-        <a href="#" class="link"> 男装</a>
-        <a href="#" class="link">可乐</a>
-        <a href="#" class="link">短袖 男装</a>
-        <a href="#" class="link">可乐</a>
-        <a href="#" class="link">养乐多</a>
+        <router-link :to="{name:'ShopCategory',query:{
+          id:$route.query.id || 0,
+          title:$route.query.title,
+          keyword:item
+        }}" class="link"  v-for="(item,index) in history" :key="index" replace>{{item}}</router-link>
       </div>
     </div>
 
@@ -40,7 +38,6 @@
 <script>
   import { mapState,mapMutations } from 'vuex'
   import { Search } from 'vux'
-  import { historySearch } from '@/assets/js/shop/historySearch'
   export default {
     name: "ShopSearch",
     components: {
@@ -65,7 +62,7 @@
       submit:function(){
         let keyword=this.search;
 
-        this.$router.push({
+        this.$router.replace({
           name:'ShopCategory',
           query:{
             id:this.$route.query.id || 0,
@@ -76,8 +73,6 @@
         //保存搜索历史记录
         if(keyword!=''){
           this.update_history_search(keyword);
-          console.log(this.historySearch);
-          console.log(1);
         }
       }
     },

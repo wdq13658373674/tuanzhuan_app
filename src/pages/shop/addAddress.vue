@@ -75,7 +75,7 @@
           res=res.data;
           if(res.status==0){
             this.$vux.toast.text('添加成功');
-            this.$router.push('/shop/address');
+            this.$router.go(-1);
           }
         }).catch(err=>{
           console.log('my err:'+err);
@@ -102,7 +102,7 @@
         }else{
           const self=this;
           let city=value2name(this.city, ChinaAddressV4Data);
-          self.address=city+this.community+this.house;
+          self.address=city+','+this.community+','+this.house;
 
           getPosition(self.address,function(point){
             if(point){

@@ -5,7 +5,7 @@
 
       <ul class="cell-list address-add">
         <li class="item">
-          <x-address title="" value-text-align="left" v-model="city" :list="addressData" placeholder="请选择地址"></x-address>
+          <x-address title="" value-text-align="left" :raw-value="true" v-model="city" :list="addressData" placeholder="请选择地址"></x-address>
         </li>
         <li class="item">
           <input class="input" type="text" v-model="community" placeholder="请输入小区名">
@@ -50,16 +50,45 @@
         house:'',
         realname:'',
         phone:'',
-        address:''
+        address:'',
       }
     },
     computed:{
       ...mapState(['userInfo'])
     },
     mounted(){
-
+      this.getCurrentAddress();
     },
     methods: {
+      /**
+       * 获取当前需修改的地址信息
+       * **/
+      getCurrentAddress(){
+        const params={
+          user_id:this.userInfo.user_id,
+          address_id:this.$route.params.id
+        }
+
+        this.$axios.get(global.API_HOST+'/index/User_address/getUserAddress',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          console.log(res);
+
+          if(res.status==0){
+            const currentAddress=res.data;
+            const addressArr=currentAddress.address_comment.split(',');
+
+            this.city=addressArr[0].split(' ');
+            this.community=addressArr[1];
+            this.house=addressArr[2];
+            this.realname=currentAddress.address_user_realname;
+            this.phone=currentAddress.address_user_phone;
+          }
+        }).catch(err=>{
+          console.log('my err:'+err);
+        })
+      },
       /**修改地址表单提交**/
       editress_ajax(lat,lng){
         let params={
@@ -74,9 +103,10 @@
 
         this.$axios.post(global.API_HOST+'/index/User_address/editAddress',qs.stringify(params)).then(res=>{
           res=res.data;
+
           if(res.status==0){
             this.$vux.toast.text('修改成功');
-            this.$router.push('/shop/address');
+            this.$router.go(-1);
           }
         }).catch(err=>{
           console.log('my err:'+err);
@@ -84,6 +114,27 @@
       },
       /**修改地址表单提交**/
       submit(){
+        if(!this.checkForm()){
+          return;
+        }else{
+          const self=this;
+          let city=value2name(this.city, ChinaAddressV4Data);
+          self.address=city+','+this.community+','+this.house;
+
+          getPosition(self.address,function(point){
+            if(point){
+              self.editress_ajax(point.lat,point.lng);
+            }else{
+              self.$vux.toast.text('该地址不存在，请填写真实存在的地址');
+            }
+          })
+          return true;
+        }
+      },
+      /**
+       * 表单验证
+       * **/
+      checkForm(){
         let tips='';
         if(this.city==''){
           tips='请选择地址';
@@ -101,17 +152,6 @@
           this.$vux.toast.text(tips);
           return false;
         }else{
-          const self=this;
-          let city=value2name(this.city, ChinaAddressV4Data);
-          self.address=city+this.community+this.house;
-
-          getPosition(self.address,function(point){
-            if(point){
-              self.editress_ajax(point.lat,point.lng);
-            }else{
-              self.$vux.toast.text('该地址不存在，请填写真实存在的地址');
-            }
-          })
           return true;
         }
       }

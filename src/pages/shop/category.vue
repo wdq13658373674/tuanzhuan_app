@@ -204,25 +204,21 @@
         this.p3=this.p3 || 0;
         this.p4=this.p4 || 0;
 
-        if(this.p1!=0 || this.p2!=0){
-          this.condition.goods_price={
-            p1:this.p1,
-            p2:this.p2,
-          }
+        this.condition.goods_price={
+          p1:this.p1,
+          p2:this.p2,
         }
 
-        if(this.p3!=0 || this.p4!=0){
-          this.condition.goods_tcion={
-            p1:this.p3,
-            p2:this.p4,
-          }
+        this.condition.goods_tcion={
+          p1:this.p3,
+          p2:this.p4,
         }
 
         this.reset();
         this.loadMore();
       },
       /**
-       * 重置
+       * 重置下拉
        * **/
       reset(){
         this.busy=false;
@@ -238,6 +234,15 @@
         this.p2='';
         this.p3='';
         this.p4='';
+
+        this.condition.goods_price={
+          p1:this.p1,
+          p2:this.p2,
+        };
+        this.condition.goods_tcion={
+          p1:this.p3,
+          p2:this.p4,
+        };
       }
     },
   }
