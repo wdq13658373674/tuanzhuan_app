@@ -8,8 +8,9 @@
         </div>
       </div>
       <p class="p1">{{userLists.user_nickname || userLists.user_phone || userLists.user_realname}}</p>
-      <p class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
-
+      <p v-if="roomLists.village_name" class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
+      <p v-else-if="roomInfo.village_name" class="p2">{{roomInfo.village_name}}{{roomInfo.unit_name}}{{roomInfo.floor_name}}{{roomInfo.floor_code}}</p>
+      <p v-else class="p2">暂无房屋</p>
       <!--波浪 start-->
       <div class="waveWrapper waveAnimation">
         <div class="wave waveTop"></div>
@@ -67,7 +68,7 @@
           </router-link>
           <router-link class="item" to="/user/cards" tag="li">
             <p class="p1">银行卡</p>
-            <p class="p2">共{{bankNum}}张</p>
+            <p class="p2">共{{bankNum || 0}}张</p>
             <i class="icon arrow"></i>
           </router-link>
         </ul>
@@ -182,18 +183,18 @@
         }).then(res=>{
           res=res.data;
           console.log(res);
+
           if(res.status === 0){
             this.userLists=res.data.village.user;
             this.bankNum = res.data.bank_num;
             this.orderNum = res.data.order;
 
-            if(res.data.room_info.length !== 0){
+            if(res.data.village.room){
+              this.roomLists=res.data.village.room;
+            }else if(res.data.room_info.length !== 0){
               this.roomInfo = res.data.room_info[0];
             }else {
               this.roomInfo.notFloor = '暂无房屋';
-            }
-            if(res.data.village.room){
-              this.roomLists=res.data.village.room;
             }
           }
         }).catch(err=>{
