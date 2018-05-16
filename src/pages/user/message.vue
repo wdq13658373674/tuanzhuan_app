@@ -78,6 +78,7 @@
   import { Actionsheet,Datetime } from 'vux'
   import { updateMessage } from '@/assets/js/user/changeMessage'
   import utils from '@/libs/util.js'
+  const storeJs=require('storejs');
 
   export default {
     name: "UserData",
@@ -126,6 +127,7 @@
       exit(){
         this.update_userInfo({});
         this.update_roomInfo({});
+        storeJs.remove("msgDB");
         this.$router.push('/');
       },
       /**修改性别**/

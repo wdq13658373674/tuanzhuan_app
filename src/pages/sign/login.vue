@@ -29,7 +29,7 @@
 <script>
   import utils from '@/libs/util.js'
   const qs = require("querystring")
-  import {mapMutations} from 'vuex'
+  import {mapState,mapMutations} from 'vuex'
 
   export default {
     name: "Login",
@@ -44,6 +44,9 @@
     mounted(){
       this.update_userInfo({});
       this.update_roomInfo({});
+    },
+    computed:{
+      ...mapState(['roomInfo'])
     },
     methods:{
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
@@ -68,10 +71,11 @@
           this.update_userInfo(res.data.user);
           this.update_token(res.data.token);
           if(res.data.room){
-            this.update_roomInfo(res.data.room);
+            this.update_roomInfo(res.data.room[0]);
           }else{
             this.update_roomInfo({});
           }
+
           this.$vux.toast.show('登陆成功');
           this.$router.replace('/user');
         }).catch(err=>{

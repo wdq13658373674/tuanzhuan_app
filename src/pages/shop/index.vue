@@ -77,7 +77,7 @@
             </p>
             <p class="p3">
               <span class="pull-left">¥{{goods.now_price}}</span>
-              <span class="gray pull-right">已售{{goods.goods_sell_count}}</span>
+              <span class="gray pull-right">已售{{goods.goods_sell_count || goods.goods_sell_fenit || 0}}</span>
             </p>
           </router-link>
         </div>

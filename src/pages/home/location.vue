@@ -35,7 +35,7 @@
 
 <script>
   import { Search } from 'vux'
-  import {mapState} from 'vuex'
+  import {mapState,mapMutations} from 'vuex'
 
   export default {
     name: "Location",
@@ -86,9 +86,10 @@
         })
       },
       /**切换小区*/
+      ...mapMutations(['update_roomInfo']),
       changeVillage:function(item){
         let roomInfo=item;
-        this.$store.commit('update_roomInfo',roomInfo);
+        this.update_roomInfo(roomInfo);
         this.$router.replace('/');
       },
       /**搜索*/
