@@ -23,7 +23,7 @@
     name: "BarNav",
     props: ["title"],
     mounted(){
-      console.log(this.$route.name)
+
     },
     methods: {
       /**返回**/

@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <h2 class="h2">热门搜索</h2>
+    <!--<h2 class="h2">热门搜索</h2>
     <div class="content">
       <div class="search-history clearfix">
         <a href="#" class="link">可乐</a>
@@ -33,12 +33,14 @@
         <a href="#" class="link">可乐</a>
         <a href="#" class="link">婴儿沐浴露</a>
       </div>
-    </div>
+    </div>-->
   </section>
 </template>
 
 <script>
+  import { mapState,mapMutations } from 'vuex'
   import { Search } from 'vux'
+  import { historySearch } from '@/assets/js/shop/historySearch'
   export default {
     name: "ShopSearch",
     components: {
@@ -46,13 +48,20 @@
     },
     data () {
       return {
-        search: this.$route.query.title
+        search: '',
       }
     },
     computed:{
-
+      ...mapState(['historySearch']),
+      history(){
+        return this.historySearch;
+      }
     },
     methods: {
+      /**
+       * 搜索按钮
+       * **/
+      ...mapMutations(['update_history_search']),
       submit:function(){
         let keyword=this.search;
 
@@ -64,6 +73,12 @@
             keyword:keyword
           }
         })
+        //保存搜索历史记录
+        if(keyword!=''){
+          this.update_history_search(keyword);
+          console.log(this.historySearch);
+          console.log(1);
+        }
       }
     },
   }

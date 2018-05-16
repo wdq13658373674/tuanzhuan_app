@@ -286,7 +286,7 @@
 <style lang="css" scoped>
   @import '../../assets/css/shopDetail.css';
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../core/base";
   /*swiper*/
   .detail-swiper{
