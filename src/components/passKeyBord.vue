@@ -35,6 +35,10 @@
     },
      watch:{
        val(value){
+         /**
+          * 传给父组件的回调函数，并返回参数value
+          * 例如：父组件调用 @run='方法名'
+          * **/
          this.$emit('run',value);
        }
     },

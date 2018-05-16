@@ -33,6 +33,7 @@
 <script>
   import infiniteScroll from 'vue-infinite-scroll'
   import { LoadMore} from 'vux'
+  import { mapState } from 'vuex'
 
   export default {
     name: "Article",
@@ -48,6 +49,9 @@
         page:0
       }
     },
+    computed:{
+      ...mapState(['roomInfo'])
+    },
     mounted:function(){
       this.loadMore();
     },
@@ -57,7 +61,7 @@
        * **/
       getNewsLists(flag){
         const param = {
-          'notic_village_id' : 1,
+          'notic_village_id' : this.roomInfo.village_id,
           'page':this.page
         }
 

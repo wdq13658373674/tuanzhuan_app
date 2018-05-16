@@ -10,6 +10,7 @@ import 'vueg/css/transition-min.css'
 import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
 import utils from '@/libs/util.js'
+import { historySearch } from '@/assets/js/shop/historySearch'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
 /**
@@ -102,26 +103,48 @@ const store = new Vuex.Store({
     roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},//小区房屋信息
     userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},//用户信息
     storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {},//商家信息
+    historySearch:storeJs('historySearch') ? storeJs('historySearch') : {},//商品搜索历史记录
   },
   mutations:{
     load(state,loading){
       state.loading=loading;
     },
+    /**
+     * 更新小区房屋信息
+     * **/
     update_roomInfo(state,roomInfo){
       state.roomInfo=roomInfo;
       storeJs.set('roomInfo',state.roomInfo);
     },
+    /**
+     * 更新用户信息
+     * **/
     update_userInfo(state,userInfo){
       state.userInfo=userInfo;
       storeJs.set('userInfo',state.userInfo);
     },
+    /**
+     * 更新商家信息
+     * **/
     update_storeInfo(state,storeInfo){
       state.storeInfo=storeInfo;
       storeJs.set('storeInfo',state.storeInfo);
     },
+    /**
+     * 更新token值
+     * **/
     update_token(state,token){
       state.token=token;
       storeJs.set('token',state.token);
+    },
+    /**
+     * 更新商品搜索历史记录
+     * **/
+    update_history_search(state,history){
+      history=historySearch(history);
+      console.log(history);
+      state.historySearch=history;
+      storeJs.set('historySearch',state.historySearch);
     },
   },
   actions:{
