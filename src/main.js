@@ -10,7 +10,6 @@ import 'vueg/css/transition-min.css'
 import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
 import utils from '@/libs/util.js'
-import { historySearch } from '@/assets/js/shop/historySearch'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
 
 /**
@@ -103,7 +102,7 @@ const store = new Vuex.Store({
     roomInfo:storeJs('roomInfo') ? storeJs('roomInfo') : {},//小区房屋信息
     userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},//用户信息
     storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {},//商家信息
-    historySearch:storeJs('historySearch') ? storeJs('historySearch') : {},//商品搜索历史记录
+    historySearch:storeJs('historySearch') ? storeJs('historySearch') : [],//商品搜索历史记录
   },
   mutations:{
     load(state,loading){
@@ -141,9 +140,19 @@ const store = new Vuex.Store({
      * 更新商品搜索历史记录
      * **/
     update_history_search(state,history){
-      history=historySearch(history);
-      console.log(history);
-      state.historySearch=history;
+      const maxLen=10;
+      let arr=state.historySearch;
+
+      if(history==''){
+        return;
+      }
+
+      if(arr.length < maxLen){
+        arr.unshift(history);
+      }else{
+        arr.pop();
+        arr.unshift(history);
+      }
       storeJs.set('historySearch',state.historySearch);
     },
   },
