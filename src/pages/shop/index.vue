@@ -192,7 +192,7 @@
 <style lang="css" scoped>
   @import '../../assets/css/shop.css';
 </style>
-<style lang="scss" scoped>
+<style lang="scss">
   @import "../../core/base";
   .index-swiper{
     height:rem(310);
