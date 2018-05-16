@@ -6,10 +6,10 @@
         <span class="name">{{village_name}}</span>
       </router-link>
 
-      <a href="#" class="pull-right ml10">
+      <a href="tel:400-135-6677" class="pull-right ml10">
         <i class="icon phone"></i>
       </a>
-      <a href="tel:400-135-6677" class="pull-right">
+      <a href="#" class="pull-right">
         <i class="icon ew"></i>
       </a>
     </div>
