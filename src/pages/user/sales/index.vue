@@ -9,7 +9,7 @@
           <li v-for="item in getSalesData.order_info" class="item">
             <router-link :to="{path: '/shop/detail', query: {id: item.goods.goods_id}}" class="link">
               <div class="img-box">
-                <img class="img" v-lazy="item.goods_logo" alt="" />
+                <img class="img" v-lazy="item.goods.goods_logo" alt="" />
               </div>
               <div class="con-box">
                 <p class="p1 clearfix">
@@ -36,7 +36,12 @@
         <ul class="cell-list">
           <li class="item cell p27">
             <span>支付方式</span>
-            <span>{{getSalesData.order.goods_order_pay_type}}</span>
+            <span v-if="getSalesData.order.goods_order_pay_type == 'tcion'">团票</span>
+            <span v-else-if="getSalesData.order.goods_order_pay_type == 'alipay'">支付宝</span>
+            <span v-else-if="getSalesData.order.goods_order_pay_type == 'weixin'">微信</span>
+            <span v-else-if="getSalesData.order.goods_order_pay_type == 'balancce'">余额</span>
+            <span v-else-if="getSalesData.order.goods_order_pay_type == 'arrival'">到付</span>
+            <span v-else>线下</span>
           </li>
           <li class="item cell p27">
             <span>下单时间</span>
@@ -62,7 +67,8 @@
       return {
         getSalesData:{
           order: {
-            goods_order_numb: 0
+            goods_order_numb: 0,
+            goods_order_create_time: 0
           },
           order_info: {}
         },
@@ -95,7 +101,7 @@
         }).then(res=>{
           res=res.data;
           this.getSalesData = res.data;
-
+          console.log(this.getSalesData);
           for(let i in this.getSalesData.order_info){
             this.total += parseFloat(this.getSalesData.order_info[i].order_info_real_tcion);
           }
