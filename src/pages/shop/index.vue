@@ -20,7 +20,9 @@
           <p class="txt">{{item.type_name}}</p>
         </router-link>
         <router-link to="categorys" class="item" append>
-          <img class="img" src="@/assets/images/img/d_menu5.png" alt="">
+          <div class="img-box">
+            <img src="@/assets/images/img/d_menu5.png" alt="">
+          </div>
           <p class="txt">全部分类</p>
         </router-link>
       </div>
