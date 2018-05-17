@@ -32,12 +32,20 @@
           this.$router.push('/user');
           return;
         }
-        if(this.$route.name=='OrderPayDetail'){
-          this.$router.go(-2);
-          return;
-        }
         if(this.$route.name=='ShopCategory'){
           this.$router.replace('/shop');
+          return;
+        }
+        if(this.$route.name=='Property'){
+          this.$router.replace('/');
+          return;
+        }
+        if(this.$route.name=='ShopDetail'){
+          this.$router.replace('/shop');
+          return;
+        }
+        if(this.$route.name=='ShopOrder'){
+          this.$router.replace('/shop/detail');
           return;
         }
 
