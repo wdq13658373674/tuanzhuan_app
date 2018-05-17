@@ -268,10 +268,8 @@ export default new Router({
           path: '/shop/order',
           name: 'ShopOrder',
           meta: {
-            title: '提交订单'
-          },
-          meta: {
             requireAuth: true,
+            title: '提交订单'
           },
           components:{
             default:ShopOrder,
