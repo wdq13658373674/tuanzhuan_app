@@ -126,7 +126,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           if(flag){
             //多次加载
             for(let i in res.data){
@@ -191,23 +190,30 @@
       },
       /*确认收货*/
       confirmGoods(order_id, index){
-        let params={
-          goods_order_id: order_id,
-          user_id: this.userInfo.user_id
-        };
+        let _this = this;
+        _this.$vux.confirm.show({
+          title: '提示',
+          content: '请在收到快递后确认收货！',
+          onConfirm(){
+            let params={
+              goods_order_id: order_id,
+              user_id: _this.userInfo.user_id
+            };
 
-        this.$axios.get(global.API_HOST+'index/goods_order/ConfirmGoods',{
-          params:params
-        }).then(res=>{
-          res=res.data;
-          if(res.status === 0){
-            this.orderList[index].goods_order_status = 5;
-          }else {
-            this.$vux.toast.text(res.msg);
+            _this.$axios.get(global.API_HOST+'index/goods_order/ConfirmGoods',{
+              params:params
+            }).then(res=>{
+              res=res.data;
+              if(res.status === 0){
+                _this.orderList[index].goods_order_status = 5;
+              }else {
+                _this.$vux.toast.text(res.msg);
+              }
+            }).catch(err=>{
+              console.log('my err:'+err)
+            })
           }
-        }).catch(err=>{
-          console.log('my err:'+err)
-        })
+        });
       }
     }
   }
