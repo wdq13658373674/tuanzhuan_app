@@ -182,7 +182,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status === 0){
             this.userLists=res.data.village.user;

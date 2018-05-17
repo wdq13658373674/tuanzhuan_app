@@ -37,7 +37,7 @@
 
         <ul class="shop-limit-list">
           <li class="item">
-            <router-link to="detail" append>
+            <router-link to="">
               <div class="img-box">
                 <img src="@/assets/images/test/img4.png" alt="" class="img">
               </div>
@@ -197,8 +197,14 @@
   .index-swiper{
     height:rem(310);
 
-    .vux-icon-dot{
+    &.vux-slider > .vux-indicator > a > .vux-icon-dot{
+      @include wh(rem(12),rem(12));
+      @include border-radius(50%);
       @include bgcolor-alpha(rgba(#000,.8));
+
+      &.active{
+        background-color: $primary;
+      }
     }
   }
 </style>

@@ -91,7 +91,7 @@
             </li>
 
             <li class="item">
-              <x-number class="mt20 xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false" @on-change="change_num"></x-number>
+              <x-number class="mt20 prop-xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false" @on-change="change_num"></x-number>
             </li>
           </ul>
         </div>
@@ -302,14 +302,20 @@
       background-size: auto !important;
     }
 
-    .vux-icon-dot{
+    &.vux-slider > .vux-indicator > a > .vux-icon-dot{
+      @include wh(rem(12),rem(12));
+      @include border-radius(50%);
       background-color: #fff;
       border:rem(1) solid $primary;
+
+      &.active{
+        background-color: $primary;
+      }
     }
   }
 
   /*计数*/
-  .xnumber{
+  .prop-xnumber{
     .vux-cell-primary>div{
       border:1px solid #BBBBBB;
       overflow: hidden;
