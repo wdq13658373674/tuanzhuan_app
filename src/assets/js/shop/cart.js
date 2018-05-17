@@ -163,10 +163,15 @@ let car={
       this.cart_list=[];
       storeJs.remove("cart_list");
     }else{
-      car_index.find(item=>{
-        this.cart_list.splice(item, 1);
+      var arr=[];
+      this.cart_list.find((item,key)=>{
+        if($.inArray(key,car_index)<0){
+          arr.push(item);
+        }
       });
-      storeJs.set('cart_list', this.cart_list);
+
+      this.cart_list=arr;
+      storeJs.set('cart_list', arr);
     }
     storeJs.remove("order_pay");
   },
