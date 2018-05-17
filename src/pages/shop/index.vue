@@ -14,7 +14,9 @@
           id: item.type_id,
           title: item.type_name
         }}" class="item" v-for="item in categorys" :key="item.type_id">
-          <img class="img" v-lazy="item.type_logo" alt="">
+          <div class="img-box">
+            <img class="img" v-lazy="item.type_logo" alt="">
+          </div>
           <p class="txt">{{item.type_name}}</p>
         </router-link>
         <router-link to="categorys" class="item" append>
