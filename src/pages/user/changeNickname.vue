@@ -58,7 +58,7 @@
        * **/
       check(){
         this.tips='';
-        if(this.nickname==''){
+        if(!this.nickname){
           this.tips='输入不能为空,修改失败';
         }else if(utils.getStrLength(this.nickname) > 8){
           this.tips='昵称不能超过8个字符';

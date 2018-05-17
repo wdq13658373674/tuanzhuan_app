@@ -8,7 +8,7 @@
     <section class="page-group">
       <ul class="change-data cell-list mt20">
         <li class="item p27">
-          <input class="input" type="text" v-model="realname" placeholder="请输入昵称">
+          <input class="input" type="text" v-model="realname" placeholder="请输入姓名">
         </li>
       </ul>
     </section>
@@ -57,7 +57,8 @@
        * **/
       check(){
         this.tips='';
-        if(this.realname==''){
+
+        if(!this.realname){
           this.tips='输入不能为空,修改失败';
         }else if(utils.getStrLength(this.realname) > 8){
           this.tips='姓名不能超过8个字符,修改失败';
