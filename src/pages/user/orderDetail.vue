@@ -99,7 +99,11 @@
 
 
         <h4 class="h4 bold mt20">订单信息</h4>
-        <ul class="cell-list">
+        <ul class="cell-list auto">
+          <li class="item cell p27">
+            <span>备注</span>
+            <div style="width:80%;">备注备注备注备注备注备注备注备注备注备注备注备注注备注备注备注备注备注备注</div>
+          </li>
           <li class="item cell p27">
             <span>支付方式</span>
             <span v-if="orderDetail.order.goods_order_is_pay === 0">未支付</span>

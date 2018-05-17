@@ -82,7 +82,7 @@
   <div class="order-remark mt20">
     <p class="cell">
       <span class="span">订单备注</span>
-      <input v-model="comment" class="input" type="text" placeholder="击添加订单备注" />
+      <textarea name="" rows="3" maxlength="30" style="width:80%" placeholder="点击添加订单备注(限制30字)"></textarea>
     </p>
   </div>
 </section>

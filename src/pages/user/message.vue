@@ -67,7 +67,7 @@
     </footer>
 
     <!--修改头像 actionSheet-->
-    <actionsheet class="user-action-sheet" v-model="changeHead" :menus="headMenu" show-cancel></actionsheet>
+    <actionsheet class="user-action-sheet" v-model="changeHead" :menus="headMenu" @on-click-menu="changeSexs" show-cancel></actionsheet>
     <!--修改性别 actionSheet-->
     <actionsheet class="user-action-sheet" v-model="changeSex" :menus="sexMenu" @on-click-menu="changeSexs" show-cancel></actionsheet>
   </div>
