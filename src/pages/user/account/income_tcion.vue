@@ -6,6 +6,7 @@
           <p class="p1 cell">
             <span v-if="item.user_tcion_change_type === 'goods'">消费</span>
             <span v-else-if="item.user_tcion_change_type === 'refund'">退款</span>
+            <span v-else-if="item.user_money_change_type === 'property'">物业缴费</span>
             <span v-else-if="item.user_tcion_change_type === 'recharge'">充值</span>
             <span v-else>后台操作</span>
             <span class="span gray">{{item.add_time | stampToDate(true)}}</span>

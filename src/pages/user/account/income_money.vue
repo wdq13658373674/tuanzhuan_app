@@ -7,6 +7,8 @@
             <span v-if="item.user_money_change_type === 'goods'">消费</span>
             <span v-else-if="item.user_money_change_type === 'refund'">退款</span>
             <span v-else-if="item.user_money_change_type === 'recharge'">充值</span>
+            <span v-else-if="item.user_money_change_type === 'property'">物业缴费</span>
+            <span v-else-if="item.user_money_change_type === 'reply'">提现</span>
             <span v-else>后台操作</span>
             <span class="span gray">{{item.add_time | stampToDate(true)}}</span>
           </p>
@@ -61,6 +63,7 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           if(flag){
             //多次加载
             this.listData=res.data;
