@@ -21,7 +21,7 @@
       <span class="f60 gray"> &rsaquo; </span>
     </h4>
 
-    <router-link to="/shop/address?from=order" class="order-address">
+    <a class="order-address" @click="goAddr">
       <p class="p" v-if="address.address_user_phone">{{address.address_comment}}</p>
       <p class="p" v-if="address.address_user_phone">
         <span>{{address.address_user_realname}}</span>
@@ -30,7 +30,7 @@
 
       <!--为空-->
       <p v-if="address.length==0">请添加或者选择地址 <i class="icon arrow5 pull-right"></i></p>
-    </router-link>
+    </a>
   </div>
   <!--商家配送-->
 
@@ -184,7 +184,7 @@ export default {
     }
 
 
-
+    console.log(this.cartList);
     //获取店铺配置信息
     let param={
       storeid:this.storeInfo.store_id,
@@ -352,9 +352,15 @@ export default {
         i++;
       }
 
+    },
+    goAddr(){
+      if(this.$route.query.type){
+        this.$router.push({path: '/shop/address?from=order',query:{ type:this.$route.query.type}});
+      }else {
+        this.$router.push({path: '/shop/address?from=order'});
+      }
     }
-
-  },
+  }
 }
 </script>
 <style lang="css" scoped>

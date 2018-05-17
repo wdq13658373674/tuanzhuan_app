@@ -200,7 +200,6 @@
               };
               this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
-                console.log(res);
                 if(res.status==0){
                   this.$router.push('/order/pay/detail?order_id='+that.order_id);
                 }else {

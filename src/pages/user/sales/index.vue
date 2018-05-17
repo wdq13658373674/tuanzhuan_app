@@ -95,13 +95,11 @@
           order_id: this.$route.query.order_id,
           user_id: this.userInfo.user_id
         };
-        // console.log(params);
         this.$axios.get(global.API_HOST+'index/goods_order/afterSale',{
           params:params
         }).then(res=>{
           res=res.data;
           this.getSalesData = res.data;
-          console.log(this.getSalesData);
           for(let i in this.getSalesData.order_info){
             this.total += parseFloat(this.getSalesData.order_info[i].order_info_real_tcion);
           }

@@ -48,11 +48,11 @@
             params:params
           }).then(res=>{
             res=res.data;
-            if(res.status === 1){
-              this.$vux.toast.text(res.msg);
-            }else {
+            if(res.status === 0){
               this.$vux.toast.text("退货提交成功，等待商家处理");
               this.status = 1;
+            }else {
+              this.$vux.toast.text(res.msg);
             }
           }).catch(err=>{
             console.log('my err:'+err)

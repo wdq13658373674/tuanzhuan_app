@@ -70,7 +70,11 @@
           this.$axios.post(global.API_HOST+'/index/User_address/set_default',qs.stringify(params)).then(res=>{
             res=res.data;
             if(res.status==0){
-              this.$router.push('/shop/order');
+              if(this.$route.query.type){
+                this.$router.push({path: '/shop/order',query:{ type:this.$route.query.type}});
+              }else{
+                this.$router.push('/shop/order');
+              }
             }
           }).catch(err=>{
             console.log('my err:'+err);
