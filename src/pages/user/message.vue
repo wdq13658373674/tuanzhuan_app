@@ -122,7 +122,11 @@
           console.log('my err:'+err)
         })
       },
-      /**退出**/
+      /**退出
+       * ----清除 用户信息 本地存储
+       * ----清除 房屋信息 本地存储
+       * ----清除 即时通讯 本地存储
+       * **/
       ...mapMutations(['update_userInfo','update_roomInfo']),
       exit(){
         this.update_userInfo({});
