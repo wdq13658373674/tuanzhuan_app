@@ -82,7 +82,7 @@
   <div class="order-remark mt20">
     <p class="cell">
       <span class="span">订单备注</span>
-      <input class="input" type="text" placeholder="击添加订单备注" />
+      <input v-model="comment" class="input" type="text" placeholder="击添加订单备注" />
     </p>
   </div>
 </section>
@@ -158,6 +158,7 @@ export default {
       tcion:0,
       orderInfo:[],
       address:[],
+      comment:''
     }
   },
   computed:{
@@ -267,14 +268,14 @@ export default {
       }else{
         wtime=`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${this.timeValue}`;
       }
-
       let params={
         goods:JSON.stringify(goods),
         sendtype:this.send_type,
         address_id:addressID,
         storeid:this.storeInfo.store_id,
         wtime:wtime,
-        userid:this.userInfo.user_id
+        userid:this.userInfo.user_id,
+        comment: this.comment
       };
 
       this.$axios.post('/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
