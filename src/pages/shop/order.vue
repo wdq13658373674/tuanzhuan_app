@@ -91,9 +91,9 @@
   <div class="order-total">
     <p class="f32">合计:
       <i class="icon tp"></i>
-      <span class="orange">{{tcion.toFixed(2)}}</span>
+      <span class="orange">{{tcion}}</span>
     </p>
-    <p>¥{{money.toFixed(2)}}</p>
+    <p>¥{{money}}</p>
   </div>
   <a href="javascript:void(0);" class="btn btn-orange" @click="seve_order">结算</a>
 </div>
@@ -169,8 +169,8 @@ export default {
       //立即购买
       this.cartList = storeJs.get('buy_goods');
       console.log(this.cartList);
-      this.money = this.cartList[0].now_price*this.cartList[0].cart_sum;
-      this.tcion = this.cartList[0].now_tcion*this.cartList[0].cart_sum;
+      this.money = (this.cartList[0].now_price*this.cartList[0].cart_sum).toFixed(2);
+      this.tcion = (this.cartList[0].now_tcion*this.cartList[0].cart_sum).toFixed(2);
     }else{
       //选中购物车商品
       this.money = cart.getMoney(cart.order_pay).price;
