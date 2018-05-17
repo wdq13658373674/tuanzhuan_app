@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cartNav :select="select"></cartNav>
+    <cartNav :select="select" v-on:success="checkCart"></cartNav>
     <section class="page-group">
       <!--购物车为空-->
       <div class="cart-empty" v-if="!cart_lists.length">
@@ -146,6 +146,17 @@
         }else{
           this.$vux.toast.text('亲！还没选择商品哟!','middle');
         }
+      },
+
+      /**
+       * 删除回调
+       */
+      checkCart(){
+        var money=cart.getMoney([]);
+        this.price=money.price;
+        this.tcion=money.tcion;
+        this.cart_lists=cart.cart_list;
+        this.select=[];
       }
 
     },

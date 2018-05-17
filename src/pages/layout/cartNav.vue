@@ -32,14 +32,18 @@ import cart from '@/assets/js/shop/cart'
         if(select.length==0){
           this.$vux.toast.text('请选择要删除的商品','top');
         }else{
-          this.$vux.confirm.show({
+          var that=this;
+          that.$vux.confirm.show({
             title:'提示',
             content:'您确定要删除此商品吗?',
             onConfirm(){
               cart.delGoods(select);
-              var money=cart.getMoney();
-              this.price=money.price;
-              this.tcion=money.tcion;
+              that.$emit('success',true);
+
+//              var money=cart.getMoney();
+//              that.price=money.price;
+//              that.tcion=money.tcion;
+//              that.cart_lists=[];
             }
           })
         }

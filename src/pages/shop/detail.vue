@@ -137,6 +137,7 @@
         cartNum:1,
         type:'',
         prop:'',
+        prop_id:'',
         popControl:false,
         goodsLists:[],
         goods:[],
@@ -223,9 +224,13 @@
       /**
        * 加入购物车
        * **/
-      addCart(){
+      addCart:function(){
+        var that=this;
+
+        console.log("bb:"+that.prop_id);
         if(this.selectType()){
-          var check=cart.addCart(this.goods,this.cartNum,this.prop);
+          console.log("qian:"+that.prop_id);
+          var check=cart.addCart(this.goods,this.cartNum,that.prop_id);
           if(check==-1){
             this.$vux.toast.text('没有库存了','middle');
             this.cartNum=this.goods.goods_stock;
@@ -234,7 +239,7 @@
           }else{
             this.$vux.toast.text('加入购物车成功','middle');
             this.cartNumber=cart.getCartShopSum(0,'',true);
-            this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);
+            this.cartNum=cart.getCartShopSum(this.goods_id,that.prop_id);
             this.popControl=false;
           }
         }
@@ -242,15 +247,18 @@
       /**
        * 选择规格
        * **/
-      changeProp(index) {
-        var prop_id=this.goods_id+'_'+index;
-        this.prop=prop_id;
+      changeProp:function(index) {
+        var that=this;
+        that.prop_id=that.goods_id+'_'+index;
 
-        this.goods.choose_prop=this.goodsType[index];
-        this.goods.choose_prop_id=prop_id;
+        console.log("aa:"+that.prop_id);
+        console.log(cart.cart_list);
+
+        that.goods.choose_prop=that.goodsType[index];
+        that.goods.choose_prop_id=that.prop_id;
         //console.log(cart.getCartShopSum(this.goods_id,this.prop));
-        this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);
-        this.changeStatus=false;
+        that.cartNum=cart.getCartShopSum(that.goods_id,that.prop_id);
+        that.changeStatus=false;
       },
       //改变购物车数量
       change_num(stock){
