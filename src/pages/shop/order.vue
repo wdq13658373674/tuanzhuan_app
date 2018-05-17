@@ -91,9 +91,9 @@
   <div class="order-total">
     <p class="f32">合计:
       <i class="icon tp"></i>
-      <span class="orange">{{tcion}}</span>
+      <span class="orange">{{tcion.toFixed(2)}}</span>
     </p>
-    <p>¥{{money}}</p>
+    <p>¥{{money.toFixed(2)}}</p>
   </div>
   <a href="javascript:void(0);" class="btn btn-orange" @click="seve_order">结算</a>
 </div>
@@ -168,8 +168,9 @@ export default {
     if(this.$route.query.type){
       //立即购买
       this.cartList = storeJs.get('buy_goods');
-      this.money = this.cartList[0].now_price;
-      this.tcion = this.cartList[0].now_tcion;
+      console.log(this.cartList);
+      this.money = this.cartList[0].now_price*this.cartList[0].cart_sum;
+      this.tcion = this.cartList[0].now_tcion*this.cartList[0].cart_sum;
     }else{
       //选中购物车商品
       this.money = cart.getMoney(cart.order_pay).price;
@@ -183,8 +184,6 @@ export default {
       }
     }
 
-
-    console.log(this.cartList);
     //获取店铺配置信息
     let param={
       storeid:this.storeInfo.store_id,
