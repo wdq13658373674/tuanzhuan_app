@@ -14,11 +14,15 @@
           id: item.type_id,
           title: item.type_name
         }}" class="item" v-for="item in categorys" :key="item.type_id">
-          <img class="img" v-lazy="item.type_logo" alt="">
+          <div class="img-box">
+            <img class="img" v-lazy="item.type_logo" alt="">
+          </div>
           <p class="txt">{{item.type_name}}</p>
         </router-link>
         <router-link to="categorys" class="item" append>
-          <img class="img" src="@/assets/images/img/d_menu5.png" alt="">
+          <div class="img-box">
+            <img src="@/assets/images/img/d_menu5.png" alt="">
+          </div>
           <p class="txt">全部分类</p>
         </router-link>
       </div>
@@ -37,7 +41,7 @@
 
         <ul class="shop-limit-list">
           <li class="item">
-            <router-link to="detail" append>
+            <router-link to="">
               <div class="img-box">
                 <img src="@/assets/images/test/img4.png" alt="" class="img">
               </div>
@@ -197,8 +201,14 @@
   .index-swiper{
     height:rem(310);
 
-    .vux-icon-dot{
+    &.vux-slider > .vux-indicator > a > .vux-icon-dot{
+      @include wh(rem(12),rem(12));
+      @include border-radius(50%);
       @include bgcolor-alpha(rgba(#000,.8));
+
+      &.active{
+        background-color: $primary;
+      }
     }
   }
 </style>

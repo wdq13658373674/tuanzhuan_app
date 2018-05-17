@@ -36,7 +36,7 @@
                 <span class="f32 orange mr20">{{item.now_tcion}}</span>
                 <span>¥{{item.now_price}}</span>
 
-                <x-number class="xnumber pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
+                <x-number class="cart-number pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
 
               </p>
             </div>
@@ -181,7 +181,7 @@
   .weui-cell{
     padding:0;
   }
-  .xnumber{
+  .cart-number{
     .vux-cell-primary>div{
       border:1px solid #BBBBBB;
       overflow: hidden;
