@@ -72,7 +72,7 @@
           this.update_userInfo(res.data.user);
           this.update_token(res.data.token);
           if(res.data.room){
-            this.update_roomInfo(res.data.room[0]);
+            this.update_roomInfo(res.data.room);
           }else{
             this.update_roomInfo({});
           }

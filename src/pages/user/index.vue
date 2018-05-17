@@ -9,7 +9,6 @@
       </div>
       <p class="p1">{{userLists.user_nickname || userLists.user_phone || userLists.user_realname}}</p>
       <p v-if="roomLists.village_name" class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
-      <p v-else class="p2">暂无房屋</p>
       <!--波浪 start-->
       <div class="waveWrapper waveAnimation">
         <div class="wave waveTop"></div>
