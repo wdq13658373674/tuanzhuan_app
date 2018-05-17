@@ -53,7 +53,6 @@ let car={
       }
 
     }else{
-      console.log(2);
       if(cart_sum>goods_info.goods_stock && goods_info.goods_stock>-1){
         return -1;
       }

@@ -227,9 +227,7 @@
       addCart:function(){
         var that=this;
 
-        console.log("bb:"+that.prop_id);
         if(this.selectType()){
-          console.log("qian:"+that.prop_id);
           var check=cart.addCart(this.goods,this.cartNum,that.prop_id);
           if(check==-1){
             this.$vux.toast.text('没有库存了','middle');
@@ -250,9 +248,6 @@
       changeProp:function(index) {
         var that=this;
         that.prop_id=that.goods_id+'_'+index;
-
-        console.log("aa:"+that.prop_id);
-        console.log(cart.cart_list);
 
         that.goods.choose_prop=that.goodsType[index];
         that.goods.choose_prop_id=that.prop_id;
