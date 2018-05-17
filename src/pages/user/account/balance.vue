@@ -10,7 +10,7 @@
         <p class="p1">余额账户(元)</p>
         <p class="p2">{{total || '0.00'}}</p>
       </div>
-      <ul class="user-pay-list arrow-cell-list">
+      <ul class="user-pay-list arrow-cell-list" v-if="check">
         <li class="item">
           <router-link to="/user/account/recharge" class="link cell">
             <span><i class="icon icon1"></i>充值</span>
@@ -23,7 +23,7 @@
         </li>
       </ul>
       <!--验证身份的时候显示-->
-      <div class="content user-pay-check mt20" v-if="!check">
+      <div class="content user-pay-check mt20" v-else>
         <p class="p1">验证身份后才能使用余额功能</p>
         <router-link to="/user/check/idCard" class="btn btn-orange">去验证</router-link>
       </div>
