@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cartNav :select="select"></cartNav>
+    <cartNav :select="select" v-on:success="checkCart"></cartNav>
     <section class="page-group">
       <!--购物车为空-->
       <div class="cart-empty" v-if="!cart_lists.length">
@@ -36,7 +36,7 @@
                 <span class="f32 orange mr20">{{item.now_tcion}}</span>
                 <span>¥{{item.now_price}}</span>
 
-                <x-number class="xnumber pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
+                <x-number class="cart-number pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
 
               </p>
             </div>
@@ -146,6 +146,17 @@
         }else{
           this.$vux.toast.text('亲！还没选择商品哟!','middle');
         }
+      },
+
+      /**
+       * 删除回调
+       */
+      checkCart(){
+        var money=cart.getMoney([]);
+        this.price=money.price;
+        this.tcion=money.tcion;
+        this.cart_lists=cart.cart_list;
+        this.select=[];
       }
 
     },
@@ -170,7 +181,7 @@
   .weui-cell{
     padding:0;
   }
-  .xnumber{
+  .cart-number{
     .vux-cell-primary>div{
       border:1px solid #BBBBBB;
       overflow: hidden;

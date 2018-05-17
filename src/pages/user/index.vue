@@ -9,8 +9,6 @@
       </div>
       <p class="p1">{{userLists.user_nickname || userLists.user_phone || userLists.user_realname}}</p>
       <p v-if="roomLists.village_name" class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
-      <p v-else-if="roomInfo.village_name" class="p2">{{roomInfo.village_name}}{{roomInfo.unit_name}}{{roomInfo.floor_name}}{{roomInfo.floor_code}}</p>
-      <p v-else class="p2">暂无房屋</p>
       <!--波浪 start-->
       <div class="waveWrapper waveAnimation">
         <div class="wave waveTop"></div>
@@ -57,8 +55,8 @@
           </router-link>
           <router-link class="item" to="/user/house" tag="li">
             <p class="p1">我的房屋</p>
-            <p class="p2" v-if="roomInfo.length !== 0">{{roomInfo.village_name}}{{roomInfo.unit_name}}{{roomInfo.floor_name}}{{roomInfo.floor_code}}</p>
-            <p v-else>{{roomInfo.notFloor}}</p>
+            <p v-if="roomLists.village_name" class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
+            <p v-else class="p2">暂无房屋</p>
             <i class="icon arrow"></i>
           </router-link>
           <router-link class="item" to="/user/order" tag="li">
@@ -157,13 +155,6 @@
         roomLists:0,
         bankNum:0,
         orderNum:0,
-        roomInfo:{
-          village_name:'',
-          unit_name:'',
-          floor_name:'',
-          floor_code:'',
-          notFloor:''
-        }
       }
     },
     computed:{
@@ -182,7 +173,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status === 0){
             this.userLists=res.data.village.user;
@@ -191,10 +181,6 @@
 
             if(res.data.village.room){
               this.roomLists=res.data.village.room;
-            }else if(res.data.room_info.length !== 0){
-              this.roomInfo = res.data.room_info[0];
-            }else {
-              this.roomInfo.notFloor = '暂无房屋';
             }
           }
         }).catch(err=>{

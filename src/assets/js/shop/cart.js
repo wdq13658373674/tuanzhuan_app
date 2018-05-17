@@ -18,7 +18,7 @@ let car={
      */
   addCart(goods_info,cart_sum,prop_id=""){
 
-    if(this.cart_list){
+    if(this.cart_list.length>0){
       var check=true;
       var stock=0;
       this.cart_list.forEach((item,index)=>{
@@ -68,7 +68,7 @@ let car={
    */
   setCartList(goods_info,cart_sum,prop_id){
     goods_info.cart_sum=cart_sum;
-    this.cart_list.push(goods_info);
+    this.cart_list.push(JSON.parse(JSON.stringify(goods_info)));
     storeJs.set('cart_list', this.cart_list);
   },
 
@@ -159,11 +159,21 @@ let car={
    * @returns {{price: number, tcion: number}}
    */
   delGoods(car_index=[]){
-    car_index.find(item=>{
-      this.cart_list.splice(item, 1);
-    });
+    if(car_index.length>=this.cart_list.length){
+      this.cart_list=[];
+      storeJs.remove("cart_list");
+    }else{
+      var arr=[];
+      this.cart_list.find((item,key)=>{
+        if($.inArray(key,car_index)<0){
+          arr.push(item);
+        }
+      });
+
+      this.cart_list=arr;
+      storeJs.set('cart_list', arr);
+    }
     storeJs.remove("order_pay");
-    storeJs.set('cart_list', this.cart_list);
   },
 
   /**

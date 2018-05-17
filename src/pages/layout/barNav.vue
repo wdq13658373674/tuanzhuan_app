@@ -36,6 +36,10 @@
           this.$router.go(-2);
           return;
         }
+        if(this.$route.name=='ShopCategory'){
+          this.$router.replace('/shop');
+          return;
+        }
 
         this.$router ? this.$router.go(-1) : window.history.back()
       }

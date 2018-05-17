@@ -62,6 +62,7 @@
 
         this.$axios.post(global.API_HOST+'/index/index/login',qs.stringify(params)).then(res=>{
           res=res.data;
+          console.log(res);
 
           if(res.status==1){
             this.$vux.toast.show(res.msg);
@@ -71,7 +72,7 @@
           this.update_userInfo(res.data.user);
           this.update_token(res.data.token);
           if(res.data.room){
-            this.update_roomInfo(res.data.room[0]);
+            this.update_roomInfo(res.data.room);
           }else{
             this.update_roomInfo({});
           }
