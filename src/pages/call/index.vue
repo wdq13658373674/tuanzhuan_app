@@ -2,7 +2,7 @@
   <div>
     <section class="page-group">
       <div class="tz-communication">
-        <div class="tz-communication-wrap" ref="msgbox">
+        <div class="tz-communication-wrap" ref="msgbox" id="msg-centent">
           <ul class="tz-communication-list clearfix" id="msgbox">
             <!--<li>-->
             <!--<div class="tip">-->

@@ -20,6 +20,10 @@ var user = {
         var tpl=$("#moban").html();
         tpl =tpl.replace('{msg}',data.result.text);
         $("#msgbox").append(tpl);
+
+        var msgbox=$("#msg-centent");
+        msgbox.scrollTop(msgbox[0].scrollHeight);
+
       }
         //接受到的文本消息处理 data.result.message为消息内容,data.result.uid为消息来源用户UID,发送消息时需要带此参数
         //console.log(data);
@@ -38,7 +42,7 @@ var user = {
 
         //发送文本消息成功后的回传方法
       $(".tz-msg-loading").remove();
-        console.log(data);
+      //console.log(data);
     },
     senderror:function(data){
       console.log(data);
