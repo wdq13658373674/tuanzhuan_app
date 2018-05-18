@@ -7,6 +7,11 @@ var user = {
     showmessage: function(data){
       var timestamp = Date.parse(new Date());
 
+      //历史记录限制条数处理(100条历史记录)
+      if(msgDB.length>100){
+        msgDB.splice(0,msgDB.length-100);
+      }
+
       var arr={
         msg:data.result.text,
         time:timestamp/1000,
@@ -30,6 +35,11 @@ var user = {
     },
     sendsuccess:function(data){
       var timestamp = Date.parse(new Date());
+
+      //历史记录限制条数处理(100条历史记录)
+      if(msgDB.length>100){
+        msgDB.splice(0,msgDB.length-100);
+      }
 
       var arr={
         msg:data.result.text,
