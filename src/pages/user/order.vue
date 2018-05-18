@@ -9,12 +9,14 @@
           <div class="top">
             <span class="pull-left">订单编号：{{item.goods_order_numb}}</span>
 
-            <span v-if="item.goods_order_status === 4">
-              <span class="pull-right" :class="item.goods_order_send_status === 4?'green':'orange'">{{sendStatus[item.goods_order_status][item.goods_order_send_status]}}</span>
-            </span>
-            <span v-else>
-              <span class="pull-right" :class="item.goods_order_status === 5?'green':'orange'">{{sendStatus[item.goods_order_status]}}</span>
-            </span>
+              <span v-if="item.goods_order_is_pay == 0">
+                <span class="pull-right orange">未支付</span>
+              </span>
+              <span v-else>
+                <span v-if="item.goods_order_status === 4" class="pull-right" :class="item.goods_order_send_status === 4?'green':'orange'">{{sendStatus[item.goods_order_status][item.goods_order_send_status]}}</span>
+
+              <span v-else class="pull-right" :class="item.goods_order_status === 5?'green':'orange'">{{sendStatus[item.goods_order_status]}}</span>
+              </span>
           </div>
             <div v-for="(goods,i) in item.property" class="pro">
               <div class="img-box">
@@ -87,7 +89,7 @@
         load:false,
         flag: false,
         sendStatus: {
-          0:"未确认",
+          0:"等待商家确认",
           1:"已取消",
           2:"已退款",
           3:"已退货",

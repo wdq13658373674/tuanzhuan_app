@@ -82,7 +82,7 @@
   <div class="order-remark mt20">
     <p class="cell">
       <span class="span">订单备注</span>
-      <textarea name="" rows="3" maxlength="30" style="width:80%" placeholder="点击添加订单备注(限制30字)"></textarea>
+      <textarea name="" v-model="comment" rows="3" maxlength="30" style="width:80%" placeholder="点击添加订单备注(限制30字)"></textarea>
     </p>
   </div>
 </section>
@@ -276,7 +276,6 @@ export default {
         userid:this.userInfo.user_id,
         comment: this.comment
       };
-
       this.$axios.post('/index/Goods_order/saveOrder',qs.stringify(params)).then(res=>{
         res=res.data;
         if(res.status==0){
