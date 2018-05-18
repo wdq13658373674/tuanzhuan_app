@@ -136,17 +136,17 @@
         payMoney:0,
         pay_list:{
           0:{
-              img:"/static/img/c_pay3.svg",
+              img:"./static/images/img/c_pay3.svg",
               title:"支付宝支付",
               type:"alipay",
           },
           1:{
-              img:"/static/img/c_pay4.svg",
+              img:"./static/images/img/c_pay4.svg",
               title:"微信支付",
               type:"wxpay",
           },
           2:{
-              img:"/static/img/c_pay5.svg",
+              img:"./static/images/img/c_pay5.svg",
               title:"线下支付",
               type:"lixian",
           }
