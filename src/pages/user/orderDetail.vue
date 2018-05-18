@@ -11,11 +11,16 @@
             6、商家正在备货 >
         -->
         <h1 class="state">
-          <span v-if="orderDetail.order.goods_order_status === 4">
+          <span v-if="orderDetail.order.goods_order_is_pay == 0">
+            <span>未支付</span>
+          </span>
+          <span v-else>
+            <span v-if="orderDetail.order.goods_order_status === 4">
             {{sendStatus[orderDetail.order.goods_order_status][orderDetail.order.goods_order_send_status]}}
           </span>
           <span v-else>
             {{sendStatus[orderDetail.order.goods_order_status]}}
+          </span>
           </span>
           >
         </h1>
@@ -100,9 +105,9 @@
 
         <h4 class="h4 bold mt20">订单信息</h4>
         <ul class="cell-list auto">
-          <li class="item cell p27">
+          <li v-if="orderDetail.order.goods_order_comment" class="item cell p27">
             <span>备注</span>
-            <div style="width:80%;">备注备注备注备注备注备注备注备注备注备注备注备注注备注备注备注备注备注备注</div>
+            <div style="width:80%;">{{orderDetail.order.goods_order_comment}}</div>
           </li>
           <li class="item cell p27">
             <span>支付方式</span>
@@ -124,16 +129,15 @@
 
     <footer>
       <div class="bottom-fixed btn-orange-fixed">
-        <a v-if="orderDetail.order.goods_order_status === 4" class="link" @click="collect">确认收货</a>
+        <a v-if="orderDetail.order.goods_order_status === 4" class="link" @click="collect(orderDetail.order.goods_order_id)">确认收货</a>
         <!--<a class="link" @click="collect">确认收货</a>-->
         <span v-if="orderDetail.order.goods_order_status !== 1">
-          <router-link v-if="orderDetail.order.goods_order_is_pay === 0" class="link" :to="{path: '/order/pay', query: {order_id: this.$route.query.id}}">立即支付</router-link>
+          <router-link v-if="orderDetail.order.goods_order_is_pay === 0" class="link" :to="{path: '/order/pay', query: {order_id: this.$route.query.order_id}}">立即支付</router-link>
 
-          <a class="link" href="#">联系商家</a>
+          <a class="link" @click="contact">联系商家</a>
 
           <a v-if="orderDetail.order.goods_order_status === 5 || orderDetail.order.goods_order_status === 9 || orderDetail.order.goods_order_status === 10" class="link" @click="tejected">申请退货</a>
         </span>
-
       </div>
     </footer>
   </div>
@@ -155,6 +159,7 @@
           order:{
             goods_order_status:0,
             goods_order_refund_numb:0,
+            goods_order_comment:'',
             pickup: {
               pickup_address: ''
             }
@@ -162,7 +167,7 @@
           order_info:{}
         },
         sendStatus: {
-          0:"未确认",
+          0:"等待商家确认",
           1:"已取消",
           2:"已退款",
           3:"已退货",
@@ -181,16 +186,18 @@
           10:"正在退货",
           11:"拒绝退货"
         },
-        total:0
+        total:0,
+        status: true
       }
     },
     computed:{
-      ...mapState(['userInfo'])
+      ...mapState(['userInfo','storeInfo'])
     },
     mounted(){
       this.getGoodsDetail();
     },
     methods:{
+      /*获取数据*/
       getGoodsDetail(){
         let params={
           goods_order_id:this.$route.query.order_id,
@@ -200,7 +207,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           this.orderDetail = res.data;
           for(let i in this.orderDetail.order_info){
             this.total += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
@@ -209,6 +215,7 @@
           console.log('my err:'+err)
         })
       },
+      /*申请退货*/
       tejected(){
         if(this.orderDetail.order.goods_order_status === 5 && this.orderDetail.order.goods_order_send_status === 4){
           this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 0}});
@@ -216,6 +223,46 @@
           this.$router.push({path: '/user/order/sales/step1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 1}});
         }else {
           this.$router.push({path: '/user/order/sales/step2', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: this.orderDetail.order.goods_order_status,refund_num:this.orderDetail.order.goods_order_refund_time}});
+        }
+      },
+
+      /*确认收货*/
+      collect(order_id, index){
+        let _this = this;
+        _this.$vux.confirm.show({
+          title: '提示',
+          content: '请在收到快递后确认收货！',
+          onConfirm(){
+            let params={
+              goods_order_id: order_id,
+              user_id: _this.userInfo.user_id
+            };
+
+            _this.$axios.get(global.API_HOST+'index/goods_order/ConfirmGoods',{
+              params:params
+            }).then(res=>{
+              res=res.data;
+              if(res.status === 0){
+                _this.orderList[index].goods_order_status = 5;
+              }else {
+                _this.$vux.toast.text(res.msg);
+              }
+            }).catch(err=>{
+              console.log('my err:'+err)
+            })
+          }
+        });
+      },
+      contact(){
+        if(this.storeInfo.store_phone == 0){
+          let _this = this;
+          _this.$vux.confirm.show({
+            title: '提示',
+            content: '商家未设置电话！',
+            onConfirm(){}
+          });
+        }else {
+          window.location.href="tel:"+this.storeInfo.store_phone
         }
       }
     }
