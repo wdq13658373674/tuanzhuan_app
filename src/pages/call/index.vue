@@ -116,7 +116,7 @@
         uitlshow:false,
         user_logo:"",
         msgBox:"",
-        myMsg:[]
+        myMsg:[],
       }
     },
     computed: {
@@ -125,7 +125,7 @@
     mounted(){
       var that=this;
       that.user_logo=that.userInfo.user_logo;
-      that.myMsg=storeJs("msgDB");
+      that.myMsg=storeJs("msgDB") || [];
 
       setTimeout(function(){
         $("#msgbox").append($("#welcome").html());
@@ -145,7 +145,6 @@
           status:1,
           type:true,
         };
-
 
         that.myMsg.push(arr);
         that.msgBox="";
