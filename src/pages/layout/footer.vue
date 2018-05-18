@@ -13,10 +13,10 @@
         <i class="door"></i>
         一键开门
       </a>
-      <a href="#" class="item">
+      <router-link to="Neighbor" class="item">
         <i class="icon icon3"></i>
         邻聚
-      </a>
+      </router-link>
       <router-link to="/user" class="item">
         <i class="icon icon4"></i>
         我的

@@ -36,7 +36,11 @@
                   <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
                 </div>
                 <div class="con-box" style="position:relative;">
-                  <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading> {{item.msg}}
+                  <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading>
+                  <div class="text" v-if="!item.img">{{item.msg}}</div>
+                  <div v-else>
+                    <img width="100%" :src="item.msg" alt="">
+                  </div>
                 </div>
               </li>
             </template>
@@ -59,7 +63,7 @@
               <label for="file">
                 <img class="img" src="@/assets/images/img/j_icon2.png" alt="">
                 <p>照片</p>
-                <input type="file" id="file"/>
+                <input type="file" id="file" accept="image/*" @change="uploadImg"/>
               </label>
             </li>
             <!--<li class="item">-->
@@ -98,7 +102,9 @@
 <script>
   import {mapState} from 'vuex'
   import { InlineLoading } from 'vux'
+  import lrz from 'lrz'
   const storeJs=require('storejs');
+  const qs = require("querystring")
 
   var svrMsg=[];
 
@@ -154,6 +160,7 @@
           action:'sendToVillage',
           result:{
             message:msg,
+            type:0,
             village_id:that.roomInfo.village_id
           }
         });
@@ -169,6 +176,60 @@
           that.$refs.msgbox.scrollTop=that.$refs.msgbox.scrollHeight;
         },100);
 
+      },
+      /**
+       * 上传图片
+       * **/
+      uploadImg(event){
+        let files=event.target.files || event.dataTransfer.files;
+        if(!files.length) return;
+
+        //图片压缩
+        lrz(files[0], {
+          quality:0.9,//压缩质量
+          fieldName:'imgFile'
+        }).then(rst => {
+          this.upload_ajax(rst.formData);
+        })
+
+      },
+      /**
+       * 上传图片接口
+       * params : 接口参数
+       * **/
+      upload_ajax(params){
+        this.$axios.post('/index/index/upload',params,{
+          headers:{'Content-Type':'multipart/form-data'}//添加请求头
+        }).then(res=>{
+          res=res.data;
+          if(res.status==0){
+            // console.log(res);
+
+            let url=res.data;
+            var arr={
+              msg:url,
+              img:true,
+              status:1,
+              type:true,
+            };
+            this.myMsg.push(arr);
+
+            const that=this;
+            wsocket.doSend({
+              controller:'index',
+              action:'sendToVillage',
+              result:{
+                message:url,
+                type:1,
+                village_id:that.roomInfo.village_id
+              }
+            });
+
+            this.scrollBottom();
+          }else{
+            this.$vux.toast.text('图片过大,上传失败');
+          }
+        })
       }
     }
   }
@@ -188,6 +249,8 @@
   .tz-msg-loading{
     position:absolute;
     left:rem(-50);
+    top:50%;
+    margin-top:rem(-20);
     @include wh(rem(40),rem(40));
   }
 </style>

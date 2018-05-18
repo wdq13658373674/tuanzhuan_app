@@ -44,6 +44,7 @@ var user = {
       var arr={
         msg:data.result.text,
         time:timestamp/1000,
+        img:data.result.type,
         status:1
       };
       msgDB.push(arr);

@@ -107,7 +107,7 @@
   import Footer from '@/pages/layout/footer'
 
   import solarLunar from 'solarlunar'
-  import {mapState} from 'vuex'
+  import {mapState,mapMutations} from 'vuex'
   import {Marquee, MarqueeItem} from 'vux'
 
   export default {
@@ -197,6 +197,7 @@
         })
       },
       /**获取商品列表**/
+      ...mapMutations(['update_storeInfo']),
       getGoodsLists:function(){
          let param={
            lat:this.roomInfo.lat,
@@ -210,7 +211,7 @@
             if(res.status==0){
               this.goodsLists=res.data.goods;
 
-              this.$store.commit('update_storeInfo',res.data.store);
+              this.update_storeInfo(res.data.store);//保存商家信息
             }
           }).catch(err=>{
             console.log('my err:'+err);

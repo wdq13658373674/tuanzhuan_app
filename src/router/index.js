@@ -23,6 +23,8 @@ import LifeGas from '@/pages/life/gas'
 import LifeCheckDetail from '@/pages/life/detail'
 import LifePay from '@/pages/life/pay'
 
+import Neighbor from '@/pages/neighbor/index'
+
 import Article from '@/pages/article/index'
 import ArticleDetail from '@/pages/article/detail'
 import Service from '@/pages/service/index'
@@ -692,6 +694,13 @@ export default new Router({
       },
       components:{
         default:UserCards,
+      }
+    },
+    {
+      path: '/neighbor',
+      name: 'Neighbor',
+      components:{
+        default:Neighbor,
       }
     },
   ]
