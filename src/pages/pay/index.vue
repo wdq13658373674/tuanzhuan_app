@@ -22,7 +22,7 @@
             <img class="img pull-left" src="@/assets/images/img/c_pay1.svg" alt="">
             <div class="pull-left">
               <p class="p">团票兑换</p>
-              <p class="p">节省{{orderType?orderInfo.goods_order_price:property_tcion}}元</p>
+              <p class="p">节省{{orderType?orderInfo.goods_order_price:property_money_sum}}元</p>
             </div>
           </div>
           <div class="cell">
@@ -36,26 +36,26 @@
             </div>
           </div>
         </label>
-        <label v-if="this.$route.query.type" class="item" title="物业卷兑换" @click="choose_pay('物业券兑换','score')">
+        <label v-if="this.$route.query.type" class="item" title="物业券兑换" @click="choose_pay('物业券兑换','ticket')">
           <div>
             <img class="img pull-left" src="@/assets/images/img/c_pay6.png" alt="">
             <div class="pull-left">
               <p class="p">物业券兑换</p>
-              <p class="p">节省{{orderType?orderInfo.goods_order_price:property_tcion}}元</p>
+              <p class="p">节省{{orderType?orderInfo.goods_order_price:property_money_sum}}元</p>
             </div>
           </div>
           <div class="cell">
             <span class="f28 mr10">剩余物业券</span>
             <i class="tp"></i>
-            <span class="f28 mr10 orange">{{pay_user.user_score}}</span>
+            <span class="f28 mr10 orange">{{pay_user.user_ticket}}</span>
 
-            <input type="radio" name="pay" v-model="payType" value="score" />
+            <input type="radio" name="pay" v-model="payType" value="ticket" />
             <div class="radio">
               <i class="check"></i>
             </div>
           </div>
         </label>
-        <label class="item" @click="choose_pay('余额支付','money')">
+        <label class="item" @click="choose_pay('余额支付','balance')">
           <div>
             <img class="img pull-left" src="@/assets/images/img/c_pay2.svg" alt="">
             <div class="pull-left">
@@ -67,7 +67,7 @@
             <span class="f28 mr10">我的余额</span>
             <span class="f16 gray">¥</span>
             <span class="f28 mr10">{{pay_user.user_money}}</span>
-            <input type="radio" name="pay" v-model="payType" value="money" />
+            <input type="radio" name="pay" v-model="payType" value="balance" />
             <div class="radio">
               <i class="check"></i>
             </div>
@@ -95,8 +95,9 @@
       <div class="bottom-fixed cell">
         <div class="pay-money">
           {{title}}：
-          <span class="orange" v-if="payType!='tcion'">¥{{payMoney}}</span>
-          <span class="orange" v-if="payType=='tcion'">{{payMoney}}</span>
+          <span class="orange" v-if="payType=='balance'">¥{{payMoney}}</span>
+          <span class="orange" v-else-if="payType=='tcion'">{{payMoney}}</span>
+          <span class="orange" v-else>{{payMoney}}</span>
         </div>
         <div class="btn btn-orange" @click="orderPay">结算</div>
       </div>
@@ -154,7 +155,7 @@
         orderType: true,  //true:默认商品订单支付，false:物业服务费
         property_money_sum:0,
         property_tcion:0,
-        property_score: 0
+        property_ticket: 0
       }
     },
     computed:{
@@ -173,7 +174,6 @@
       orderPay(){
 
         var that=this;
-
         if(that.payType=="tcion"){
           if(parseFloat(that.pay_user.user_tcion)<parseFloat(that.orderInfo.goods_order_tcion)){
             this.$vux.toast.text('团票余额不足,请换一种支付方式!','middle');
@@ -181,14 +181,14 @@
           }
         }
 
-        if(that.payType=="score"){
-          if(parseFloat(that.pay_user.user_score)<parseFloat(that.orderInfo.goods_order_score)){
-            this.$vux.toast.text('物业卷余额不足,请换一种支付方式!','middle');
+        if(that.payType=="ticket"){
+          if(parseFloat(that.pay_user.user_ticket)<parseFloat(that.property_money_sum)){
+            this.$vux.toast.text('物业券余额不足,请换一种支付方式!','middle');
             return false;
           }
         }
 
-        if(that.payType=="money"){
+        if(that.payType=="balance"){
           if(parseFloat(that.pay_user.user_money)<parseFloat(that.orderInfo.goods_order_price)){
             this.$vux.toast.text('我的余额不足,请换一种支付方式!','middle');
             return false;
@@ -220,7 +220,7 @@
         if(code==1){
           if(this.orderType){
 
-            if(that.payType=="tcion" || that.payType=="money"){
+            if(that.payType=="tcion" || that.payType=="balance"){
               let param={
                 user_id:that.userInfo.user_id,
                 order_id:that.$route.query.order_id,
@@ -238,13 +238,12 @@
               });
             }
           }else {
-            if(this.payType=="tcion" || this.payType=="money"){
+            if(this.payType=="tcion" || this.payType=="balance" || this.payType == "ticket"){
               let param={
                 user_id: this.userInfo.user_id,
                 property: JSON.stringify( this.$route.query.property_id ),
                 type: this.payType
               };
-              console.log(param);
               this.$axios.post('index/property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
@@ -270,18 +269,9 @@
        * 选择支付方式
        */
       choose_pay(tit,type){
-        console.log(type);
-        console.log(tit);
         this.title=tit;
         this.payType=type;
-        if(type == 'score'){
-          if(this.orderInfo.goods_order_score){
-            this.payMoney=this.orderInfo.goods_order_score;
-          }else{
-            this.payMoney = this.property_score;
-            console.log(this.property_score);
-          }
-        }else if(type!="tcion"){
+        if(type!="tcion"){
           if(this.orderInfo.goods_order_price){
             this.payMoney=this.orderInfo.goods_order_price;
           }else{
@@ -352,14 +342,13 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           this.orderInfo=res.data.order;
           this.property_money_sum = res.data.property_money_sum;
           this.property_tcion = res.data.property_tcion;
           this.pay_user=res.data.user;
           this.payMoney=this.property_tcion;
           this.ticket=(res.data.property_money_sum*this.ticket_rate).toFixed(2);
-          this.property_score = res.data.property_score;
+          this.property_ticket = res.data.property_ticket;
         }).catch(err=>{
           console.log('my err:'+err)
         })
