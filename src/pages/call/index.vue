@@ -2,7 +2,7 @@
   <div>
     <section class="page-group">
       <div class="tz-communication">
-        <div class="tz-communication-wrap" ref="msgbox">
+        <div class="tz-communication-wrap" ref="msgbox" id="msg-centent">
           <ul class="tz-communication-list clearfix" id="msgbox">
             <!--<li>-->
             <!--<div class="tip">-->
@@ -116,7 +116,7 @@
         uitlshow:false,
         user_logo:"",
         msgBox:"",
-        myMsg:[]
+        myMsg:[],
       }
     },
     computed: {
@@ -125,7 +125,7 @@
     mounted(){
       var that=this;
       that.user_logo=that.userInfo.user_logo;
-      that.myMsg=storeJs("msgDB");
+      that.myMsg=storeJs("msgDB") || [];
 
       setTimeout(function(){
         $("#msgbox").append($("#welcome").html());
@@ -145,7 +145,6 @@
           status:1,
           type:true,
         };
-
 
         that.myMsg.push(arr);
         that.msgBox="";
