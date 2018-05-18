@@ -56,13 +56,16 @@
 
           <ul class="util-box-list clearfix" :class="{active:uitlshow}">
             <li class="item">
-              <img class="img" src="@/assets/images/img/j_icon2.png" alt="">
-              <p>照片</p>
+              <label for="file">
+                <img class="img" src="@/assets/images/img/j_icon2.png" alt="">
+                <p>照片</p>
+                <input type="file" id="file"/>
+              </label>
             </li>
-            <li class="item">
-              <img class="img" src="@/assets/images/img/j_icon1.png" alt="">
-              <p>拍摄</p>
-            </li>
+            <!--<li class="item">-->
+              <!--<img class="img" src="@/assets/images/img/j_icon1.png" alt="">-->
+              <!--<p>拍摄</p>-->
+            <!--</li>-->
             <li class="item">
               <a href="tel:400-135-6677">
                 <img class="img" src="@/assets/images/img/j_icon3.png" alt="">
@@ -84,7 +87,7 @@
       <div style="display: none" id="welcome">
         <li>
           <div class="tip">
-            <span>房计划管家<em>小雪</em>为您服务</span>
+            <span><em>房计划管家</em>为您服务</span>
           </div>
         </li>
       </div>
