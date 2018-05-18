@@ -39,7 +39,7 @@
                   <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading>
                   <div class="text" v-if="!item.img">{{item.msg}}</div>
                   <div v-else>
-                    <img width="100%" :src="item.msg" alt="">
+                    <img width="100%" class="previewer" :src="item.msg" alt="" @click="show(key)">
                   </div>
                 </div>
               </li>
@@ -96,12 +96,13 @@
         </li>
       </div>
     </section>
-  </div>
 
+    <previewer :list="myMsg" ref="previewer" :options="options"></previewer>
+  </div>
 </template>
 <script>
   import {mapState} from 'vuex'
-  import { InlineLoading } from 'vux'
+  import { InlineLoading , Previewer } from 'vux'
   import lrz from 'lrz'
   const storeJs=require('storejs');
   const qs = require("querystring")
@@ -111,7 +112,8 @@
   export default {
     name: "Call",
     components:{
-      InlineLoading
+      InlineLoading,
+      Previewer
     },
     data(){
       return {
@@ -123,6 +125,19 @@
         user_logo:"",
         msgBox:"",
         myMsg:[],
+        options: {
+          getThumbBoundsFn (index) {
+            let thumbnail = document.querySelectorAll('.previewer')[index]
+            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+            let rect = thumbnail.getBoundingClientRect()
+
+            return {
+              x: rect.left,
+              y: rect.top + pageYScroll,
+              w: rect.width
+            }
+          }
+        }
       }
     },
     computed: {
@@ -224,12 +239,17 @@
                 village_id:that.roomInfo.village_id
               }
             });
-
             this.scrollBottom();
           }else{
             this.$vux.toast.text('图片过大,上传失败');
           }
         })
+      },
+      /**
+       * 显示大图
+       * **/
+      show (index) {
+        this.$refs.previewer.show(index)
       }
     }
   }
