@@ -16,6 +16,7 @@
 
       <h2 class="h2">选择支付方式</h2>
       <div class="pay-list">
+
         <label class="item" title="团票兑换" @click="choose_pay('团票兑换','tcion')">
           <div>
             <img class="img pull-left" src="@/assets/images/img/c_pay1.svg" alt="">
@@ -30,6 +31,25 @@
             <span class="f28 mr10 orange">{{pay_user.user_tcion}}</span>
 
             <input type="radio" name="pay" v-model="payType" value="tcion" />
+            <div class="radio">
+              <i class="check"></i>
+            </div>
+          </div>
+        </label>
+        <label v-if="this.$route.query.type" class="item" title="物业卷兑换" @click="choose_pay('物业券兑换','score')">
+          <div>
+            <img class="img pull-left" src="@/assets/images/img/c_pay6.png" alt="">
+            <div class="pull-left">
+              <p class="p">物业券兑换</p>
+              <p class="p">节省{{orderType?orderInfo.goods_order_price:property_tcion}}元</p>
+            </div>
+          </div>
+          <div class="cell">
+            <span class="f28 mr10">剩余物业券</span>
+            <i class="tp"></i>
+            <span class="f28 mr10 orange">{{pay_user.user_score}}</span>
+
+            <input type="radio" name="pay" v-model="payType" value="score" />
             <div class="radio">
               <i class="check"></i>
             </div>
@@ -133,7 +153,8 @@
         },
         orderType: true,  //true:默认商品订单支付，false:物业服务费
         property_money_sum:0,
-        property_tcion:0
+        property_tcion:0,
+        property_score: 0
       }
     },
     computed:{
@@ -156,6 +177,13 @@
         if(that.payType=="tcion"){
           if(parseFloat(that.pay_user.user_tcion)<parseFloat(that.orderInfo.goods_order_tcion)){
             this.$vux.toast.text('团票余额不足,请换一种支付方式!','middle');
+            return false;
+          }
+        }
+
+        if(that.payType=="score"){
+          if(parseFloat(that.pay_user.user_score)<parseFloat(that.orderInfo.goods_order_score)){
+            this.$vux.toast.text('物业卷余额不足,请换一种支付方式!','middle');
             return false;
           }
         }
@@ -242,9 +270,18 @@
        * 选择支付方式
        */
       choose_pay(tit,type){
+        console.log(type);
+        console.log(tit);
         this.title=tit;
         this.payType=type;
-        if(type!="tcion"){
+        if(type == 'score'){
+          if(this.orderInfo.goods_order_score){
+            this.payMoney=this.orderInfo.goods_order_score;
+          }else{
+            this.payMoney = this.property_score;
+            console.log(this.property_score);
+          }
+        }else if(type!="tcion"){
           if(this.orderInfo.goods_order_price){
             this.payMoney=this.orderInfo.goods_order_price;
           }else{
@@ -315,12 +352,14 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           this.orderInfo=res.data.order;
           this.property_money_sum = res.data.property_money_sum;
           this.property_tcion = res.data.property_tcion;
           this.pay_user=res.data.user;
           this.payMoney=this.property_tcion;
           this.ticket=(res.data.property_money_sum*this.ticket_rate).toFixed(2);
+          this.property_score = res.data.property_score;
         }).catch(err=>{
           console.log('my err:'+err)
         })

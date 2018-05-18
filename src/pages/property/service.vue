@@ -13,7 +13,7 @@
           <table class="table">
             <thead>
             <tr>
-              <td>操作 {{propertyList.length}}</td>
+              <td>操作</td>
               <td class="text-center">日期</td>
               <td class="text-center">总计</td>
               <td></td>
@@ -156,6 +156,7 @@
           let total = parseFloat(item.property_money);
           let propertyId = item.property_id;
           this.propertyTotal.push(total);
+          console.log(this.propertyTotal);
           this.property_id.push(propertyId);
         }else{
           item.checked = !item.checked;
@@ -170,6 +171,7 @@
                 _this.property_id.push(propertyId);
               }
             });
+            console.log(this.propertyTotal);
           }else{
             this.propertyTotal = [];
             this.property_id = [];
@@ -181,6 +183,7 @@
                 _this.property_id.push(propertyId);
               }
             });
+            console.log(this.propertyTotal);
           }
         }
       },
