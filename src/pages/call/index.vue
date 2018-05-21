@@ -39,7 +39,7 @@
                   <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading>
                   <div class="text" v-if="!item.img">{{item.msg}}</div>
                   <div v-else>
-                    <img width="100%" class="previewer" :src="item.msg" alt="" @click="show(key)">
+                    <img width="100%" :id="previewer(key)" :src="item.msg" alt="" @click="show(key)">
                   </div>
                 </div>
               </li>
@@ -127,9 +127,11 @@
         myMsg:[],
         options: {
           getThumbBoundsFn (index) {
-            let thumbnail = document.querySelectorAll('.previewer')[index]
-            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
-            let rect = thumbnail.getBoundingClientRect()
+            let thumbnail = document.querySelector('#previewer'+index);
+            console.log(thumbnail);
+            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            let rect = thumbnail.getBoundingClientRect();
 
             return {
               x: rect.left,
@@ -222,6 +224,7 @@
 
             let url=res.data;
             var arr={
+              src:url,
               msg:url,
               img:true,
               status:1,
@@ -249,7 +252,14 @@
        * 显示大图
        * **/
       show (index) {
-        this.$refs.previewer.show(index)
+        this.$refs.previewer.show(index);
+        console.log(index);
+      },
+      /**
+       * 动态添加图片id
+       * **/
+      previewer(key){
+        return 'previewer' + key;
       }
     }
   }

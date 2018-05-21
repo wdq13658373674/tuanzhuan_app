@@ -52,6 +52,8 @@ import BindMobile from '@/pages/user/bindMobile'
 import CheckIdCard from '@/pages/user/checkIdCard'
 import Call from '@/pages/call/index'
 
+import AddDevice from '@/pages/intelligent/addDevice'
+
 import UserBalance from '@/pages/user/account/balance'
 import UserIntegral from '@/pages/user/account/integral'
 import UserTickets from '@/pages/user/account/tickets'
@@ -576,6 +578,16 @@ export default new Router({
           },
           components:{
             default:OrderPayDetail,
+          }
+        },
+        {
+          path: '/intelligent/addDevice',
+          name: 'AddDevice',
+          meta: {
+            title: '添加设备'
+          },
+          components:{
+            default:AddDevice,
           }
         },
       ]

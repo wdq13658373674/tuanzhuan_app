@@ -45,7 +45,7 @@
       </div>
 
       <ul class="neighbor-msg-list">
-        <li class="item">
+        <!--<li class="item">
 
           <a href="#" class="link">
             <div class="neighbor">
@@ -84,12 +84,12 @@
               <li class="img-box">
                 <img class="img" src="@/assets/images/test/img7.png" alt="">
               </li>
-              <!--说明:
+              &lt;!&ndash;说明:
                   单张图片添加class='simple'
-              -->
-              <!--<li class="img-box simple">
+              &ndash;&gt;
+              &lt;!&ndash;<li class="img-box simple">
                   <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>-->
+              </li>&ndash;&gt;
             </ul>
           </div>
 
@@ -121,7 +121,7 @@
             </ul>
             <a href="#" class="block f28 gray mt20">查看全部4条评论</a>
           </div>
-        </li>
+        </li>-->
         <li class="item">
 
           <a href="#" class="link">
@@ -149,7 +149,10 @@
 
           <div class="content">
             <ul class="neighbor-thumbs clearfix">
-              <li class="img-box">
+              <li class="img-box" v-for="(item,index) in imgList" :key="index">
+                <img class="img" v-lazy="item.src" alt="" @click="show(index)">
+              </li>
+              <!--<li class="img-box">
                 <img class="img" src="@/assets/images/test/img7.png" alt="">
               </li>
               <li class="img-box">
@@ -157,10 +160,7 @@
               </li>
               <li class="img-box">
                 <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>
-              <li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>
+              </li>-->
               <!--说明:
                   单张图片添加class='simple'
               -->
@@ -194,18 +194,57 @@
         </li>
       </ul>
     </section>
+    <previewer :list="imgList" ref="previewer" :options="options"></previewer>
   </div>
 </template>
 
 <script>
+  import { Previewer } from 'vux'
   import BarNav from '../layout/barNav'
   export default {
     name: "Neighbor",
     components:{
-      BarNav
+      BarNav,
+      Previewer
     },
-    computed:{
+    data(){
+      return {
+        imgList:[{
+          src: 'https://placekitten.com/800/400',
+          w: 600,
+          h: 400
+        },
+          {
+            src: 'https://placekitten.com/1200/900',
+            w: 1200,
+            h: 900
+          }],
+        options: {
+          /**
+           * 图片放大参数配置
+           * **/
+          getThumbBoundsFn (index) {
+            let thumbnail = document.querySelectorAll('.img-box')[index];
+            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
 
+            let rect = thumbnail.getBoundingClientRect();
+
+            return {
+              x: rect.left,
+              y: rect.top + pageYScroll,
+              w: rect.width
+            }
+          }
+        }
+      }
+    },
+    methods:{
+      /**
+       * 显示大图
+       * **/
+      show(index){
+        this.$refs.previewer.show(index);
+      },
     }
   }
 </script>
