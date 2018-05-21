@@ -62,7 +62,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           if(flag){
             //多次加载
             this.listData=res.data;
