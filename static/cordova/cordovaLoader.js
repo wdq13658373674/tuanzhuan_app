@@ -1,5 +1,4 @@
 function cordovaLoader(callback,path){
-
 	var cdvpath = typeof path != 'undefined' ? path : "cordova/";   //cordova文件夹路径
 	var cdvplatform = navigator.platform;
 	var scriptc = "";
@@ -9,11 +8,10 @@ function cordovaLoader(callback,path){
     }else if(cdvplatform.indexOf("Linux a")==0 || cdvplatform.indexOf("Linux i")==0){
         scriptc = (cdvpath+"android/cordova.js");
     }else{
-        cordova = null;
-        console.warn("This cordova plugin not support your device");
+        scriptc = (cdvpath+"browser/cordova.js");
     }
 	if(scriptc!=""){
-		var headcdv = document.getElementsByTagName("head")[0];
+		var headcdv = document.getElementsByTagName("head")[0]; 
 		var cdvm = document.createElement("script");
 		cdvm.type = "text/javascript";
 		cdvm.src = scriptc;
