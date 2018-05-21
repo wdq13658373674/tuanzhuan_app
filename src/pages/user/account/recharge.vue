@@ -41,16 +41,16 @@
           </div>
           <div class="arrow-cell-list">
             <div class="item">
-              <a href="#" class="link cell">
+              <a class="link cell" @click="selectPay">
                 <span>付款方式</span>
-                <span>重庆银行卡储蓄卡(1114)</span>
+                <span>{{paymentType}}</span>
               </a>
             </div>
           </div>
         </div>
       </div>
       <footer>
-        <div class="bottom-fixed btn-orange-fixed" @click="next2">立即付款</div>
+        <div class="bottom-fixed btn-orange-fixed" @click="confirmPayment">立即付款</div>
       </footer>
     </popup>
     <!--popup-->
@@ -58,22 +58,50 @@
     <!--popup 输入支付密码-->
     <popup v-model="popshow3" style="background: #fff;">
       <span class="pop-close"  @click="popshow3=!popshow3">X</span>
-      <EnterPassword></EnterPassword>
+      <EnterPassword @run="payment"></EnterPassword>
     </popup>
     <!--popup-->
+
+    <!-- 选择支付方式-->
+    <popup v-model="popshow4" style="background: #fff;">
+      <span class="pop-close"  @click="popshow4=!popshow4">X</span>
+      <SelectPayment @showPayment="updataPayment"></SelectPayment>
+    </popup>
+    <!-- 选择支付方式-->
+
+    <div v-show="qrcodeUrl" class="response">
+      <qrcode
+        :value="qrcodeUrl"
+        v-if="qrcodeUrl"
+        :options="{ size: 500 }">
+      </qrcode>
+      <p>请使用微信扫码支付</p>
+    </div>
   </div>
+
 </template>
 
 <script>
-  import {Popup} from 'vux'
+  import {Popup, AlertPlugin } from 'vux'
+  import {mapState} from 'vuex'
+  import Qrcode from '@xkeshi/vue-qrcode'
   import PassKeyBord from '@/components/passKeyBord'
   import EnterPassword from '@/components/enterPassword'
+  import SelectPayment from '@/components/selectPayment'
+
+  import gopay from '@/assets/js/payment/gopay'
   export default {
     name: "Recharge",
     components: {
       PassKeyBord,
       EnterPassword,
-      Popup
+      Popup,
+      SelectPayment,
+      Qrcode,
+      AlertPlugin
+    },
+    computed:{
+      ...mapState(['userInfo']),
     },
     data() {
       return {
@@ -81,6 +109,10 @@
         popshow:true,
         popshow2:false,
         popshow3:false,
+        popshow4:false,
+        paymentType:'支付宝',
+        type:'alipay',
+        qrcodeUrl:''
       }
     },
     mounted(){
@@ -107,10 +139,53 @@
         this.popshow=false;
         this.popshow2=true;
       },
-      next2(){
+      selectPay(){
+        this.popshow2=false;
+        this.popshow3=false;
+        this.popshow4=true;
+      },
+      updataPayment(type){
+        this.popshow2=true;
+        this.popshow3=false;
+        this.popshow4=false;
+        console.log(type);
+        if(type == 'weixin'){
+          this.paymentType = '微信';
+          this.type = 'weixin';
+        }else {
+          this.paymentType = '支付宝';
+          this.type = 'alipay';
+        }
+      },
+      confirmPayment(){
         this.popshow2=false;
         this.popshow3=true;
       },
+      payment(val){
+        if(val == 1){
+          let _this = this;
+          let type = this.type;
+          let user_id = this.userInfo.user_id;
+          let total = (this.val);
+          let subject = this.paymentType+'充值';
+          gopay(subject,total,user_id,type,function(result,source){
+            if(source=='app'){
+              console.log(result);
+            }else{
+              if(type=='alipay'){
+                $("body").html(result);
+                console.log(result);
+              }else if(type=='weixin'){
+                _this.popshow3=false;
+                console.log('生成二维码成功');
+                _this.qrcodeUrl = result;
+              }
+            }
+          });
+        }else{
+          this.$vux.toast.text('支付密码输入错误，请重新输入','top');
+        }
+      }
     }
   }
 </script>

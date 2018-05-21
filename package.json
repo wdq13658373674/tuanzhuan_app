@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@xkeshi/vue-qrcode": "github:xkeshi/vue-qrcode",
     "axios": "^0.18.0",
     "fastclick": "^1.0.6",
     "lrz": "^4.9.40",
