@@ -233,11 +233,13 @@
         if(code==1){
           if(this.payType=="tcion" || this.payType=="balance" || this.payType == "ticket"){
             if(this.orderType){
+              /** 商品订单支付 **/
               let param={
                 user_id:that.userInfo.user_id,
                 order_id:that.$route.query.order_id,
                 type:that.payType
               };
+              console.log(param);
               this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
@@ -249,11 +251,14 @@
                 console.log('my err:'+err);
               });
             }else {
+
+              /** 物业支付 **/
               let param={
                 user_id: this.userInfo.user_id,
                 property: JSON.stringify( this.$route.query.property_id ),
                 type: this.payType
               };
+              console.log(param);
               this.$axios.post('index/property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
