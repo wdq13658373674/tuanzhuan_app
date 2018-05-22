@@ -13,7 +13,7 @@ function gopay(subject, total, user_id, type, callback){
             if(data.status){
                 alert('错误:'+data.msg);
             }else{
-                if(cordovaLoaded){
+                if(cordovaLoaded && navigator.userAgent.indexOf('Tuanzhuanw')>-1){
                     if(type=='weixin'){
                         Wechat.sendPaymentRequest({
                                 partnerid:data.data.mch_id,

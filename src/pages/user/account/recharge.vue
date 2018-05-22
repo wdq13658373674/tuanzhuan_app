@@ -82,13 +82,12 @@
 </template>
 
 <script>
-  import {Popup, AlertPlugin } from 'vux'
+  import {Popup} from 'vux'
   import {mapState} from 'vuex'
   import Qrcode from '@xkeshi/vue-qrcode'
   import PassKeyBord from '@/components/passKeyBord'
   import EnterPassword from '@/components/enterPassword'
   import SelectPayment from '@/components/selectPayment'
-
   import gopay from '@/assets/js/payment/gopay'
   export default {
     name: "Recharge",
@@ -97,8 +96,7 @@
       EnterPassword,
       Popup,
       SelectPayment,
-      Qrcode,
-      AlertPlugin
+      Qrcode
     },
     computed:{
       ...mapState(['userInfo']),

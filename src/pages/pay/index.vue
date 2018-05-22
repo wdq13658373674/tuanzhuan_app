@@ -109,20 +109,32 @@
       <EnterPassword @run="checkPwd"></EnterPassword>
     </popup>
     <!--popup-->
+    <div v-show="qrcodeUrl" class="response">
+      <qrcode
+        :value="qrcodeUrl"
+        v-if="qrcodeUrl"
+        :options="{ size: 500 }">
+      </qrcode>
+      <p>请使用微信扫码支付</p>
+    </div>
   </div>
+
 </template>
 
 <script>
   import {Popup} from 'vux'
   import {mapState} from 'vuex'
+  import Qrcode from '@xkeshi/vue-qrcode'
   import EnterPassword from '@/components/enterPassword'
+  import gopay from '@/assets/js/payment/gopay'
   const qs = require("querystring");
 
   export default {
     name: "OrderPay",
     components:{
       Popup,
-      EnterPassword
+      EnterPassword,
+      Qrcode
     },
     data(){
       return {
@@ -144,7 +156,7 @@
           1:{
               img:"./static/images/img/c_pay4.svg",
               title:"微信支付",
-              type:"wxpay",
+              type:"weixin",
           },
           2:{
               img:"./static/images/img/c_pay5.svg",
@@ -155,7 +167,8 @@
         orderType: true,  //true:默认商品订单支付，false:物业服务费
         property_money_sum:0,
         property_tcion:0,
-        property_ticket: 0
+        property_ticket: 0,
+        qrcodeUrl:''
       }
     },
     computed:{
@@ -218,9 +231,8 @@
         var that=this;
 
         if(code==1){
-          if(this.orderType){
-
-            if(that.payType=="tcion" || that.payType=="balance"){
+          if(this.payType=="tcion" || this.payType=="balance" || this.payType == "ticket"){
+            if(this.orderType){
               let param={
                 user_id:that.userInfo.user_id,
                 order_id:that.$route.query.order_id,
@@ -236,9 +248,7 @@
               }).catch(err=>{
                 console.log('my err:'+err);
               });
-            }
-          }else {
-            if(this.payType=="tcion" || this.payType=="balance" || this.payType == "ticket"){
+            }else {
               let param={
                 user_id: this.userInfo.user_id,
                 property: JSON.stringify( this.$route.query.property_id ),
@@ -255,9 +265,32 @@
               }).catch(err=>{
                 console.log('my err:'+err);
               });
-            }else {
-             console.log("支付接口");
             }
+          }else if(this.payType=="lixian"){
+            console.log('线下支付')
+          } else {
+            console.log('支付接口');
+            console.log(this.payType);
+            let _this = this;
+            let type = this.payType;
+            let user_id = this.userInfo.user_id;
+            let total = this.payMoney;
+            let subject = this.paymentType+'充值';
+            gopay(subject,total,user_id,type,function(result,source){
+              if(source=='app'){
+                console.log(result);
+              }else{
+                if(type=='alipay'){
+                  $("body").html(result);
+                  console.log(result);
+                }else if(type=='weixin'){
+                  _this.popshow3=false;
+                  console.log('生成二维码成功');
+                  _this.qrcodeUrl = result;
+                }
+              }
+            });
+
           }
         }else {
           this.$vux.toast.text("支付密码错误");
