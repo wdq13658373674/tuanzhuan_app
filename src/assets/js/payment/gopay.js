@@ -1,9 +1,21 @@
 function gopay(subject,total,user_id,type,callback){
-  var onBridgeReady = function(options,callback){
+  var onBridgeReady = function(options){
     WeixinJSBridge.invoke(
       "getBrandWCPayRequest",options,
       function(res){
-        callback(res,'wxb');
+        if(res.err_msg=="get_brand_wcpay_request:ok"){
+          alert('支付成功');
+          setTimeout("window.location.history.go(-1)",2000);
+        }else{
+          if(res.err_msg == "get_brand_wcpay_request:cancel"){
+            alert("支付失败:你取消了支付");
+          }else if(res.err_msg == "get_brand_wcpay_request:fail"){
+            alert("支付失败:"+res.err_msg+' : '+res.err_desc);
+          }else{
+            alert("支付失败:"+res.err_msg+' : '+res.err_desc);
+          }
+          setTimeout("window.location.history.go(-1)",2000);
+        }
       }
     );
   }
@@ -47,16 +59,16 @@ function gopay(subject,total,user_id,type,callback){
               alert('没有该支付方式');
             }
           }else if(navigator.userAgent.indexOf('MicroMessenger')>-1 && type=='weixin'){
-            var options = JSON.stringify(data.data);
+            var options = JSON.parse(data.data);
             if (typeof WeixinJSBridge == "undefined"){
               if( document.addEventListener ){
-                document.addEventListener('WeixinJSBridgeReady', onBridgeReady(options,callback), false);
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady(options), false);
               }else if (document.attachEvent){
-                document.attachEvent('WeixinJSBridgeReady', onBridgeReady(options,callback));
-                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady(options,callback));
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady(options));
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady(options));
               }
             }else{
-              onBridgeReady(options,callback);
+              onBridgeReady(options);
             }
           }else{
             if(type=='weixin' || type=='alipay'){
