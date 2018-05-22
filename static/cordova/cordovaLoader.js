@@ -2,16 +2,21 @@ function cordovaLoader(callback,path){
 	var cdvpath = typeof path != 'undefined' ? path : "cordova/";   //cordova文件夹路径
 	var cdvplatform = navigator.platform;
 	var scriptc = "";
-	//判断是android还是ios,引入对应平台的cordova
+	if(navigator.userAgent.indexOf('Tuanzhuanw')>-1){
+    //判断是android还是ios,引入对应平台的cordova
     if(cdvplatform.indexOf("iPhone")==0 || cdvplatform.indexOf("iPad")==0){
-        scriptc = (cdvpath+"ios/cordova.js");
+      scriptc = (cdvpath+"ios/cordova.js");
     }else if(cdvplatform.indexOf("Linux a")==0 || cdvplatform.indexOf("Linux i")==0){
-        scriptc = (cdvpath+"android/cordova.js");
+      scriptc = (cdvpath+"android/cordova.js");
     }else{
-        scriptc = (cdvpath+"browser/cordova.js");
+      scriptc = (cdvpath+"browser/cordova.js");
     }
+  }else{
+	  cordova = null;
+	  console.warn('your device not support cordova');
+  }
 	if(scriptc!=""){
-		var headcdv = document.getElementsByTagName("head")[0]; 
+		var headcdv = document.getElementsByTagName("head")[0];
 		var cdvm = document.createElement("script");
 		cdvm.type = "text/javascript";
 		cdvm.src = scriptc;
