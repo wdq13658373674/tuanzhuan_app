@@ -273,6 +273,8 @@
             }
           }else if(this.payType=="lixian"){
             console.log('线下支付')
+
+
           } else {
             console.log('支付接口');
             console.log(this.payType);
@@ -281,7 +283,8 @@
             let user_id = this.userInfo.user_id;
             let total = this.payMoney;
             let subject = this.paymentType+'充值';
-            gopay(subject,total,user_id,type,function(result,source){
+            console.log(this.paymentType);
+            /*gopay(subject,total,user_id,type,function(result,source){
               if(source=='app'){
                 console.log(result);
               }else{
@@ -294,7 +297,7 @@
                   _this.qrcodeUrl = result;
                 }
               }
-            });
+            });*/
 
           }
         }else {
