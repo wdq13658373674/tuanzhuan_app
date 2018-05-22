@@ -1,16 +1,9 @@
 function gopay(subject,total,user_id,type,callback){
   var onBridgeReady = function(options,callback){
     WeixinJSBridge.invoke(
-      'getBrandWCPayRequest', {
-        "appId":options.appid,
-        "timeStamp":options.timestamp,
-        "nonceStr":options.nonce_str,
-        "package":"prepay_id="+options.prepay_id,
-        "signType":"MD5",
-        "paySign":options.sign
-      },
+      "getBrandWCPayRequest",options,
       function(res){
-        callback(res);
+        callback(res,'wxb');
       }
     );
   }
@@ -53,16 +46,17 @@ function gopay(subject,total,user_id,type,callback){
             }else{
               alert('没有该支付方式');
             }
-          }else if(navigator.userAgent.indexOf('MicroMessenger')>-1){
+          }else if(navigator.userAgent.indexOf('MicroMessenger')>-1 && type=='weixin'){
+            var options = JSON.stringify(data.data);
             if (typeof WeixinJSBridge == "undefined"){
               if( document.addEventListener ){
-                document.addEventListener('WeixinJSBridgeReady', onBridgeReady(data.data,callback), false);
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady(options,callback), false);
               }else if (document.attachEvent){
-                document.attachEvent('WeixinJSBridgeReady', onBridgeReady(data.data,callback));
-                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady(data.data,callback));
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady(options,callback));
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady(options,callback));
               }
             }else{
-              onBridgeReady(data.data,callback);
+              onBridgeReady(options,callback);
             }
           }else{
             if(type=='weixin' || type=='alipay'){

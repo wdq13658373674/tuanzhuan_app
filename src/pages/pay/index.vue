@@ -284,10 +284,10 @@
             let total = this.payMoney;
             let subject = this.paymentType+'充值';
             console.log(this.paymentType);
-            /*gopay(subject,total,user_id,type,function(result,source){
+            gopay(subject,total,user_id,type,function(result,source){
               if(source=='app'){
                 console.log(result);
-              }else{
+              }else if(source=='h5'){
                 if(type=='alipay'){
                   $("body").html(result);
                   console.log(result);
@@ -297,7 +297,7 @@
                   _this.qrcodeUrl = result;
                 }
               }
-            });*/
+            });
 
           }
         }else {
