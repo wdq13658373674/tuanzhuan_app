@@ -3,170 +3,51 @@
     <!--header-->
     <BarNav>
       <div class="title" slot="middle">
-        <a href="#" class="tab orange">精华</a>
-        <a href="#" class="tab">最新</a>
+        <tab>
+          <tabItem class="tab orange" v-for="(item,index) in tabMenus" :key="index+1" :selected="index===0" @on-item-click="tab">{{item}}</tabItem>
+        </tab>
       </div>
       <a class="link pull-right" slot="right">
         <i class="icon camera"></i>
       </a>
     </BarNav>
+
     <section class="page-group">
       <div class="neighbor-menu clearfix">
-        <a href="#" class="item">
+        <a v-for="(item, index) in menuList" href="#" class="item">
           <div class="img-box">
-            <img class="img" src="@/assets/images/icons/menu6.png" alt="">
+            <img class="img" v-lazy="item.type_bbs_logo" alt="" />
           </div>
-          <p class="txt">邻里乐园</p>
-        </a>
-        <a href="#" class="item">
-          <div class="img-box">
-            <img class="img" src="@/assets/images/icons/menu6.png" alt="">
-          </div>
-          <p class="txt">活动部落</p>
-        </a>
-        <a href="#" class="item">
-          <div class="img-box">
-            <img class="img" src="@/assets/images/icons/menu6.png" alt="">
-          </div>
-          <p class="txt">二手闲置</p>
-        </a>
-        <a href="#" class="item">
-          <div class="img-box">
-            <img class="img" src="@/assets/images/icons/menu6.png" alt="">
-          </div>
-          <p class="txt">便民生活</p>
-        </a>
-        <a href="#" class="item">
-          <div class="img-box">
-            <img class="img" src="@/assets/images/icons/menu6.png" alt="">
-          </div>
-          <p class="txt">美食美刻</p>
+          <p class="txt">{{item.type_bbs_title}}</p>
         </a>
       </div>
 
       <ul class="neighbor-msg-list">
-        <!--<li class="item">
-
+        <li class="item" v-for="(item, index) in bobList">
           <a href="#" class="link">
             <div class="neighbor">
               <div class="img-box">
-                <img class="img" src="@/assets/images/test/img6.png" alt="">
+                <!--<img class="img" src="@/assets/images/test/img6.png" alt="">-->
+                <img class="img" v-lazy="item.user_logo" alt="" />
               </div>
               <div class="con">
-                <p class="p1">Marsbaby</p>
+                <p class="p1">{{item.user_nickname}}</p>
                 <p class="p2">
                   <em>重庆市-沙坪坝区</em>
-                  <span>1小时前</span>
+                  <span>{{item.add_time | stampToDate(true)}}</span>
                 </p>
               </div>
             </div>
 
-            <div class="neighbor-content">
-              #30天安利ninebot#
-              +2017.12.28
-              关于你的故事：
-              每当这两个字划过，脑袋就像电影一样，往事也像流星一样。第一次，第二次。啦啦啦啦啦啦啦啦
-            </div>
+            <div class="neighbor-content">{{item.bbs_content}}</div>
             <p class="f28 orange mt20">全文</p>
           </a>
 
           <div class="content">
             <ul class="neighbor-thumbs clearfix">
-              <li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
+              <li class="img-box" v-for="(item_image,index) in item.bbs_image" v-if="item_image.length!=''" :key="index">
+                <img class="img" v-lazy="item_image" alt="" @click="show(index)">
               </li>
-              <li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>
-              <li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>
-              <li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>
-              &lt;!&ndash;说明:
-                  单张图片添加class='simple'
-              &ndash;&gt;
-              &lt;!&ndash;<li class="img-box simple">
-                  <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>&ndash;&gt;
-            </ul>
-          </div>
-
-          <div class="neighbor-bar">
-            <div class="box">来自：<span class="orange">活动部落</span></div>
-            <div class="box">
-              <i class="icon thumbs1">
-                <em class="orange">+1</em>
-              </i>
-              <i class="icon comment"></i>
-            </div>
-          </div>
-
-          <div class="neighbor-comment">
-            <p><i class="icon thumbs2"></i>30人点赞</p>
-            <ul class="comment-list mt20">
-              <li class="cell">
-                <em>yunxiao:</em>
-                <span>很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队！</span>
-              </li>
-              <li class="cell">
-                <em>全世界都会给你让路:</em>
-                <span>很酷的团队！</span>
-              </li>
-              <li class="cell">
-                <em>yunxiao:</em>
-                <span>很酷的团队！</span>
-              </li>
-            </ul>
-            <a href="#" class="block f28 gray mt20">查看全部4条评论</a>
-          </div>
-        </li>-->
-        <li class="item">
-
-          <a href="#" class="link">
-            <div class="neighbor">
-              <div class="img-box">
-                <img class="img" src="@/assets/images/test/img6.png" alt="">
-              </div>
-              <div class="con">
-                <p class="p1">Marsbaby</p>
-                <p class="p2">
-                  <em>重庆市-沙坪坝区</em>
-                  <span>2018.05.28  16:54</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="neighbor-content">
-              #30天安利ninebot#
-              +2017.12.28
-              关于你的故事：
-              每当这两个字划过，脑袋就像电影一样，往事也像流星一样。第一次，第二次。啦啦啦啦啦啦啦啦
-            </div>
-            <p class="f28 orange mt20">全文</p>
-          </a>
-
-          <div class="content">
-            <ul class="neighbor-thumbs clearfix">
-              <li class="img-box" v-for="(item,index) in imgList" :key="index">
-                <img class="img" v-lazy="item.src" alt="" @click="show(index)">
-              </li>
-              <!--<li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>
-              <li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>
-              <li class="img-box">
-                <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>-->
-              <!--说明:
-                  单张图片添加class='simple'
-              -->
-              <!--<li class="img-box simple">
-                  <img class="img" src="@/assets/images/test/img7.png" alt="">
-              </li>-->
             </ul>
           </div>
 
@@ -179,18 +60,24 @@
           </div>
 
           <div class="neighbor-comment">
-            <p><i class="icon thumbs2"></i>30人点赞</p>
+            <p><i class="icon thumbs2"></i>{{item.bbs_nice}}人点赞</p>
             <ul class="comment-list mt20">
-              <li class="cell">
-                <em>yunxiao:</em>
-                <span>很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队很酷的团队！</span>
-              </li>
-              <li class="cell">
-                <em>全世界都会给你让路:</em>
-                <span>很酷的团队！</span>
+              <li class="cell" v-for="(item_reply, index) in item.reply">
+                <em>{{item_reply.bbs_user.user_nickname}}:</em>
+                <span>{{item_reply.reply_content}}</span>
               </li>
             </ul>
           </div>
+        </li>
+
+
+
+
+        <li v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+          <load-more class="load-more" tip="正在加载" v-show="load"></load-more>
+          <h3 class="no-more mb40" v-show="!load">
+            <span class="tit">- 没有更多记录了 -</span>
+          </h3>
         </li>
       </ul>
     </section>
@@ -199,25 +86,31 @@
 </template>
 
 <script>
-  import { Previewer } from 'vux'
+  import {Tab, TabItem, Previewer,LoadMore } from 'vux'
+  import {mapState} from 'vuex'
   import BarNav from '../layout/barNav'
+  import infiniteScroll from 'vue-infinite-scroll'
   export default {
     name: "Neighbor",
+    directives: {infiniteScroll},
     components:{
+      Tab,
+      TabItem,
       BarNav,
-      Previewer
+      Previewer,
+      LoadMore
+    },
+    computed:{
+    ...mapState(['roomInfo'])
     },
     data(){
       return {
+        tabMenus:['精华','最新'],
         imgList:[{
           src: 'https://placekitten.com/800/400',
-          w: 600,
-          h: 400
         },
           {
             src: 'https://placekitten.com/1200/900',
-            w: 1200,
-            h: 900
           }],
         options: {
           /**
@@ -235,8 +128,18 @@
               w: rect.width
             }
           }
-        }
+        },
+        bobList:[],
+        menuList:[],
+        page: 0,
+        bbs_type: 1,
+        busy:false,
+        load:false,
+        flag: false,
       }
+    },
+    mounted(){
+      this.loadMore();
     },
     methods:{
       /**
@@ -244,6 +147,59 @@
        * **/
       show(index){
         this.$refs.previewer.show(index);
+      },
+      getBbsIndex(type){
+        let params={
+          village_id: this.roomInfo.village_id,
+          type: type,
+          page: this.page
+        };
+
+        this.$axios.get(global.API_HOST+'index/bbs/getBobIndex',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          /*菜单列表*/
+          this.menuList = res.data.type;
+          /*文章列表*/
+          if(res.data!=undefined){
+            if(this.flag){
+              if(res.data.bbs.data.length != 0){
+                this.bobList.push(res.data.bbs.data);
+              }
+              if(this.page >= res.data.bbs.last_page){
+                this.busy=true;
+                this.load=false;
+              }else {
+                this.busy=false;
+                this.load=true;
+              }
+            }else {
+              //第一次加载
+              this.bobList=res.data.bbs.data;
+              this.busy=false;
+              this.load=false;
+              this.flag = true;
+            }
+          }
+          console.log(this.bobList);
+        }).catch(err=>{
+          console.log('my err:'+err)
+        })
+      },
+      tab(type){
+        /*选项卡切换*/
+        this.bbs_type = type+1;
+        this.flag = false;
+        this.page = 0;
+        this.getBbsIndex(this.bbs_type);
+      },
+      /*下拉加载*/
+      loadMore:function(){
+        this.busy = true;
+        this.load = true;
+        this.page++;
+        this.getBbsIndex(this.bbs_type);
       },
     }
   }
