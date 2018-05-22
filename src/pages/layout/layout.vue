@@ -9,6 +9,10 @@
         <i class="icon cart"></i>
       </a>
 
+      <router-link to="/intelligent/search" class="link pull-right green" v-if="rightNav==='device'"  slot="right">
+        搜素网关
+      </router-link>
+
       <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right" @click="setDefault">
         设为默认
       </div>
@@ -53,6 +57,9 @@
         }
         if(routeName=="UserHouseHolders"){
           return 'default';
+        }
+        if(routeName=="IgtLogin"){
+          return 'device';
         }
         return false;
       }

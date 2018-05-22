@@ -52,7 +52,12 @@ import BindMobile from '@/pages/user/bindMobile'
 import CheckIdCard from '@/pages/user/checkIdCard'
 import Call from '@/pages/call/index'
 
+import Intelligent from '@/pages/intelligent/index'
 import AddDevice from '@/pages/intelligent/addDevice'
+import IgtLogin from '@/pages/intelligent/login'
+import IgtSearch from '@/pages/intelligent/search'
+import IgtHouse from '@/pages/intelligent/house'
+import IgtSet from '@/pages/intelligent/set'
 
 import UserBalance from '@/pages/user/account/balance'
 import UserIntegral from '@/pages/user/account/integral'
@@ -581,13 +586,43 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/addDevice',
-          name: 'AddDevice',
+          path: '/intelligent',
+          name: 'IgtLogin',
           meta: {
-            title: '添加设备'
+            title: '智能家居'
           },
           components:{
-            default:AddDevice,
+            default:IgtLogin,
+          }
+        },
+        {
+          path: '/intelligent/search',
+          name: 'IgtSearch',
+          meta: {
+            title: '智能家居'
+          },
+          components:{
+            default:IgtSearch,
+          }
+        },
+        {
+          path: '/intelligent/change/house',
+          name: 'IgtHouse',
+          meta: {
+            title: '智能家居'
+          },
+          components:{
+            default:IgtHouse,
+          }
+        },
+        {
+          path: '/intelligent/change/set',
+          name: 'IgtSet',
+          meta: {
+            title: '房间设置'
+          },
+          components:{
+            default:IgtSet,
           }
         },
       ]
@@ -713,6 +748,13 @@ export default new Router({
       name: 'Neighbor',
       components:{
         default:Neighbor,
+      }
+    },
+    {
+      path: '/intelligent/home',
+      name: 'Intelligent',
+      components:{
+        default:Intelligent,
       }
     },
   ]

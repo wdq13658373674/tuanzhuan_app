@@ -21,7 +21,7 @@
         </router-link>
         <router-link to="categorys" class="item" append>
           <div class="img-box all">
-            <img src="@/assets/images/img/d_menu5.png" alt="">
+            <img class="img" src="@/assets/images/img/d_menu5.png" alt="">
           </div>
           <p class="txt">全部分类</p>
         </router-link>
