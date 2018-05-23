@@ -169,14 +169,16 @@
           gopay(subject,total,user_id,type,function(result,source){
             if(source=='app'){
               console.log(result);
+            }else if(source=='wap') {
+              _this.popshow3=false;
+              console.log('生成二维码成功');
+              _this.qrcodeUrl = result;
             }else{
               if(type=='alipay'){
                 $("body").html(result);
                 console.log(result);
               }else if(type=='weixin'){
-                _this.popshow3=false;
-                console.log('生成二维码成功');
-                _this.qrcodeUrl = result;
+                location.href = result;
               }
             }
           });

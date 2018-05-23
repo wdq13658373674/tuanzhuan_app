@@ -34,14 +34,14 @@ function gopay(subject,total,user_id,type,callback){
           alert('错误:'+data.msg);
         }else{
           var useragent = navigator.userAgent.toLowerCase();
-          if(cordovaLoaded && useragent.indexOf('tuanzhuanw')>-1){
+          if(cordovaLoaded && data.data.type=='app'){
             if(type=='weixin'){
               Wechat.sendPaymentRequest({
-                  partnerid:data.data.mch_id,
-                  prepayid:data.data.prepay_id,
-                  noncestr:data.data.nonce_str,
-                  timestamp:data.data.timestamp,
-                  sign:data.data.sign
+                  partnerid:data.data.data.mch_id,
+                  prepayid:data.data.data.prepay_id,
+                  noncestr:data.data.data.nonce_str,
+                  timestamp:data.data.data.timestamp,
+                  sign:data.data.data.sign
                 },
                 function(result){
                   callback(result,'app');
@@ -59,7 +59,7 @@ function gopay(subject,total,user_id,type,callback){
             }else{
               alert('没有该支付方式');
             }
-          }else if(useragent.indexOf('micromessenger')>-1 && type=='weixin'){
+          }else if(data.data.type=='jsapi'){
             var options = JSON.parse(data.data);
             if (typeof WeixinJSBridge == "undefined"){
               if( document.addEventListener ){
@@ -71,11 +71,9 @@ function gopay(subject,total,user_id,type,callback){
             }else{
               onBridgeReady(options);
             }
-          }else if(type=='weixin' && (useragent.indexOf('ipad')>-1 || useragent.indexOf('iphone')>-1 || useragent.indexOf('midp')>-1 || useragent.indexOf('rv:1.2.3.4')>-1 || useragent.indexOf('ucweb')>-1 || useragent.indexOf('android')>-1 || useragent.indexOf('windows ce')>-1 || useragent.indexOf('windows mobile')>-1)){
-            callback(data.data,'wap');
           }else{
             if(type=='weixin' || type=='alipay'){
-              callback(data.data,'h5');
+              callback(data.data,data.data.type);
             }else{
               alert('没有该支付方式');
             }
