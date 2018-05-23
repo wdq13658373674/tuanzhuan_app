@@ -57,7 +57,9 @@ import AddDevice from '@/pages/intelligent/addDevice'
 import IgtLogin from '@/pages/intelligent/login'
 import IgtSearch from '@/pages/intelligent/search'
 import IgtHouse from '@/pages/intelligent/house'
-import IgtSet from '@/pages/intelligent/set'
+import IgtRoom from '@/pages/intelligent/room'
+import IgtRoomSet from '@/pages/intelligent/roomSet'
+import IgtRoomAdd from '@/pages/intelligent/roomAdd'
 import DeviceWifi from '@/pages/intelligent/wifi'
 import WifiStart from '@/pages/intelligent/wifiStart'
 import BindDevice from '@/pages/intelligent/bindDevice'
@@ -620,13 +622,13 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/house/set',
-          name: 'IgtSet',
+          path: '/intelligent/room/manage',
+          name: 'IgtRoom',
           meta: {
-            title: '房间设置'
+            title: '房间管理'
           },
           components:{
-            default:IgtSet,
+            default:IgtRoom,
           }
         },
         {
@@ -809,6 +811,26 @@ export default new Router({
       name: 'Intelligent',
       components:{
         default:Intelligent,
+      }
+    },
+    {
+      path: '/intelligent/room/manage/set',
+      name: 'IgtRoomSet',
+      meta: {
+
+      },
+      components:{
+        default:IgtRoomSet,
+      }
+    },
+    {
+      path: '/intelligent/room/manage/add',
+      name: 'IgtRoomAdd',
+      meta: {
+
+      },
+      components:{
+        default:IgtRoomAdd,
       }
     },
   ]

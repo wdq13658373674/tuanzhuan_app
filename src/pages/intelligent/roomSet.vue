@@ -1,13 +1,18 @@
 <template>
   <div>
+    <BarNav title="房间设置">
+      <div class="link pull-right orange"  slot="right">
+        保存
+      </div>
+    </BarNav>
     <section class="page-group">
       <div class="tz-device-roomset">
         <ul class="arrow-cell-list">
           <li class="item">
-            <a href="#" class="link cell">
+            <div class="link cell">
               <span>房间名称</span>
-              <span>客厅</span>
-            </a>
+              <input class="input text-right" type="text" value="客厅">
+            </div>
           </li>
         </ul>
       </div>
@@ -63,10 +68,11 @@
 </template>
 
 <script>
+  import BarNav from '@/pages/layout/barNav'
   export default {
     name: "Set",
     components:{
-
+      BarNav
     },
     data () {
       return {

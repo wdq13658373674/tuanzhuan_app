@@ -5,18 +5,27 @@
         <i class="icon home2"></i>
       </router-link>
 
+      <!--购物车-->
       <a class="link pull-right" v-if="rightNav==='cart'"  slot="right">
         <i class="icon cart"></i>
       </a>
 
+      <!--智能家居-搜索网关-->
       <router-link to="/intelligent/search" class="link pull-right green" v-if="rightNav==='search'"  slot="right">
         搜素网关
       </router-link>
 
+      <!--智能家居-选择设备-->
       <router-link to="#" class="link pull-right orange" v-if="rightNav==='refresh'"  slot="right">
         刷新
       </router-link>
 
+      <!--智能家居-添加房间-->
+      <router-link :to="{name:'IgtRoomAdd'}" class="link pull-right orange" v-if="rightNav==='addroom'"  slot="right">
+        添加房间
+      </router-link>
+
+      <!--我的房屋-管理房屋-->
       <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right" @click="setDefault">
         设为默认
       </div>
@@ -68,12 +77,15 @@
         if(routeName=="SelectDevice"){
           return 'refresh';
         }
+        if(routeName=="IgtRoom"){
+          return 'addroom';
+        }
         return false;
       }
     },
     methods:{
       /**
-       * 我的房屋设置默认值
+       * 我的房屋-管理房屋-设置默认值
        * **/
       setDefault(){
         const params={

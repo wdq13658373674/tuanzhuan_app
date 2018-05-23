@@ -66,4 +66,16 @@
 </script>
 <style lang="scss">
   @import "../../core/base";
+
+  .tz-link-device{
+    .cell-list{
+      .cell{
+        @include align-items(center);
+      }
+      .name{
+        width:100%;
+        margin-left:rem(20);
+      }
+    }
+  }
 </style>
