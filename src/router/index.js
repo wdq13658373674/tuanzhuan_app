@@ -642,7 +642,7 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/add/wifi',
+          path: '/intelligent/device/add/wifi',
           name: 'DeviceWifi',
           meta: {
             title: '添加wifi设备'
@@ -652,7 +652,7 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/wifi/start',
+          path: '/intelligent/device/add/wifi/start',
           name: 'WifiStart',
           meta: {
             title: '启动设备Wi-Fi模块'
@@ -662,7 +662,7 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/wifi/bind',
+          path: '/intelligent/device/add/wifi/start/bind',
           name: 'BindDevice',
           meta: {
             title: '绑定设备'
@@ -672,7 +672,7 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/wifi/select',
+          path: '/intelligent/device/add/wifi/start/bind/select',
           name: 'SelectDevice',
           meta: {
             title: '选择设备'
