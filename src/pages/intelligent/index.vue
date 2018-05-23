@@ -76,8 +76,8 @@
             <!--tab-box-->
             <div class="tab-box">
               <scroller lock-x height="100%" ref="scrollerBottom2">
-                <div class="device-list">
-                  <label class="item" :class="{active:item.switchValue}" v-for="(item,index) in deviceLists">
+                <ul class="device-list">
+                  <li class="item" :class="{active:item.switchValue}" v-for="(item,index) in deviceLists">
                     <div class="img-box">
                       <img class="img" src="@/assets/images/icons/camera2.jpeg" alt="">
                     </div>
@@ -95,16 +95,16 @@
                         <i class="open"></i>
                       </div>
                     </div>
-                  </label>
+                  </li>
 
                   <!--设备添加-->
-                  <div class="item">
+                  <li class="item">
                     <router-link :to="{}" class="add">
                       <span class="f32">+</span>
                       <span>添加常用设备</span>
                     </router-link>
-                  </div>
-                </div>
+                  </li>
+                </ul>
               </scroller>
             </div>
           </div>

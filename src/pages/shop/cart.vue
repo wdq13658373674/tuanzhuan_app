@@ -36,7 +36,7 @@
                 <span class="f32 orange mr20">{{item.now_tcion}}</span>
                 <span>¥{{item.now_price}}</span>
 
-                <x-number class="cart-number pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
+                <x-number class="tz-xnumber pull-right" title="" v-model="item.cart_sum" :min="1" :fillable="false" @on-change="change_sum(item.cart_sum,key)"></x-number>
 
               </p>
             </div>
@@ -178,7 +178,7 @@
 <style lang="scss">
   @import "../../core/base";
   /*计数*/
-  .weui-cell{
+  /*.weui-cell{
     padding:0;
   }
   .cart-number{
@@ -218,5 +218,5 @@
       margin-right:0;
       border-radius: 0;
     }
-  }
+  }*/
 </style>
