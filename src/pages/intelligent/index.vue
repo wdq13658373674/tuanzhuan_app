@@ -186,6 +186,7 @@
   @import "../../assets/css/intellindex.css";
   @import "../../assets/css/intellicon.css";
 
+
   .animated{
     background: url("../../assets/images/img/m_bg.jpg") no-repeat;
     background-size: cover;

@@ -98,6 +98,7 @@
 <style lang="scss">
   @import "../../core/base";
 
+
   .tz-device-roomicon{
     .roomicon-list{
       background: #fff;

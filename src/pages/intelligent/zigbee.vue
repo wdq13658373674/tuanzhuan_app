@@ -52,6 +52,7 @@
 <style lang="scss">
   @import "../../core/base";
 
+
   .tz-device-tips{
     background: #fff;
     overflow: hidden;

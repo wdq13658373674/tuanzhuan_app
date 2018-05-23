@@ -51,6 +51,7 @@
 <style lang="scss">
   @import "../../core/base";
 
+
   .tz-start-device{
     .arrow-cell-list{
       .link{

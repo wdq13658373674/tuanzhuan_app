@@ -28,7 +28,7 @@
     methods: {
       /**返回**/
       back() {
-        if(this.$route.name=='UserOrder'){
+        /*if(this.$route.name=='UserOrder'){
           this.$router.push('/user');
           return;
         }
@@ -39,7 +39,7 @@
         if(this.$route.name=='ShopOrder'){
           this.$router.replace('/shop/detail');
           return;
-        }
+        }*/
 
         this.$router ? this.$router.go(-1) : window.history.back()
       }

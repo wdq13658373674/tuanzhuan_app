@@ -67,6 +67,7 @@
 <style lang="scss">
   @import "../../core/base";
 
+
   .tz-link-device{
     .cell-list{
       .cell{

@@ -42,7 +42,6 @@
 </script>
 <style lang="css" scoped>
   @import "../../assets/css/intelladd.css";
-
   .animated:nth-child(1){
     background: #fff;
   }

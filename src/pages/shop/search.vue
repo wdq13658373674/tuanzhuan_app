@@ -63,7 +63,7 @@
       submit:function(){
         let keyword=this.search;
 
-        this.$router.replace({
+        this.$router.push({
           name:'ShopCategory',
           query:{
             id:this.$route.query.id || 0,

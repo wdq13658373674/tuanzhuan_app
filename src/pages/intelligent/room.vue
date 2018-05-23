@@ -63,6 +63,7 @@
 <style lang="scss">
   @import "../../core/base";
 
+
   .tz-device-room{
     .m_icon{
       float:left;
