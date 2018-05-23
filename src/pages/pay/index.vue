@@ -240,7 +240,7 @@
                 type:that.payType
               };
               console.log(param);
-              this.$axios.post('/index/user/pay_money',qs.stringify(param)).then(res=>{
+              this.$axios.post(global.API_HOST+'user/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
                   this.$router.push('/order/pay/detail?order_id='+that.order_id);
@@ -259,7 +259,7 @@
                 type: this.payType
               };
               console.log(param);
-              this.$axios.post('index/property/pay_money',qs.stringify(param)).then(res=>{
+              this.$axios.post(global.API_HOST+'property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
                   this.$router.push('/property/service');
@@ -339,7 +339,7 @@
           goods_order_id:that.$route.query.order_id,
           user_id:that.userInfo.user_id
         };
-        this.$axios.get(global.API_HOST+'/index/Goods_order/getOrder',{
+        this.$axios.get(global.API_HOST+'Goods_order/getOrder',{
           params:param
         }).then(res=>{
           res=res.data;
@@ -381,7 +381,7 @@
           data:propertyId,
           user_id:this.userInfo.user_id
         };
-        this.$axios.get(global.API_HOST+'index/property/getPropertyMoeny',{
+        this.$axios.get(global.API_HOST+'property/getPropertyMoeny',{
           params:params
         }).then(res=>{
           res=res.data;

@@ -133,7 +133,7 @@
           };
         }
         this.disable = false;
-        this.$axios.get(global.API_HOST+'index/goods_order/refundOrderInfo',{
+        this.$axios.get(global.API_HOST+'goods_order/refundOrderInfo',{
           params:params
         }).then(res=>{
           res=res.data;

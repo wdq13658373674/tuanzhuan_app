@@ -131,7 +131,7 @@
         };
 
         if(this.roomInfo.room_id){
-          this.$axios.get(global.API_HOST+'index/property/getUserPropertyList',{
+          this.$axios.get(global.API_HOST+'property/getUserPropertyList',{
             params:params
           }).then(res=>{
             res=res.data;

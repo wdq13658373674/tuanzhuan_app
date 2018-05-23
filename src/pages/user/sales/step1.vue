@@ -44,7 +44,7 @@
           goods_order_cancel_reason: this.reason
         };
         if(this.reason !== ''){
-          this.$axios.get(global.API_HOST+'index/Goods_order/refundOrder',{
+          this.$axios.get(global.API_HOST+'Goods_order/refundOrder',{
             params:params
           }).then(res=>{
             res=res.data;

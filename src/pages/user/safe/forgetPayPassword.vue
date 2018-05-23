@@ -68,7 +68,7 @@
           code:this.code,
         }
 
-        this.$axios.post(global.API_HOST+'/index/index/newPayPassword',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'index/newPayPassword',qs.stringify(params)).then(res=>{
           res=res.data;
           if(res.status==0) {
             this.$router.push('/user/safe/setPayPassword');

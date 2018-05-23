@@ -50,7 +50,7 @@
             'rule':1
           }
 
-        this.$axios.post(global.API_HOST+'/index/index/registration',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'index/registration',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==0){

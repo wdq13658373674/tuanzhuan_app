@@ -95,7 +95,7 @@
           order_id: this.$route.query.order_id,
           user_id: this.userInfo.user_id
         };
-        this.$axios.get(global.API_HOST+'index/goods_order/afterSale',{
+        this.$axios.get(global.API_HOST+'goods_order/afterSale',{
           params:params
         }).then(res=>{
           res=res.data;

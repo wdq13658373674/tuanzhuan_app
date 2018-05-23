@@ -26,8 +26,8 @@ const options={
 }
 Vue.use(vueg, router,options);
 
-//global.API_HOST="http://192.168.1.252";
-global.API_HOST="";
+//global.API_HOST="http://192.168.1.252/";
+global.API_HOST="/index/";
 
 /**
  * 定位

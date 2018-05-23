@@ -54,7 +54,7 @@
           address:''/*例如；重庆*/
         }
 
-        this.$axios.post(global.API_HOST+'/index/Bank/bankType',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'Bank/bankType',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==0){
@@ -75,7 +75,7 @@
           bank_branch:this.branch
         }
 
-        this.$axios.post(global.API_HOST+'/index/Bank/addBank',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'Bank/addBank',qs.stringify(params)).then(res=>{
           res=res.data;
           console.log(res);
 

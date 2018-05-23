@@ -155,7 +155,7 @@
           page: this.page
         };
 
-        this.$axios.get(global.API_HOST+'index/bbs/getBobIndex',{
+        this.$axios.get(global.API_HOST+'bbs/getBobIndex',{
           params:params
         }).then(res=>{
           res=res.data;

@@ -93,7 +93,7 @@
           room_id:this.$route.query.id
         }
 
-        this.$axios.post(global.API_HOST+'/index/House_user_bind_info_view/set_default',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'House_user_bind_info_view/set_default',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==0){

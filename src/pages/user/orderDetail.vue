@@ -203,7 +203,7 @@
           goods_order_id:this.$route.query.order_id,
           user_id:this.userInfo.user_id
         };
-        this.$axios.get(global.API_HOST+'index/Goods_order/order_info',{
+        this.$axios.get(global.API_HOST+'Goods_order/order_info',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -238,7 +238,7 @@
               user_id: _this.userInfo.user_id
             };
 
-            _this.$axios.get(global.API_HOST+'index/goods_order/ConfirmGoods',{
+            _this.$axios.get(global.API_HOST+'goods_order/ConfirmGoods',{
               params:params
             }).then(res=>{
               res=res.data;

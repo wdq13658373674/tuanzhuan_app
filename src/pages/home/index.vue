@@ -140,7 +140,7 @@
     methods:{
       /**获取服务*/
       getserviceIndex(){
-        this.$axios.get(global.API_HOST+'index/service/serviceIndex').then(res=>{
+        this.$axios.get(global.API_HOST+'service/serviceIndex').then(res=>{
           res=res.data;
           this.serviceList = res.data;
         }).catch(err=>{
@@ -165,7 +165,7 @@
           ak:'4ChzIxMmmkgsV1uhED0baRa3XsZVG777'
         }
 
-        this.$axios.get(global.API_HOST+url+'http://api.map.baidu.com/telematics/v3/weather',{
+        this.$axios.get(url+'http://api.map.baidu.com/telematics/v3/weather',{
           params:param
         }).then(res=>{
           res=res.data;
@@ -187,7 +187,7 @@
           'notic_village_id' : this.roomInfo.village_id
         }
 
-        this.$axios.get(global.API_HOST+'index/House_notic/getTitle',{
+        this.$axios.get(global.API_HOST+'House_notic/getTitle',{
           params : param
         }).then(res=>{
           res=res.data;
@@ -204,7 +204,7 @@
            lng:this.roomInfo.lng,
           }
 
-          this.$axios.get(global.API_HOST+'/index/Goods/IndexGoods',{
+          this.$axios.get(global.API_HOST+'Goods/IndexGoods',{
             params:param
           }).then(res=>{
             res=res.data;

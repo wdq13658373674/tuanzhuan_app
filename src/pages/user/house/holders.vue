@@ -103,7 +103,7 @@
           bind_type:this.type,
         }
 
-        this.$axios.post(global.API_HOST+'/index/House_user_bind_info_view/getUserType',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'House_user_bind_info_view/getUserType',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==0){
@@ -137,7 +137,7 @@
           bind_type:this.select.bind_type,
         }
 
-        this.$axios.post(global.API_HOST+'/index/House_user_bind_info_view/delBind',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'House_user_bind_info_view/delBind',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==0){
