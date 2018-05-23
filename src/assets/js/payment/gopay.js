@@ -33,7 +33,6 @@ function gopay(subject,total,user_id,type,callback){
         if(data.status){
           alert('错误:'+data.msg);
         }else{
-          var useragent = navigator.userAgent.toLowerCase();
           if(cordovaLoaded && data.data.type=='app'){
             if(type=='weixin'){
               Wechat.sendPaymentRequest({
@@ -73,6 +72,10 @@ function gopay(subject,total,user_id,type,callback){
             }
           }else{
             if(type=='weixin' || type=='alipay'){
+              if(data.data.type=='h5' && navigator.userAgent.indexOf('Tuanzhuanw')>-1){
+                cordova.InAppBrowser.open(data.data.data, '_blank', 'location=yes,hideurlbar=yes,clearcache=yes,clearsessioncache=yes');
+                return;
+              }
               callback(data.data.data,data.data.type);
             }else{
               alert('没有该支付方式');
