@@ -11,7 +11,7 @@ import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
 import utils from '@/libs/util.js'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
-
+import VuePreview from 'vue-preview'
 /**
  * 路由转场动画
  * **/
@@ -91,6 +91,7 @@ Vue.use(VueLazyload,{
   attempt: 1
 })
 
+Vue.use(VuePreview);
 /**
  * store状态管理
  * **/

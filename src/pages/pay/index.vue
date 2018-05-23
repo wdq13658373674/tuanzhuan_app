@@ -285,7 +285,9 @@
             let subject = this.paymentType+'充值';
             console.log(this.paymentType);
             gopay(subject,total,user_id,type,function(result,source){
-              if(source=='app'){
+              if(source=='wap') {
+                location.href = result;
+              }else if(source=='app'){
                 console.log(result);
               }else if(source=='wap') {
                 _this.popshow3=false;
