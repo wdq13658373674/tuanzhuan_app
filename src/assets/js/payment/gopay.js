@@ -33,7 +33,8 @@ function gopay(subject,total,user_id,type,callback){
         if(data.status){
           alert('错误:'+data.msg);
         }else{
-          if(cordovaLoaded && navigator.userAgent.indexOf('Tuanzhuanw')>-1){
+          var useragent = navigator.userAgent.toLowerCase();
+          if(cordovaLoaded && useragent.indexOf('tuanzhuanw')>-1){
             if(type=='weixin'){
               Wechat.sendPaymentRequest({
                   partnerid:data.data.mch_id,
@@ -58,7 +59,7 @@ function gopay(subject,total,user_id,type,callback){
             }else{
               alert('没有该支付方式');
             }
-          }else if(navigator.userAgent.indexOf('MicroMessenger')>-1 && type=='weixin'){
+          }else if(useragent.indexOf('micromessenger')>-1 && type=='weixin'){
             var options = JSON.parse(data.data);
             if (typeof WeixinJSBridge == "undefined"){
               if( document.addEventListener ){
@@ -70,6 +71,8 @@ function gopay(subject,total,user_id,type,callback){
             }else{
               onBridgeReady(options);
             }
+          }else if(type=='weixin' && (useragent.indexOf('ipad')>-1 || useragent.indexOf('iphone')>-1 || useragent.indexOf('midp')>-1 || useragent.indexOf('rv:1.2.3.4')>-1 || useragent.indexOf('ucweb')>-1 || useragent.indexOf('android')>-1 || useragent.indexOf('windows ce')>-1 || useragent.indexOf('windows mobile')>-1)){
+            callback(data.data,'wap');
           }else{
             if(type=='weixin' || type=='alipay'){
               callback(data.data,'h5');
