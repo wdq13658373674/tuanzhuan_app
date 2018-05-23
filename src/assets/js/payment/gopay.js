@@ -50,7 +50,7 @@ function gopay(subject,total,user_id,type,callback){
                 });
             }else if(type=='alipay'){
               cordova.plugins.MyAlipay.coolMethod(
-                data.data,
+                data.data.data,
                 function(result){
                   callback(result,'app');
                 },function(error){
@@ -60,7 +60,7 @@ function gopay(subject,total,user_id,type,callback){
               alert('没有该支付方式');
             }
           }else if(data.data.type=='jsapi'){
-            var options = JSON.parse(data.data);
+            var options = JSON.parse(data.data.data);
             if (typeof WeixinJSBridge == "undefined"){
               if( document.addEventListener ){
                 document.addEventListener('WeixinJSBridgeReady', onBridgeReady(options), false);
@@ -73,7 +73,7 @@ function gopay(subject,total,user_id,type,callback){
             }
           }else{
             if(type=='weixin' || type=='alipay'){
-              callback(data.data,data.data.type);
+              callback(data.data.data,data.data.type);
             }else{
               alert('没有该支付方式');
             }
