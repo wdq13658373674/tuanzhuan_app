@@ -2,7 +2,7 @@
   <section class="page-group">
     <h2 class="h2">请先登录网关</h2>
 
-    <form action="" @submit="submit">
+    <form action="">
       <ul class="cell-list">
         <li class="item p27 cell">
           <label class="w90">网关</label>
@@ -19,7 +19,7 @@
           禁止点击状态；disabled
       -->
       <div class="btn-box">
-        <button type="submit" class="btn btn-orange mt60">进入</button>
+        <button type="submit" class="btn btn-orange mt60" @click="submit">进入</button>
       </div>
     </form>
   </section>
@@ -43,9 +43,27 @@
 
     },
     methods:{
+      /**
+       * 表单提交
+       * **/
       submit(){
-        this.$router.push({
-          name:'Intelligent'
+        const self=this;
+
+        //首次登陆成功后提示
+        this.$vux.confirm.show({
+          title:'提示',
+          content:'网关已自动绑定当前默认房屋, <span class="orange">东樾府13栋9-1</span> 是否需要更改？',
+          cancelText:'更改',
+          onConfirm(){
+            self.$router.push({
+              name:'Intelligent'
+            })
+          },
+          onCancel(){
+            self.$router.push({
+              name:'IgtHouse'
+            })
+          }
         })
       }
     }

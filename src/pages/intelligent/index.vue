@@ -2,15 +2,15 @@
   <div>
     <ColorNav color="trans-bar">
       <i class="icon arrow6" slot="leftIcon"></i>
-      <a href="#" class="link pull-right" slot="right">
+      <router-link to="/intelligent/device/add" class="link pull-right" slot="right">
         <i class="icon device"></i>
         添加设备
-      </a>
+      </router-link>
     </ColorNav>
     <section class="page-group">
       <div class="tz-device-main">
         <div class="flex-box">
-          <router-link to="/intelligent/change/house" tag="div" class="title clearfix">
+          <router-link :to="{name:'IgtHouse'}" tag="div" class="title clearfix">
             <span class="f32 pull-left">西城御府2栋2-3</span>
             <div class="change">切换</div>
           </router-link>
@@ -67,7 +67,7 @@
                 </div>
               </scroller>
 
-              <router-link to="/intelligent/change/set" tag="div" class="item mb30">
+              <router-link to="/intelligent/house/set" tag="div" class="item mb30">
                 <i class="icon set"></i>
                 <p>设置</p>
               </router-link>

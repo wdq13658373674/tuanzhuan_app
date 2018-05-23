@@ -9,8 +9,12 @@
         <i class="icon cart"></i>
       </a>
 
-      <router-link to="/intelligent/search" class="link pull-right green" v-if="rightNav==='device'"  slot="right">
+      <router-link to="/intelligent/search" class="link pull-right green" v-if="rightNav==='search'"  slot="right">
         搜素网关
+      </router-link>
+
+      <router-link to="#" class="link pull-right orange" v-if="rightNav==='refresh'"  slot="right">
+        刷新
       </router-link>
 
       <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right" @click="setDefault">
@@ -59,7 +63,10 @@
           return 'default';
         }
         if(routeName=="IgtLogin"){
-          return 'device';
+          return 'search';
+        }
+        if(routeName=="SelectDevice"){
+          return 'refresh';
         }
         return false;
       }

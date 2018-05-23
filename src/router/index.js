@@ -58,6 +58,10 @@ import IgtLogin from '@/pages/intelligent/login'
 import IgtSearch from '@/pages/intelligent/search'
 import IgtHouse from '@/pages/intelligent/house'
 import IgtSet from '@/pages/intelligent/set'
+import DeviceWifi from '@/pages/intelligent/wifi'
+import WifiStart from '@/pages/intelligent/wifiStart'
+import BindDevice from '@/pages/intelligent/bindDevice'
+import SelectDevice from '@/pages/intelligent/selectDevice'
 
 import UserBalance from '@/pages/user/account/balance'
 import UserIntegral from '@/pages/user/account/integral'
@@ -606,7 +610,7 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/change/house',
+          path: '/intelligent/house/change',
           name: 'IgtHouse',
           meta: {
             title: '智能家居'
@@ -616,13 +620,63 @@ export default new Router({
           }
         },
         {
-          path: '/intelligent/change/set',
+          path: '/intelligent/house/set',
           name: 'IgtSet',
           meta: {
             title: '房间设置'
           },
           components:{
             default:IgtSet,
+          }
+        },
+        {
+          path: '/intelligent/device/add',
+          name: 'AddDevice',
+          meta: {
+            title: '添加设备'
+          },
+          components:{
+            default:AddDevice,
+          }
+        },
+        {
+          path: '/intelligent/add/wifi',
+          name: 'DeviceWifi',
+          meta: {
+            title: '添加wifi设备'
+          },
+          components:{
+            default:DeviceWifi,
+          }
+        },
+        {
+          path: '/intelligent/wifi/start',
+          name: 'WifiStart',
+          meta: {
+            title: '启动设备Wi-Fi模块'
+          },
+          components:{
+            default:WifiStart,
+          }
+        },
+        {
+          path: '/intelligent/wifi/bind',
+          name: 'BindDevice',
+          meta: {
+            title: '绑定设备'
+          },
+          components:{
+            default:BindDevice,
+          }
+        },
+        {
+          path: '/intelligent/wifi/select',
+          name: 'SelectDevice',
+          meta: {
+            title: '选择设备'
+          },
+          components:{
+            default:SelectDevice,
           }
         },
       ]
