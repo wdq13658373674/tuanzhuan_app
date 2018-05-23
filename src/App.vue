@@ -246,25 +246,6 @@
     }
   }
 
-  /*xswitch*/
-  /*.tz-switch{
-    .weui-switch{
-      @include wh(rem(52),rem(32));
-
-      &:before{
-        @include wh(rem(50),rem(30));
-        border:1px solid $grayLight;
-      }
-
-      &:after{
-        @include wh(rem(18),rem(18));
-        top:rem(6);
-        left:rem(6);
-      }
-    }
-  }*/
-
-
   /*动画*/
   .tz-animated {
     animation-duration:.6s;

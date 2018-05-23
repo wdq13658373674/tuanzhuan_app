@@ -61,6 +61,7 @@ import IgtRoom from '@/pages/intelligent/room'
 import IgtRoomSet from '@/pages/intelligent/roomSet'
 import IgtRoomAdd from '@/pages/intelligent/roomAdd'
 import DeviceWifi from '@/pages/intelligent/wifi'
+import DeviceZigbee from '@/pages/intelligent/zigbee'
 import WifiStart from '@/pages/intelligent/wifiStart'
 import BindDevice from '@/pages/intelligent/bindDevice'
 import SelectDevice from '@/pages/intelligent/selectDevice'
@@ -649,6 +650,16 @@ export default new Router({
           },
           components:{
             default:DeviceWifi,
+          }
+        },
+        {
+          path: '/intelligent/device/add/zigbee',
+          name: 'DeviceZigbee',
+          meta: {
+            title: '添加zigBee设备'
+          },
+          components:{
+            default:DeviceZigbee,
           }
         },
         {

@@ -3,9 +3,9 @@
     <section class="page-group">
       <div class="tz-add-device">
         <p class="f30">添加ZigBee设备</p>
-        <div>
-          <a href="#" class="link-icon icon1"></a>
-        </div>
+        <router-link :to="{name:'DeviceZigbee'}">
+          <span class="link-icon icon1"></span>
+        </router-link>
         <p>选择后自动开启网关代加网模式</p>
 
         <p class="f30 mt150">添加WIFI设备</p>

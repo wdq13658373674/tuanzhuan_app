@@ -1,19 +1,25 @@
 <template>
   <section class="page-group">
     <div class="tz-device-tips">
-      <div class="img-box">
-        <img class="img" src="@/assets/images/img/m_img7.png" alt="">
-      </div>
-      <p class="con">检测到您的网关版本过低，需要手动打开加网模式，找到网关上的set键快速按四下。</p>
+      <swiper height="100%" :show-dots="true">
+        <swiper-item>
+          <div class="img-box">
+            <img class="img" src="@/assets/images/img/m_img7.png" alt="">
+          </div>
+          <p class="con">检测到您的网关版本过低，需要手动打开加网模式，找到网关上的set键快速按四下。</p>
+        </swiper-item>
+      </swiper>
     </div>
   </section>
 </template>
 
 <script>
+  import { Swiper, SwiperItem } from 'vux'
   export default {
     name: "Zigbee",
     components:{
-
+      Swiper,
+      SwiperItem
     },
     data () {
       return {
