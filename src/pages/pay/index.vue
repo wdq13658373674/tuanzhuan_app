@@ -239,7 +239,6 @@
                 order_id:that.$route.query.order_id,
                 type:that.payType
               };
-              console.log(param);
               this.$axios.post(global.API_HOST+'user/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
@@ -345,7 +344,7 @@
           params:param
         }).then(res=>{
           res=res.data;
-
+          this.ticket_rate = res.data.ticket;
           if(res.status!=0){
             this.$router.push('/shop/cart');
           }else{
@@ -387,6 +386,7 @@
           params:params
         }).then(res=>{
           res=res.data;
+          this.ticket_rate = res.data.ticket;
           this.orderInfo=res.data.order;
           this.property_money_sum = res.data.property_money_sum;
           this.property_tcion = res.data.property_tcion;
