@@ -77,6 +77,10 @@
           <span>打包费</span>
           <span>¥ {{package_price == 0?Number(package_price):package_price.toFixed(2)}}</span>
         </li>
+        <li class="item cell">
+          <span>打包团票费</span>
+          <span>{{package_tcion == 0?Number(package_tcion):package_tcion.toFixed(2)}}</span>
+        </li>
         <!--<li class="item cell">-->
         <!--<span>优惠活动</span>-->
         <!--<span class="orange">满100减50</span>-->
@@ -184,9 +188,9 @@
       if (this.$route.query.type) {
         //立即购买
         this.cartList = storeJs.get('buy_goods');
-        console.log(this.cartList);
-        this.package_price = this.cartList[0].goods_package_price;
-        this.package_tcion = this.cartList[0].goods_package_tcion;
+        this.package_price = parseFloat(this.cartList[0].goods_package_price);
+        this.package_tcion = parseFloat(this.cartList[0].goods_package_tcion);
+
         this.money = (this.cartList[0].now_price * this.cartList[0].cart_sum) + parseFloat(this.package_price);
         this.tcion = (this.cartList[0].now_tcion * this.cartList[0].cart_sum) + parseFloat(this.package_tcion);
 
@@ -196,10 +200,9 @@
         if (cart.order_pay.length > 0) {
           cart.order_pay.find(item => {
             this.cartList.push(cart.cart_list[item]);
-            this.package_price += parseFloat(cart.cart_list[item].goods_package_price);
-            this.package_tcion += parseFloat(cart.cart_list[item].goods_package_tcion);
+            this.package_price += parseFloat(this.cartList[item].goods_package_price);
+            this.package_tcion += parseFloat(this.cartList[item].goods_package_tcion);
           });
-          //console.log(this.cartList);
           this.money = parseFloat(cart.getMoney(cart.order_pay).price) + this.package_price;
           this.tcion = parseFloat(cart.getMoney(cart.order_pay).tcion) + this.package_tcion;
         } else {
