@@ -51,10 +51,16 @@
           </li>
         </ul>
 
-        <div class="order-total">
-          实付:<i class="icon tp ml10"></i>
-          <span class="orange f32">{{total.toFixed(2)}}</span>
+        <div class="order-total" v-if="orderDetail.order.goods_order_pay_type == 'tcion'">
+          实付:
+          <i class="icon tp ml10"></i>
+          <span class="orange f32">{{totalTcion.toFixed(2)}}</span>
         </div>
+        <div class="order-total" v-else>
+          实付:
+          <span class="orange f32">￥{{totalMoney.toFixed(2)}}</span>
+        </div>
+
 
         <div v-if="orderDetail.order.goods_order_send_type === 1">
           <!--商家配送 start-->
@@ -115,7 +121,7 @@
             <span v-else-if="orderDetail.order.goods_order_pay_type == 'tcion'">团票</span>
             <span v-else-if="orderDetail.order.goods_order_pay_type == 'alipay'">支付宝</span>
             <span v-else-if="orderDetail.order.goods_order_pay_type == 'weixin'">微信</span>
-            <span v-else-if="orderDetail.order.goods_order_pay_type == 'balancce'">余额</span>
+            <span v-else-if="orderDetail.order.goods_order_pay_type == 'balance'">余额</span>
             <span v-else-if="orderDetail.order.goods_order_pay_type == 'arrival'">到付</span>
             <span v-else>线下</span>
           </li>
@@ -186,7 +192,8 @@
           10:"正在退货",
           11:"拒绝退货"
         },
-        total:0,
+        totalMoney:0,
+        totalTcion:0,
         status: true
       }
     },
@@ -208,8 +215,10 @@
         }).then(res=>{
           res=res.data;
           this.orderDetail = res.data;
+          console.log(this.orderDetail.order.goods_order_pay_type);
           for(let i in this.orderDetail.order_info){
-            this.total += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
+            this.totalTcion += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
+            this.totalMoney += parseFloat(this.orderDetail.order_info[i].order_info_goods_money);
           }
         }).catch(err=>{
           console.log('my err:'+err)

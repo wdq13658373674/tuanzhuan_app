@@ -4,16 +4,16 @@
       <ul class="user-income-list">
         <li v-for="item in listData.data" class="item">
           <p class="p1 cell">
-            <span v-if="item.user_score_change_type === 'goods'">消费</span>
-            <span v-else-if="item.user_score_change_type === 'refund'">退款</span>
-            <span v-else-if="item.user_money_change_type === 'property'">物业缴费</span>
-            <span v-else-if="item.user_score_change_type === 'recharge'">充值</span>
+            <span v-if="item.user_ticket_change_type === 'goods'">消费</span>
+            <span v-else-if="item.user_ticket_change_type === 'refund'">退款</span>
+            <span v-else-if="item.user_ticket_change_type === 'property'">物业缴费</span>
+            <span v-else-if="item.user_ticket_change_type === 'recharge'">充值</span>
             <span v-else>后台操作</span>
             <span class="span gray">{{item.add_time | stampToDate(true)}}</span>
           </p>
           <p class="p2 cell">
-            <span class="span">余额：{{item.user_score_change_balance || 0.00}}</span>
-            <span>{{item.user_score_change_score || 0.00}}</span>
+            <span class="span">余额：{{item.user_ticket_change_balance || 0.00}}</span>
+            <span>{{item.user_ticket_change_ticket || 0.00}}</span>
           </p>
         </li>
 
@@ -58,10 +58,11 @@
           user_id: this.userInfo.user_id,
           page: this.page
         };
-        this.$axios.get(global.API_HOST+'user_change/score',{
+        this.$axios.get(global.API_HOST+'user_change/ticket',{
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           if(flag){
             //多次加载
             this.listData=res.data;
