@@ -88,7 +88,6 @@
       /**切换小区*/
       ...mapMutations(['update_roomInfo']),
       changeVillage:function(item){
-        console.log(item);
         let roomInfo=item;
         this.update_roomInfo(roomInfo);
         this.$router.replace('/');

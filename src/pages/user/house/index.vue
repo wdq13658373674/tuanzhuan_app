@@ -6,7 +6,7 @@
           <div class="cell">
             <div>
               <span>{{item.village_name}}</span>
-              <span class="gray ml20">{{item.unit_name}}-{{item.floor_name}}-{{item.floor_code}}</span>
+              <span class="gray ml20">{{item.unit_name}}-{{item.floor_name}}-{{item.room_code}}</span>
             </div>
           </div>
           <div class="cell mt50">
