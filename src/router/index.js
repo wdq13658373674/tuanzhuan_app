@@ -14,6 +14,7 @@ import Location from '@/pages/home/location'
 
 import Property from '@/pages/property/index'
 import PropertyService from '@/pages/property/service'
+import PropertyServiceDetail from '@/pages/property/detail'
 
 import Life from '@/pages/life/index'
 import LifeElectricity from '@/pages/life/electricity'
@@ -140,6 +141,15 @@ export default new Router({
           path: '/property/service',
           name: 'PropertyService',
           component: PropertyService,
+          meta: {
+            requireAuth: true,
+            title: '物业服务费'
+          }
+        },
+        {
+          path: '/property/service/detail',
+          name: 'PropertyServiceDetail',
+          component: PropertyServiceDetail,
           meta: {
             requireAuth: true,
             title: '物业服务费'
