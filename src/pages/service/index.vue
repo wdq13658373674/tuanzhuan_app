@@ -52,6 +52,7 @@
   import indexNav from '@/pages/layout/indexNav'
   import Footer from '@/pages/layout/footer'
   import { Scroller } from 'vux'
+  import {mapState} from 'vuex'
 
   export default {
     name: "Service",
@@ -59,6 +60,9 @@
       Scroller,
       indexNav,
       Footer
+    },
+    computed:{
+      ...mapState(['roomInfo'])
     },
     data () {
       return {
@@ -76,9 +80,17 @@
       })
     },
     methods: {
+
       getServiceList(){
-        this.$axios.get(global.API_HOST+'service/getServiceList').then(res=>{
+        let params={
+          village_id: this.roomInfo.village_id
+        };
+
+        this.$axios.get(global.API_HOST+'service/getServiceList',{
+          params:params
+        }).then(res=>{
           res=res.data;
+          console.log(res.data);
           this.serviceList = res.data;
           for(let i in this.serviceList){
             this.tabs.push(res.data[i].service_title);
