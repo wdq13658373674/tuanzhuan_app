@@ -1,4 +1,5 @@
-function gopay(subject,total,user_id,type,callback){
+function gopay(subject,total,user_id,type,out_trade_no,callback){
+  if(typeof callback != 'function'){console.error('param 7 type error, the callback must be a function');return;}
   var onBridgeReady = function(options){
     WeixinJSBridge.invoke(
       "getBrandWCPayRequest",options,
@@ -26,7 +27,8 @@ function gopay(subject,total,user_id,type,callback){
         subject:subject,
         total:total,
         user_id:user_id,
-        type:type
+        type:type,
+        out_trade_no:out_trade_no
       },
       url:"http://192.168.1.252/index/pay/gopay",
       success:function(data){
