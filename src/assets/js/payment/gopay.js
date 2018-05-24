@@ -30,7 +30,7 @@ function gopay(subject,total,user_id,type,out_trade_no,callback){
         type:type,
         out_trade_no:out_trade_no
       },
-      url:"http://192.168.1.252/index/pay/gopay",
+      url:"http://192.168.1.252/index/pay/gopay", /*正式环境请更改域名*/
       success:function(data){
         if(data.status){
           alert('错误:'+data.msg);
