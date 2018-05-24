@@ -125,9 +125,10 @@
                 bank_id:bankId
               }
 
-              self.$axios.post(global.API_HOST+'/index/Bank/delBank',qs.stringify(params)).then(res=>{
+              self.$axios.post(global.API_HOST+'Bank/delBank',qs.stringify(params)).then(res=>{
                 res=res.data;
 
+                console.log(res);
                 if(res.status==0){
                   self.updateCards(bankId);
                   self.$vux.toast.text('解除绑定成功');
