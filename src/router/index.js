@@ -14,7 +14,6 @@ import Location from '@/pages/home/location'
 
 import Property from '@/pages/property/index'
 import PropertyService from '@/pages/property/service'
-// import ServiceDetail from '@/pages/property/detail'
 
 import Life from '@/pages/life/index'
 import LifeElectricity from '@/pages/life/electricity'
