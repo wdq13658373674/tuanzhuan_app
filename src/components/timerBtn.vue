@@ -45,7 +45,7 @@
           'mobile':this.phone,
           'type':this.type
         }
-        this.$axios.post(global.API_HOST+'/index/index/sendVerify',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'index/sendVerify',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==1){

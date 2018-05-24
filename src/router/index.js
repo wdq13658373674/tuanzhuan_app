@@ -14,7 +14,7 @@ import Location from '@/pages/home/location'
 
 import Property from '@/pages/property/index'
 import PropertyService from '@/pages/property/service'
-import ServiceDetail from '@/pages/property/detail'
+// import ServiceDetail from '@/pages/property/detail'
 
 import Life from '@/pages/life/index'
 import LifeElectricity from '@/pages/life/electricity'
@@ -27,7 +27,9 @@ import Neighbor from '@/pages/neighbor/index'
 
 import Article from '@/pages/article/index'
 import ArticleDetail from '@/pages/article/detail'
+
 import Service from '@/pages/service/index'
+import ServiceDetail from '@/pages/service/detail'
 
 import Shop from '@/pages/shop/index'
 import ShopSearch from '@/pages/shop/search'

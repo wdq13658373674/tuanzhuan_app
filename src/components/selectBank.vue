@@ -72,7 +72,7 @@
           user_id:this.userInfo.user_id
         }
 
-        this.$axios.get(global.API_HOST+'/index/Bank/getUserBankAll',{
+        this.$axios.get(global.API_HOST+'Bank/getUserBankAll',{
           params:params
         }).then(res=>{
           res=res.data;
