@@ -75,7 +75,7 @@
 <style lang="scss">
   @import './assets/css/common.css';
   @import "core/base";
-  /****/
+  /**转场动画 animated**/
   .animated{
     position:absolute;
     width:100%;
@@ -184,7 +184,6 @@
       color:#bbbbbb;
     }
   }
-
   .vux-popup-picker-container{
     .vux-popup-header {
       height: rem(90);
@@ -246,7 +245,7 @@
     }
   }
 
-  /*x-number*/
+  /*tz-x-number*/
   .tz-xnumber{
     &.weui-cell{
       padding:0;
@@ -286,6 +285,22 @@
       padding: 0 rem(20);
       margin-right:0;
       border-radius: 0;
+    }
+  }
+
+  /*tz-sheet*/
+  .tz-sheet{
+    .weui-actionsheet{
+      background: none;
+    }
+
+    .weui-actionsheet__cell{
+      padding:rem(31) 0 ;
+      font-size:rem(30);
+    }
+
+    .weui-actionsheet__action{
+      margin-top:rem(20);
     }
   }
 
