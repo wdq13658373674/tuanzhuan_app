@@ -48,7 +48,7 @@
         }
 
         updateMessage(this,data);
-        this.$router.replace('/user/message');
+        this.$router.go('-1');
       },
       /**
        * 输入验证：
