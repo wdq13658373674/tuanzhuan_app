@@ -146,15 +146,6 @@ export default new Router({
           }
         },
         {
-          path: '/property/service/detail',
-          name: 'ServiceDetail',
-          component: ServiceDetail,
-          meta: {
-            requireAuth: true,
-            title: '物业费账单'
-          }
-        },
-        {
           path: '/life',
           name: 'Life',
           meta: {
@@ -705,6 +696,14 @@ export default new Router({
       name: 'Service',
       components:{
         default:Service
+      }
+    },
+    {
+      path: '/service/detail',
+      name: 'ServiceDetail',
+      component: ServiceDetail,
+      meta: {
+        title: '我的订单'
       }
     },
     {
