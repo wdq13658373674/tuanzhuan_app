@@ -34,7 +34,7 @@
     </section>
 
     <!--银行卡解除绑定 actionSheet-->
-    <actionsheet class="bank-sheet" v-model="sheetShow" :menus="delMenus" @on-click-menu="del" show-cancel></actionsheet>
+    <actionsheet class="tz-sheet" v-model="sheetShow" :menus="delMenus" @on-click-menu="del" show-cancel></actionsheet>
   </div>
 </template>
 
@@ -158,20 +158,4 @@
 </style>
 <style lang="scss">
   @import "../../../core/base";
-
-  /*sheet*/
-  .bank-sheet{
-    .weui-actionsheet{
-      background: none;
-    }
-
-    .weui-actionsheet__cell{
-      padding:rem(31) 0 ;
-      font-size:rem(30);
-    }
-
-    .weui-actionsheet__action{
-      margin-top:rem(20);
-    }
-  }
 </style>
