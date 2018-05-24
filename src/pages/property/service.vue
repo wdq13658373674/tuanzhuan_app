@@ -125,12 +125,11 @@
     },
     methods:{
       getUserPropertyList(){
-        let params={
-          village_id: this.roomInfo.village_id,
-          room_id: this.roomInfo.room_id
-        };
-
-        if(this.roomInfo.room_id){
+        if(this.roomInfo.user_room){
+          let params={
+            village_id: this.roomInfo.village_id,
+            room_id: this.roomInfo.user_room.room_id
+          };
           this.$axios.get(global.API_HOST+'property/getUserPropertyList',{
             params:params
           }).then(res=>{

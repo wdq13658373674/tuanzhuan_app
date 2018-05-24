@@ -140,7 +140,12 @@
     methods:{
       /**获取服务*/
       getserviceIndex(){
-        this.$axios.get(global.API_HOST+'service/serviceIndex').then(res=>{
+        const params={
+          village_id: this.roomInfo.village_id
+        };
+        this.$axios.get(global.API_HOST+'service/serviceIndex',{
+          params:params
+        }).then(res=>{
           res=res.data;
           this.serviceList = res.data;
         }).catch(err=>{
