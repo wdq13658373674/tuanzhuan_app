@@ -44,7 +44,7 @@
           </a>
 
           <div class="content" v-if="item.bbs_image.length != 0">
-            <vue-preview :slides="imgList.slide+index" @close="handleClose"></vue-preview>
+            <vue-preview :slides="imgList['slide'+index]" ></vue-preview>
           </div>
 
           <div class="neighbor-bar">
@@ -101,10 +101,7 @@
     data(){
       return {
         tabMenus:['精华','最新'],
-        imgList: {
-
-        },
-
+        imgList: {},
         bobList:[],
         menuList:[],
         page: 0,
@@ -132,39 +129,23 @@
           res=res.data;
           /*菜单列表*/
           this.menuList = res.data.type;
-          let imgObj = {}
+
+          /*获取图片*/
           res.data.bbs.data.map((item, index) =>{
-            //console.log(item);
-            //console.log(index);
-            console.log(item.bbs_image)
+            let slide = [];
+            let a = {};
             item.bbs_image.map((img, i)=>{
+              a = {
+                src: img,
+                msrc: img,
+                w:600,
+                h:400
+              };
+              slide.push(a);
+            });
 
-            })
-
-            //this.imgList[index].push()
+            this.imgList['slide'+index] = slide;
           });
-
-          /*
-          *
-          *{
-            src: 'https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_b.jpg',
-            msrc: 'https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg',
-            alt: 'picture1',
-            title: 'Image Caption 1',
-            w: 600,
-            h: 400
-          },
-          {
-            src: 'https://farm4.staticflickr.com/3902/14985871946_86abb8c56f_b.jpg',
-            msrc: 'https://farm4.staticflickr.com/3902/14985871946_86abb8c56f_m.jpg',
-            alt: 'picture2',
-            title: 'Image Caption 2',
-            w: 1200,
-            h: 900
-          }
-          *
-          *
-          * */
 
           /*文章列表*/
           if(res.data!=undefined){
@@ -187,7 +168,7 @@
               this.flag = true;
             }
           }
-          console.log(this.bobList);
+          //console.log(this.bobList);
         }).catch(err=>{
           console.log('my err:'+err)
         })
@@ -205,9 +186,6 @@
         this.load = true;
         this.page++;
         this.getBbsIndex(this.bbs_type);
-      },
-      handleClose () {
-        console.log('close event')
       }
     }
   }
