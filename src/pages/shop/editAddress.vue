@@ -69,7 +69,7 @@
           address_id:this.$route.params.id
         }
 
-        this.$axios.get(global.API_HOST+'/index/User_address/getUserAddress',{
+        this.$axios.get(global.API_HOST+'User_address/getUserAddress',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -101,7 +101,7 @@
           address_comment:this.address
         }
 
-        this.$axios.post(global.API_HOST+'/index/User_address/editAddress',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'User_address/editAddress',qs.stringify(params)).then(res=>{
           res=res.data;
 
           if(res.status==0){

@@ -11,7 +11,7 @@ import {getCurrentPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
 import utils from '@/libs/util.js'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
-
+import VuePreview from 'vue-preview'
 /**
  * 路由转场动画
  * **/
@@ -26,8 +26,8 @@ const options={
 }
 Vue.use(vueg, router,options);
 
-//global.API_HOST="http://192.168.1.252";
-global.API_HOST="";
+//global.API_HOST="http://192.168.1.252/";
+global.API_HOST="/index/";
 
 /**
  * 定位
@@ -91,6 +91,7 @@ Vue.use(VueLazyload,{
   attempt: 1
 })
 
+Vue.use(VuePreview);
 /**
  * store状态管理
  * **/

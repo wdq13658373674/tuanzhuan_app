@@ -67,7 +67,7 @@
         let params={
           property_id:this.$route.query.property_id
         };
-        this.$axios.get(global.API_HOST+'index/property/getPropertyList',{
+        this.$axios.get(global.API_HOST+'property/getPropertyList',{
           params:params
         }).then(res=>{
           res=res.data;

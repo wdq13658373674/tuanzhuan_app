@@ -246,24 +246,48 @@
     }
   }
 
-  /*xswitch*/
-  /*.tz-switch{
-    .weui-switch{
-      @include wh(rem(52),rem(32));
+  /*x-number*/
+  .tz-xnumber{
+    &.weui-cell{
+      padding:0;
+    }
+    .vux-cell-primary>div{
+      border:1px solid #BBBBBB;
+      overflow: hidden;
+      @include border-radius(rem(10));
+    }
+    .vux-number-selector {
+      @include wh(auto,rem(50));
+      font-size: 25px;
+      border: none;
 
-      &:before{
-        @include wh(rem(50),rem(30));
-        border:1px solid $grayLight;
-      }
-
-      &:after{
-        @include wh(rem(18),rem(18));
-        top:rem(6);
-        left:rem(6);
+      svg {
+        @include wh(rem(30),rem(30));
+        margin-top:rem(10);
       }
     }
-  }*/
 
+    .vux-number-input {
+      min-width:rem(100);
+      height: rem(50);
+      font-size: rem(28);
+      color: #000;
+      border: none;
+      text-align: center;
+    }
+
+    .vux-number-selector-sub {
+      border-right: 1px solid #BBBBBB;
+      padding: 0 rem(20);
+      border-radius: 0;
+    }
+    .vux-number-selector-plus {
+      border-left: 1px solid #BBBBBB;
+      padding: 0 rem(20);
+      margin-right:0;
+      border-radius: 0;
+    }
+  }
 
   /*动画*/
   .tz-animated {

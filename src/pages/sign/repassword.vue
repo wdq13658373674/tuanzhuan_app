@@ -46,7 +46,7 @@
             'code':this.code,
           }
 
-        this.$axios.post(global.API_HOST+'/index/index/newPassword',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'index/newPassword',qs.stringify(params)).then(res=>{
           res=res.data;
 
           console.log(res);

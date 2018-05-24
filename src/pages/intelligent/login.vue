@@ -72,6 +72,7 @@
 <style lang="scss">
   @import "../../core/base";
 
+
   .tz-device-house{
     .cell-list{
       .name{

@@ -58,7 +58,7 @@
           user_id: this.userInfo.user_id,
           page: this.page
         };
-        this.$axios.get(global.API_HOST+'index/user_change/score',{
+        this.$axios.get(global.API_HOST+'user_change/score',{
           params:params
         }).then(res=>{
           res=res.data;

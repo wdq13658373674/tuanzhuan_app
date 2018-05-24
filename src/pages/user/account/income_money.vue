@@ -59,7 +59,7 @@
           user_id: this.userInfo.user_id,
           page: this.page
         };
-        this.$axios.get(global.API_HOST+'index/user_change/moneny',{
+        this.$axios.get(global.API_HOST+'user_change/moneny',{
           params:params
         }).then(res=>{
           res=res.data;

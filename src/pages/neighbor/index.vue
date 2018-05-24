@@ -40,15 +40,11 @@
             </div>
 
             <div class="neighbor-content">{{item.bbs_content}}</div>
-            <p class="f28 orange mt20">全文</p>
+            <p class="f28 orange mt20">全文{{index}}</p>
           </a>
 
-          <div class="content">
-            <ul class="neighbor-thumbs clearfix">
-              <li class="img-box" v-for="(item_image,index) in item.bbs_image" v-if="item_image.length!=''" :key="index">
-                <img class="img" v-lazy="item_image" alt="" @click="show(index)">
-              </li>
-            </ul>
+          <div class="content" v-if="item.bbs_image.length != 0">
+            <vue-preview :slides="imgList['slide'+index]" ></vue-preview>
           </div>
 
           <div class="neighbor-bar">
@@ -81,15 +77,15 @@
         </li>
       </ul>
     </section>
-    <previewer :list="imgList" ref="previewer" :options="options"></previewer>
   </div>
 </template>
 
 <script>
-  import {Tab, TabItem, Previewer,LoadMore } from 'vux'
+  import {Tab, TabItem,LoadMore } from 'vux'
   import {mapState} from 'vuex'
   import BarNav from '../layout/barNav'
   import infiniteScroll from 'vue-infinite-scroll'
+
   export default {
     name: "Neighbor",
     directives: {infiniteScroll},
@@ -97,38 +93,15 @@
       Tab,
       TabItem,
       BarNav,
-      Previewer,
       LoadMore
     },
     computed:{
-    ...mapState(['roomInfo'])
+      ...mapState(['roomInfo'])
     },
     data(){
       return {
         tabMenus:['精华','最新'],
-        imgList:[{
-          src: 'https://placekitten.com/800/400',
-        },
-          {
-            src: 'https://placekitten.com/1200/900',
-          }],
-        options: {
-          /**
-           * 图片放大参数配置
-           * **/
-          getThumbBoundsFn (index) {
-            let thumbnail = document.querySelectorAll('.img-box')[index];
-            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-            let rect = thumbnail.getBoundingClientRect();
-
-            return {
-              x: rect.left,
-              y: rect.top + pageYScroll,
-              w: rect.width
-            }
-          }
-        },
+        imgList: {},
         bobList:[],
         menuList:[],
         page: 0,
@@ -142,12 +115,7 @@
       this.loadMore();
     },
     methods:{
-      /**
-       * 显示大图
-       * **/
-      show(index){
-        this.$refs.previewer.show(index);
-      },
+
       getBbsIndex(type){
         let params={
           village_id: this.roomInfo.village_id,
@@ -155,12 +123,30 @@
           page: this.page
         };
 
-        this.$axios.get(global.API_HOST+'index/bbs/getBobIndex',{
+        this.$axios.get(global.API_HOST+'bbs/getBobIndex',{
           params:params
         }).then(res=>{
           res=res.data;
           /*菜单列表*/
           this.menuList = res.data.type;
+
+          /*获取图片*/
+          res.data.bbs.data.map((item, index) =>{
+            let slide = [];
+            let a = {};
+            item.bbs_image.map((img, i)=>{
+              a = {
+                src: img,
+                msrc: img,
+                w:600,
+                h:400
+              };
+              slide.push(a);
+            });
+
+            this.imgList['slide'+index] = slide;
+          });
+
           /*文章列表*/
           if(res.data!=undefined){
             if(this.flag){
@@ -182,7 +168,7 @@
               this.flag = true;
             }
           }
-          console.log(this.bobList);
+          //console.log(this.bobList);
         }).catch(err=>{
           console.log('my err:'+err)
         })
@@ -200,10 +186,30 @@
         this.load = true;
         this.page++;
         this.getBbsIndex(this.bbs_type);
-      },
+      }
     }
   }
 </script>
 <style lang="css" scoped>
   @import '../../assets/css/neighbor.css';
+  @import '../../assets/css/preview.css';
+</style>
+
+<style lang="css">
+  .my-gallery figure{
+    background: #fff;
+    margin-top: .4rem;
+    width: 4.32rem;
+    height: 4.32rem;
+    line-height: 4.28rem;
+    border: 1px solid #e8e8e8;
+    float: left;
+    margin-right: .48rem;
+    text-align: center;
+  }
+  .my-gallery figure img{
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 1.6rem;
+  }
 </style>

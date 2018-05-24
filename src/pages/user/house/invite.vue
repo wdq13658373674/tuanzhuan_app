@@ -78,7 +78,7 @@
           bind_type:this.type
         }
 
-        this.$axios.get(global.API_HOST+'/index/house_user_bind_info_view/addUserBind',{
+        this.$axios.get(global.API_HOST+'house_user_bind_info_view/addUserBind',{
           params:params
         }).then(res=>{
           res=res.data;

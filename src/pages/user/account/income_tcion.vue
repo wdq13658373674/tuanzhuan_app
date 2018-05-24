@@ -58,7 +58,7 @@
           user_id: this.userInfo.user_id,
           page: this.page
         };
-        this.$axios.get(global.API_HOST+'index/user_change/tcion',{
+        this.$axios.get(global.API_HOST+'user_change/tcion',{
           params:params
         }).then(res=>{
           res=res.data;

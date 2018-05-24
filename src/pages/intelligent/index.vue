@@ -21,54 +21,54 @@
               <scroller lock-x ref="scrollerBottom">
                 <div class="tab-items">
                   <div class="item active">
-                    <i class="icon icon1"></i>
+                    <i class="m_icon icon21"></i>
                     <p>常用</p>
                   </div>
-                  <div class="item">
-                    <i class="icon icon2"></i>
+                  <div class="item active">
+                    <i class="m_icon icon1"></i>
                     <p>客厅1</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon2"></i>
                     <p>客厅2</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon3"></i>
                     <p>客厅3</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon4"></i>
                     <p>客厅4</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon5"></i>
                     <p>客厅5</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon2"></i>
                     <p>客厅6</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon2"></i>
                     <p>客厅7</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon2"></i>
                     <p>客厅8</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon2"></i>
                     <p>客厅9</p>
                   </div>
                   <div class="item">
-                    <i class="icon icon2"></i>
+                    <i class="m_icon icon2"></i>
                     <p>客厅10</p>
                   </div>
                 </div>
               </scroller>
 
-              <router-link to="/intelligent/house/set" tag="div" class="item mb30">
-                <i class="icon set"></i>
+              <router-link :to="{name:'IgtRoom'}" tag="div" class="item mb30">
+                <i class="m_icon set"></i>
                 <p>设置</p>
               </router-link>
             </div>
@@ -76,8 +76,8 @@
             <!--tab-box-->
             <div class="tab-box">
               <scroller lock-x height="100%" ref="scrollerBottom2">
-                <div class="device-list">
-                  <label class="item" :class="{active:item.switchValue}" v-for="(item,index) in deviceLists">
+                <ul class="device-list">
+                  <li class="item" :class="{active:item.switchValue}" v-for="(item,index) in deviceLists">
                     <div class="img-box">
                       <img class="img" src="@/assets/images/icons/camera2.jpeg" alt="">
                     </div>
@@ -95,16 +95,16 @@
                         <i class="open"></i>
                       </div>
                     </div>
-                  </label>
+                  </li>
 
                   <!--设备添加-->
-                  <div class="item">
-                    <a href="#" class="add">
+                  <li class="item">
+                    <router-link :to="{}" class="add">
                       <span class="f32">+</span>
                       <span>添加常用设备</span>
-                    </a>
-                  </div>
-                </div>
+                    </router-link>
+                  </li>
+                </ul>
               </scroller>
             </div>
           </div>
@@ -184,6 +184,8 @@
 </script>
 <style lang="css" scoped>
   @import "../../assets/css/intellindex.css";
+  @import "../../assets/css/intellicon.css";
+
 
   .animated{
     background: url("../../assets/images/img/m_bg.jpg") no-repeat;

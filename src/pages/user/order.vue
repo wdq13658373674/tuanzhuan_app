@@ -124,7 +124,7 @@
           page: this.page,
           type: type
         };
-        this.$axios.get(global.API_HOST+'index/Goods_order/UserListOrder',{
+        this.$axios.get(global.API_HOST+'Goods_order/UserListOrder',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -175,7 +175,7 @@
               user_id: _this.userInfo.user_id
             };
 
-            _this.$axios.get(global.API_HOST+'index/Goods_order/cancelOrder',{
+            _this.$axios.get(global.API_HOST+'Goods_order/cancelOrder',{
               params:params
             }).then(res=>{
               res=res.data;
@@ -202,7 +202,7 @@
               user_id: _this.userInfo.user_id
             };
 
-            _this.$axios.get(global.API_HOST+'index/goods_order/ConfirmGoods',{
+            _this.$axios.get(global.API_HOST+'goods_order/ConfirmGoods',{
               params:params
             }).then(res=>{
               res=res.data;

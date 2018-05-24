@@ -91,7 +91,7 @@
             </li>
 
             <li class="item">
-              <x-number class="mt20 prop-xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false" @on-change="change_num"></x-number>
+              <x-number class="mt20 tz-xnumber" title="购买数量" v-model="cartNum" :min="1" :fillable="false" @on-change="change_num"></x-number>
             </li>
           </ul>
         </div>
@@ -175,7 +175,7 @@
           goods_id:this.goods_id
         }
 
-        this.$axios.get(global.API_HOST+'/index/goods/getGoodsInfo',{
+        this.$axios.get(global.API_HOST+'goods/getGoodsInfo',{
           params:param
         }).then(res=>{
           res=res.data;
@@ -314,46 +314,6 @@
       &.active{
         background-color: $primary;
       }
-    }
-  }
-
-  /*计数*/
-  .prop-xnumber{
-    .vux-cell-primary>div{
-      border:1px solid #BBBBBB;
-      overflow: hidden;
-      @include border-radius(rem(10));
-    }
-    .vux-number-selector {
-      @include wh(auto,rem(50));
-      font-size: 25px;
-      border: none;
-
-      svg {
-        @include wh(rem(30),rem(30));
-        margin-top:rem(10);
-      }
-    }
-
-    .vux-number-input {
-      min-width:rem(100);
-      height: rem(50);
-      font-size: rem(28);
-      color: #000;
-      border: none;
-      text-align: center;
-    }
-
-    .vux-number-selector-sub {
-      border-right: 1px solid #BBBBBB;
-      padding: 0 rem(20);
-      border-radius: 0;
-    }
-    .vux-number-selector-plus {
-      border-left: 1px solid #BBBBBB;
-      padding: 0 rem(20);
-      margin-right:0;
-      border-radius: 0;
     }
   }
 </style>

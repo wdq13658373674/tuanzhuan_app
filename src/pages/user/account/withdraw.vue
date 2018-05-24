@@ -112,7 +112,7 @@
       },
       /**获取提现费率**/
       getRates(){
-        this.$axios.get('/index/user/getreplay').then(res=>{
+        this.$axios.get(global.API_HOST+'user/getreplay').then(res=>{
           res=res.data;
           this.rates=res.data;
         })
@@ -141,7 +141,7 @@
             cardid:this.bankId
           }
 
-          this.$axios.post('/index/user/withdraw',qs.stringify(params)).then(res=>{
+          this.$axios.post(global.API_HOST+'user/withdraw',qs.stringify(params)).then(res=>{
             res=res.data;
 
             if(res.status==0){

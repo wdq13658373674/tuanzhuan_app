@@ -45,4 +45,5 @@
 </script>
 <style lang="scss">
   @import "../../core/base";
+
 </style>

@@ -63,7 +63,7 @@
           user_id:this.userInfo.user_id
         }
 
-        this.$axios.post(global.API_HOST+'/index/House_user_bind_info_view/getUserHouse',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'House_user_bind_info_view/getUserHouse',qs.stringify(params)).then(res=>{
           res=res.data;
           if(res.status==0){
             this.houseLists=res.data;

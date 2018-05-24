@@ -215,7 +215,7 @@
        * params : 接口参数
        * **/
       upload_ajax(params){
-        this.$axios.post('/index/index/upload',params,{
+        this.$axios.post(global.API_HOST+'index/upload',params,{
           headers:{'Content-Type':'multipart/form-data'}//添加请求头
         }).then(res=>{
           res=res.data;

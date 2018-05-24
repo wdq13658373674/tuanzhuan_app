@@ -77,7 +77,7 @@
     },
     methods: {
       getServiceList(){
-        this.$axios.get(global.API_HOST+'index/service/getServiceList').then(res=>{
+        this.$axios.get(global.API_HOST+'service/getServiceList').then(res=>{
           res=res.data;
           this.serviceList = res.data;
           for(let i in this.serviceList){

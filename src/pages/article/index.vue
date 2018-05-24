@@ -65,7 +65,7 @@
           'page':this.page
         }
 
-        this.$axios.get(global.API_HOST+'/index/House_notic/getMore',{
+        this.$axios.get(global.API_HOST+'House_notic/getMore',{
           params:param
         }).then(res=>{
           res=res.data;

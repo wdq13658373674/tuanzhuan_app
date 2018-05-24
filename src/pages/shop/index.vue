@@ -137,7 +137,7 @@
           store_id:this.storeInfo.store_id,
         }
 
-        this.$axios.get(global.API_HOST+'/index/Goods/getBanner',{
+        this.$axios.get(global.API_HOST+'Goods/getBanner',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -161,7 +161,7 @@
           lng:this.roomInfo.lng,
         }
 
-        this.$axios.get(global.API_HOST+'/index/Goods/classify',{
+        this.$axios.get(global.API_HOST+'Goods/classify',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -178,7 +178,7 @@
           lat:this.roomInfo.lat,
           lng:this.roomInfo.lng,
         };
-        this.$axios.get(global.API_HOST+'/index/Goods/position',{
+        this.$axios.get(global.API_HOST+'Goods/position',{
           params:params
         }).then(res=>{
 
