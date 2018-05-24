@@ -73,7 +73,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==0){
             const currentAddress=res.data;

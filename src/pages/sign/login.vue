@@ -71,8 +71,6 @@
           this.update_token(res.data.token);
           if(res.data.room){
             this.update_roomInfo(res.data.room);
-          }else{
-            this.update_roomInfo({});
           }
 
           this.$vux.toast.show('登陆成功');

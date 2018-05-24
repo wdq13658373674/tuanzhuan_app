@@ -73,14 +73,6 @@
           <span>配送费</span>
           <span>¥ {{orderInfo.send_money}}</span>
         </li>
-        <li class="item cell">
-          <span>打包费</span>
-          <span>¥ {{package_price == 0?Number(package_price):package_price.toFixed(2)}}</span>
-        </li>
-        <li class="item cell">
-          <span>打包团票费</span>
-          <span>{{package_tcion == 0?Number(package_tcion):package_tcion.toFixed(2)}}</span>
-        </li>
         <!--<li class="item cell">-->
         <!--<span>优惠活动</span>-->
         <!--<span class="orange">满100减50</span>-->
@@ -100,9 +92,9 @@
         <div class="order-total">
           <p class="f32">合计:
             <i class="icon tp"></i>
-            <span class="orange">{{tcion.toFixed(2)}}</span>
+            <span class="orange">{{tcion}}</span>
           </p>
-          <p>¥{{money.toFixed(2)}}</p>
+          <p>¥{{money}}</p>
         </div>
         <a href="javascript:void(0);" class="btn btn-orange" @click="seve_order">结算</a>
       </div>
@@ -175,10 +167,7 @@
         comment: '',
         sheetShow:false,
         selfMenus:{},
-        mention:'',
-        package_price: 0,
-        package_tcion: 0
-
+        mention:''
       }
     },
     computed: {
@@ -188,23 +177,17 @@
       if (this.$route.query.type) {
         //立即购买
         this.cartList = storeJs.get('buy_goods');
-        this.package_price = parseFloat(this.cartList[0].goods_package_price);
-        this.package_tcion = parseFloat(this.cartList[0].goods_package_tcion);
-
-        this.money = (this.cartList[0].now_price * this.cartList[0].cart_sum) + parseFloat(this.package_price);
-        this.tcion = (this.cartList[0].now_tcion * this.cartList[0].cart_sum) + parseFloat(this.package_tcion);
-
+        console.log(this.cartList);
+        this.money = (this.cartList[0].now_price * this.cartList[0].cart_sum).toFixed(2);
+        this.tcion = (this.cartList[0].now_tcion * this.cartList[0].cart_sum).toFixed(2);
       } else {
         //选中购物车商品
-
+        this.money = cart.getMoney(cart.order_pay).price;
+        this.tcion = cart.getMoney(cart.order_pay).tcion;
         if (cart.order_pay.length > 0) {
           cart.order_pay.find(item => {
             this.cartList.push(cart.cart_list[item]);
-            this.package_price += parseFloat(this.cartList[item].goods_package_price);
-            this.package_tcion += parseFloat(this.cartList[item].goods_package_tcion);
           });
-          this.money = parseFloat(cart.getMoney(cart.order_pay).price) + this.package_price;
-          this.tcion = parseFloat(cart.getMoney(cart.order_pay).tcion) + this.package_tcion;
         } else {
           this.$router.push('/shop/cart');
         }
@@ -282,7 +265,7 @@
 
         var addressID = this.address.address_id;
         if (this.send_type == 2) {
-         this.orderInfo.pickup.forEach(item=>{
+          this.orderInfo.pickup.forEach(item=>{
             if(item.pickup_name == this.mention){
               addressID=item.pickup_id;
             }
@@ -316,7 +299,12 @@
           res = res.data;
           if (res.status == 0) {
             cart.delGoods(cart.order_pay);
-            this.$router.push('/order/pay?order_id=' + res.data.goods_order_id);
+            this.$router.push({
+              name:'OrderPay',
+              query:{
+                'order_id':res.data.goods_order_id
+              }
+            });
           } else {
             this.$vux.toast.text(res.msg);
           }
@@ -389,9 +377,9 @@
       },
       goAddr() {
         if (this.$route.query.type) {
-          this.$router.push({path: '/shop/address?from=order', query: {type: this.$route.query.type}});
+          this.$router.push({name: 'ShopAddress', query: {type: this.$route.query.type}});
         } else {
-          this.$router.push({path: '/shop/address?from=order'});
+          this.$router.push({name: 'ShopAddress',query:{'from':'order'}});
         }
       },
       /**

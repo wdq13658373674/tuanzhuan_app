@@ -214,7 +214,7 @@
             title: '提示',
             content: '您没有设置支付密码,是否现在设置!',
             onConfirm(){
-              self.$router.replace('/user/safe/setPayPassword');
+              self.$router.push('/user/safe/setPayPassword');
             }
           });
 

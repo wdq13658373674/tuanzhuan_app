@@ -35,7 +35,7 @@
     </section>
     <footer>
       <div class="bottom-fixed cell">
-        <router-link to="/shop/cart" class="shop-cart">
+        <router-link :to="{name:'ShopCart'}" class="shop-cart">
           <p>
             <span class="icon cart">
               <i class="num">{{cartNumber}}</i>
@@ -268,7 +268,7 @@
           goods_list.push(this.goods);
           goods_list[0].cart_sum = this.cartNum;
           storeJs.set('buy_goods', goods_list);
-          this.$router.push({path: '/shop/order',query:{ type:'isbuy'}});
+          this.$router.push({name: 'ShopOrder',query:{ type:'isbuy'}});
         }
       },
       /**

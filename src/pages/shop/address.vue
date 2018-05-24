@@ -29,7 +29,7 @@
 
     <!--footer-->
     <footer>
-      <router-link to="add" class="bottom-fixed btn-orange-fixed" append>添加地址</router-link>
+      <router-link :to="{name:'ShopAddAddress'}" class="bottom-fixed btn-orange-fixed">添加地址</router-link>
     </footer>
   </div>
 </template>
@@ -71,9 +71,9 @@
             res=res.data;
             if(res.status==0){
               if(this.$route.query.type){
-                this.$router.push({path: '/shop/order',query:{ type:this.$route.query.type}});
+                this.$router.push({name: 'ShopOrder',query:{ type:this.$route.query.type}});
               }else{
-                this.$router.push('/shop/order');
+                this.$router.go(-1);
               }
             }
           }).catch(err=>{

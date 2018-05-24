@@ -139,7 +139,9 @@
         if(this.select.length>0){
           var check=cart.setOrder(this.select);
           if(check){
-            this.$router.push('/shop/order');
+            this.$router.push({
+              name:'ShopOrder'
+            });
           }else{
             this.$vux.toast.text('亲！还没选择商品哟!','middle');
           }

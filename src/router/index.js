@@ -28,31 +28,23 @@ import Neighbor from '@/pages/neighbor/index'
 import Article from '@/pages/article/index'
 import ArticleDetail from '@/pages/article/detail'
 
+import Call from '@/pages/call/index'
+
 import Service from '@/pages/service/index'
-import ServiceDetail from '@/pages/service/detail'
 
 import Shop from '@/pages/shop/index'
 import ShopSearch from '@/pages/shop/search'
 import ShopDetail from '@/pages/shop/detail'
 import ShopCategory from '@/pages/shop/category'
 import ShopCategorys from '@/pages/shop/categorys'
-import ShopOrder from '@/pages/shop/order'
 import ShopAddress from '@/pages/shop/address'
 import ShopAddAddress from '@/pages/shop/addAddress'
 import ShopEditAddress from '@/pages/shop/editAddress'
-import Cart from '@/pages/shop/cart'
+import ShopCart from '@/pages/shop/cart'
+import ShopOrder from '@/pages/shop/order'
 
 import OrderPay from '@/pages/pay/index'
 import OrderPayDetail from '@/pages/pay/detail'
-
-import User from '@/pages/user/index'
-import UserData from '@/pages/user/message'
-import UserName from '@/pages/user/changeName'
-import UserNickname from '@/pages/user/changeNickname'
-
-import BindMobile from '@/pages/user/bindMobile'
-import CheckIdCard from '@/pages/user/checkIdCard'
-import Call from '@/pages/call/index'
 
 import Intelligent from '@/pages/intelligent/index'
 import AddDevice from '@/pages/intelligent/addDevice'
@@ -67,6 +59,14 @@ import DeviceZigbee from '@/pages/intelligent/zigbee'
 import WifiStart from '@/pages/intelligent/wifiStart'
 import BindDevice from '@/pages/intelligent/bindDevice'
 import SelectDevice from '@/pages/intelligent/selectDevice'
+
+import User from '@/pages/user/index'
+import UserData from '@/pages/user/message'
+import UserName from '@/pages/user/changeName'
+import UserNickname from '@/pages/user/changeNickname'
+
+import BindMobile from '@/pages/user/bindMobile'
+import CheckIdCard from '@/pages/user/checkIdCard'
 
 import UserBalance from '@/pages/user/account/balance'
 import UserIntegral from '@/pages/user/account/integral'
@@ -283,7 +283,7 @@ export default new Router({
           }
         },
         {
-          path: '/shop/order',
+          path: '/shop/buy/order/detail',
           name: 'ShopOrder',
           meta: {
             requireAuth: true,
@@ -294,7 +294,7 @@ export default new Router({
           }
         },
         {
-          path: '/shop/address',
+          path: '/shop/buy/order/detail/address',
           name: 'ShopAddress',
           meta: {
             title: '选择地址'
@@ -304,7 +304,7 @@ export default new Router({
           }
         },
         {
-          path: '/shop/address/add',
+          path: '/shop/buy/order/detail/address/add',
           name: 'ShopAddAddress',
           meta: {
             title: '添加地址'
@@ -314,7 +314,7 @@ export default new Router({
           }
         },
         {
-          path: '/shop/address/edit/:id',
+          path: '/shop/order/detail/address/edit/:id',
           name: 'ShopEditAddress',
           meta: {
             title: '修改地址'
@@ -573,7 +573,7 @@ export default new Router({
           }
         },
         {
-          path: '/order/pay',
+          path: '/shop/buy/order/detail/pay',
           name: 'OrderPay',
           meta: {
             requireAuth: true,
@@ -584,7 +584,7 @@ export default new Router({
           }
         },
         {
-          path: '/order/pay/detail',
+          path: '/shop/buy/order/detail/pay/detail',
           name: 'OrderPayDetail',
           meta: {
             requireAuth: true,
@@ -697,23 +697,15 @@ export default new Router({
       ]
     },
     {
-      path: '/shop/cart',
+      path: '/shop/buy/cart',
       name: 'ShopCart',
-      component: Cart,
+      component: ShopCart,
     },
     {
       path: '/service',
       name: 'Service',
       components:{
         default:Service
-      }
-    },
-    {
-      path: '/service/detail',
-      name: 'ServiceDetail',
-      component: ServiceDetail,
-      meta: {
-        title: '我的订单'
       }
     },
     {
