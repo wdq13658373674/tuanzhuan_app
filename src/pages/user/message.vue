@@ -3,13 +3,14 @@
     <section class="page-group">
       <ul class="user-data-list arrow-cell-list">
         <li class="item" @click="changeHead=true">
-          <div class="link cell">
+          <label class="link cell">
+            <input type="file" accept="image/*" @change="uploadImg">
             <span> <i class="icon icon1"></i>头像</span>
             <span class="user-img">
               <img v-if="userLists.user_logo" class="img" :src="userLists.user_logo" alt="">
               <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
             </span>
-          </div>
+          </label>
         </li>
         <li class="item">
           <router-link class="link cell" :to="{name:'UserName',query:{
@@ -67,7 +68,8 @@
     </footer>
 
     <!--修改头像 actionSheet-->
-    <actionsheet class="user-action-sheet" v-model="changeHead" :menus="headMenu" @on-click-menu="changeSexs" show-cancel></actionsheet>
+    <!--<actionsheet class="user-action-sheet" v-model="changeHead" :menus="headMenu" @on-click-menu="changeSexs" show-cancel></actionsheet>-->
+
     <!--修改性别 actionSheet-->
     <actionsheet class="user-action-sheet" v-model="changeSex" :menus="sexMenu" @on-click-menu="changeSexs" show-cancel></actionsheet>
   </div>
@@ -89,7 +91,7 @@
     data() {
       return {
         changeHead:false,
-        headMenu:['拍照','本地相册'],
+        // headMenu:['拍照','本地相册'],
         changeSex:false,
         sexMenu:{
           0:'女',
@@ -154,6 +156,10 @@
           value:value
         }
         updateMessage(this,data);
+      },
+      /**上传图片**/
+      uploadImg(){
+
       }
     }
   }

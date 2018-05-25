@@ -12,13 +12,11 @@
 
     <h2 class="h2">其他可选房屋</h2>
     <ul class="cell-list auto">
-      <li v-for="(item, index) in room_list" class="item link">
-        <router-link :to="{name:'PropertyService',query:{room_id:item.room_id,village_id:item.village_id}}">
-          <span>{{item.village_name}}</span>
-          <span>{{item.version_name}} {{item.build_name}}</span>
-          <span>{{item.unit_name}} {{item.floor_name}} {{item.room_code}}号</span>
-        </router-link>
-      </li>
+      <router-link v-for="(item, index) in room_list" class="item link" tag="li" :to="{name:'PropertyService',query:{room_id:item.room_id,village_id:item.village_id}}">
+        <span>{{item.village_name}}</span>
+        <span>{{item.version_name}} {{item.build_name}}</span>
+        <span>{{item.unit_name}} {{item.floor_name}} {{item.room_code}}号</span>
+      </router-link>
     </ul>
   </section>
 </template>
@@ -64,7 +62,7 @@
         }).catch(err=>{
           console.log('my err:'+err)
         });
-      }
+      },
     }
   }
 </script>

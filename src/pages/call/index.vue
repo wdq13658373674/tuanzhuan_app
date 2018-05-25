@@ -197,7 +197,7 @@
       /**
        * 上传图片
        * **/
-      uploadImg(event){
+      uploadImg(event,callback){
         let files=event.target.files || event.dataTransfer.files;
         if(!files.length) return;
 
@@ -208,7 +208,6 @@
         }).then(rst => {
           this.upload_ajax(rst.formData);
         })
-
       },
       /**
        * 上传图片接口

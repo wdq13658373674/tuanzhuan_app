@@ -1,8 +1,8 @@
 <template>
   <div>
     <section class="page-group">
-      <router-link :to="{name:'PropertyRoom',query:{room_id:room.room_id}}" class="h2" v-if="room.version_name">
-        <i class="home pull-left"></i>
+      <router-link :to="{name:'PropertyRoom',query:{room_id:room.room_id}}" tag="h2" class="h2 clearfix">
+        <i class="icon home"></i>
         <span class="mr10">{{room.village_name}}</span>
         <span class="mr10">{{room.unit_name}}</span>
         <span class="mr10">{{room.floor_name}}</span>
@@ -129,23 +129,21 @@
     },
     methods:{
       getUserPropertyList(){
-        if(this.roomInfo.user_room){
-          let params={};
-          if(this.$route.query.room_id){
-            this.room_id = this.$route.query.room_id;
-            params={
-              village_id: this.$route.query.village_id,
-              room_id: this.room_id
-            };
-          }else{
-            this.room_id = this.roomInfo.user_room.room_id;
-            params={
-              village_id: this.roomInfo.village_id,
-              room_id: this.room_id
-            };
-          }
-
-
+        let params={};
+        if(this.$route.query.room_id){
+          this.room_id = this.$route.query.room_id;
+          params={
+            village_id: this.$route.query.village_id,
+            room_id: this.room_id
+          };
+        }else{
+          this.room_id = this.roomInfo.user_room.room_id;
+          params={
+            village_id: this.roomInfo.village_id,
+            room_id: this.room_id
+          };
+        }
+        if(params.room_id != ''){
           this.$axios.get(global.API_HOST+'property/getUserPropertyList',{
             params:params
           }).then(res=>{

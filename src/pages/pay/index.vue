@@ -268,9 +268,7 @@
               this.$axios.post(global.API_HOST+'property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
-                  this.$router.push({
-                    name:'PropertyService'
-                  });
+                  this.$router.go(-1);
                   this.$vux.toast.text("支付成功");
                 }else {
                   this.$vux.toast.text(res.msg);
