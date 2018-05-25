@@ -21,9 +21,7 @@
     <section class="page-group">
       <div class="content user-menu">
         <div class="item">
-          <router-link :to="{path:'/user/tickets',query:{
-            total:userLists.user_tcion
-          }}">
+          <router-link :to="{path:'/user/tickets'}">
             <p class="p1 orange">{{userLists.user_tcion || '0.00'}}</p>
             <p class="p2">我的团票</p>
           </router-link>

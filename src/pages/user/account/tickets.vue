@@ -8,9 +8,9 @@
     <section class="page-group">
       <div class="user-pay">
         <p class="p1">团票余额(T)</p>
-        <p class="p2">{{total || '0.00'}}</p>
+        <p class="p2">{{ticon.user_tcion || '0.00'}}</p>
       </div>
-      <ul class="user-pay-list arrow-cell-list">
+      <ul class="user-pay-list arrow-cell-list" v-if="list.tb_balance_radio!=0">
         <li class="item" @click="toBalance">
           <div class="link cell">
             <span><i class="icon icon2"></i>转为余额</span>
@@ -35,23 +35,73 @@
     },
     data() {
       return {
-        total:this.$route.query.total
+        ticon:'',
+        list:''
       }
     },
     computed:{
       ...mapState(['userInfo']),
     },
     mounted(){
-
+      this.getTicon();
     },
     methods:{
+      /**
+       * 获取团票
+       * **/
+      getTicon(){
+        const params={
+          user_id : this.userInfo.user_id
+        }
+
+        this.$axios.get(global.API_HOST+'tcion_change/getUserTcion',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          console.log(res);
+
+          if(res.status==0){
+            this.list=res.data;
+            this.ticon=res.data.user;
+          }
+        }).catch(err=>{
+          console.log('my err:'+err);
+        })
+      },
       /**
        * 转为余额
        * **/
       toBalance(){
+        const self=this;
+
         this.$vux.confirm.show({
           title:'提示',
-          content:'确定将团票全部转为余额么?'
+          content:'确定将团票全部转为余额么?',
+          onConfirm(){
+
+          }
+        })
+      },
+      /**
+       * 团票转余额 ajax
+       * **/
+      ticon_ajax(){
+        const params={
+          user_id : self.userInfo.user_id
+        }
+
+        this.$axios.get(global.API_HOST+'tcion_change/getUserTcion',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          console.log(res);
+
+          if(res.status==0){
+            this.list=res.data;
+            this.ticon=res.data.user;
+          }
+        }).catch(err=>{
+          console.log('my err:'+err);
         })
       }
     }

@@ -182,10 +182,14 @@
 
           if(res.status==0){
             this.goodsLists=res.data;
+            console.log(this.goodsLists);
+
+            //主商品
             this.goods=res.data[0];
             this.goodsDetail=res.data[0];
             this.goodsType=res.data[0].goods_property.split(',');
 
+            //轮播图
             let swiper=res.data[0].goods_imgs.split(',');
             if(swiper){
               this.swiperList=swiper.map((item)=>({
@@ -206,7 +210,6 @@
         if(this.goods.goods_logo==""){
           this.goods.goods_logo=this.goodsLists[0].goods_logo
         }
-
 
         this.goods_id=this.goods.goods_id;
         this.cartNum=cart.getCartShopSum(this.goods_id,this.prop);

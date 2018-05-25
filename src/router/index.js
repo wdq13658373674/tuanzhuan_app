@@ -1,22 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+/**
+ * barNav 嵌套路由模板
+ * **/
 import Layout from '@/pages/layout/layout'
 
+/**登陆注册**/
 import Login from '@/pages/sign/login'
 import Register from '@/pages/sign/register'
 import Password from '@/pages/sign/password'
 import Repassword from '@/pages/sign/repassword'
 import ForgetPassword from '@/pages/sign/forgetPassword'
 
+/**首页**/
 import Index from '@/pages/home/index'
 import Location from '@/pages/home/location'
 
+/**物业服务**/
 import Property from '@/pages/property/index'
 import PropertyService from '@/pages/property/service'
 import PropertyRoom from '@/pages/property/room'
 import PropertyServiceDetail from '@/pages/property/detail'
 
+/**生活服务**/
 import Life from '@/pages/life/index'
 import LifeElectricity from '@/pages/life/electricity'
 import LifeWater from '@/pages/life/water'
@@ -24,15 +31,20 @@ import LifeGas from '@/pages/life/gas'
 import LifeCheckDetail from '@/pages/life/detail'
 import LifePay from '@/pages/life/pay'
 
+/**邻聚**/
 import Neighbor from '@/pages/neighbor/index'
 
+/**公告**/
 import Article from '@/pages/article/index'
 import ArticleDetail from '@/pages/article/detail'
 
+/**智能管家**/
 import Call from '@/pages/call/index'
 
+/**服务**/
 import Service from '@/pages/service/index'
 
+/**商城**/
 import Shop from '@/pages/shop/index'
 import ShopSearch from '@/pages/shop/search'
 import ShopDetail from '@/pages/shop/detail'
@@ -44,9 +56,11 @@ import ShopEditAddress from '@/pages/shop/editAddress'
 import ShopCart from '@/pages/shop/cart'
 import ShopOrder from '@/pages/shop/order'
 
+/**订单支付**/
 import OrderPay from '@/pages/pay/index'
 import OrderPayDetail from '@/pages/pay/detail'
 
+/**智能家居**/
 import Intelligent from '@/pages/intelligent/index'
 import AddDevice from '@/pages/intelligent/addDevice'
 import IgtLogin from '@/pages/intelligent/login'
@@ -61,14 +75,17 @@ import WifiStart from '@/pages/intelligent/wifiStart'
 import BindDevice from '@/pages/intelligent/bindDevice'
 import SelectDevice from '@/pages/intelligent/selectDevice'
 
+/**用户中心-个人资料**/
 import User from '@/pages/user/index'
 import UserData from '@/pages/user/message'
 import UserName from '@/pages/user/changeName'
 import UserNickname from '@/pages/user/changeNickname'
-
 import BindMobile from '@/pages/user/bindMobile'
+
+/**用户中心-验证身份**/
 import CheckIdCard from '@/pages/user/checkIdCard'
 
+/**用户中心-我的账户**/
 import UserBalance from '@/pages/user/account/balance'
 import UserIntegral from '@/pages/user/account/integral'
 import UserTickets from '@/pages/user/account/tickets'
@@ -78,25 +95,31 @@ import UserIncomeMoney from '@/pages/user/account/income_money'
 import UserIncomeTcion from '@/pages/user/account/income_tcion'
 import UserIncomeScore from '@/pages/user/account/income_score'
 
+/**用户中心-银行卡**/
 import UserCards from '@/pages/user/cards/index'
 import UserAddCards from '@/pages/user/cards/add'
 import UserAddCardsNext from '@/pages/user/cards/addNext'
 
+/**用户中心-安全管理（支付密码）**/
 import UserSafeManage from '@/pages/user/safe/index'
 import ForgetPayPassword from '@/pages/user/safe/forgetPayPassword'
 import SetPayPassword from '@/pages/user/safe/setPayPassword'
 
+/**用户中心-我的订单**/
 import UserOrder from '@/pages/user/order'
 import UserOrderDetail from '@/pages/user/orderDetail'
 
+/**用户中心-售后服务**/
 import UserOrderSales from '@/pages/user/sales/index'
 import UserSalesStep1 from '@/pages/user/sales/step1'
 import UserSalesStep2 from '@/pages/user/sales/step2'
 import UserSalesStep3 from '@/pages/user/sales/step3'
 
+/**用户中心-我的预约**/
 import UserOrdain from '@/pages/user/ordain/index'
 import UserOrdainDetail from '@/pages/user/ordain/detail'
 
+/**用户中心-我的房屋**/
 import UserHouse from '@/pages/user/house/index'
 import UserHouseHolders from '@/pages/user/house/holders'
 import UserHouseInvite from '@/pages/user/house/invite'
@@ -154,6 +177,15 @@ export default new Router({
           meta: {
             requireAuth: true,
             title: '更改房屋'
+          }
+        },
+        {
+          path: '/property/service/detail',
+          name: 'PropertyServiceDetail',
+          component: PropertyServiceDetail,
+          meta: {
+            requireAuth: true,
+            title: '物业服务费'
           }
         },
         {
