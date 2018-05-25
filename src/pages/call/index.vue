@@ -106,6 +106,7 @@
   import lrz from 'lrz'
   const storeJs=require('storejs');
   const qs = require("querystring")
+  // import { uploadImg } from '@/assets/js/upload/upload'
 
   var svrMsg=[];
 
@@ -197,7 +198,7 @@
       /**
        * 上传图片
        * **/
-      uploadImg(event,callback){
+      uploadImg(event){
         let files=event.target.files || event.dataTransfer.files;
         if(!files.length) return;
 
