@@ -10,6 +10,13 @@
         <p class="p1">团票余额(T)</p>
         <p class="p2">{{total || '0.00'}}</p>
       </div>
+      <ul class="user-pay-list arrow-cell-list">
+        <li class="item" @click="toBalance">
+          <div class="link cell">
+            <span><i class="icon icon2"></i>转为余额</span>
+          </div>
+        </li>
+      </ul>
 
       <div class="connect-box">
         <p class="bank-connect">联系客服：400-135-6677</p>
@@ -38,7 +45,15 @@
 
     },
     methods:{
-
+      /**
+       * 转为余额
+       * **/
+      toBalance(){
+        this.$vux.confirm.show({
+          title:'提示',
+          content:'确定将团票全部转为余额么?'
+        })
+      }
     }
   }
 </script>

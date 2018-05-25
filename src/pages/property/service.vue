@@ -1,12 +1,13 @@
 <template>
   <div>
     <section class="page-group">
-      <h2 class="h2">
+      <router-link :to="{name:'PropertyRoom'}" class="h2" v-if="room.version_name">
         <i class="home pull-left"></i>
         <span class="mr10">{{room.version_name}}</span>
         <span class="mr10">{{room.version_name}}</span>
         <span class="mr10">{{room.unit_name}}{{room.room_code}}</span>
-      </h2>
+        <span class="change">切换</span>
+      </router-link>
 
       <div v-if="isData" class="content">
         <div>
@@ -42,7 +43,7 @@
           </table>
         </div>
       </div>
-      <div v-else style="background-color: #f4f4f4;">
+      <div v-else class="mt40" style="background-color: #f4f4f4;">
         <p style="text-align: center;background-color: #f4f4f4;">暂无服务费</p>
       </div>
     </section>
