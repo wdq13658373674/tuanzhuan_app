@@ -143,11 +143,17 @@
             room_id: this.room_id
           };
         }
-        if(params.room_id != ''){
+        /*if(params.room_id){
+          console.log(params.room_id);
+        }else{
+          console.log("无")
+        }*/
+        if(params.room_id){
           this.$axios.get(global.API_HOST+'property/getUserPropertyList',{
             params:params
           }).then(res=>{
             res=res.data;
+            console.log(res);
             if(res.data == ''){
               this.isData = false;
             }else {
