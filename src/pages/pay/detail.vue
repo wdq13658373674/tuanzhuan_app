@@ -33,7 +33,7 @@
     </section>
 
     <footer>
-      <router-link  to="/user/order" class="bottom-fixed btn-orange-fixed">返回</router-link>
+      <router-link  :to="{name:'UserOrder'}" class="bottom-fixed btn-orange-fixed">返回</router-link>
     </footer>
   </div>
 </template>

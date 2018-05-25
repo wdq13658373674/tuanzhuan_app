@@ -104,6 +104,7 @@ import UserAddCardsNext from '@/pages/user/cards/addNext'
 import UserSafeManage from '@/pages/user/safe/index'
 import ForgetPayPassword from '@/pages/user/safe/forgetPayPassword'
 import SetPayPassword from '@/pages/user/safe/setPayPassword'
+import CheckPayPassword from '@/pages/user/safe/checkPayPassword'
 
 /**用户中心-我的订单**/
 import UserOrder from '@/pages/user/order'
@@ -125,7 +126,6 @@ import UserHouseHolders from '@/pages/user/house/holders'
 import UserHouseInvite from '@/pages/user/house/invite'
 
 Vue.use(Router)
-
 export default new Router({
   // mode:'history',
   saveScrollPosition : false,
@@ -603,6 +603,17 @@ export default new Router({
           },
           components:{
             default:SetPayPassword,
+          }
+        },
+        {
+          path: '/user/safe/checkPayPassword',
+          name: 'CheckPayPassword',
+          meta: {
+            requireAuth: true,
+            title: '修改支付密码'
+          },
+          components:{
+            default:CheckPayPassword,
           }
         },
         {
