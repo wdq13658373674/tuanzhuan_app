@@ -9,6 +9,7 @@
             <span v-else-if="item.user_money_change_type === 'recharge'">充值</span>
             <span v-else-if="item.user_money_change_type === 'property'">物业缴费</span>
             <span v-else-if="item.user_money_change_type === 'reply'">提现</span>
+            <span v-else-if="item.user_money_change_type === 'exchange'">团票兑换</span>
             <span v-else>后台操作</span>
             <span class="span gray">{{item.add_time | stampToDate(true)}}</span>
           </p>
