@@ -194,7 +194,8 @@
         },
         totalMoney:0,
         totalTcion:0,
-        status: true
+        status: true,
+        store_phone:''
       }
     },
     computed:{
@@ -214,8 +215,8 @@
           params:params
         }).then(res=>{
           res=res.data;
+          this.store_phone = res.data.order.store_phone;
           this.orderDetail = res.data;
-          console.log(this.orderDetail.order.goods_order_pay_type);
           for(let i in this.orderDetail.order_info){
             this.totalTcion += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
             this.totalMoney += parseFloat(this.orderDetail.order_info[i].order_info_goods_money);
@@ -263,7 +264,7 @@
         });
       },
       contact(){
-        if(this.storeInfo.store_phone == 0){
+        if(this.store_phone == 0){
           let _this = this;
           _this.$vux.confirm.show({
             title: '提示',
@@ -271,7 +272,13 @@
             onConfirm(){}
           });
         }else {
-          window.location.href="tel:"+this.storeInfo.store_phone
+          let _this = this;
+          //window.location.href="tel:"+this.store_phone
+          _this.$vux.confirm.show({
+            title: '为测试临时提示',
+            content: '商家电话:'+this.store_phone,
+            onConfirm(){}
+          });
         }
       }
     }
