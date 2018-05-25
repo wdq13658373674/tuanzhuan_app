@@ -74,13 +74,15 @@
       toBalance(){
         const self=this;
 
-        this.$vux.confirm.show({
-          title:'提示',
-          content:'确定将团票全部转为余额么?',
-          onConfirm(){
-            self.ticon_ajax();
-          }
-        })
+        if(this.check_limit()){
+          this.$vux.confirm.show({
+            title:'提示',
+            content:'确定将团票全部转为余额么?',
+            onConfirm(){
+              self.ticon_ajax();
+            }
+          })
+        }
       },
       /**
        * 团票转余额 ajax
@@ -94,6 +96,7 @@
           res=res.data;
 
           if(res.status==0){
+            this.ticon.user_tcion=0;
             this.$vux.toast.text('转出成功');
           }else{
             this.$vux.toast.text(res.msg);
@@ -102,6 +105,17 @@
         }).catch(err=>{
           console.log('my err:'+err);
         })
+      },
+      /**
+       * 验证团票最小提出限制
+       * **/
+      check_limit(){
+        if(parseFloat(this.list.tb_balance_limit) > parseFloat(this.ticon.user_tcion)){
+            this.$vux.toast.text('团票需达到200才能转为余额');
+            return false;
+        }
+
+        return true;
       }
     }
   }

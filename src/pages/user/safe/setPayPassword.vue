@@ -49,14 +49,8 @@
         password:[],
         repassword:[],
         paslength:6,
-        from:''
       }
     },
-    /*beforeRouteEnter(to, from, next){
-      next(vm => {
-        vm.from=from.name;
-      })
-    },*/
     computed:{
       ...mapState(['userInfo']),
     },

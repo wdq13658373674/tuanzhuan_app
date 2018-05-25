@@ -53,7 +53,7 @@
           </router-link>
           <router-link class="item" to="/user/house" tag="li">
             <p class="p1">我的房屋</p>
-            <p v-if="roomLists.village_name" class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.floor_code}}</p>
+            <p v-if="roomLists.village_name" class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.room_code}}</p>
             <p v-else class="p2">暂无房屋</p>
             <i class="icon arrow"></i>
           </router-link>

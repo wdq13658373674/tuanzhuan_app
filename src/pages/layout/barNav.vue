@@ -25,14 +25,15 @@
     mounted(){
 
     },
+    data(){
+      return {
+        from:''
+      }
+    },
     methods: {
       /**返回**/
       back() {
         let routeName=this.$route.name;
-        /*if(this.$route.name=='Property'){
-          this.$router.replace('/');
-          return;
-        }*/
 
         if(routeName=='UserOrder'){
           this.$router.push('/user');
