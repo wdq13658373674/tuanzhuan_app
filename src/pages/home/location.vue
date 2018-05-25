@@ -90,7 +90,7 @@
       changeVillage:function(item){
         let roomInfo=item;
         this.update_roomInfo(roomInfo);
-        this.$router.replace('/');
+        this.$router.push('/');
       },
       /**搜索*/
       /*submit:function(){

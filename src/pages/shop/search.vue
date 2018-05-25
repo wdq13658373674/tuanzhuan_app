@@ -17,7 +17,7 @@
           id:$route.query.id || 0,
           title:$route.query.title,
           keyword:item
-        }}" class="link"  v-for="(item,index) in history" :key="index" replace>{{item}}</router-link>
+        }}" class="link"  v-for="(item,index) in history" :key="index">{{item}}</router-link>
       </div>
     </div>
 
