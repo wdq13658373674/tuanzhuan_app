@@ -309,4 +309,12 @@
     animation-duration:.6s;
     animation-fill-mode: both;
   }
+
+  /*高度满屏幕,背景色为白色*/
+  .tz-justify{
+    @extend %flex;
+    @include flex-direction();
+    background: #fff;
+    height:100%;
+  }
 </style>

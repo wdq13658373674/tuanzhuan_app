@@ -66,7 +66,7 @@
                 <span>{{goods.now_tcion}}</span>
               </p>
               <p class="p2">¥{{goods.now_price}}</p>
-              <p class="p3" v-if="goods.goods_stock!=-1">库存：{{goods.goods_stock}}</p>
+              <p class="p3" v-if="goods.goods_stock!=-1">库存：{{goods.goods_stock || 0}}</p>
             </div>
           </div>
           <ul class="format-list mb70">

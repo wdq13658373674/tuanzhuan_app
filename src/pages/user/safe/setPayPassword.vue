@@ -116,16 +116,6 @@
     }
   }
 </script>
-<style lang="css" scoped>
-  @import '../../../assets/css/userBindBank.css';
-</style>
 <style lang="scss">
   @import "../../../core/base";
-
-  .tz-justify{
-    @extend %flex;
-    @include flex-direction();
-    background: #fff;
-    height:100%;
-  }
 </style>

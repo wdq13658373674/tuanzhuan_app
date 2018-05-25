@@ -28,6 +28,7 @@
 <script>
   import ColorNav from '@/pages/layout/colorNav'
   import {mapState} from 'vuex'
+  const qs=require('querystring')
   export default {
     name: "Integral",
     components: {
@@ -58,7 +59,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==0){
             this.list=res.data;
@@ -78,7 +78,7 @@
           title:'提示',
           content:'确定将团票全部转为余额么?',
           onConfirm(){
-
+            self.ticon_ajax();
           }
         })
       },
@@ -87,19 +87,18 @@
        * **/
       ticon_ajax(){
         const params={
-          user_id : self.userInfo.user_id
+          user_id : this.userInfo.user_id
         }
 
-        this.$axios.get(global.API_HOST+'tcion_change/getUserTcion',{
-          params:params
-        }).then(res=>{
+        this.$axios.post(global.API_HOST+'tcion_change/tb_change_balance',qs.stringify(params)).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==0){
-            this.list=res.data;
-            this.ticon=res.data.user;
+            this.$vux.toast.text('转出成功');
+          }else{
+            this.$vux.toast.text(res.msg);
           }
+
         }).catch(err=>{
           console.log('my err:'+err);
         })
