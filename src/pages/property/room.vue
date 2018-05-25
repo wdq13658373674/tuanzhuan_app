@@ -4,29 +4,27 @@
     <ul class="cell-list">
       <li class="item link">
         <i class="icon home mr10"></i>
-        <span>扬子江商务中心</span>
-        <span>二期2号楼</span>
-        <span>2单元0406</span>
+        <span>{{defaultRoom.village_name}}</span>
+        <span>{{defaultRoom.version_name}} {{defaultRoom.build_name}}</span>
+        <span>{{defaultRoom.unit_name}} {{defaultRoom.floor_name}} {{defaultRoom.room_code}}号</span>
       </li>
     </ul>
 
     <h2 class="h2">其他可选房屋</h2>
     <ul class="cell-list auto">
-      <li class="item link">
-        <span>扬子江商务中心</span>
-        <span>二期2号楼</span>
-        <span>2单元0406</span>
-      </li>
-      <li class="item link">
-        <span>扬子江商务中心</span>
-        <span>二期2号楼</span>
-        <span>2单元0406</span>
+      <li v-for="(item, index) in room_list" class="item link">
+        <router-link :to="{name:'PropertyService',query:{room_id:item.room_id,village_id:item.village_id}}">
+          <span>{{item.village_name}}</span>
+          <span>{{item.version_name}} {{item.build_name}}</span>
+          <span>{{item.unit_name}} {{item.floor_name}} {{item.room_code}}号</span>
+        </router-link>
       </li>
     </ul>
   </section>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: "Room",
     components:{
@@ -34,17 +32,40 @@
     },
     data () {
       return {
-
+        room_list:{},
+        defaultRoom:{}
       }
     },
     computed:{
-
+      ...mapState(['userInfo'])
     },
     mounted(){
-
+      this.getRoomList();
     },
     methods:{
-
+      getRoomList(){
+        let defaultRoom_id = this.$route.query.room_id;
+        let params={
+         user_id:this.userInfo.user_id
+        };
+        this.$axios.get(global.API_HOST+'House_user_bind_info_view/getUserHouse',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          if(res.data != ''){
+            res.data.map((item, index)=>{
+              if(item.room_id == defaultRoom_id){
+                this.defaultRoom = item;
+                res.data.splice(index, 1);
+              }
+              this.room_list = res.data;
+            });
+            console.log(this.room_list);
+          }
+        }).catch(err=>{
+          console.log('my err:'+err)
+        });
+      }
     }
   }
 </script>

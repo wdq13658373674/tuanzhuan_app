@@ -1,11 +1,12 @@
 <template>
   <div>
     <section class="page-group">
-      <router-link :to="{name:'PropertyRoom'}" class="h2" v-if="room.version_name">
+      <router-link :to="{name:'PropertyRoom',query:{room_id:room.room_id}}" class="h2" v-if="room.version_name">
         <i class="home pull-left"></i>
-        <span class="mr10">{{room.version_name}}</span>
-        <span class="mr10">{{room.version_name}}</span>
-        <span class="mr10">{{room.unit_name}}{{room.room_code}}</span>
+        <span class="mr10">{{room.village_name}}</span>
+        <span class="mr10">{{room.unit_name}}</span>
+        <span class="mr10">{{room.floor_name}}</span>
+        <span class="mr10">{{room.room_code}}号</span>
         <span class="change">切换</span>
       </router-link>
 
@@ -60,7 +61,7 @@
 
           合计：<span class="orange">¥{{totalMoney}}</span>
         </div>
-        <router-link :to="{path:'/order/pay',query:{type:'property',property_id:property_id}}" class="btn btn-orange" :class="checkboxModel.length==0?'disabled':''" @click="pay">结算</router-link>
+        <router-link :to="{name:'OrderPay',query:{type:'property',property_id:property_id}}" class="btn btn-orange" :class="checkboxModel.length==0?'disabled':''" @click="pay">结算</router-link>
       </div>
     </footer>
   </div>
@@ -77,7 +78,8 @@
         propertyTotal: [],
         checkboxModel:[],
         isData: true,
-        property_id: []
+        property_id: [],
+        room_id: 0
       }
     },
     computed:{
@@ -122,23 +124,38 @@
       }
     },
     mounted(){
+      this.getRoom_id();
       this.getUserPropertyList();
     },
     methods:{
       getUserPropertyList(){
         if(this.roomInfo.user_room){
-          let params={
-            village_id: this.roomInfo.village_id,
-            room_id: this.roomInfo.user_room.room_id
-          };
+          let params={};
+          if(this.$route.query.room_id){
+            this.room_id = this.$route.query.room_id;
+            params={
+              village_id: this.$route.query.village_id,
+              room_id: this.room_id
+            };
+          }else{
+            this.room_id = this.roomInfo.user_room.room_id;
+            params={
+              village_id: this.roomInfo.village_id,
+              room_id: this.room_id
+            };
+          }
+
+
           this.$axios.get(global.API_HOST+'property/getUserPropertyList',{
             params:params
           }).then(res=>{
             res=res.data;
+            console.log(params);
             if(res.data == ''){
               this.isData = false;
             }else {
               this.room = res.data.room;
+              console.log(this.room);
               this.propertyList = res.data.property;
             }
           }).catch(err=>{
@@ -186,7 +203,17 @@
       },
       pay(){
 
+      },
+      getRoom_id () {
+        // 取到路由带过来的参数
+        let room_id = this.$route.query.room_id;
+        // 将数据放在当前组件的数据内
+        this.room_id = room_id;
       }
+    },
+    watch: {
+      // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
+      '$route': 'room_id'
     }
   }
 </script>
