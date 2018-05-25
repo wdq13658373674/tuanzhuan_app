@@ -26,8 +26,13 @@ const options={
 }
 Vue.use(vueg, router,options);
 
+//全局ajax访问域名
 //global.API_HOST="http://192.168.1.252/";
 global.API_HOST="/index/";
+
+//全局图片域名地址
+global.IMG_HOST="";
+
 
 /**
  * 定位
