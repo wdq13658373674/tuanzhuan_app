@@ -60,7 +60,6 @@
               }
               this.room_list = res.data;
             });
-            console.log(this.room_list);
           }
         }).catch(err=>{
           console.log('my err:'+err)

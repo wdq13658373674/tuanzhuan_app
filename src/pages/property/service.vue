@@ -150,12 +150,10 @@
             params:params
           }).then(res=>{
             res=res.data;
-            console.log(params);
             if(res.data == ''){
               this.isData = false;
             }else {
               this.room = res.data.room;
-              console.log(this.room);
               this.propertyList = res.data.property;
             }
           }).catch(err=>{
@@ -212,8 +210,7 @@
       }
     },
     watch: {
-      // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-      '$route': 'room_id'
+
     }
   }
 </script>
