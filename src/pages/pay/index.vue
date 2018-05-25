@@ -214,7 +214,9 @@
             title: '提示',
             content: '您没有设置支付密码,是否现在设置!',
             onConfirm(){
-              self.$router.push('/user/safe/setPayPassword');
+              self.$router.push({
+                name:'SetPayPassword'
+              });
             }
           });
 
@@ -242,7 +244,12 @@
               this.$axios.post(global.API_HOST+'user/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
-                  this.$router.push('/order/pay/detail?order_id='+that.order_id);
+                  this.$router.push({
+                    name:'OrderPayDetail',
+                    query:{
+                      order_id:that.order_id
+                    }
+                  });
                 }else {
                   this.$vux.toast.text(res.msg);
                 }
@@ -261,7 +268,9 @@
               this.$axios.post(global.API_HOST+'property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
                 if(res.status==0){
-                  this.$router.push('/property/service');
+                  this.$router.push({
+                    name:'PropertyService'
+                  });
                   this.$vux.toast.text("支付成功");
                 }else {
                   this.$vux.toast.text(res.msg);
@@ -346,10 +355,14 @@
           res=res.data;
           this.ticket_rate = res.data.ticket;
           if(res.status!=0){
-            this.$router.push('/shop/cart');
+            this.$router.push({
+              name:'ShopCart'
+            });
           }else{
             if(res.data.order.goods_order_is_pay==1){
-              this.$router.push('/user/order');
+              this.$router.push({
+                name:'UserOrder'
+              });
               return false;
             }
 

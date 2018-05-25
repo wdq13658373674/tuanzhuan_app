@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 /**
- * barNav 嵌套路由模板
+ * barNav(公共导航条) 嵌套路由模板
  * **/
 import Layout from '@/pages/layout/layout'
 
