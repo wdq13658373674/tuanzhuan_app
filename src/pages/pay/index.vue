@@ -97,6 +97,7 @@
           {{title}}：
           <span class="orange" v-if="payType=='balance'">¥{{payMoney}}</span>
           <span class="orange" v-else-if="payType=='tcion'">{{payMoney}}</span>
+          <span class="orange" v-else-if="payType=='ticket'">{{ticket}}</span>
           <span class="orange" v-else>{{payMoney}}</span>
         </div>
         <div class="btn btn-orange" @click="orderPay">结算</div>
@@ -264,9 +265,9 @@
                 property: JSON.stringify( this.$route.query.property_id ),
                 type: this.payType
               };
-              console.log(param);
               this.$axios.post(global.API_HOST+'property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
+
                 if(res.status==0){
                   this.$router.go(-1);
                   this.$vux.toast.text("支付成功");
@@ -396,6 +397,7 @@
         this.$axios.get(global.API_HOST+'property/getPropertyMoeny',{
           params:params
         }).then(res=>{
+          console.log(res.data);
           res=res.data;
           this.ticket_rate = res.data.ticket;
           this.orderInfo=res.data.order;
@@ -403,7 +405,8 @@
           this.property_tcion = res.data.property_tcion;
           this.pay_user=res.data.user;
           this.payMoney=this.property_tcion;
-          this.ticket=(res.data.property_money_sum*this.ticket_rate).toFixed(2);
+          this.ticket=(res.data.property_money_sum/this.ticket_rate).toFixed(2);
+          console.log(this.ticket);
           this.property_ticket = res.data.property_ticket;
         }).catch(err=>{
           console.log('my err:'+err)
