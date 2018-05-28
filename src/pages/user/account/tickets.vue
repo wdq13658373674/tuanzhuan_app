@@ -13,7 +13,7 @@
       <ul class="user-pay-list arrow-cell-list" v-if="list.tb_balance_radio!=0">
         <li class="item" @click="toBalance">
           <div class="link cell">
-            <span><i class="icon icon2"></i>转为余额</span>
+            <span><i class="icon icon2"></i>转到个人账户</span>
           </div>
         </li>
       </ul>
@@ -77,7 +77,7 @@
         if(this.check_limit()){
           this.$vux.confirm.show({
             title:'提示',
-            content:'确定将团票全部转为余额么?',
+            content:'确定将团票全部转到个人账户?',
             onConfirm(){
               self.ticon_ajax();
             }
@@ -111,7 +111,7 @@
        * **/
       check_limit(){
         if(parseFloat(this.list.tb_balance_limit) > parseFloat(this.ticon.user_tcion)){
-            this.$vux.toast.text('团票需达到200才能转为余额');
+            this.$vux.toast.text('团票需达到'+this.list.tb_balance_limit+'才能转到个人账户');
             return false;
         }
 

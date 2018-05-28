@@ -137,8 +137,8 @@
             let a = {};
             item.bbs_image.map((img, i)=>{
               a = {
-                src: img,
-                msrc: img,
+                src: IMG_HOST+img,
+                msrc: IMG_HOST+img,
                 w:600,
                 h:400
               };
