@@ -106,7 +106,6 @@
   import lrz from 'lrz'
   const storeJs=require('storejs');
   const qs = require("querystring")
-  // import { uploadImg } from '@/assets/js/upload/upload'
 
   var svrMsg=[];
 
