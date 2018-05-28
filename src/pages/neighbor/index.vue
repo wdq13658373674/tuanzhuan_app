@@ -16,7 +16,7 @@
       <div class="neighbor-menu clearfix">
         <a v-for="(item, index) in menuList" href="#" class="item">
           <div class="img-box">
-            <img class="img" v-lazy="item.type_bbs_logo" alt="" />
+            <img class="img" v-lazy="IMG_HOST+item.type_bbs_logo" alt="" />
           </div>
           <p class="txt">{{item.type_bbs_title}}</p>
         </a>
@@ -28,7 +28,7 @@
             <div class="neighbor">
               <div class="img-box">
                 <!--<img class="img" src="@/assets/images/test/img6.png" alt="">-->
-                <img class="img" v-lazy="item.user_logo" alt="" />
+                <img class="img" v-lazy="IMG_HOST+item.user_logo" alt="" />
               </div>
               <div class="con">
                 <p class="p1">{{item.user_nickname}}</p>
@@ -100,6 +100,7 @@
     },
     data(){
       return {
+        IMG_HOST:global.IMG_HOST || "",
         tabMenus:['精华','最新'],
         imgList: {},
         bobList:[],

@@ -32,7 +32,7 @@
           <li v-for="item in orderDetail.order_info" class="item">
             <router-link :to="{path: '/user/order/detail', query: {id: item.goods_order_id}}" class="link">
               <div class="img-box">
-                <img class="img" v-lazy="item.goods.goods_logo" alt="" />
+                <img class="img" v-lazy="IMG_HOST+item.goods.goods_logo" alt="" />
               </div>
               <div class="con-box">
                 <p class="p1 clearfix">
@@ -161,6 +161,7 @@
     },
     data() {
       return {
+        IMG_HOST:global.IMG_HOST || "",
         orderDetail:{
           order:{
             goods_order_status:0,

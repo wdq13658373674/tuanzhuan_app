@@ -58,7 +58,7 @@
         <div class="content pop-shop-detail">
           <div class="product-detail clearfix">
             <div class="img-box">
-              <img class="img" v-lazy="goods.goods_logo" alt="">
+              <img class="img" v-lazy="IMG_HOST+goods.goods_logo" alt="">
             </div>
             <div class="con-box">
               <p class="p1">
@@ -133,6 +133,7 @@
     },
     data(){
       return {
+        IMG_HOST:global.IMG_HOST || "",
         swiperList:[],
         cartNum:1,
         type:'',
@@ -193,7 +194,7 @@
             let swiper=res.data[0].goods_imgs.split(',');
             if(swiper){
               this.swiperList=swiper.map((item)=>({
-                img:item
+                img:IMG_HOST+item
               }))
             }
           }

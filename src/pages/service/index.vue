@@ -31,7 +31,7 @@
                 <li v-for="two_level in item.two_level" class="item">
                   <router-link class="link" :to="{path: two_level.service_url}">
                     <div class="img-box">
-                      <img class="img" v-lazy="two_level.service_logo" alt="" />
+                      <img class="img" v-lazy="IMG_HOST+two_level.service_logo" alt="" />
                     </div>
                     <p class="txt">{{two_level.service_title}}</p>
                   </router-link>
@@ -66,6 +66,7 @@
     },
     data () {
       return {
+        IMG_HOST:global.IMG_HOST || "",
         tabIndex:0,
         tabs:[],
         onFetching: true,

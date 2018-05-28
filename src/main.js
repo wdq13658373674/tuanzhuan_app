@@ -31,7 +31,7 @@ Vue.use(vueg, router,options);
 global.API_HOST="/index/";
 
 //全局图片域名地址
-global.IMG_HOST="";
+global.IMG_HOST="http://192.168.1.252";
 
 
 /**

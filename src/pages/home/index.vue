@@ -62,7 +62,7 @@
           <div v-for="item in serviceList" class="item">
             <router-link  :to="item.service_url">
               <div class="img-box">
-                <img class="img" v-lazy="item.service_logo" alt="" />
+                <img class="img" v-lazy="IMG_HOST+item.service_logo" alt="" />
                 <!--<img class="img" src="@/assets/images/test/img3.jpg" alt="">-->
               </div>
               <p class="txt">{{item.service_title}}</p>
@@ -81,7 +81,7 @@
         <div class="shop-list mb70">
           <router-link :to="{path:'/shop/detail',query:{id:item.goods_id}}" class="item" v-for="item in goodsLists" :key="item.goods_id">
             <div class="img-box">
-              <img class="img" v-lazy="item.goods_logo" alt="">
+              <img class="img" v-lazy="IMG_HOST+item.goods_logo" alt="">
             </div>
             <p class="p1">{{item.goods_name}}</p>
             <p class="p2">
@@ -120,6 +120,7 @@
     },
     data(){
       return{
+        IMG_HOST:global.IMG_HOST || "",
         weather:'',
         newsLists:'',
         goodsLists:[],
