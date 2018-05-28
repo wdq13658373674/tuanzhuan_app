@@ -117,20 +117,20 @@
             <span class="item"
                   v-for="(item,index) in tabs"
                   :class="{active:index==tabIndex}" @click="tab(index)">
-      {{item}}
-    </span>
+                     {{item}}
+            </span>
           </div>
 
           <div class="con">
-            <scroller height="100%" lock-x>
+            <Scroller height="100%" lock-x ref="scrollerBottom">
               <group>
                 <radio title="title" :options="options" v-model="timeValue" @on-change="popControl=false">
-                  <template slot-scope="props" slot="each-item">
+                  <template slot-scope="props" scope="props" slot="each-item">
                     送达时间 {{ props.label }} <span class="gray"></span>
                   </template>
                 </radio>
               </group>
-            </scroller>
+            </Scroller>
           </div>
         </div>
       </div>
@@ -186,6 +186,13 @@
       ...mapState(['userInfo', 'storeInfo'])
     },
     mounted() {
+      /**
+       * Scroller 组件重置
+       * **/
+      this.$nextTick(() => {
+        this.$refs.scrollerBottom.reset({top: 0})
+      });
+
       if (this.$route.query.type) {
         //立即购买
         this.cartList = storeJs.get('buy_goods');
@@ -346,7 +353,7 @@
         };
 
         if (set == 0) {
-          var strOpenTime = `${day["Y"]}-${day["M"]}-${day["d"]} ${this.orderInfo.store_open_time}`;
+          var strOpenTime = `${day["Y"]}/${day["M"]}/${day["d"]} ${this.orderInfo.store_open_time}`;
           var openTime = Date.parse(new Date(strOpenTime));
           var nowStamp = Date.parse(new Date());
           var timestamp = openTime / 1000;
@@ -358,12 +365,12 @@
           }
 
         } else {
-          var strOpenTime = `${day["Y"]}-${day["M"]}-${day["d"]} ${this.orderInfo.store_open_time}`;
+          var strOpenTime = `${day["Y"]}/${day["M"]}/${day["d"]} ${this.orderInfo.store_open_time}`;
           var openTime = Date.parse(new Date(strOpenTime));
           var timestamp = openTime / 1000;
         }
 
-        let strCloseTime = `${day["Y"]}-${day["M"]}-${day["d"]} ${this.orderInfo.store_close_time}`;
+        let strCloseTime = `${day["Y"]}/${day["M"]}/${day["d"]} ${this.orderInfo.store_close_time}`;
         let closeTime = Date.parse(new Date(strCloseTime));
         closeTime = closeTime / 1000;
 
