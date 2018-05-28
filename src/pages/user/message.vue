@@ -81,6 +81,7 @@
   import { updateMessage } from '@/assets/js/user/changeMessage'
   import utils from '@/libs/util.js'
   const storeJs=require('storejs');
+  import { uploadImg } from '@/assets/js/upload/upload'
 
   export default {
     name: "UserData",
@@ -159,7 +160,7 @@
       },
       /**上传图片**/
       uploadImg(){
-
+        
       }
     }
   }
