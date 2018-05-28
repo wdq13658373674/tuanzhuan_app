@@ -206,6 +206,7 @@
           quality:0.9,//压缩质量
           fieldName:'imgFile'
         }).then(rst => {
+          console.log(rst.formData.get('imgFile'))
           this.upload_ajax(rst.formData);
         })
       },
