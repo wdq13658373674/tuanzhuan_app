@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="status === 0">
+    <div v-if="status == 0">
       <h5 class="h5 mt20">退货原因 <span class="gray">（至少说明一个原因）</span></h5>
       <textarea name="" id="" rows="6" class="textarea" placeholder="请说明退货原因" v-model="reason"></textarea>
     <footer>
@@ -27,14 +27,14 @@
     data() {
       return {
         reason:'',
-        status: this.$route.query.status
+        status: 0
       }
     },
     computed:{
       ...mapState(['userInfo'])
     },
     mounted(){
-
+      this.status = this.$route.query.status;
     },
     methods:{
       postRefundOrder(){

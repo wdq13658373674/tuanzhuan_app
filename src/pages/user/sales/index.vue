@@ -39,7 +39,7 @@
             <span v-if="getSalesData.order.goods_order_pay_type == 'tcion'">团票</span>
             <span v-else-if="getSalesData.order.goods_order_pay_type == 'alipay'">支付宝</span>
             <span v-else-if="getSalesData.order.goods_order_pay_type == 'weixin'">微信</span>
-            <span v-else-if="getSalesData.order.goods_order_pay_type == 'balancce'">余额</span>
+            <span v-else-if="getSalesData.order.goods_order_pay_type == 'balance'">余额</span>
             <span v-else-if="getSalesData.order.goods_order_pay_type == 'arrival'">到付</span>
             <span v-else>线下</span>
           </li>
@@ -99,6 +99,7 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data)
           this.getSalesData = res.data;
           for(let i in this.getSalesData.order_info){
             this.total += parseFloat(this.getSalesData.order_info[i].order_info_real_tcion);

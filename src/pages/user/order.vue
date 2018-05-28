@@ -20,7 +20,7 @@
           </div>
             <div v-for="(goods,i) in item.property" class="pro">
               <div class="img-box">
-                <router-link :to="{path: '/shop/detail', query: {id: goods.goods_info.goods_id}}"  ><img class="img" v-lazy="goods.goods_info.goods_logo" alt="" /></router-link>
+                <router-link :to="{name: 'ShopDetail', query: {id: goods.goods_info.goods_id}}"  ><img class="img" v-lazy="goods.goods_info.goods_logo" alt="" /></router-link>
               </div>
               <div class="con-box">
                 <p class="p1">{{goods.goods_info.goods_name}}</p>
@@ -38,13 +38,13 @@
             </div>
             <div class="clearfix">
               <span v-if="item.goods_order_status !== 1">
-                <router-link v-if="item.goods_order_is_pay === 0" :to="{path: '/order/pay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
+                <router-link v-if="item.goods_order_is_pay === 0" :to="{name: 'OrderPay', query: {order_id: item.goods_order_id}}" class="link">立即支付</router-link>
 
                 <a v-if="item.goods_order_is_pay === 1 && item.goods_order_status === 4" class="link" @click="confirmGoods(item.goods_order_id,index)">确认收货</a>
 
                 <a v-else-if="item.goods_order_is_pay === 0 && item.goods_order_status < 4" class="link" @click="cancelOrder(item.goods_order_id,index)">取消订单</a>
               </span>
-              <router-link :to="{path: '/user/order/detail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
+              <router-link :to="{name: 'UserOrderDetail', query: {order_id: item.goods_order_id}}" class="link">查看详情</router-link>
             </div>
           </div>
         </li>
