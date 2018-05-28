@@ -228,7 +228,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           this.store_phone = res.data.order.store_phone;
           this.orderDetail = res.data;
           for(let i in this.orderDetail.order_info){

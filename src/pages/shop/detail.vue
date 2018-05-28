@@ -183,7 +183,6 @@
 
           if(res.status==0){
             this.goodsLists=res.data;
-            console.log(this.goodsLists);
 
             //主商品
             this.goods=res.data[0];
