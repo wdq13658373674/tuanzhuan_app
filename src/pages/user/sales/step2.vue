@@ -7,7 +7,7 @@
       <!--<p>重庆市渝北区扬子江商务中心22楼 小怪兽收</p>-->
       <!--<p>联系电话：86954763</p>-->
       <!--</div>-->
-      <div v-if="this.$route.query.refund_num === 0">
+      <div v-if="this.$route.query.refund_status === 0">
         <div v-if="flag">
           <div class="tab-box">
             <div class="tab" :class="active?'active':''" @click="tab">快递寄回</div>
@@ -59,7 +59,7 @@
           <li class="item cell p27">
             <label>快递单号</label>
             <!--<span class="input">{{this.$route.query.order_num}}</span>-->
-            <input type="text" class="input" v-model="this.$route.query.refund_num" disabled >
+            <input type="text" class="input" v-model="orderNums?orderNums:this.$route.query.refund_num" disabled >
           </li>
         </ul>
       </div>

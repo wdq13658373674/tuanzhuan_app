@@ -228,13 +228,12 @@
       },
       /*申请退货*/
       tejected(){
-        console.log(this.orderDetail.order.goods_order_refund_time);
         if(this.orderDetail.order.goods_order_status === 5 && this.orderDetail.order.goods_order_send_status === 4){
           this.$router.push({name: 'UserSalesStep1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 0}});
         }else if(this.orderDetail.order.goods_order_status === 9){
           this.$router.push({name: 'UserSalesStep1', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: 1}});
         }else {
-          this.$router.push({name: 'UserSalesStep2', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: this.orderDetail.order.goods_order_status,refund_num:this.orderDetail.order.goods_order_refund_time}});
+          this.$router.push({name: 'UserSalesStep2', query: {order_id: this.$route.query.order_id, user_id: this.userInfo.user_id, status: this.orderDetail.order.goods_order_status,refund_status:this.orderDetail.order.goods_order_refund_time, refund_num:this.orderDetail.order.goods_order_refund_numb}});
         }
       },
 

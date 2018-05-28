@@ -100,7 +100,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data)
           this.getSalesData = res.data;
           for(let i in this.getSalesData.order_info){
             this.total += parseFloat(this.getSalesData.order_info[i].order_info_real_tcion);
