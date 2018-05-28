@@ -53,23 +53,23 @@
 
         <div class="order-total" v-if="orderDetail.order.goods_order_pay_type == 'tcion'">
           <p>
-            打包费: <span class="mr20 orange">50.00</span>
-            配送费: <span class="orange">10.00</span>
+            打包费: <span class="mr20 orange">{{orderDetail.order.goods_order_package_tcion}}</span>
+            配送费: <span class="orange">{{orderDetail.order.goods_order_send_tcion}}</span>
           </p>
           <p class="mt15">
             实付:
             <i class="icon tp ml10"></i>
-            <span class="orange f32">{{totalTcion.toFixed(2)}}</span>
+            <span class="orange f32">{{(parseFloat(totalTcion)+parseFloat(orderDetail.order.goods_order_package_tcion)+parseFloat(orderDetail.order.goods_order_send_tcion)).toFixed(2)}}</span>
           </p>
         </div>
         <div class="order-total" v-else>
           <p>
-            打包费: <span class="mr20 orange">50.00</span>
-            配送费: <span class="orange">10.00</span>
+            打包费: <span class="mr20 orange">{{orderDetail.order.goods_order_package_price}}</span>
+            配送费: <span class="orange">{{orderDetail.order.goods_order_send_money}}</span>
           </p>
           <p class="mt15">
             实付:
-            <span class="orange f32">￥{{totalMoney.toFixed(2)}}</span>
+            <span class="orange f32">￥{{(parseFloat(totalMoney)+parseFloat(orderDetail.order.goods_order_package_price)+parseFloat(orderDetail.order.goods_order_send_money)).toFixed(2)}}</span>
           </p>
         </div>
 
@@ -228,6 +228,7 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           this.store_phone = res.data.order.store_phone;
           this.orderDetail = res.data;
           for(let i in this.orderDetail.order_info){
