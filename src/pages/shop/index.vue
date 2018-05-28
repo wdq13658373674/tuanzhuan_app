@@ -15,7 +15,7 @@
           title: item.type_name
         }}" class="item" v-for="item in categorys" :key="item.type_id">
           <div class="img-box">
-            <img class="img" v-lazy="item.type_logo" alt="">
+            <img class="img" v-lazy="IMG_HOST+item.type_logo" alt="">
           </div>
           <p class="txt">{{item.type_name}}</p>
         </router-link>
@@ -70,7 +70,7 @@
         <div class="shop-list mb40">
           <router-link :to="{path:'/shop/detail',query:{id:goods.goods_id}}" class="item" v-for="goods in item.goods" :key="goods.goods_id" append>
             <div class="img-box">
-              <img class="img" v-lazy="goods.goods_logo" alt="">
+              <img class="img" v-lazy="IMG_HOST+goods.goods_logo" alt="">
             </div>
             <p class="p1">{{goods.goods_name}}</p>
             <p class="p2">
@@ -104,6 +104,8 @@
     },
     data(){
       return {
+        IMG_HOST:global.IMG_HOST || "",
+
         swiperList:[{
           url: '/',
           img: 'https://static.vux.li/demo/1.jpg',

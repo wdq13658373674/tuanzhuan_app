@@ -75,7 +75,7 @@
         </label>
         <label class="item" v-for="(item,key) in pay_list"  @click="choose_pay(item.title,item.type)">
           <div>
-            <img class="img pull-left" v-lazy="item.img" alt="" />
+            <img class="img pull-left" v-lazy="IMG_HOST+item.img" alt="" />
             <div class="pull-left">
               <p class="p">{{item.title}}</p>
               <p class="p">赠送{{ticket}}物业券</p>
@@ -139,6 +139,7 @@
     },
     data(){
       return {
+        IMG_HOST:global.IMG_HOST || "",
         popshow:false,
         order_id:this.$route.query.order_id,
         orderInfo:[],

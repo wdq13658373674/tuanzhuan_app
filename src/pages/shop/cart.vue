@@ -23,7 +23,7 @@
               <div class="product">
                 <div class="img-box">
                   <router-link  :to="{path:'/shop/detail',query:{id:item.goods_id}}">
-                    <img class="img" v-lazy="item.goods_logo" alt="" />
+                    <img class="img" v-lazy="IMG_HOST+item.goods_logo" alt="" />
                   </router-link>
                 </div>
                 <div class="con-box">
@@ -79,6 +79,7 @@
     },
     data () {
       return {
+        IMG_HOST:global.IMG_HOST || "",
         cart_lists:cart.cart_list,
         price:0,
         tcion:0,

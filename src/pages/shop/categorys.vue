@@ -31,7 +31,7 @@
                 title: item.type_name,
               }}" class="link">
                 <div class="img-box">
-                  <img class="img" v-lazy="item.type_logo" alt="">
+                  <img class="img" v-lazy="IMG_HOST+item.type_logo" alt="">
                 </div>
                 <p class="txt">{{item.type_name}}</p>
               </router-link>
@@ -55,6 +55,7 @@
     },
     data () {
       return {
+        IMG_HOST:global.IMG_HOST || "",
         tabIndex:0,
         tabs:'',
         tabContents:'',

@@ -51,7 +51,7 @@
           id:items.goods_id
         }}">
           <div class="img-box">
-            <img class="img" v-lazy="items.goods_logo" alt="">
+            <img class="img" v-lazy="IMG_HOST+items.goods_logo" alt="">
           </div>
           <div class="con-box">
             <p class="title">{{items.goods_name}}</p>
@@ -94,6 +94,7 @@
     },
     data () {
       return {
+        IMG_HOST:global.IMG_HOST || "",
         type_id:this.$route.query.id,
         title:this.$route.query.title,
         keyword:this.$route.query.keyword || '',

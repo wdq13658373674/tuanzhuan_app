@@ -20,7 +20,7 @@
           </div>
             <div v-for="(goods,i) in item.property" class="pro">
               <div class="img-box">
-                <router-link :to="{path: '/shop/detail', query: {id: goods.goods_info.goods_id}}"  ><img class="img" v-lazy="goods.goods_info.goods_logo" alt="" /></router-link>
+                <router-link :to="{path: '/shop/detail', query: {id: goods.goods_info.goods_id}}"  ><img class="img" v-lazy="IMG_HOST+goods.goods_info.goods_logo" alt="" /></router-link>
               </div>
               <div class="con-box">
                 <p class="p1">{{goods.goods_info.goods_name}}</p>
@@ -75,6 +75,7 @@
     },
     data() {
       return {
+        IMG_HOST:global.IMG_HOST || "",
         tabMenus:['全部','未完成','已完成','售后申请'],
         orderList:{
           property:{
