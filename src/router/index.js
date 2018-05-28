@@ -59,6 +59,7 @@ import ShopOrder from '@/pages/shop/order'
 /**订单支付**/
 import OrderPay from '@/pages/pay/index'
 import OrderPayDetail from '@/pages/pay/detail'
+import WerxinPay from '@/pages/pay/wx'
 
 /**智能家居**/
 import Intelligent from '@/pages/intelligent/index'
@@ -636,6 +637,17 @@ export default new Router({
           },
           components:{
             default:OrderPayDetail,
+          }
+        },
+        {
+          path: '/shop/buy/order/detail/pay/wx',
+          name: 'WerxinPay',
+          meta: {
+            requireAuth: true,
+            title: '微信支付'
+          },
+          components:{
+            default:WerxinPay,
           }
         },
         {

@@ -8,7 +8,7 @@
             <span> <i class="icon icon1"></i>头像</span>
             <span class="user-img">
               <img v-if="userLists.user_logo" class="img" :src="userLists.user_logo" alt="">
-              <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
+              <!--<img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>-->
             </span>
           </label>
         </li>
@@ -81,7 +81,7 @@
   import { updateMessage } from '@/assets/js/user/changeMessage'
   import utils from '@/libs/util.js'
   const storeJs=require('storejs');
-  import { uploadImg } from '@/assets/js/upload/upload'
+  import { compressImg } from '@/assets/js/upload/upload'
 
   export default {
     name: "UserData",
@@ -119,8 +119,10 @@
           params:params
         }).then(res=>{
           res=res.data;
-          this.userLists=res.data.village.user;
-          this.changeBirth=utils.stampToDate(this.userLists.user_birthday);
+          if(res.status==0){
+            this.userLists=res.data.village.user;
+            this.changeBirth=utils.stampToDate(this.userLists.user_birthday);
+          }
         }).catch(err=>{
           console.log('my err:'+err)
         })
@@ -158,9 +160,24 @@
         }
         updateMessage(this,data);
       },
-      /**上传图片**/
-      uploadImg(){
-        
+      /**上传头像**/
+      uploadImg(event){
+        compressImg(event,'dir').then(params=>{
+
+
+          this.$axios.post(global.API_HOST+'index/upload',params,{
+            headers:{'Content-Type':'multipart/form-data'}//添加请求头
+          }).then(res=>{
+            res=res.data;
+            console.log(res);
+
+            if(res.status==0){
+
+            }else{
+              this.$vux.toast.text('图片过大,上传失败');
+            }
+          })
+        });
       }
     }
   }
