@@ -8,7 +8,7 @@
             <span> <i class="icon icon1"></i>头像</span>
             <span class="user-img">
               <img v-if="userLists.user_logo" class="img" :src="userLists.user_logo" alt="">
-              <!--<img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>-->
+              <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
             </span>
           </label>
         </li>
@@ -162,22 +162,18 @@
       },
       /**上传头像**/
       uploadImg(event){
-        compressImg(event,'dir').then(params=>{
+        /*this.$axios.post(global.API_HOST+'index/upload',params,{
+          headers:{'Content-Type':'multipart/form-data'}//添加请求头
+        }).then(res=>{
+          res=res.data;
+          console.log(res);
 
+          if(res.status==0){
 
-          this.$axios.post(global.API_HOST+'index/upload',params,{
-            headers:{'Content-Type':'multipart/form-data'}//添加请求头
-          }).then(res=>{
-            res=res.data;
-            console.log(res);
-
-            if(res.status==0){
-
-            }else{
-              this.$vux.toast.text('图片过大,上传失败');
-            }
-          })
-        });
+          }else{
+            this.$vux.toast.text('图片过大,上传失败');
+          }
+        })*/
       }
     }
   }

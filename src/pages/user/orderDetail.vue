@@ -52,13 +52,25 @@
         </ul>
 
         <div class="order-total" v-if="orderDetail.order.goods_order_pay_type == 'tcion'">
-          实付:
-          <i class="icon tp ml10"></i>
-          <span class="orange f32">{{totalTcion.toFixed(2)}}</span>
+          <p>
+            打包费: <span class="mr20 orange">50.00</span>
+            配送费: <span class="orange">10.00</span>
+          </p>
+          <p class="mt15">
+            实付:
+            <i class="icon tp ml10"></i>
+            <span class="orange f32">{{totalTcion.toFixed(2)}}</span>
+          </p>
         </div>
         <div class="order-total" v-else>
-          实付:
-          <span class="orange f32">￥{{totalMoney.toFixed(2)}}</span>
+          <p>
+            打包费: <span class="mr20 orange">50.00</span>
+            配送费: <span class="orange">10.00</span>
+          </p>
+          <p class="mt15">
+            实付:
+            <span class="orange f32">￥{{totalMoney.toFixed(2)}}</span>
+          </p>
         </div>
 
 
