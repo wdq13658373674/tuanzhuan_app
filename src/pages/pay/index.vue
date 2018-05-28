@@ -97,7 +97,7 @@
           {{title}}：
           <span class="orange" v-if="payType=='balance'">¥{{payMoney}}</span>
           <span class="orange" v-else-if="payType=='tcion'">{{payMoney}}</span>
-          <span class="orange" v-else-if="payType=='ticket'">{{ticket}}</span>
+          <span class="orange" v-else-if="payType=='ticket'">{{ticketTotal}}</span>
           <span class="orange" v-else>{{payMoney}}</span>
         </div>
         <div class="btn btn-orange" @click="orderPay">结算</div>
@@ -170,7 +170,8 @@
         property_money_sum:0,
         property_tcion:0,
         property_ticket: 0,
-        qrcodeUrl:''
+        qrcodeUrl:'',
+        ticketTotal:0
       }
     },
     computed:{
@@ -406,7 +407,8 @@
           this.property_tcion = res.data.property_tcion;
           this.pay_user=res.data.user;
           this.payMoney=this.property_tcion;
-          this.ticket=(res.data.property_money_sum/this.ticket_rate).toFixed(2);
+          this.ticketTotal=(res.data.property_money_sum/this.ticket_rate).toFixed(2);
+          this.ticket=res.data.property_money_sum.toFixed(2);
           console.log(this.ticket);
           this.property_ticket = res.data.property_ticket;
         }).catch(err=>{

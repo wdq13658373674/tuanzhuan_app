@@ -2,7 +2,7 @@
   <div>
     <section class="page-group">
       <ul class="user-income-list">
-        <li v-for="item in listData.data" class="item">
+        <li v-for="item in listData" class="item">
           <p class="p1 cell">
             <span v-if="item.user_tcion_change_type === 'goods'">消费</span>
             <span v-else-if="item.user_tcion_change_type === 'refund'">退款</span>
@@ -44,7 +44,7 @@
     },
     data() {
       return {
-        listData:{},
+        listData:[],
         page:0,
         busy:false,
         load:false,
@@ -65,7 +65,9 @@
           res=res.data;
           if(flag){
             //多次加载
-            this.listData=res.data;
+            res.data.data.map((item, index)=>{
+              this.listData.push(item);
+            });
             if(this.page >= res.data.last_page){
               this.busy=true;
               this.load=false;
@@ -76,13 +78,15 @@
 
           }else {
             //第一次加载
-            this.listData=res.data;
+            this.listData=res.data.data;
             this.busy=false;
             this.load=false;
           }
+
         }).catch(err=>{
           console.log('my err:'+err)
         })
+        console.log(this.listData);
       },
       loadMore(){
         this.busy = true;
