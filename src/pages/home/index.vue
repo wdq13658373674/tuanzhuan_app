@@ -30,10 +30,10 @@
             <img class="img" src="@/assets/images/icons/menu2.svg" alt="">
             <p class="txt">生活缴费</p>
           </router-link>
-          <router-link to="/call" class="item">
+          <a class="item" @click="isCall">
             <img class="img" src="@/assets/images/icons/menu6.png" alt="">
             <p class="txt">呼叫管家</p>
-          </router-link>
+          </a>
           <router-link to="/intelligent" class="item">
             <img class="img" src="@/assets/images/icons/menu5.svg" alt="">
             <p class="txt">智能家居</p>
@@ -223,6 +223,19 @@
             console.log('my err:'+err);
           })
       },
+      isCall(){
+        if(this.roomInfo.room_id){
+          this.$router.push({name: 'Call'});
+        }else if(this.roomInfo.user_room) {
+          this.$router.push({name: 'Call'});
+        }else{
+          this.$vux.confirm.show({
+            title: '提示',
+            content: '您在该小区不是业主，不能使用此功能',
+            onConfirm(){}
+          });
+        }
+      }
     }
   }
 </script>
