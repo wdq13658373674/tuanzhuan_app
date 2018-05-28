@@ -136,8 +136,14 @@
             village_id: this.$route.query.village_id,
             room_id: this.room_id
           };
-        }else{
+        }else if(this.roomInfo.user_room){
           this.room_id = this.roomInfo.user_room.room_id;
+          params={
+            village_id: this.roomInfo.village_id,
+            room_id: this.room_id
+          };
+        }else {
+          this.room_id = this.roomInfo.room_id;
           params={
             village_id: this.roomInfo.village_id,
             room_id: this.room_id
