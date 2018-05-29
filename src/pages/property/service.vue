@@ -25,8 +25,8 @@
             <tbody>
             <tr v-for="(item, index) in propertyList">
               <td>
-                <label @click="currClick(item,index)">
-                  <input type="checkbox" name="pay" :value="index" v-model="checkboxModel">
+                <label>
+                  <input @click="currClick(item,index)" type="checkbox" name="pay" :value="index" v-model="checkboxModel">
                   <div class="radio">
                     <i class="check"></i>
                   </div>
@@ -89,6 +89,7 @@
         for(let i=0;i<this.propertyTotal.length;i++){
           sum += this.propertyTotal[i];
         };
+
         return sum.toFixed(2);
       },
       checkAll: {
@@ -169,9 +170,8 @@
         }
       },
       currClick(item,index){
-
         let _this = this;
-        if(typeof item.checked === 'undefined'){
+        if(typeof item.checked == 'undefined'){
           this.$set(item,'checked',true);
           let total = parseFloat(item.property_money);
           let propertyId = item.property_id;
