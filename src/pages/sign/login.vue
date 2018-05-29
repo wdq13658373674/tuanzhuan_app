@@ -38,14 +38,22 @@
         area:86,
         phone:'',
         password:'',
-        tips:''
+        tips:'',
+        fromUrl:''
       }
     },
-    mounted(){
-
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
     },
     computed:{
       ...mapState(['roomInfo'])
+    },
+    mounted(){
+      this.$nextTick(()=>{
+        this.update_userInfo({});
+      })
     },
     methods:{
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
@@ -78,7 +86,12 @@
             location.href = global.API_HOST+'index/index/wxlogin?user_id='+res.data.user.user_id+'&returns='+encodeURI('http://'+location.host+'/#/user');
             return;
           }
-          this.$router.replace('/user');
+
+          if(this.checkUrl()){
+            this.$router.go(-1);
+          }else{
+            this.$router.replace('/user');
+          }
         }).catch(err=>{
           console.log('my err:'+err)
         })
@@ -100,6 +113,16 @@
         }else{
           return true;
         }
+      },
+      /**
+       * 判断来源地址
+       * **/
+      checkUrl(){
+        const arrUrl=['Password','Repassword'];//登陆后直接到user页面的url
+        if(arrUrl.indexOf(this.fromUrl)==-1){
+          return true;
+        }
+        return false;
       }
     }
   }

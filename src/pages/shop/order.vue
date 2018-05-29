@@ -253,8 +253,6 @@
       }).catch(err => {
         console.log('my err:' + err);
       });
-
-
     },
     methods: {
       /**
