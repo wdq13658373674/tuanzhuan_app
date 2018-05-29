@@ -7,19 +7,33 @@
 
       <ul class="user-income-list">
         <li v-for="item in listData" class="item">
-          <p class="p1 cell">
-            <span v-if="item.user_tcion_change_type === 'goods'">消费</span>
-            <span v-else-if="item.user_tcion_change_type === 'refund'">退款</span>
-            <span v-else-if="item.user_tcion_change_type === 'property'">物业缴费</span>
-            <span v-else-if="item.user_tcion_change_type === 'recharge'">充值</span>
-            <span v-else-if="item.user_tcion_change_type === 'exchange'">团票兑换</span>
-            <span v-else>后台操作</span>
-            <span class="span gray">{{item.add_time | stampToDate(true)}}</span>
-          </p>
-          <p class="p2 cell">
-            <span class="span">余额：{{item.user_tcion_change_balance || 0.00}}</span>
-            <span>{{item.user_tcion_change_tcion || 0.00}}</span>
-          </p>
+          <div v-if="type == 0">
+            <p class="p1 cell">
+              <span v-if="item.user_tcion_change_type === 'goods'">消费</span>
+              <span v-else-if="item.user_tcion_change_type === 'refund'">退款</span>
+              <span v-else-if="item.user_tcion_change_type === 'property'">物业缴费</span>
+              <span v-else-if="item.user_tcion_change_type === 'recharge'">充值</span>
+              <span v-else-if="item.user_tcion_change_type === 'exchange'">团票兑换</span>
+              <span v-else-if="item.user_tcion_log_type === 'system'">系统发放</span>
+              <span v-else>后台操作</span>
+              <span class="span gray">{{item.add_time | stampToDate(true)}}</span>
+            </p>
+            <p class="p2 cell">
+              <span class="span">余额：{{item.user_tcion_change_balance || 0.00}}</span>
+              <span>{{item.user_tcion_change_tcion || 0.00}}</span>
+            </p>
+          </div>
+          <div v-else>
+            <p class="p1 cell">
+              <span v-if="item.user_tcion_log_type === 'system'">收益</span>
+              <span v-else>后台操作</span>
+              <span class="span gray">{{item.add_time | stampToDate(true)}}</span>
+            </p>
+            <p class="p2 cell">
+              <span class="span">余额：{{item.user_tcion_log_balance || 0.00}}</span>
+              <span>{{item.user_tcion_log_tcion || 0.00}}</span>
+            </p>
+          </div>
         </li>
 
         <li v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
@@ -50,11 +64,12 @@
     },
     data() {
       return {
-        tabMenus:['收支明细','交易明细'],
+        tabMenus:['交易明细','收益明细'],
         listData:[],
         page:0,
         busy:false,
         load:false,
+        type:0
       }
     },
     mounted(){
@@ -63,47 +78,84 @@
     methods:{
       /**选项卡切换*/
       tab(type){
-        console.log(type);
+        this.type = type;
+        this.page = 0;
+        this.listData=[];
+        this.loadMore();
       },
-      list(flag){
+      getList(flag){
         let params={
           user_id: this.userInfo.user_id,
           page: this.page
         };
-        this.$axios.get(global.API_HOST+'user_change/tcion',{
-          params:params
-        }).then(res=>{
-          res=res.data;
-          if(flag){
-            //多次加载
-            res.data.data.map((item, index)=>{
-              this.listData.push(item);
-            });
-            if(this.page >= res.data.last_page){
-              this.busy=true;
-              this.load=false;
+
+        if(this.type == 0){
+          this.$axios.get(global.API_HOST+'user_change/tcion',{
+            params:params
+          }).then(res=>{
+            res=res.data;
+            if(flag){
+              //多次加载
+              res.data.data.map((item, index)=>{
+                this.listData.push(item);
+              });
+              if(this.page >= res.data.last_page){
+                this.busy=true;
+                this.load=false;
+              }else {
+                this.busy=false;
+                this.load=true;
+              }
+
             }else {
+              //第一次加载
+              this.listData=res.data.data;
               this.busy=false;
-              this.load=true;
+              this.load=false;
             }
 
-          }else {
-            //第一次加载
-            this.listData=res.data.data;
-            this.busy=false;
-            this.load=false;
-          }
+          }).catch(err=>{
+            console.log('my err:'+err)
+          })
+        }else{
+          this.$axios.get(global.API_HOST+'user_change/userTcion',{
+            params:params
+          }).then(res=>{
+            res=res.data;
+            if(flag){
+              //多次加载
 
-        }).catch(err=>{
-          console.log('my err:'+err)
-        })
+              res.data.data.map((item, index)=>{
+                this.listData.push(item);
+              });
+              if(this.page >= res.data.last_page){
+                this.busy=true;
+                this.load=false;
+              }else {
+                this.busy=false;
+                this.load=true;
+              }
+
+            }else {
+
+              //第一次加载
+              this.listData=res.data.data;
+              this.busy=false;
+              this.load=false;
+            }
+
+          }).catch(err=>{
+            console.log('my err:'+err)
+          })
+        }
+
         console.log(this.listData);
       },
       loadMore(){
         this.busy = true;
         this.load = true;
         this.page++;
-        this.list(true);
+        this.getList(true);
       },
     }
   }
