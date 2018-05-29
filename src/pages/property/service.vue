@@ -69,6 +69,7 @@
 
 <script>
   import {mapState} from 'vuex'
+  const qs = require("querystring")
   export default {
     name: "PropertyService",
     data(){
@@ -79,11 +80,12 @@
         checkboxModel:[],
         isData: true,
         property_id: [],
-        room_id: 0
+        room_id: 0,
+        default_roomInfo:{}
       }
     },
     computed:{
-      ...mapState(['roomInfo']),
+      ...mapState(['roomInfo','userInfo']),
       totalMoney:function(item,index){
         let sum = 0;
         for(let i=0;i<this.propertyTotal.length;i++){
@@ -130,44 +132,34 @@
     },
     methods:{
       getUserPropertyList(){
+
         let params={};
         if(this.$route.query.room_id){
           this.room_id = this.$route.query.room_id;
           params={
             village_id: this.$route.query.village_id,
-            room_id: this.room_id
-          };
-        }else if(this.roomInfo.user_room){
-          this.room_id = this.roomInfo.user_room.room_id;
-          params={
-            village_id: this.roomInfo.village_id,
-            room_id: this.room_id
+            room_id: this.room_id,
+            user_id:this.userInfo.user_id
           };
         }else {
-          this.room_id = this.roomInfo.room_id;
           params={
-            village_id: this.roomInfo.village_id,
-            room_id: this.room_id
+            user_id:this.userInfo.user_id
           };
         }
+        this.$axios.get(global.API_HOST+'property/getUserPropertyList',{
+          params:params
+        }).then(res=>{
+          res=res.data;
+          this.room = res.data.room;
+          if(res.data.property == null){
+            this.isData = false;
+          }else {
+            this.propertyList = res.data.property;
+          }
+        }).catch(err=>{
+          console.log('my err:'+err)
+        });
 
-        if(params.room_id){
-          this.$axios.get(global.API_HOST+'property/getUserPropertyList',{
-            params:params
-          }).then(res=>{
-            res=res.data;
-            this.room = res.data.room;
-            if(res.data.property == null){
-              this.isData = false;
-            }else {
-              this.propertyList = res.data.property;
-            }
-          }).catch(err=>{
-            console.log('my err:'+err)
-          });
-        }else{
-          this.isData = false;
-        }
       },
       currClick(item,index){
         let _this = this;

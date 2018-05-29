@@ -228,11 +228,12 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data.order_info);
           this.store_phone = res.data.order.store_phone;
           this.orderDetail = res.data;
           for(let i in this.orderDetail.order_info){
-            this.totalTcion += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
-            this.totalMoney += parseFloat(this.orderDetail.order_info[i].order_info_goods_price);
+            this.totalTcion += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion)*this.orderDetail.order_info[i].order_info_goods_count;
+            this.totalMoney += parseFloat(this.orderDetail.order_info[i].order_info_goods_price)*this.orderDetail.order_info[i].order_info_goods_count;
           }
         }).catch(err=>{
           console.log('my err:'+err)
