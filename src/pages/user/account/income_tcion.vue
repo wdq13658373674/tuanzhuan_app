@@ -1,6 +1,10 @@
 <template>
   <div>
     <section class="page-group">
+      <tab>
+        <tab-item v-for="(item,index) in tabMenus" :key="index+1" :selected="index===0" @on-item-click="tab">{{item}}</tab-item>
+      </tab>
+
       <ul class="user-income-list">
         <li v-for="item in listData" class="item">
           <p class="p1 cell">
@@ -31,19 +35,22 @@
 
 <script>
   import infiniteScroll from 'vue-infinite-scroll'
-  import {LoadMore} from 'vux'
+  import {LoadMore,Tab,TabItem} from 'vux'
   import {mapState} from 'vuex'
   export default {
     name: "IncomeMoney",
     directives: {infiniteScroll},
     components: {
-      LoadMore
+      LoadMore,
+      Tab,
+      TabItem
     },
     computed:{
       ...mapState(['userInfo'])
     },
     data() {
       return {
+        tabMenus:['收支明细','交易明细'],
         listData:[],
         page:0,
         busy:false,
@@ -54,6 +61,10 @@
       this.loadMore();
     },
     methods:{
+      /**选项卡切换*/
+      tab(type){
+        console.log(type);
+      },
       list(flag){
         let params={
           user_id: this.userInfo.user_id,
@@ -93,7 +104,7 @@
         this.load = true;
         this.page++;
         this.list(true);
-      }
+      },
     }
   }
 </script>

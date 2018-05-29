@@ -512,7 +512,7 @@ export default new Router({
           name: 'UserIncomeTcion',
           meta: {
             requireAuth: true,
-            title: '团票收支明细'
+            title: '团票明细'
           },
           components:{
             default:UserIncomeTcion,
