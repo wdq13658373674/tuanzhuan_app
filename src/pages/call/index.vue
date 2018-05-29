@@ -195,9 +195,7 @@
        * **/
       scrollBottom(){
         const that=this;
-        /**
-         * Scroller 组件重置
-         * **/
+
         setTimeout(function(){
           let parentH=$('#msg-content').height()
             ,listH=$('#msgbox').height();
