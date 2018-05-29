@@ -29,7 +29,7 @@ const uploadImg=async function(event,self){
       headers:{'Content-Type':'multipart/form-data'}//添加请求头
     }).then(res=>{
       res=res.data;
-      console.log(res);
+
       if(res.status==0){
         data=res.data;
       }else{
