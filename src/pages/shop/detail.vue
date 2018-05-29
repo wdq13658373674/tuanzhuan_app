@@ -230,7 +230,7 @@
       addCart:function(){
         var that=this;
 
-        if(this.selectType()){
+        if(this.selectType(0)){
           var check=cart.addCart(this.goods,this.cartNum,that.prop_id);
           if(check==-1){
             this.$vux.toast.text('没有库存了','middle');
@@ -258,15 +258,20 @@
         that.cartNum=cart.getCartShopSum(that.goods_id,that.prop_id);
         that.changeStatus=false;
       },
-      //改变购物车数量
+      /**
+       * 改变购物车数量
+       * **/
       change_num(stock){
         if(stock<=1) return false;
-        if(!this.selectType()){
+        if(!this.selectType(0)){
           this.cartNum=stock-1;
         }
       },
+      /**
+       * 立即购买
+       * **/
       buy(){
-        if(this.selectType()){
+        if(this.selectType(1)){
           let goods_list = [];
           goods_list.push(this.goods);
           goods_list[0].cart_sum = this.cartNum;
@@ -276,20 +281,28 @@
       },
       /**
        * 加入购物车商品验证规格是否选择
+       * type : 0->表示加入购物车  1->表示立即购买
        * **/
-      selectType:function(){
+      selectType(types){
         if(this.showPop){
           if(this.popControl){
             if((this.type=='' || this.prop=='') && this.goods.goods_property!=""){
               this.$vux.toast.text('请选择商品规格和属性','middle');
               return false;
             }
-          }else if(this.type=='' || this.prop==''){
-            this.popControl=true;
-            return false;
+            return true;
+          }else{
+            if(types==0){
+              this.popControl=true;
+              return false;
+            }else if((this.type=='' || this.prop=='') && this.goods.goods_property!=""){
+              this.popControl=true;
+              return false;
+            }
+
+            return true;
           }
         }
-        return true;
       }
     }
   }
