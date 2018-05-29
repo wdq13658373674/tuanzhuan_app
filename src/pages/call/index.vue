@@ -2,59 +2,60 @@
   <div>
     <section class="page-group">
       <div class="tz-communication">
-        <div class="tz-communication-wrap" ref="msgbox" id="msg-centent">
-          <ul class="tz-communication-list clearfix" id="msgbox">
-            <!--<li>-->
-            <!--<div class="tip">-->
-            <!--<span>房计划管家<em>小雪</em>为您服务</span>-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--<li class="customer">-->
-            <!--<div class="img-box">-->
-            <!--<img src="@/assets/images/test/img6.png" alt="">-->
-            <!--</div>-->
-            <!--<div class="con-box">-->
-            <!--你好，我家楼上漏水了，麻烦尽快-->
-            <!--维修。-->
-            <!--</div>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--<div class="tip">-->
-            <!--<span>10:24</span>-->
-            <!--</div>-->
-            <!--</li>-->
-            <template v-for="(item,key) in myMsg">
-              <li v-if="item.time">
-                <div class="tip">
-                  <span>{{item.time | stampToDate(true)}}</span>
-                </div>
-              </li>
-
-              <li v-bind:class="listClass[item.status]">
-                <div class="img-box">
-                  <img v-if="user_logo" :src="user_logo" alt="">
-                  <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
-                </div>
-                <div class="con-box" style="position:relative;">
-                  <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading>
-                  <div class="text" v-if="!item.img">{{item.msg}}</div>
-                  <div v-else>
-                    <img width="100%" :id="previewer(key)" :src="item.msg" alt="" @click="show(key)">
+        <div class="tz-communication-wrap" id="msg-content">
+          <scroller lock-x height="100%" ref="scrollerBottom">
+            <ul class="tz-communication-list clearfix" id="msgbox">
+              <!--<li>-->
+              <!--<div class="tip">-->
+              <!--<span>房计划管家<em>小雪</em>为您服务</span>-->
+              <!--</div>-->
+              <!--</li>-->
+              <!--<li class="customer">-->
+              <!--<div class="img-box">-->
+              <!--<img src="@/assets/images/test/img6.png" alt="">-->
+              <!--</div>-->
+              <!--<div class="con-box">-->
+              <!--你好，我家楼上漏水了，麻烦尽快-->
+              <!--维修。-->
+              <!--</div>-->
+              <!--</li>-->
+              <!--<li>-->
+              <!--<div class="tip">-->
+              <!--<span>10:24</span>-->
+              <!--</div>-->
+              <!--</li>-->
+              <template v-for="(item,key) in myMsg">
+                <li v-if="item.time">
+                  <div class="tip">
+                    <span>{{item.time | stampToDate(true)}}</span>
                   </div>
-                </div>
-              </li>
-            </template>
+                </li>
 
-          </ul>
+                <li v-bind:class="listClass[item.status]">
+                  <div class="img-box">
+                    <img v-if="user_logo" :src="user_logo" alt="">
+                    <img src="@/assets/images/icons/u_head.png" style="background: #fd4915" alt="" v-else>
+                  </div>
+                  <div class="con-box" style="position:relative;">
+                    <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading>
+                    <div class="text" v-if="!item.img">{{item.msg}}</div>
+                    <div v-else>
+                      <img width="100%" :id="previewer(key)" :src="item.msg" alt="" @click="show(key)">
+                    </div>
+                  </div>
+                </li>
+              </template>
+
+            </ul>
+          </scroller>
         </div>
-
 
         <div class="bottom">
           <div class="enter-box">
             <div class="input-group">
               <textarea name="" v-model="msgBox" cols="30" rows="10" class="input"></textarea>
             </div>
-            <i class="icon icon2" @click="uitlshow=!uitlshow"></i>
+            <i class="icon icon2" @click="uitl"></i>
             <div class="send" @click="sendMsg">发送</div>
           </div>
 
@@ -67,8 +68,8 @@
               </label>
             </li>
             <!--<li class="item">-->
-              <!--<img class="img" src="@/assets/images/img/j_icon1.png" alt="">-->
-              <!--<p>拍摄</p>-->
+            <!--<img class="img" src="@/assets/images/img/j_icon1.png" alt="">-->
+            <!--<p>拍摄</p>-->
             <!--</li>-->
             <li class="item">
               <a href="tel:400-135-6677">
@@ -102,10 +103,11 @@
 </template>
 <script>
   import {mapState} from 'vuex'
-  import { InlineLoading , Previewer } from 'vux'
+  import { InlineLoading , Previewer , Scroller} from 'vux'
   import lrz from 'lrz'
   const storeJs=require('storejs');
-  const qs = require("querystring")
+  const qs = require("querystring");
+  import { uploadImg } from '@/assets/js/upload/upload'
 
   var svrMsg=[];
 
@@ -113,7 +115,8 @@
     name: "Call",
     components:{
       InlineLoading,
-      Previewer
+      Previewer,
+      Scroller
     },
     data(){
       return {
@@ -156,6 +159,9 @@
       },100);
     },
     methods: {
+      /**
+       * 发送消息
+       * **/
       sendMsg:function(){
         var that=this;
 
@@ -188,64 +194,46 @@
        * 发送消息后重置滚动条保持在底部
        * **/
       scrollBottom(){
-        var that=this;
+        const that=this;
+        /**
+         * Scroller 组件重置
+         * **/
         setTimeout(function(){
-          that.$refs.msgbox.scrollTop=that.$refs.msgbox.scrollHeight;
-        },100);
+          let parentH=$('#msg-content').height()
+            ,listH=$('#msgbox').height();
 
+          if(listH >= parentH){
+            var dis=listH - parentH;
+            that.$refs.scrollerBottom.reset({top: dis})
+          }
+        },100);
       },
       /**
        * 上传图片
        * **/
       uploadImg(event){
-        let files=event.target.files || event.dataTransfer.files;
-        if(!files.length) return;
+        //公共方法 uploadImg 上传单张图片 url 上传后的图片地址
+        uploadImg(event,this).then(url=>{
+          var arr={
+            src:url,
+            msg:url,
+            img:true,
+            status:1,
+            type:true,
+          };
+          this.myMsg.push(arr);
 
-        //图片压缩
-        lrz(files[0], {
-          quality:0.9,//压缩质量
-          fieldName:'imgFile'
-        }).then(rst => {
-          console.log(rst.formData.get('imgFile'))
-          this.upload_ajax(rst.formData);
-        })
-      },
-      /**
-       * 上传图片接口
-       * params : 接口参数
-       * **/
-      upload_ajax(params){
-        this.$axios.post(global.API_HOST+'index/upload',params,{
-          headers:{'Content-Type':'multipart/form-data'}//添加请求头
-        }).then(res=>{
-          res=res.data;
-          if(res.status==0){
-            // console.log(res);
-
-            let url=res.data;
-            var arr={
-              src:url,
-              msg:url,
-              img:true,
-              status:1,
-              type:true,
-            };
-            this.myMsg.push(arr);
-
-            const that=this;
-            wsocket.doSend({
-              controller:'index',
-              action:'sendToVillage',
-              result:{
-                message:url,
-                type:1,
-                village_id:that.roomInfo.village_id
-              }
-            });
-            this.scrollBottom();
-          }else{
-            this.$vux.toast.text('图片过大,上传失败');
-          }
+          const that=this;
+          wsocket.doSend({
+            controller:'index',
+            action:'sendToVillage',
+            result:{
+              message:url,
+              type:1,
+              village_id:that.roomInfo.village_id
+            }
+          });
+          this.scrollBottom();
         })
       },
       /**
@@ -260,6 +248,15 @@
        * **/
       previewer(key){
         return 'previewer' + key;
+      },
+      /**
+       * 显示工具框
+       * **/
+      uitl(){
+        this.uitlshow=!this.uitlshow;
+        setTimeout(()=>{
+          this.scrollBottom();
+        },200);
       }
     }
   }

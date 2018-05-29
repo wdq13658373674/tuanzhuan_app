@@ -165,8 +165,8 @@
       uploadImg(event){
         //compressImg压缩图片
         compressImg(event).then(params=>{
-          params.append('user_id',this.userInfo.user_id);
           params.append('dir','image');
+          params.append('user_id',this.userInfo.user_id);
           this.upload_ajax(params);
         })
       },

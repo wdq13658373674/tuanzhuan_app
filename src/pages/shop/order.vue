@@ -125,7 +125,7 @@
             <Scroller height="100%" lock-x ref="scrollerBottom">
               <group>
                 <radio title="title" :options="options" v-model="timeValue" @on-change="popControl=false">
-                  <template slot-scope="props" scope="props" slot="each-item">
+                  <template slot-scope="props" slot="each-item">
                     送达时间 {{ props.label }} <span class="gray"></span>
                   </template>
                 </radio>
