@@ -130,7 +130,6 @@
         }).then(res=>{
           res=res.data;
 
-          console.log(res);
           if(res.status==0){
             let swiper=res.data.data;
             this.swiperList=swiper.map((item)=>({
