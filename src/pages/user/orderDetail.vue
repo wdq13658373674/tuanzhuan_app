@@ -230,7 +230,6 @@
           res=res.data;
           this.store_phone = res.data.order.store_phone;
           this.orderDetail = res.data;
-          console.log(res.data);
           for(let i in this.orderDetail.order_info){
             this.totalTcion += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion);
             this.totalMoney += parseFloat(this.orderDetail.order_info[i].order_info_goods_price);
