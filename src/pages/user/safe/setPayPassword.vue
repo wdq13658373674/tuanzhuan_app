@@ -49,7 +49,13 @@
         password:[],
         repassword:[],
         paslength:6,
+        fromUrl:''
       }
+    },
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
     },
     computed:{
       ...mapState(['userInfo']),
@@ -96,7 +102,12 @@
             this.userInfo.user_paypass=1;
             this.update_userInfo(this.userInfo);
 
-            this.$router.go(-1);
+            const arrUrl=['ForgetPayPassword','CheckPayPassword'];
+            if(arrUrl.indexOf(this.fromUrl)!=-1){
+              this.$router.go(-2);
+            }else{
+              this.$router.go(-1);
+            }
           }
         }).catch(err=>{
           console.log('my err:'+err);

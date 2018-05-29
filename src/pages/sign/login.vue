@@ -118,7 +118,7 @@
        * 判断来源地址
        * **/
       checkUrl(){
-        const arrUrl=['Password','Repassword'];//登陆后直接到user页面的url
+        const arrUrl=['Password','Repassword','Index'];//登陆后直接到user页面的url，否则直接返回上个页面
         if(arrUrl.indexOf(this.fromUrl)==-1){
           return true;
         }
