@@ -193,7 +193,9 @@
             let swiper=res.data[0].goods_imgs.split(',');
             if(swiper){
               this.swiperList=swiper.map((item)=>({
-                img:IMG_HOST+item
+                url:'',
+                img:IMG_HOST+item,
+                title:''
               }))
             }
           }

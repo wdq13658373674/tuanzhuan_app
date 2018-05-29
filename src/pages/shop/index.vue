@@ -105,21 +105,7 @@
     data(){
       return {
         IMG_HOST:global.IMG_HOST || "",
-
-        swiperList:[{
-          url: '/',
-          img: 'https://static.vux.li/demo/1.jpg',
-          title: ''
-        }, {
-          url: 'javascript:',
-          img: 'https://static.vux.li/demo/2.jpg',
-          title: ''
-        }, {
-          url: 'javascript:',
-          img: 'https://static.vux.li/demo/3.jpg',
-          title: '',
-          fallbackImg: 'https://static.vux.li/demo/3.jpg'
-        }],
+        swiperList:[],
         categorys:'',
         shopLists:''
       }
@@ -143,17 +129,18 @@
           params:params
         }).then(res=>{
           res=res.data;
+
+          console.log(res);
           if(res.status==0){
-            /**
-             * todo 轮播图获取
-             * **/
-            /*let swiper=res.data[0].goods_imgs.split(',');
+            let swiper=res.data.data;
             this.swiperList=swiper.map((item)=>({
-              img:item
-            }))*/
+              url:'',
+              img:IMG_HOST+item.store_slider_img,
+              title:''
+            }))
           }
         }).catch(err=>{
-          cnsole.log('my err:'+err);
+          console.log('my err:'+err);
         })
       },
       /**获取商品种类**/
