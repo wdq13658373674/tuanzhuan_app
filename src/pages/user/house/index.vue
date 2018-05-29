@@ -76,7 +76,7 @@
        * 房屋链接
        * **/
       jump(item){
-        const unit=item.unit_name +'-'+item.floor_name +'-' + item.floor_code;
+        const unit=item.unit_name +'-'+item.floor_name +'-' + item.room_code;
 
         this.$router.push({
           name:'UserHouseHolders',

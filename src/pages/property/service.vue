@@ -135,6 +135,7 @@
 
         let params={};
         if(this.$route.query.room_id){
+          console.log(1);
           this.room_id = this.$route.query.room_id;
           params={
             village_id: this.$route.query.village_id,
