@@ -222,8 +222,8 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userOrder.css';
+  @import '../../../assets/css/userOrder.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 </style>

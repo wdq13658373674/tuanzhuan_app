@@ -76,20 +76,22 @@ import WifiStart from '@/pages/intelligent/wifiStart'
 import BindDevice from '@/pages/intelligent/bindDevice'
 import SelectDevice from '@/pages/intelligent/selectDevice'
 
-/**用户中心-个人资料**/
+/**用户中心-首页**/
 import User from '@/pages/user/index'
-import UserData from '@/pages/user/message'
-import UserName from '@/pages/user/changeName'
-import UserNickname from '@/pages/user/changeNickname'
-import BindMobile from '@/pages/user/bindMobile'
+
+/**用户中心-个人资料**/
+import UserData from '@/pages/user/message/message'
+import UserName from '@/pages/user/message/changeName'
+import UserNickname from '@/pages/user/message/changeNickname'
+import BindMobile from '@/pages/user/message/bindMobile'
 
 /**用户中心-验证身份**/
 import CheckIdCard from '@/pages/user/checkIdCard'
 
 /**用户中心-我的账户**/
 import UserBalance from '@/pages/user/account/balance'
-import UserIntegral from '@/pages/user/account/integral'
-import UserTickets from '@/pages/user/account/tickets'
+import UserTicket from '@/pages/user/account/ticket'
+import UserTicon from '@/pages/user/account/ticon'
 import UserRecharge from '@/pages/user/account/recharge'
 import UserWithdraw from '@/pages/user/account/withdraw'
 import UserIncomeMoney from '@/pages/user/account/income_money'
@@ -97,9 +99,9 @@ import UserIncomeTcion from '@/pages/user/account/income_tcion'
 import UserIncomeScore from '@/pages/user/account/income_score'
 
 /**用户中心-银行卡**/
-import UserCards from '@/pages/user/cards/index'
-import UserAddCards from '@/pages/user/cards/add'
-import UserAddCardsNext from '@/pages/user/cards/addNext'
+import UserCards from '@/pages/user/bank/index'
+import UserAddCards from '@/pages/user/bank/add'
+import UserAddCardsNext from '@/pages/user/bank/addNext'
 
 /**用户中心-安全管理（支付密码）**/
 import UserSafeManage from '@/pages/user/safe/index'
@@ -108,8 +110,8 @@ import SetPayPassword from '@/pages/user/safe/setPayPassword'
 import CheckPayPassword from '@/pages/user/safe/checkPayPassword'
 
 /**用户中心-我的订单**/
-import UserOrder from '@/pages/user/order'
-import UserOrderDetail from '@/pages/user/orderDetail'
+import UserOrder from '@/pages/user/order/order'
+import UserOrderDetail from '@/pages/user/order/orderDetail'
 
 /**用户中心-售后服务**/
 import UserOrderSales from '@/pages/user/sales/index'
@@ -796,22 +798,22 @@ export default new Router({
       component: UserBalance,
     },
     {
-      path: '/user/integral',
-      name: 'UserIntegral',
+      path: '/user/ticket',
+      name: 'UserTicket',
       meta: {
         requireAuth: true,
-        title:'我的积分'
+        title:'我的物业券'
       },
-      component: UserIntegral,
+      component: UserTicket,
     },
     {
-      path: '/user/tickets',
-      name: 'UserTickets',
+      path: '/user/ticon',
+      name: 'UserTicon',
       meta: {
         requireAuth: true,
         title:'我的团票'
       },
-      component: UserTickets,
+      component: UserTicon,
     },
     {
       path: '/user/change/mobile',

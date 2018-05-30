@@ -96,10 +96,10 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userData.css';
+  @import '../../../assets/css/userData.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 
   .form-code.disabled{
     background: none;

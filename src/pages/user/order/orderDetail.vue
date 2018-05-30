@@ -304,8 +304,8 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/userOrderDetail.css';
+  @import '../../../assets/css/userOrderDetail.css';
 </style>
 <style lang="scss">
-  @import "../../core/base";
+  @import "../../../core/base";
 </style>

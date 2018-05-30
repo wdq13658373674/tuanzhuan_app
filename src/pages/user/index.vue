@@ -21,13 +21,13 @@
     <section class="page-group">
       <div class="content user-menu">
         <div class="item">
-          <router-link :to="{path:'/user/tickets'}">
+          <router-link :to="{name:'UserTicon'}">
             <p class="p1 orange">{{userLists.user_tcion || '0.00'}}</p>
             <p class="p2">我的团票</p>
           </router-link>
         </div>
         <div class="item">
-          <router-link :to="{path:'/user/balance',query:{
+          <router-link :to="{name:'UserBalance',query:{
             total:userLists.user_money
           }}">
             <p class="p1">¥{{userLists.user_money || '0.00'}}</p>
@@ -35,7 +35,7 @@
           </router-link>
         </div>
         <div class="item">
-          <router-link :to="{path:'/user/integral',query:{
+          <router-link :to="{name:'UserTicket',query:{
             total:userLists.user_ticket
           }}">
             <p class="p1">{{userLists.user_ticket || '0.00'}}</p>
