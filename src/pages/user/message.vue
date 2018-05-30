@@ -44,7 +44,7 @@
           </div>
         </li>
         <li class="item">
-          <router-link class="link cell" :to="{name:'BindMobile',params:{
+          <router-link class="link cell" :to="{name:'BindMobile',query:{
             old_phone:userLists.user_phone
           }}">
             <span> <i class="icon icon6"></i>绑定手机</span>

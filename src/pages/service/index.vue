@@ -91,7 +91,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           this.serviceList = res.data;
           for(let i in this.serviceList){
             this.tabs.push(res.data[i].service_title);

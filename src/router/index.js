@@ -814,7 +814,7 @@ export default new Router({
       component: UserTickets,
     },
     {
-      path: '/user/mobile/:old_phone',
+      path: '/user/change/mobile',
       name: 'BindMobile',
       meta: {
         requireAuth: true,

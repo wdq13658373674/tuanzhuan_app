@@ -39,7 +39,7 @@
     },
     data() {
       return {
-        old_phone:this.$route.params.old_phone,
+        old_phone:this.$route.query.old_phone,
         phone:'',
         code:'',
         verify:''
