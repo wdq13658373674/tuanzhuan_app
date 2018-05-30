@@ -40,7 +40,7 @@
                     <inline-loading class="tz-msg-loading" v-if="item.type"></inline-loading>
                     <div class="text" v-if="!item.img">{{item.msg}}</div>
                     <div v-else>
-                      <img width="100%" :id="previewer(key)" :src="item.msg" alt="" @click="show(key)">
+                      <img width="100%" :src="item.msg" alt="">
                     </div>
                   </div>
                 </li>
@@ -98,7 +98,7 @@
       </div>
     </section>
 
-    <previewer :list="myMsg" ref="previewer" :options="options"></previewer>
+    <!--<previewer :list="myMsg" ref="previewer" :options="options"></previewer>-->
   </div>
 </template>
 <script>
@@ -128,21 +128,20 @@
         user_logo:"",
         msgBox:"",
         myMsg:[],
-        options: {
+        /*options: {
           getThumbBoundsFn (index) {
             let thumbnail = document.querySelector('#previewer'+index);
             console.log(thumbnail);
             let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-            let rect = thumbnail.getBoundingClientRect();
+            // let rect = thumbnail.getBoundingClientRect();
 
             return {
-              x: rect.left,
-              y: rect.top + pageYScroll,
-              w: rect.width
+              x: 0,
+              y: 0,
             }
           }
-        }
+        }*/
       }
     },
     computed: {
@@ -237,16 +236,16 @@
       /**
        * 显示大图
        * **/
-      show (index) {
+      /*show (index) {
         this.$refs.previewer.show(index);
         console.log(index);
-      },
+      },*/
       /**
        * 动态添加图片id
        * **/
-      previewer(key){
+      /*previewer(key){
         return 'previewer' + key;
-      },
+      },*/
       /**
        * 显示工具框
        * **/
