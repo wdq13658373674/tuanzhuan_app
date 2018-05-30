@@ -618,17 +618,6 @@ export default new Router({
           }
         },
         {
-          path: '/shop/buy/order/detail/pay',
-          name: 'OrderPay',
-          meta: {
-            requireAuth: true,
-            title: '确认支付'
-          },
-          components:{
-            default:OrderPay,
-          }
-        },
-        {
           path: '/shop/buy/order/detail/pay/detail',
           name: 'OrderPayDetail',
           meta: {
@@ -900,6 +889,16 @@ export default new Router({
       },
       components:{
         default:IgtRoomAdd,
+      }
+    },
+    {
+      path: '/shop/buy/order/detail/pay',
+      name: 'OrderPay',
+      meta: {
+        requireAuth: true,
+      },
+      components:{
+        default:OrderPay,
       }
     },
   ]

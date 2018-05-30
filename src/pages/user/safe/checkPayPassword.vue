@@ -51,12 +51,11 @@
       },
       /**原密码接口**/
       password_ajax(){
-        const params={
-          user_id:this.userInfo.user_id,
-          pay:this.password.join(''),
-        }
+        const params = new FormData();
+        params.append('user_id',this.userInfo.user_id);
+        params.append('pay',this.password.join(''));
 
-        this.$axios.post(global.API_HOST+'user/getpaypwd',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'user/getpaypwd',params).then(res=>{
           res=res.data;
 
           if(res.status==0) {

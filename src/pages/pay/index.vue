@@ -1,5 +1,13 @@
 <template>
   <div>
+    <BarNav title="确认支付">
+      <span @click="back" class="link pull-left" slot="left">
+          <slot name="leftIcon">
+               <i class="icon arrow2"></i>
+          </slot>
+      </span>
+    </BarNav>
+
     <section class="page-group">
       <div class="content">
         <div class="text-center">
@@ -123,6 +131,7 @@
 </template>
 
 <script>
+  import BarNav from '@/pages/layout/barNav'
   import {Popup} from 'vux'
   import {mapState} from 'vuex'
   import Qrcode from '@xkeshi/vue-qrcode'
@@ -135,7 +144,8 @@
     components:{
       Popup,
       EnterPassword,
-      Qrcode
+      Qrcode,
+      BarNav
     },
     data(){
       return {
@@ -175,11 +185,15 @@
         fromUrl:''
       }
     },
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
+    },
     computed:{
       ...mapState(['userInfo'])
     },
     mounted(){
-
       if(this.$route.query.type){
         this.getProperty();
       }else{
@@ -187,7 +201,7 @@
       }
     },
     methods:{
-      /*结算*/
+      /**结算*/
       orderPay(){
 
         var that=this;
@@ -229,10 +243,9 @@
         //支付密码
         that.popshow=true;
       },
-
-        /**
-         * 支付密码回调
-         */
+      /**
+       * 支付密码回调
+       * */
       checkPwd(code){
         var that=this;
 
@@ -321,7 +334,6 @@
         }else {
           this.$vux.toast.text("支付密码错误");
         }
-
       },
 
       /**
@@ -417,6 +429,17 @@
         }).catch(err=>{
           console.log('my err:'+err)
         })
+      },
+      /**返回**/
+      back(){
+        if(this.fromUrl=='ShopOrder'){
+          this.$router.push({
+            name:'UserOrder'
+          })
+
+          return;
+        }
+        this.$router ? this.$router.go(-1) : window.history.back();
       }
     }
   }

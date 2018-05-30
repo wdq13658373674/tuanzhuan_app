@@ -62,12 +62,15 @@
         if(!this.check()){
           return;
         }
-        const params={
-          'mobile':this.phone,
-          'password':this.password,
-        }
+        const params=new FormData();
+        params.append('mobile',this.phone);
+        params.append('password',this.password);
 
-        this.$axios.post(global.API_HOST+'index/login',qs.stringify(params)).then(res=>{
+        this.$axios.post(global.API_HOST+'index/login',params,{
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(res=>{
           res=res.data;
 
           if(res.status==1){
@@ -75,6 +78,7 @@
             return;
           }
 
+          //更新vuex store
           this.update_userInfo(res.data.user);
           this.update_token(res.data.token);
           if(res.data.room){

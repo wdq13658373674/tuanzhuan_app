@@ -46,6 +46,7 @@
           this.$router.push('/user');
           return;
         }
+
         if(routeName=='OrderPayDetail'){
           this.$router.push({
             name:'UserOrder'
