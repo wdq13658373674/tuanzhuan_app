@@ -51,15 +51,12 @@
     watch:{
       /**监听选择的银行卡**/
       selectBank(value){
-        let bank='';
         this.cardsLists.forEach(item=>{
-          if(this.selectBank==item.bank_id){
-            bank=item.bank_name.split('-')[0]+item.bank_name.split('-')[2]+item.bank_numb.substr(-4);
+          if(value==item.bank_id){
+            //传递给父元素回调
+            this.$emit('run',item);
           }
         })
-
-        //传递给父元素回调
-        this.$emit('run',bank,this.selectBank);
       }
     },
     mounted(){

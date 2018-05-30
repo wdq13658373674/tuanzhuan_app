@@ -52,6 +52,12 @@
 
       }
     },
+    beforeRouteEnter(to, from, next){
+      console.log(from);
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
+    },
     computed: {
       ...mapState(['userInfo']),
       title(){
