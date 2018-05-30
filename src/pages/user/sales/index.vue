@@ -27,9 +27,25 @@
             </router-link>
           </li>
         </ul>
-        <div class="sales-total">
-          实付:<i class="icon tp ml10"></i>
-          <span class="orange f32">{{total.toFixed(2)}}</span>
+        <div class="sales-total" v-if="getSalesData.order.goods_order_pay_type == 'tcion'">
+          <p>
+            打包费: <span class="mr20 orange">{{getSalesData.order.goods_order_package_tcion}}</span>
+            配送费: <span class="orange">{{getSalesData.order.goods_order_send_tcion}}</span>
+          </p>
+          <p class="mt15">
+            实付:<i class="icon tp ml10"></i>
+            <span class="orange f32">{{total_tcion}}</span>
+          </p>
+        </div>
+        <div class="sales-total" v-else>
+          <p>
+            打包费: <span class="mr20 orange">{{getSalesData.order.goods_order_package_price}}</span>
+            配送费: <span class="orange">{{getSalesData.order.goods_order_send_money}}</span>
+          </p>
+          <p class="mt15">
+            实付:
+            <span class="orange f32">{{total_money}}</span>
+          </p>
         </div>
 
         <h4 class="h4 bold mt20">订单信息</h4>
@@ -73,7 +89,8 @@
           },
           order_info: {}
         },
-        total:0
+        total_money:0,
+        total_tcion:0
       }
     },
     computed:{
@@ -100,10 +117,11 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           this.getSalesData = res.data;
-          for(let i in this.getSalesData.order_info){
-            this.total += parseFloat(this.getSalesData.order_info[i].order_info_real_tcion);
-          }
+          this.total_tcion = this.getSalesData.order.goods_order_tcion;
+          this.total_money = this.getSalesData.order.goods_order_price;
+
         }).catch(err=>{
           console.log('my err:'+err)
         })
