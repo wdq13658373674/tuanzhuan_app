@@ -175,11 +175,6 @@
         fromUrl:''
       }
     },
-    beforeRouteEnter(to, from, next){
-      next(vm => {
-        vm.fromUrl = from.name;
-      })
-    },
     computed:{
       ...mapState(['userInfo'])
     },

@@ -56,10 +56,15 @@
             打包费: <span class="mr20 orange">{{orderDetail.order.goods_order_package_tcion}}</span>
             配送费: <span class="orange">{{orderDetail.order.goods_order_send_tcion}}</span>
           </p>
-          <p class="mt15">
+          <p class="mt15" v-if="orderDetail.order.goods_order_is_pay == 1">
             实付:
             <i class="icon tp ml10"></i>
-            <span class="orange f32">{{(parseFloat(totalTcion)+parseFloat(orderDetail.order.goods_order_package_tcion)+parseFloat(orderDetail.order.goods_order_send_tcion)).toFixed(2)}}</span>
+            <span class="orange f32">{{totalTcion}}</span>
+          </p>
+          <p class="mt15" v-else>
+            应付:
+            <i class="icon tp ml10"></i>
+            <span class="orange f32">{{totalTcion}}</span>
           </p>
         </div>
         <div class="order-total" v-else>
@@ -67,9 +72,13 @@
             打包费: <span class="mr20 orange">{{orderDetail.order.goods_order_package_price}}</span>
             配送费: <span class="orange">{{orderDetail.order.goods_order_send_money}}</span>
           </p>
-          <p class="mt15">
+          <p class="mt15" v-if="orderDetail.order.goods_order_is_pay == 1">
             实付:
-            <span class="orange f32">￥{{(parseFloat(totalMoney)+parseFloat(orderDetail.order.goods_order_package_price)+parseFloat(orderDetail.order.goods_order_send_money)).toFixed(2)}}</span>
+            <span class="orange f32">￥{{totalMoney}}</span>
+          </p>
+          <p class="mt15" v-else>
+            应付:
+            <span class="orange f32">￥{{totalMoney}}</span>
           </p>
         </div>
 
@@ -228,13 +237,10 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data.order_info);
           this.store_phone = res.data.order.store_phone;
           this.orderDetail = res.data;
-          for(let i in this.orderDetail.order_info){
-            this.totalTcion += parseFloat(this.orderDetail.order_info[i].order_info_real_tcion)*this.orderDetail.order_info[i].order_info_goods_count;
-            this.totalMoney += parseFloat(this.orderDetail.order_info[i].order_info_goods_price)*this.orderDetail.order_info[i].order_info_goods_count;
-          }
+          this.totalMoney = res.data.order.goods_order_price;
+          this.totalTcion = res.data.order.goods_order_tcion;
         }).catch(err=>{
           console.log('my err:'+err)
         })
@@ -261,14 +267,10 @@
               goods_order_id: order_id,
               user_id: _this.userInfo.user_id
             };
-            console.log();
-
             _this.$axios.get(global.API_HOST+'goods_order/ConfirmGoods',{
               params:params
             }).then(res=>{
               res=res.data;
-              alert(1);
-
               if(res.status === 0){
                 _this.orderDetail.order.goods_order_status = 5;
               }else {

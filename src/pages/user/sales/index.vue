@@ -44,7 +44,7 @@
           </p>
           <p class="mt15">
             实付:
-            <span class="orange f32">{{total_money}}</span>
+            <span class="orange f32">￥{{total_money}}</span>
           </p>
         </div>
 
