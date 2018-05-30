@@ -194,6 +194,7 @@
       });
 
       if (this.$route.query.type) {
+
         //立即购买
         this.cartList = storeJs.get('buy_goods');
         this.package_price = parseFloat(this.cartList[0].goods_package_price);
@@ -204,6 +205,7 @@
 
       } else {
         //选中购物车商品
+        console.log(storeJs.get('buy_goods'));
         this.money = cart.getMoney(cart.order_pay).price;
         this.tcion = cart.getMoney(cart.order_pay).tcion;
         if (cart.order_pay.length > 0) {
@@ -215,7 +217,7 @@
           this.money = parseFloat(cart.getMoney(cart.order_pay).price) + this.package_price;
           this.tcion = parseFloat(cart.getMoney(cart.order_pay).tcion) + this.package_tcion;
         } else {
-          this.$router.push('/shop/cart');
+          this.$router.push('/shop/buy/cart');
         }
       }
 

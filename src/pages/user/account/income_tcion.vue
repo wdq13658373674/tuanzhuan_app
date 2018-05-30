@@ -149,7 +149,6 @@
           })
         }
 
-        console.log(this.listData);
       },
       loadMore(){
         this.busy = true;

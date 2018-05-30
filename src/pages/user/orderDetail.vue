@@ -16,11 +16,11 @@
           </span>
           <span v-else>
             <span v-if="orderDetail.order.goods_order_status === 4">
-            {{sendStatus[orderDetail.order.goods_order_status][orderDetail.order.goods_order_send_status]}}
-          </span>
-          <span v-else>
-            {{sendStatus[orderDetail.order.goods_order_status]}}
-          </span>
+              {{sendStatus[orderDetail.order.goods_order_status][orderDetail.order.goods_order_send_status]}}
+            </span>
+            <span v-else>
+              {{sendStatus[orderDetail.order.goods_order_status]}}
+            </span>
           </span>
           >
         </h1>
@@ -261,13 +261,16 @@
               goods_order_id: order_id,
               user_id: _this.userInfo.user_id
             };
+            console.log();
 
             _this.$axios.get(global.API_HOST+'goods_order/ConfirmGoods',{
               params:params
             }).then(res=>{
               res=res.data;
+              alert(1);
+
               if(res.status === 0){
-                _this.orderList[index].goods_order_status = 5;
+                _this.orderDetail.order.goods_order_status = 5;
               }else {
                 _this.$vux.toast.text(res.msg);
               }

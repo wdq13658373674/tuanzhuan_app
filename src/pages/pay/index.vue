@@ -171,8 +171,14 @@
         property_tcion:0,
         property_ticket: 0,
         qrcodeUrl:'',
-        ticketTotal:0
+        ticketTotal:0,
+        fromUrl:''
       }
+    },
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
     },
     computed:{
       ...mapState(['userInfo'])
@@ -267,11 +273,15 @@
                 property: JSON.stringify( this.$route.query.property_id ),
                 type: this.payType
               };
+
               this.$axios.post(global.API_HOST+'property/pay_money',qs.stringify(param)).then(res=>{
                 res=res.data;
-
                 if(res.status==0){
-                  this.$router.go(-1);
+                  if(this.fromUrl == 'PropertyServiceDetail'){
+                    this.$router.go(-2);
+                  }else {
+                    this.$router.go(-1);
+                  }
                   this.$vux.toast.text("支付成功");
                 }else {
                   this.$vux.toast.text(res.msg);
@@ -399,7 +409,6 @@
         this.$axios.get(global.API_HOST+'property/getPropertyMoeny',{
           params:params
         }).then(res=>{
-          console.log(res.data);
           res=res.data;
           this.ticket_rate = res.data.ticket;
           this.orderInfo=res.data.order;
@@ -409,7 +418,6 @@
           this.payMoney=this.property_tcion;
           this.ticketTotal=(res.data.property_money_sum/this.ticket_rate).toFixed(2);
           this.ticket=res.data.property_money_sum.toFixed(2);
-          console.log(this.ticket);
           this.property_ticket = res.data.property_ticket;
         }).catch(err=>{
           console.log('my err:'+err)

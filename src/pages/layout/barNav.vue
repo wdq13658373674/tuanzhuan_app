@@ -27,8 +27,15 @@
     },
     data(){
       return {
-        from:''
+        from:'',
+        fromUrl:''
       }
+    },
+    beforeRouteEnter(to, from, next){
+      console.log(from.name);
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
     },
     methods: {
       /**返回**/
