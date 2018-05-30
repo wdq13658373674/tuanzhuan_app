@@ -29,7 +29,6 @@
   import {mapState} from 'vuex'
   import BarNav from '@/pages/layout/barNav'
   import timerBtn from '@/components/timerBtn'
-  import utils from '@/libs/util.js'
   const qs = require("querystring");
   export default {
     name: "BindMobile",
@@ -69,7 +68,7 @@
         if(this.phone == ''){
           this.$vux.toast.show('请输入手机号码')
           return;
-        }else if(!utils.is_mobile(this.phone)){
+        }else if(!this.$utils.is_mobile(this.phone)){
           this.$vux.toast.show({
             text: '手机号码格式不正确'
           })

@@ -21,7 +21,6 @@
 <script>
   import {mapState,mapMutations} from 'vuex'
   const qs = require("querystring")
-  import utils from '@/libs/util.js'
 
   export default {
     name: "CheckIdCard",
@@ -37,7 +36,7 @@
     computed:{
       ...mapState(['userInfo']),
       check(){
-        if(this.realname!='' && utils.is_card(this.idcard)){
+        if(this.realname!='' && this.$utils.is_card(this.idcard)){
           return true;
         }
         return false;
@@ -50,7 +49,7 @@
       ...mapMutations(['update_userInfo']),
       /**确定*/
       refer(){
-        if(this.realname!='' && utils.is_card(this.idcard)){
+        if(this.realname!='' && this.$utils.is_card(this.idcard)){
           const params={
             card_num:this.idcard,
             card_realname:this.realname,

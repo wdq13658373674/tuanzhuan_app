@@ -29,7 +29,6 @@
 </template>
 
 <script>
-  import utils from '@/libs/util.js'
   const qs = require("querystring")
   import {Actionsheet} from 'vux'
   export default {
@@ -67,7 +66,7 @@
        *确认添加住户
        * **/
       submit(){
-        if(!utils.is_mobile(this.phone)){
+        if(!this.$utils.is_mobile(this.phone)){
           this.$vux.toast.show('手机号码格式不正确');
           return;
         }

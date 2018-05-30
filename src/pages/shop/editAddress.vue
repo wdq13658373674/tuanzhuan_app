@@ -34,7 +34,6 @@
   import {mapState} from 'vuex'
   import { XAddress, ChinaAddressV4Data,Value2nameFilter as value2name } from 'vux'
   import {getPosition} from '@/libs/bMap'
-  import utils from '@/libs/util.js'
   const qs = require("querystring")
 
   export default {
@@ -143,7 +142,7 @@
           tips='请输入你的真实姓名';
         }else if(this.phone==''){
           tips='请输入你的电话号码';
-        }else if(!utils.is_mobile(this.phone)){
+        }else if(!this.$utils.is_mobile(this.phone)){
           tips='电话号码格式错误';
         }
 

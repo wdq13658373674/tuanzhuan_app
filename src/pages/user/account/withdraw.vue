@@ -54,7 +54,6 @@
   import MoneyKeyBord from '@/components/moneyKeyBord'
   import SelectBank from '@/components/selectBank'
   import {mapState,mapMutations} from 'vuex'
-  import utils from '@/libs/util.js'
   const qs = require("querystring");
   export default {
     name: "Withdraw",

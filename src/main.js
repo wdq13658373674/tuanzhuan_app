@@ -47,11 +47,6 @@ Object.keys(filters).forEach(key => {
 })
 
 /**
- * 全局工具函数
- * **/
-Vue.use(utils);
-
-/**
  * fastclick
  * **/
 FastClick.attach(document.body);
@@ -75,6 +70,11 @@ Vue.use(ConfirmPlugin)
 Vue.use(Vuex);
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
+
+/**
+ * 全局工具函数
+ * **/
+Vue.prototype.$utils = utils;
 
 /**
  * 接口请求设置

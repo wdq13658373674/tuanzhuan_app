@@ -79,7 +79,6 @@
   import {mapMutations,mapState} from 'vuex'
   import { Actionsheet,Datetime } from 'vux'
   import { updateMessage } from '@/assets/js/user/changeMessage'
-  import utils from '@/libs/util.js'
   const storeJs=require('storejs');
   import { compressImg } from '@/assets/js/upload/upload'
 
@@ -122,7 +121,7 @@
           res=res.data;
           if(res.status==0){
             this.userLists=res.data.village.user;
-            this.changeBirth=utils.stampToDate(this.userLists.user_birthday);
+            this.changeBirth=this.$utils.stampToDate(this.userLists.user_birthday);
           }
         }).catch(err=>{
           console.log('my err:'+err)

@@ -19,7 +19,6 @@
   import {mapState} from 'vuex'
   import BarNav from '@/pages/layout/barNav'
   import { updateMessage } from '@/assets/js/user/changeMessage'
-  import utils from '@/libs/util.js'
   export default {
     name: "ChangeName",
     components: {
@@ -60,7 +59,7 @@
 
         if(!this.realname){
           this.tips='输入不能为空,修改失败';
-        }else if(utils.getStrLength(this.realname) > 8){
+        }else if(this.$utils.getStrLength(this.realname) > 8){
           this.tips='姓名不能超过8个字符,修改失败';
         }
 

@@ -22,7 +22,6 @@
   import {mapState} from 'vuex'
   import timerBtn from '@/components/timerBtn'
   import setPassword from '@/components/setPassword'
-  import utils from '@/libs/util.js'
   import {Popup} from 'vux'
   const qs = require("querystring");
   export default {

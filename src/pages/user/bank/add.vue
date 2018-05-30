@@ -12,13 +12,12 @@
           <input class="input" v-model.trim="cardsNum" type="number" placeholder="请输入银行卡号">
         </li>
       </ul>
-      <div @click="getBankType" class="btn btn-orange" :class="cardsNum.length>=16 ? '' : 'disabled'">下一步</div>
+      <div @click="getBankType" class="btn btn-orange" :class="cardsNum ? '' : 'disabled'">下一步</div>
     </section>
   </div>
 </template>
 
 <script>
-  import utils from '@/libs/util.js'
   const qs = require("querystring")
   export default {
     name: "AddCards",
@@ -40,10 +39,17 @@
 
     },
     methods:{
-      /**获取银行卡所属银行*/
+      /**
+       * 下一步
+       * 获取银行卡所属银行
+       * */
       getBankType(){
+        if(this.cardsNum.length > 19 || this.cardsNum.length < 16 ){
+          this.$vux.toast.text('银行卡号不正确','top');
+          return;
+        }
         let params={
-          bank_car:utils.Trim(this.cardsNum,true),
+          bank_car:this.$utils.Trim(this.cardsNum,true),
           address:'重庆'
         }
 
@@ -70,7 +76,7 @@
           this.$router.push({
             name:'UserAddCardsNext',
             params:{
-              cardsNum:utils.Trim(this.cardsNum,true)
+              cardsNum:this.$utils.Trim(this.cardsNum,true)
             }
           })
         }

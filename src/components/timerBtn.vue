@@ -1,5 +1,5 @@
 <template>
-  <button :class="{disabled : count>0}"  :disabled="count>0"  @click.prevent="getCode">{{text}}</button>
+  <button class="flex-shrink" :class="{disabled : count>0}"  :disabled="count>0"  @click.prevent="getCode">{{text}}</button>
 </template>
 
 <script>

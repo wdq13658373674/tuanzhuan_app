@@ -27,7 +27,6 @@
   </div>
 </template>
 <script>
-  import utils from '@/libs/util.js'
   const qs = require("querystring")
   import {mapState,mapMutations} from 'vuex'
 
@@ -105,7 +104,7 @@
         this.tips='';
         if(this.phone == ''){
           this.tips='请输入手机号码';
-        }else if(!utils.is_mobile(this.phone)){
+        }else if(!this.$utils.is_mobile(this.phone)){
           this.tips='手机号码格式不正确';
         }else if(this.password== ''){
           this.tips='请输入密码';
