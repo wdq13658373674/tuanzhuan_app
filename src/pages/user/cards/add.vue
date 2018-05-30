@@ -9,7 +9,7 @@
         </li>
         <li class="item cell p27">
           <label>卡号</label>
-          <input class="input" v-model.trim="cardsNum" maxlength="23" type="number" placeholder="请输入银行卡号">
+          <input class="input" v-model.trim="cardsNum" type="number" placeholder="请输入银行卡号">
         </li>
       </ul>
       <div @click="getBankType" class="btn btn-orange" :class="cardsNum.length>=16 ? '' : 'disabled'">下一步</div>

@@ -46,7 +46,7 @@
           return;
         }
 
-        this.$router ? this.$router.go(-1) : window.history.back()
+        this.$router ? this.$router.go(-1) : window.history.back();
       }
     }
   }

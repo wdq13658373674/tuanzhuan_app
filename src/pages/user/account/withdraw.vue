@@ -27,7 +27,7 @@
       </div>
       <div class="user-recharge-rate" v-show="tips==''">
         <p>
-          实际到账金额<span class="orange f32"> ¥{{parseFloat(this.val)-extra || '0.00'}} </span>
+          实际到账金额<span class="orange f32"> ¥{{ relMoney || '0.00'}} </span>
           ,额外扣除 ¥{{extra || '0.00'}} 手续费(手续费率 {{rates * 100}} %)
         </p>
         <p>到账时间 T+3</p>
@@ -67,12 +67,14 @@
       return {
         val:'',
         rates:'',
-        extra:'',
         popshow:true,
         popshow2:false,
         selectBank:'请选择银行卡',
         bankId:'',
-        tips:''
+        tips:'',
+        least:'',
+        extra:0,
+        relMoney:''
       }
     },
     mounted(){
@@ -84,11 +86,21 @@
     watch:{
       /**监听val计算手续费**/
       val(){
-        let res=parseFloat(this.val) * parseFloat(this.rates);
-        this.extra=parseFloat(res);
+        let val=parseFloat(this.val);
 
-        if(parseFloat(this.val) > parseFloat(this.userInfo.user_money)){
-          this.tips='金额已超过可提现余额'
+        if(!val){
+          this.extra='';
+          this.relMoney='';
+          return;
+        }
+
+        let res=parseFloat(val * this.rates);
+
+        this.extra=res.toFixed(2);
+        this.relMoney=(val-this.extra).toFixed(2);
+
+        if(val > parseFloat(this.userInfo.user_money)){
+          this.tips='金额已超过可提现余额';
         }else{
           this.tips='';
         }
@@ -106,7 +118,7 @@
         this.val='';
         this.$refs.keyBord.empty();
       },
-      /**输入金额后下一步*/
+      /**输入金额后点击键盘确定*/
       next(){
         this.submit();
       },
@@ -118,12 +130,12 @@
         })
       },
       /**获取选择的银行卡组件回调**/
-      getSelect(name,id){
-        if(name && id){
+      getSelect(item){
+        if(item){
           this.popshow2=false;
           this.popshow=true;
-          this.selectBank=name;
-          this.bankId=id;
+          this.selectBank=item.bank_name.split('-')[0]+item.bank_name.split('-')[2]+item.bank_numb.substr(-4);
+          this.bankId=item.bank_id;
         }
       },
       /**切换pop组件**/
@@ -132,9 +144,13 @@
         this.popshow2=true;
       },
       /**确认提现**/
-      ...mapMutations(['update_userInfo']),
       submit(){
         if(this.tips==''){
+          if(!this.bankId){
+            this.$vux.toast.text('请选择提现的银行卡');
+            return;
+          }
+
           const params={
             user_id:this.userInfo.user_id,
             money:this.val,
@@ -147,7 +163,7 @@
             if(res.status==0){
               this.updateMoney();
               this.$vux.toast.text('提现成功');
-              this.$router.replace('/user');
+              this.$router.push('/user');
             }else{
               this.$vux.toast.text('提现失败');
             }
@@ -155,6 +171,7 @@
         }
       },
       /**更新store中的用户余额**/
+      ...mapMutations(['update_userInfo']),
       updateMoney(){
         let money=parseFloat(this.userInfo.user_money) - parseFloat(this.val);
         this.userInfo.user_money=money;
@@ -168,5 +185,4 @@
 </style>
 <style lang="scss">
   @import "../../../core/base";
-
 </style>

@@ -77,7 +77,6 @@
 
         this.$axios.post(global.API_HOST+'Bank/addBank',qs.stringify(params)).then(res=>{
           res=res.data;
-          console.log(res);
 
           if(res.status==0){
             this.$vux.toast.text('绑定成功');
