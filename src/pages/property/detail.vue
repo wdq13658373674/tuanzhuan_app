@@ -4,8 +4,7 @@
       <div class="content">
         <div class="bill">
           <p>
-            <span class="f32 mr10">{{property_month_end}}月账单</span>
-            <span>{{property_year}}/{{property_month_begin}}-{{property_month_end}}/31</span>
+            <span class="f32 mr10">{{property_year}} {{property_month_end}}月账单</span>
             <span class="pull-right">单位：元</span>
           </p>
           <p v-if="property_finished == 0">未缴纳</p>
@@ -36,9 +35,9 @@
       </div>
     </section>
 
-    <footer>
+    <!--<footer>
       <router-link :to="{name:'OrderPay',query:{type:'property',property_id:property_id}}" class="bottom-fixed btn-orange-fixed" :class="select?'disabled':''">我要缴费</router-link>
-    </footer>
+    </footer>-->
   </div>
 </template>
 
