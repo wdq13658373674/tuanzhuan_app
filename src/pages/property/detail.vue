@@ -68,7 +68,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           this.property_finished = res.data.property_finished;
           this.property_month_begin = res.data.property_month_begin;
           this.property_month_end = res.data.property_month_end;
