@@ -30,9 +30,6 @@
           </li>
         </ul>
       </div>
-      <div class="no-more">
-        - 没有更多记录了 -
-      </div>
     </section>
 
     <!--<footer>
