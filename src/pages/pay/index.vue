@@ -35,7 +35,7 @@
           </div>
           <div class="cell">
             <span class="f28 mr10">剩余团票</span>
-            <i class="tp"></i>
+            <i class="icon tp"></i>
             <span class="f28 mr10 orange">{{pay_user.user_tcion}}</span>
 
             <input type="radio" name="pay" v-model="payType" value="tcion" />
@@ -55,7 +55,7 @@
           <div class="cell">
             <span class="f28 mr10">剩余物业券</span>
             <i class="tp"></i>
-            <span class="f28 mr10 orange">{{pay_user.user_ticket}}</span>
+            <span class="f28 mr10 orange"> {{pay_user.user_ticket}}</span>
 
             <input type="radio" name="pay" v-model="payType" value="ticket" />
             <div class="radio">
@@ -71,7 +71,7 @@
               <p class="p">赠送{{ticket}}物业券</p>
             </div>
           </div>
-          <div>
+          <div class="cell">
             <span class="f28 mr10">我的余额</span>
             <span class="f16 gray">¥</span>
             <span class="f28 mr10">{{pay_user.user_money}}</span>
