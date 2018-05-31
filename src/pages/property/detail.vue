@@ -33,9 +33,9 @@
       </div>
     </section>
 
-    <!--<footer>
+    <footer>
       <router-link :to="{name:'OrderPay',query:{type:'property',property_id:property_id}}" class="bottom-fixed btn-orange-fixed" :class="select?'disabled':''">我要缴费</router-link>
-    </footer>-->
+    </footer>
   </div>
 </template>
 
