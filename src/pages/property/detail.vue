@@ -4,7 +4,8 @@
       <div class="content">
         <div class="bill">
           <p>
-            <span class="f32 mr10">{{property_year}} {{property_month_end}}月账单</span>
+            <span v-if="property_month_end - property_month_begin == 0 " class="f32 mr10">{{property_year}} {{property_month_begin}}月账单</span>
+            <span v-else class="f32 mr10">{{property_year}}年 {{property_month_begin}}月 -  {{property_month_end}}月账单</span>
             <span class="pull-right">单位：元</span>
           </p>
           <p v-if="property_finished == 0">未缴纳</p>
@@ -67,6 +68,7 @@
           params:params
         }).then(res=>{
           res=res.data;
+          console.log(res.data);
           this.property_finished = res.data.property_finished;
           this.property_month_begin = res.data.property_month_begin;
           this.property_month_end = res.data.property_month_end;

@@ -32,8 +32,8 @@
                   </div>
                 </label>
               </td>
-              <td v-if="item.property_month_end - item.property_month_begin == 0" class="text-center">{{item.property_year}}年{{item.property_month_begin}}月</td>
-              <td v-else class="text-center">{{item.property_year}}年{{item.property_month_begin}}月 - {{item.property_month_begin + (item.property_month_end - item.property_month_begin)}}月</td>
+              <td v-if="item.property_month_end - item.property_month_begin == 0" class="text-center">{{item.property_year}}年 {{item.property_month_begin}}月</td>
+              <td v-else class="text-center">{{item.property_year}}年 {{item.property_month_begin}}月 - {{item.property_month_begin + (item.property_month_end - item.property_month_begin)}}月</td>
               <td class="text-center propertyMoney">{{item.property_money}}</td>
               <td>
                 <router-link class="link" :to="{path:'/property/service/detail',query:{property_id:item.property_id}}">
@@ -136,7 +136,6 @@
 
         let params={};
         if(this.$route.query.room_id){
-          console.log(1);
           this.room_id = this.$route.query.room_id;
           params={
             village_id: this.$route.query.village_id,
@@ -152,7 +151,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           this.room = res.data.room;
           if(res.data.property == null){
             this.isData = false;
