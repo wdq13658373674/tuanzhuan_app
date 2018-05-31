@@ -7,7 +7,7 @@
         }}" class="search-link" append>请输入商品名称</router-link>
       </div>
 
-      <swiper class="index-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
+      <swiper :auto="true" class="index-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
 
       <div class="menu-shop clearfix">
         <router-link :to="{ name: 'ShopCategory', query: {

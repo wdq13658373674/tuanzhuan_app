@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="page-group">
-      <swiper class="detail-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
+      <swiper :auto="true" class="detail-swiper" :list="swiperList" height="100%" dots-class="dot" :show-desc-mask="false"></swiper>
 
       <div class="content">
         <div class="mb30">

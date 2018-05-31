@@ -6,9 +6,9 @@
       </router-link>
 
       <!--购物车-->
-      <a class="link pull-right" v-if="rightNav==='cart'"  slot="right">
+      <router-link :to="{name:'ShopCart'}" class="link pull-right" v-if="rightNav==='cart'"  slot="right">
         <i class="icon cart"></i>
-      </a>
+      </router-link>
 
       <!--智能家居-搜索网关-->
       <router-link to="/intelligent/search" class="link pull-right green" v-if="rightNav==='search'"  slot="right">
