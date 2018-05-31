@@ -52,7 +52,7 @@
     <footer v-if="isData">
       <div class="bottom-fixed cell">
         <div class="property-pay-money">
-          <label class="pull-left mr50" >
+          <label class="cart-radio mr50" >
             <input type="checkbox" name="pay" v-model="checkAll">
             <div class="radio">
               <i class="check"></i>
