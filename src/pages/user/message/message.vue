@@ -136,6 +136,10 @@
       exit(){
         this.update_userInfo({});
         this.update_roomInfo({});
+        /*退出登录清空用户密码文件*/
+        window.cdvfiletxt(function(status,msg){
+          if(!status){console.log(msg)};
+        },'login.tz',"");
         storeJs.remove("msgDB");
         this.$router.push('/');
       },

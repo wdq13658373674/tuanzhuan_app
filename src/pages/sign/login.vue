@@ -54,7 +54,20 @@
         this.update_userInfo({});
       })
 
-      console.log(window.cdvfiletxt);
+      var that = this;
+      /*用户自动登陆*/
+      window.cdvfiletxt(function(status,msg,data){
+        if(status && data.data.length>0){
+          try{
+            var login = JSON.parse(data.data);
+            that.phone = login.mobile;
+            that.password = login.password;
+            that.submit();
+          }catch(e){
+
+          }
+        }
+      },'login.tz');
     },
     methods:{
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
@@ -78,6 +91,12 @@
             this.$vux.toast.show(res.msg);
             return;
           }
+
+          /*登录成功后储存用户账户密码*/
+          var logindata = JSON.stringify({mobile:this.phone,password:this.password});
+          window.cdvfiletxt(function(status,msg){
+            if(!status){console.log(msg)};
+          },'login.tz',logindata);
 
           //更新vuex store
           this.update_userInfo(res.data.user);
