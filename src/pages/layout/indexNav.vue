@@ -17,13 +17,13 @@
       <div style="width:100%;height:50%;position:fixed;top:10%;left:0;background-color:white;text-align:center;display:none;" id="paybardiv">
         <div style="width:100%;height:100%;padding-top:10%;" id="paybars">
           <div v-show="qrcodeUrl" style="text-align:center;">
-            <qrcode>
+            <qrcode
               :value="qrcodeUrl"
               v-if="qrcodeUrl"
               :options="{ size: 500 }">
             </qrcode>
-            <p id="paymsg">获取支付码中</p>
           </div>
+          <p id="paymsg"></p>
         </div>
       </div>
       <div style='width:100%;height:168px;background-color:white;z-index:99999;position:fixed;bottom:0;left:0;text-align:center;font-size:19px;' id="scannav">
@@ -45,6 +45,8 @@
     name: "IndexNav",
     data(){
       return{
+        user_id:0,
+        user_phone:'',
         village_name:'',
         qrcodeUrl:false
       }
@@ -68,7 +70,7 @@
         if(window.navigator.userAgent.indexOf('Tuanzhuanw')>-1){
           $("#scanopens").show();
         }else{
-          $("#scannav").css("height","84px");
+          $("#scannav").css("height","126px");
         }
         $("#scannerdiv").show();
       },
@@ -98,9 +100,12 @@
         }
         $("#scannerdiv").hide();
       },paybar(type,event){
-        $("#paymsg").html("获取支付码中");
         var that = this;
         $("#paybardiv").show();
+        if(typeof this.userInfo.user_id == 'undefined'){
+          $("#paymsg").html("未登录");return;
+        }
+        $("#paymsg").html("获取支付码中");
         this.$axios.get(global.API_HOST+'User/paybar',{
           params:{user_id:that.userInfo.user_id,user_phone:that.userInfo.user_phone,type:type}
         }).then(res=>{
