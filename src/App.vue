@@ -317,4 +317,70 @@
     background: #fff;
     height:100%;
   }
+  /*搜索*/
+  .tz-search{
+    .weui-search-bar{
+      padding:rem(13) rem(27);
+    }
+
+    .weui-search-bar__form{
+      border:none;
+      @include wh(auto,rem(64),rem(64));
+      font-size: rem(24);
+      background-color: #fff;
+
+      &:after{
+        border:none;
+      }
+    }
+
+    .weui-search-bar__box{
+      padding-left:rem(60);
+      padding-right:rem(60);
+      @include border-radius(rem(200));
+      border: 1px solid $grayLight;
+
+      .weui-icon-search{
+        line-height:rem(64);
+        font-size:rem(30);
+      }
+
+      .weui-icon-clear{
+        line-height:rem(64);
+        font-size:rem(30);
+      }
+
+      .weui-search-bar__input{
+        @include wh(100%,rem(62));
+        font-size:rem(24);
+        padding:0;
+      }
+    }
+
+    .weui-search-bar__cancel-btn{
+      line-height:rem(64);
+      margin-left:rem(10);
+    }
+
+    .weui-search-bar__label {
+      top:1px;
+      right: 0;
+      bottom:1px;
+      left:0;
+      border-radius:rem(200);
+      color:$gray;
+      background:$bg;
+      display:block;
+
+      .weui-icon-search{
+        font-size:rem(30);
+        margin-right:0;
+      }
+
+      span{
+        font-size:rem(24);
+        vertical-align: inherit;
+      }
+    }
+  }
 </style>
