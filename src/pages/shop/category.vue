@@ -7,6 +7,7 @@
           title:title
         }}" class="search-link">{{keyword || title}}</router-link>
       </div>
+
       <div class="shop-filter">
         <span class="item" @click="tab(0)" :class="{'active':tabIndex==0}">销量优先</span>
         <span class="item" @click="tab(1)" :class="{'active':tabIndex==1}">
@@ -246,6 +247,11 @@
         };
       }
     },
+    //修改meta值设置为false,再次进入页面会重新请求数据。
+    beforeRouteLeave(to, from, next) {
+      from.meta.keepAlive = false;
+      next();
+    }
   }
 </script>
 <style lang="css" scoped>
@@ -265,10 +271,6 @@
       height:auto;
     }
   }
-
-  /*.slide-down-box{
-    background: #fff;
-  }*/
 
   .vux-masker-fullscreen {
     position: fixed;

@@ -33,6 +33,8 @@ import LifePay from '@/pages/life/pay'
 
 /**邻聚**/
 import Neighbor from '@/pages/neighbor/index'
+import NeighborDetail from '@/pages/neighbor/detail'
+import NeighborPost from '@/pages/neighbor/post'
 
 /**公告**/
 import Article from '@/pages/article/index'
@@ -294,6 +296,9 @@ export default new Router({
         {
           path: '/shop/category',
           name: 'ShopCategory',
+          meta:{
+            // keepAlive: true
+          },
           components:{
             default:ShopCategory,
           }
@@ -739,6 +744,26 @@ export default new Router({
           },
           components:{
             default:SelectDevice,
+          }
+        },
+        {
+          path: '/neighbor/detail',
+          name: 'NeighborDetail',
+          meta: {
+            title: '动态详情'
+          },
+          components:{
+            default:NeighborDetail,
+          }
+        },
+        {
+          path: '/neighbor/detail/post',
+          name: 'NeighborPost',
+          meta: {
+            title: '发布动态'
+          },
+          components:{
+            default:NeighborPost,
           }
         },
       ]

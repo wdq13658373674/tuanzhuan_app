@@ -77,6 +77,16 @@
         </li>
       </ul>
     </section>
+
+    <!--发表评论输入框-->
+    <footer>
+      <div class="footer tz-msg-send">
+        <div class="input-group">
+          <textarea name="" id="" cols="30" rows="10" class="input" placeholder="写评论"></textarea>
+        </div>
+        <div class="send">发送</div>
+      </div>
+    </footer>
   </div>
 </template>
 

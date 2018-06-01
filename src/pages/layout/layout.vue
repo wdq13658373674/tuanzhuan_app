@@ -29,10 +29,18 @@
       <div class="link pull-right orange" v-if="rightNav==='default'"  slot="right" @click="setDefault">
         设为默认
       </div>
+
+      <!--邻聚-详情页、发布页 -->
+      <a class="link pull-right" v-if="rightNav==='camera'" slot="right">
+        <i class="icon camera"></i>
+      </a>
     </bar-nav>
 
     <div class="layout-page">
-      <router-view v-transition></router-view>
+      <keep-alive>
+        <router-view v-transition v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-transition v-if="!$route.meta.keepAlive"></router-view>
     </div>
   </div>
 </template>
@@ -79,6 +87,9 @@
         }
         if(routeName=="IgtRoom"){
           return 'addroom';
+        }
+        if(routeName=="NeighborDetail" || routeName=="NeighborPost"){
+          return 'camera';
         }
         return false;
       }
