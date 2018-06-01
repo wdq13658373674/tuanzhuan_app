@@ -17,13 +17,9 @@
       <div style="width:100%;height:50%;position:fixed;top:10%;left:0;background-color:white;text-align:center;display:none;" id="paybardiv">
         <div style="width:100%;height:100%;padding-top:10%;" id="paybars">
           <div v-show="qrcodeUrl" style="text-align:center;">
-            <qrcode
-              :value="qrcodeUrl"
-              v-if="qrcodeUrl"
-              :options="{ size: 500 }">
-            </qrcode>
+            <barcode :value="qrcodeUrl" :options="{ displayValue: true ,width:'2px',height:'90px',fontSize:'17px'}"></barcode>
           </div>
-          <p id="paymsg"></p>
+          <p id="paymsg" style="font-size:19px;"></p>
         </div>
       </div>
       <div style='width:100%;height:168px;background-color:white;z-index:99999;position:fixed;bottom:0;left:0;text-align:center;font-size:19px;' id="scannav">
@@ -38,8 +34,8 @@
 
 <script>
 
-  import {mapState} from 'vuex'
-  import Qrcode from '@xkeshi/vue-qrcode'
+  import {mapState} from 'vuex';
+  import VueBarcode from '@xkeshi/vue-barcode';
 
   export default {
     name: "IndexNav",
@@ -48,11 +44,11 @@
         user_id:0,
         user_phone:'',
         village_name:'',
-        qrcodeUrl:false
+        qrcodeUrl:'123456'
       }
     },
     components:{
-      Qrcode
+      "barcode":VueBarcode
     },
     computed:{
       ...mapState(['roomInfo','userInfo'])
@@ -109,6 +105,7 @@
         this.$axios.get(global.API_HOST+'User/paybar',{
           params:{user_id:that.userInfo.user_id,user_phone:that.userInfo.user_phone,type:type}
         }).then(res=>{
+          console.log(res);
           if(res.data.status==0){
             that.qrcodeUrl = res.data.data;
             $("#paymsg").html("请使用团转收银台扫码");
