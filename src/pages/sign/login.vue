@@ -53,6 +53,8 @@
       this.$nextTick(()=>{
         this.update_userInfo({});
       })
+
+      console.log(window.cdvfiletxt);
     },
     methods:{
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),

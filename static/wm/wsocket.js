@@ -38,7 +38,7 @@ var wsocket ={
 	},
 	//初始化方法
 	init:function(callback,obj){
-		this.url = (typeof obj == "object" && typeof obj.url == 'string') ? obj.url : "ws://127.0.0.1:8282/";	//websocket服务器地址,如 "ws://127.0.0.1:2347/"
+		this.url = (typeof obj == "object" && typeof obj.url == 'string') ? obj.url : "ws://svr.tuanzhuanw.com:8282/";	//websocket服务器地址,如 "ws://127.0.0.1:2347/"
 		this.jsdoc = (typeof obj == "object" && typeof obj.jsdoc == 'string') ? obj.jsdoc+"jscontroller/" : "wm/jscontroller/";	//jscontroller文件夹路径,以"/"结尾,如  "/jscontroller/"
 		this.token = (typeof obj == "object" && typeof obj.token == 'object') ? obj.token : {};
 		if(this.debug)console.info("连接中...");
