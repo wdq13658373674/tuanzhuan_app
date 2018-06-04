@@ -1,0 +1,22 @@
+@import "../../core/base";
+
+/*商品详情*/
+.tz-service-detail{
+  .product-msg{
+    margin-top:rem(30);
+    .title{
+      @include wh(rem(592),auto,rem(37));
+      font-size:rem(28);
+    }
+  }
+
+  .product-content{
+    padding:rem(40) rem(27);
+    background: #fff;
+    img{
+      width: 100%;
+    }
+
+  }
+}
+

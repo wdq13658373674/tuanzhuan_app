@@ -144,6 +144,6 @@
     }
   }
 </script>
-<style lang="css">
-  @import '../../assets/css/ngbDetail.css';
+<style lang="scss">
+  @import '../../assets/scss/ngbDetail.scss';
 </style>

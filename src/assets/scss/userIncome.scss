@@ -1,0 +1,18 @@
+@import "../../core/base";
+
+.user-income-list{
+  background: #fff;
+  .item{
+    padding:rem(27);
+    font-size:rem(28);
+    border-bottom:1px solid $grayLight;
+
+    .p2{
+      margin-top:rem(5);
+    }
+
+    .span{
+      font-size:rem(24);
+    }
+  }
+}

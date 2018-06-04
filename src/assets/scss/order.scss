@@ -1,0 +1,171 @@
+@import "../../core/base";
+
+/*提交订单*/
+.order-total{
+  @include wh(100%,100%,rem(51));
+  padding-right:rem(30);
+  text-align: right;
+  font-size: rem(22);
+}
+
+.order-mark{
+  border-bottom:1px solid $grayLight;
+  padding-bottom:rem(32);
+
+  label{
+    position: relative;
+    display: block;
+    float: left;
+    margin-top:rem(32);
+    margin-right:rem(20);
+    &:after{
+      @include wh(100%,100%);
+      position: absolute;
+      top:0;
+      left:0;
+      content: '';
+    }
+
+    input{
+      display:none;
+    }
+
+    input:checked+.mark{
+      background: $primary;
+      color:#fff;
+      border-color:$primary;
+    }
+  }
+
+  .mark{
+    padding:rem(12) rem(20);
+    min-width: rem(80);
+    font-size:rem(22);
+    text-align: center;
+    @include border-radius(rem(8));
+    float: left;
+    border:1px solid $black;
+  }
+}
+
+.order-shop-list{
+  background: #fff;
+  .item{
+    font-size: rem(24);
+    padding:rem(40) rem(27);
+    @extend %active;
+    border-bottom:1px solid $grayLight;
+  }
+
+  .img-box{
+    @include wh(rem(150),rem(150),rem(150));
+    min-width: rem(150);
+  }
+
+  .title{
+    @include wh(auto,rem(31),rem(31));
+    font-size:rem(24);
+
+    .w388{
+      width: rem(388);
+      @extend %ellipsis-basic;
+    }
+  }
+
+  .con-box{
+    padding-left:rem(20);
+    width:100%;
+    @extend %flex;
+    @include flex-direction();
+    @include justify-content();
+
+    .p2{
+      font-size:rem(22);
+      max-height: rem(66);
+      color:$gray;
+      @include ellipsis-line(2);
+    }
+
+    .p3{
+      em{
+        margin-left:rem(30);
+      }
+    }
+  }
+}
+
+.order-money{
+  .item{
+    padding:0 rem(27);
+  }
+}
+
+.order-remark{
+  background: #fff;
+  padding:rem(20) rem(27);
+
+  .input{
+    @include wh(100%,100%);
+    text-align: right;
+  }
+}
+
+.order-address{
+  display:block;
+  padding:rem(40) rem(27);
+  margin-top:rem(20);
+  font-size:rem(30);
+  background:#fff url("../images/img/d_border.png") left bottom repeat-x;
+  background-size: 100% auto;
+
+  .p{
+    @include wh(auto,rem(50),rem(50));
+    @extend %ellipsis-basic;
+  }
+}
+
+/*送达时间弹窗*/
+.pop-order-time{
+  background: #fff;
+  .tit{
+    text-align: center;
+    @include wh(auto,rem(88),rem(88));
+    font-size:rem(24);
+    border-bottom: 1px solid $grayLight;
+  }
+
+  .time-box{
+    background: $bg;
+    font-size:rem(24);
+    @extend %flex;
+
+    .nav-list{
+      float:left;
+      @include wh(rem(166),rem(90),rem(90));
+      min-width:rem(166);
+      text-align: center;
+
+      .item{
+        display:block;
+        @include wh(rem(166),rem(90),rem(90));
+        &.active{
+          background: #fff;
+        }
+      }
+    }
+
+    .con{
+      height:rem(500);
+      width:100%;
+      background:#fff;
+      padding-left:rem(40);
+
+      .p{
+        @include wh(auto,rem(90),rem(90));
+        border-bottom: 1px solid $grayLight;
+
+        &:last-child{border-bottom:none;}
+      }
+    }
+  }
+}

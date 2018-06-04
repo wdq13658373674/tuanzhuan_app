@@ -1,0 +1,91 @@
+@import "../../core/base";
+
+.page-group{
+  &.gray-bg{
+   position: absolute;
+    min-height:100%;
+    width:100%;
+    background: #464646;
+    padding-top:rem(88);
+    margin-top:rem(-88);
+  }
+}
+
+.user-add-bank{
+  display:block;
+  @include wh(auto,rem(90),rem(90));
+  padding:0 rem(27);
+  color:#fff;
+  font-size:rem(24);
+  background:#525252 url("../images/icons/arrow5.png") right rem(27) center no-repeat;
+
+  &:active{
+    background: $gray;
+  }
+
+  .add{
+    font-size:rem(32);
+  }
+}
+
+.user-bank-list{
+  margin:rem(10) rem(27) rem(30);
+  overflow: hidden;
+  .item{
+    margin-top:rem(20);
+    color:#fff;
+    @extend %flex;
+    background: #C64F55;
+    padding:rem(20);
+    @include border-radius(rem(8));
+  }
+
+  .img-box{
+    @include wh(rem(150),auto);
+    min-width:rem(62);
+    overflow: hidden;
+
+    img{
+      @include wh(100%,auto);
+    }
+  }
+
+  .msg-box{
+    width:100%;
+    padding-left:rem(20);
+  }
+
+  .link{
+    @include wh(rem(123),rem(40),rem(38));
+    min-width:rem(123);
+    font-size:rem(24);
+    text-align: center;
+    color:#fff;
+    border:1px solid #fff;
+    @include border-radius(rem(8));
+  }
+
+  .name{
+    width:100%;
+    p{
+      @extend %ellipsis-basic;
+    }
+  }
+
+  .card{
+    font-size:rem(42);
+    margin-top:rem(30);
+  }
+}
+
+.connect-box{
+  height:rem(83);
+  .bank-connect{
+    text-align: center;
+    font-size:rem(22);
+    color:#fff;
+    bottom:0;
+    position: absolute;
+    @include wh(100%,rem(83),rem(83));
+  }
+}

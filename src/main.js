@@ -109,6 +109,7 @@ const store = new Vuex.Store({
     userInfo:storeJs('userInfo') ? storeJs('userInfo') : {},//用户信息
     storeInfo:storeJs('storeInfo') ? storeJs('storeInfo') : {},//商家信息
     historySearch:storeJs('historySearch') ? storeJs('historySearch') : [],//商品搜索历史记录
+    categoryFilter:storeJs('categoryFilter') ? storeJs('categoryFilter') : {},//商品分类列表筛选状态缓存
   },
   mutations:{
     load(state,loading){
@@ -160,6 +161,13 @@ const store = new Vuex.Store({
         arr.unshift(history);
       }
       storeJs.set('historySearch',state.historySearch);
+    },
+    /**
+     * 更新商品分类列表筛选状态
+     * **/
+    update_category_filter(state,categoryFilter){
+      state.categoryFilter = categoryFilter;
+      storeJs.set('categoryFilter',state.categoryFilter);
     },
   },
   actions:{

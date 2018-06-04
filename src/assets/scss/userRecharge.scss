@@ -1,0 +1,90 @@
+@import "../../core/base";
+
+/*充值*/
+.user-recharge{
+  padding:rem(27);
+
+  .item{
+    font-size:rem(32);
+  }
+}
+
+.user-recharge-rate{
+  background: #fff;
+  padding:rem(27);
+  font-size:rem(24);
+  color:$gray;
+}
+
+.tx-tips{
+  @include wh(auto,rem(90),rem(90));
+  color:$primary;
+  padding:0 rem(27);
+  background: #fff;
+  border-top:1px solid $grayLight;
+}
+
+.btn-orange{
+  width:auto;
+  display:block;
+  margin:rem(60) rem(27) 0;
+  @include border-radius(rem(8));
+
+  &.disabled{
+    background: #F3A58E;
+  }
+}
+
+/*确认付款*/
+.user-confirm-pay{
+  background: #fff;
+
+  .title{
+    @include wh(auto,rem(90),rem(90));
+    font-size:rem(32);
+    text-align: center;
+    border-bottom:1px solid $grayLight;
+  }
+
+  .money{
+    font-size:rem(70);
+    text-align: center;
+    margin-top:rem(20);
+  }
+
+  .type{
+    @include wh(auto,rem(90),rem(90));
+    padding:0 rem(27);
+    border-bottom:1px solid $grayLight;
+  }
+
+  .tips{
+    background: #FBE9EA;
+    color:$primary;
+    padding:rem(27);
+    font-size:rem(24);
+  }
+}
+
+/*选择银行卡弹层*/
+.user-select-bank{
+  background: #fff;
+
+  .title{
+    @include wh(auto,rem(90),rem(90));
+    font-size:rem(32);
+    text-align: center;
+    border-bottom:1px solid $grayLight;
+  }
+
+  .icon{
+    @include wh(rem(40),100%);
+    @extend %inline-block;
+    margin-right:rem(20);
+    &.add{
+      background: url("../images/img/i_bank1.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+  }
+}
+

@@ -181,8 +181,8 @@
     },
   }
 </script>
-<style lang="css" scoped>
-  @import '../../assets/css/shop.css';
+<style lang="scss" scoped>
+  @import '../../assets/scss/shop.scss';
 </style>
 <style lang="scss">
   @import "../../core/base";

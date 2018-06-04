@@ -1,0 +1,116 @@
+@import "../../core/base";
+
+.user-after-sales{
+  //退货申请
+  .sales-list{
+    background: #fff;
+    .item{
+      padding:0 rem(27);
+      @extend %active;
+      overflow: hidden;
+    }
+
+    .link{
+      padding:rem(30) 0;
+      font-size:rem(24);
+      @extend %flex;
+      border-bottom:1px solid $grayLight;
+    }
+
+    .img-box{
+      @include wh(rem(120),rem(120),rem(120));
+      min-width:rem(120);
+      text-align: center;
+      background: $grayLight;
+
+      img{
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .con-box{
+      width:100%;
+      padding-left:rem(20);
+      overflow: hidden;
+
+      .p1{
+        .tit{
+          width:80%;
+          float:left;
+          @extend %ellipsis-basic;
+        }
+        .num{
+          float:right;
+        }
+      }
+
+      .p2{
+        margin-top:rem(10);
+        color:$gray;
+      }
+
+      .p3{
+        margin-top:rem(10);
+        em{
+          font-size:rem(32);
+          color:$primary;
+          margin-right:rem(30);
+        }
+
+        .span{
+          color:$gray;
+          text-decoration:line-through;
+        }
+      }
+    }
+  }
+
+  .sales-total{
+    background: #fff;
+    font-size:rem(24);
+    text-align: right;
+    padding:rem(25) rem(27);
+  }
+
+  .textarea{
+    padding:rem(20) rem(27);
+    width:100%;
+    background: $grayLight;
+    margin-bottom:rem(50);
+  }
+
+  //退货中
+  .sales-back{
+    margin-top:rem(20);
+    padding-top:rem(20);
+    padding-bottom:rem(20);
+    em{
+      font-weight:bold;
+    }
+  }
+
+  .tab-box{
+    @extend %flex;
+    padding:rem(20) rem(27);
+
+    .tab{
+      text-align: center;
+      @include wh(rem(330),rem(56),rem(56));
+      @include border-radius(rem(8));
+      background: #fff;
+
+      &.active{
+        background: $primary;
+        color:#fff;
+      }
+    }
+  }
+
+  .sale-form{
+    margin-bottom:rem(50);
+    label{
+      width:rem(150);
+    }
+  }
+}

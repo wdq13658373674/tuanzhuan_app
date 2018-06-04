@@ -1,0 +1,94 @@
+@import "../../core/base";
+
+/*社区公告列表页*/
+.mark-bg{
+  padding:rem(5) rem(16);
+  color:#fff;
+  min-width: rem(80);
+  font-size:rem(24);
+  text-align: center;
+  @include border-radius(rem(8));
+
+  &.green{
+    background: $green;
+  }
+  &.yellow{
+    background: $yellow;
+  }
+  &.blue{
+    background: $blue;
+  }
+  &.red{
+    background: $red;
+  }
+}
+.post-list{
+  .item{
+    background: #fff;
+    padding:0 rem(27);
+    overflow: hidden;
+    margin-bottom:rem(20);
+
+    &:active{
+      background: $grayLight;
+    }
+  }
+  .p1{
+    @include wh(auto,rem(42),rem(42));
+    font-size:rem(28);
+    margin-top:rem(40);
+    @extend %ellipsis-basic;
+  }
+
+  .p2{
+    @include wh(auto,rem(50),rem(50));
+    color:$gray;
+    font-size:rem(24);
+    border-bottom:1px solid $grayLight;
+    .date{
+      margin-right: rem(30);
+    }
+  }
+
+  .p3{
+    @include wh(auto,rem(60),rem(60));
+    .link{
+      display:block;
+      color:$gray;
+    }
+
+    .arrow{
+      margin-top:rem(16);
+    }
+  }
+}
+
+.post-detail{
+  .p1{
+    @include wh(auto,auto,rem(42));
+    font-size:rem(28);
+    margin-top:rem(40);
+  }
+
+  .p2{
+    @include wh(auto,rem(50),rem(50));
+    color:$gray;
+    font-size:rem(24);
+    border-bottom:1px solid $grayLight;
+    .date{
+      margin-right: rem(30);
+    }
+  }
+
+  .con{
+    img{
+      max-width: 100%;
+      text-align: center;
+    }
+    p{
+      line-height:rem(40);
+      margin-bottom:rem(40);
+      font-size:rem(26);
+    }
+  }
+}

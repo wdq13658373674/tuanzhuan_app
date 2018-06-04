@@ -499,3 +499,38 @@
 @function rem($px){
   @return $px / $rem * 1rem;
 }
+
+/*评论等发送公共样式*/
+%tz-msg-send{
+  @extend %flex;
+  height: rem(102);
+  align-items: center;
+  padding: 0 rem(27);
+  border-top: 1px solid $grayLight;
+
+  .input-group {
+    @include wh(100%, rem(68));
+    @include border-radius(rem(8));
+    border: 1px solid $grayLight;
+    background: #fff;
+
+    .input {
+      @include wh(100%, rem(66), rem(36));
+      min-width: rem(472);
+      padding: rem(15);
+    }
+  }
+
+  .send{
+    @include wh(rem(140),rem(68),rem(68));
+    text-align: center;
+    @include border-radius(rem(8));
+    background: $primary;
+    color:#fff;
+    margin-left:rem(10);
+
+    &:active{
+      background: darken($primary,10%);
+    }
+  }
+}

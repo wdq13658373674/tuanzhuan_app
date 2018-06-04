@@ -1,0 +1,148 @@
+@import "../../core/base";
+
+.neighbor-menu{
+  background: #fff;
+  padding:0 0 rem(30);
+  .item{
+    @include wh(20%,auto);
+    text-align: center;
+    font-size:rem(24);
+    float:left;
+    padding-top:rem(30);
+
+    .img-box{
+      margin:0 auto;
+      @include wh(rem(96),rem(96));
+      @include border-radius(50%);
+      border:1px solid $grayLight;
+
+      .img{
+        height:100%;
+        max-width: none;
+      }
+    }
+
+    .txt{
+      margin-top:rem(20);
+    }
+  }
+}
+
+.neighbor-msg-list{
+  .item{
+    margin-top:rem(20);
+    background: #fff;
+  }
+
+  .link{
+    display:block;
+    padding:rem(30) rem(27);
+    @extend %active;
+  }
+
+  .neighbor{
+    @extend %flex;
+
+    .img-box{
+      @include wh(rem(90),rem(90));
+      min-width:rem(90);
+      @include border-radius(50%);
+      border:1px solid $grayLight;
+
+      img{
+        height:100%;
+      }
+    }
+
+    .con{
+      @include wh(100%,auto);
+      padding-left:rem(20);
+      overflow: hidden;
+
+      .p2{
+        width:100%;
+        @extend %flex;
+        color:$gray;
+        margin-top:rem(15);
+
+        em{
+          @extend %ellipsis-basic;
+          width:60%;
+        }
+      }
+    }
+  }
+
+  .neighbor-content{
+    @include wh(auto,auto,rem(40));
+    max-height: rem(200);
+    overflow: hidden;
+    margin-top:rem(40);
+  }
+
+  .neighbor-thumbs{
+    padding-left:rem(27);
+    background: #fff;
+    .img-box{
+      background: #fff;
+      margin-top:rem(20);
+      @include wh(rem(216),rem(216),rem(214));
+      border:1px solid $grayLight;
+      float:left;
+      margin-right:rem(24);
+
+      &.simple{
+        @include wh(100%,auto);
+      }
+    }
+  }
+
+  .neighbor-bar{
+    @extend %flex;
+    overflow: hidden;
+    @include wh(auto,rem(70),rem(70));
+    padding:0 rem(27);
+    .box{
+      width:100%;
+
+      &:nth-child(1){
+        @extend %ellipsis-basic;
+      }
+
+      &:nth-child(2){
+        text-align: right;
+      }
+
+      .icon{
+        @include wh(rem(70),100%);
+      }
+    }
+  }
+
+  .neighbor-comment{
+    padding:rem(15) rem(27);
+    border-top:1px solid $grayLight;
+
+    .comment-list{
+      li{
+        line-height:rem(40);
+        @include justify-content(flex-start);
+        em{
+          color:rgb(88 ,164, 232);
+          padding-right:rem(8);
+        }
+      }
+    }
+
+    .thumbs2{
+      float:left;
+      margin-top:rem(5);
+      margin-right:rem(10);
+    }
+  }
+}
+
+.tz-msg-send{
+  background: $grayLighter;
+  @extend %tz-msg-send;
+}

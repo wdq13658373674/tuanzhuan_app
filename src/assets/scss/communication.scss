@@ -1,0 +1,161 @@
+@import "../../core/base";
+
+.tz-communication{
+  background: #fff;
+  overflow: hidden;
+  position: absolute;
+  @include wh(100%,100%);
+  padding-top:rem(88);
+  @extend %flex;
+  @include flex-direction();
+
+  .tz-communication-wrap{
+    position:relative;
+    overflow: hidden;
+    height:100%;
+    padding-bottom:rem(30);
+  }
+
+  .tz-communication-list{
+    li{
+      float:left;
+      width:100%;
+      padding:0 rem(27);
+      margin-top:rem(30);
+
+      &.customer{
+        .img-box{
+          float:left;
+        }
+        .con-box{
+          float:left;
+          background: $bg;
+          color:#000;
+        }
+      }
+    }
+
+    .tip{
+      text-align: center;
+
+      span{
+        background: $bg;
+        padding:rem(20);
+        margin-top:rem(24);
+        @extend %inline-block;
+      }
+
+      em{
+        color:$primary;
+      }
+    }
+
+    .img-box{
+      float:right;
+      @include wh(rem(72),rem(72));
+      @include border-radius(50%);
+      border:1px solid $grayLight;
+      text-align: center;
+
+      img{
+        height: 100%;
+        width:100%;
+      }
+    }
+
+    .con-box{
+      float:right;
+      margin:0 rem(30);
+      max-width: 60%;
+      //padding:rem(20);
+      background: $primary;
+      color:#fff;
+      @include border-radius(rem(8));
+      overflow: hidden;
+
+      .text{
+        margin:rem(20);
+        overflow: hidden;
+      }
+    }
+  }
+
+  .bottom{
+    @include wh(100%,auto);
+
+    .enter-box{
+      @extend %flex;
+      height:rem(102);
+      align-items: center;
+      padding:0 rem(27);
+      border-top:1px solid $grayLight;
+
+      .input-group{
+        @include wh(100%,rem(68));
+        @include border-radius(rem(8));
+        border:1px solid $grayLight;
+
+        .input{
+          @include wh(100%,rem(66),rem(36));
+          min-width:rem(472);
+          padding:rem(15);
+        }
+      }
+
+      .icon{
+        @include wh(rem(53),100%);
+        min-width:rem(60);
+        margin-left:rem(15);
+
+        &.icon1{
+          background: url("../images/img/j_3.png") center no-repeat;
+          background-size: 100% auto;
+        }
+
+        &.icon2{
+          background: url("../images/img/j_4.png") center no-repeat;
+          background-size: 100% auto;
+        }
+
+      }
+    }
+
+    .util-box-list{
+      border-top:1px solid $grayLight;
+      height:0;
+      overflow: hidden;
+      @include transition(all .3s linear);
+
+      &.active{
+        height:auto;
+        padding:rem(30) 0;
+      }
+
+      .item{
+        padding:0 rem(30);
+        text-align: center;
+        float:left;
+        .img{
+          @include wh(rem(80),rem(80));
+        }
+
+        p{
+          margin-top:rem(10);
+        }
+      }
+    }
+
+    .send{
+      @include wh(rem(140),rem(68),rem(68));
+      text-align: center;
+      @include border-radius(rem(8));
+      background: $primary;
+      color:#fff;
+      margin-left:rem(10);
+
+      &:active{
+        background: darken($primary,10%);
+      }
+    }
+  }
+}

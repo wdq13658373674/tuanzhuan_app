@@ -1,0 +1,44 @@
+@import "../../core/base";
+
+.tz-keybord{
+  @extend %flex;
+  background: #F2F2F2 ;
+  font-size:rem(32);
+  text-align: center;
+  border-top:1px solid  #E8E8E8;
+
+  li{
+    @extend %active;
+  }
+
+  .number-box{
+    @include wh(75%,rem(468));
+    @extend %flex;
+    @include flex-wrap();
+
+    li{
+      border:1px solid  #E8E8E8;
+      border-top:0;
+      @include wh(33.3333333%,rem(117),rem(117));
+    }
+  }
+
+  .opera-box{
+    @include wh(25%,rem(468));
+
+    li{
+      @include wh(100%,rem(234),rem(234));
+    }
+
+    .sure{
+      background: $primary;
+      color:#fff;
+    }
+
+    .delete{
+      .img{
+        @include wh(rem(39),rem(29));
+      }
+    }
+  }
+}

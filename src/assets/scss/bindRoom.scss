@@ -1,0 +1,17 @@
+@import "../../core/base";
+
+.user-bind-rooms{
+  .h5{
+    border-bottom:1px solid $grayLight;
+  }
+  .tips{
+    padding:0 rem(27);
+    font-size:rem(22);
+    color:$primary;
+    margin-top:rem(20);
+  }
+
+  .btn{
+    margin-top:rem(22);
+  }
+}

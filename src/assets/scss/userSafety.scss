@@ -1,0 +1,16 @@
+@import "../../core/base";
+
+.user-safety-list{
+  .icon{
+    @include wh(rem(24),100%);
+    margin-right:rem(30);
+    &.icon1{
+      background: url("../images/img/i_icon9.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon2{
+      background: url("../images/img/i_icon8.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+  }
+}

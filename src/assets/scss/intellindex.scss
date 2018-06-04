@@ -1,0 +1,173 @@
+@import "../../core/base";
+
+/*自能家居-首页*/
+.tz-device-main{
+  position: absolute;
+  padding:rem(88) 0 0;
+  margin-top:rem(-88);
+  height:100%;
+  width:100%;
+
+  .flex-box{
+    height:100%;
+    @include display-flex();
+    @include flex-direction();
+    @include align-content(stretch);
+  }
+
+  .title{
+    color:#fff;
+    padding:rem(20) rem(27);
+  }
+
+  .change{
+    display:block;
+    float: left;
+    text-align: center;
+    padding:rem(5) rem(14);
+    border:1px solid #fff;
+    @include border-radius(rem(8));
+    color:#fff;
+    margin-left:rem(10);
+  }
+
+  .flex-content{
+    height:100%;
+    margin:rem(30) 0 0;
+    padding:0 rem(27);
+    @extend %flex;
+
+    .tabs{
+      height:96%;
+      width:rem(110);
+      min-width:rem(110);
+      background: #fff;
+      @include border-radius(rem(8));
+      @include display-flex();
+      @include flex-direction();
+      @include justify-content();
+
+      .tab-items{
+        height:100%;
+        overflow: hidden;
+      }
+
+      .item{
+        @include wh(100%,auto);
+        text-align: center;
+        padding:rem(20) 0;
+
+        &:nth-child(1){
+          padding:rem(30) 0;
+        }
+
+        &.active{
+          .icon{
+            &.icon1{
+              background-image: url("../images/img/m_hicon1.png");
+            }
+          }
+        }
+
+        p{
+          margin-top:rem(10);
+          font-size:rem(22);
+        }
+
+        .m_icon{
+          display:block;
+          @include wh(100%,rem(41));
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: auto 100%;
+
+          &.set{
+            background-image: url("../images/icons/set.png");
+          }
+        }
+      }
+    }
+
+    .tab-box{
+      position: relative;
+      @include wh(100%,100%);
+      padding-left:rem(20);
+      overflow: hidden;
+    }
+
+    .device-list{
+      overflow: hidden;
+      .item{
+        padding:rem(28) rem(30);
+        background: #fff;
+        @include border-radius(rem(8));
+        @extend %flex;
+        margin-bottom:rem(20);
+
+        @extend %active;
+
+        &.active{
+          .state{
+            color:$primary;
+          }
+
+          .open{
+            background: url("../images/img/m_img6.png") right center no-repeat;
+            background-size: auto 100%;
+          }
+        }
+      }
+
+      .add{
+        display: block;
+        width:100%;
+        text-align: center;
+      }
+
+      .img-box{
+        @include wh(rem(150),rem(150));
+        min-width:rem(150);
+        @include align-self(center);
+
+        .img{
+          height:100%;
+          max-width:inherit;
+        }
+      }
+
+      .content-box{
+        width:100%;
+        padding-left:rem(30);
+        @extend %flex;
+        @include flex-direction();
+
+        .p1{
+          @include wh(auto,rem(30),rem(30));
+          span:nth-child(1){
+            font-size:rem(22);
+            float:left;
+          }
+          span:nth-child(2){
+            float:right;
+          }
+        }
+
+        .p2{
+          margin:rem(10) 0;
+        }
+
+        .open{
+          @include wh(rem(60),rem(32));
+          display: block;
+          float:right;
+          background: url("../images/img/m_img5.png") right center no-repeat;
+          background-size: auto 100%;
+        }
+
+        .state{
+          color:$gray;
+        }
+      }
+    }
+  }
+}

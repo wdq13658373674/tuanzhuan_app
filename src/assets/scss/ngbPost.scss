@@ -1,0 +1,49 @@
+@import "../../core/base";
+
+.tz-neighbor-post{
+  .textarea{
+    width:100%;
+    padding:rem(32) 0;
+  }
+
+  .upload-img{
+    padding:0 0 rem(30) rem(27);
+    background: #fff;
+
+    .img-list{
+      .img-box{
+        float:left;
+        margin-top:rem(30);
+        margin-right:rem(20);
+        @include wh(rem(159),rem(159));
+        border:1px solid $gray;
+
+        img{
+          height:100%;
+        }
+      }
+    }
+
+    .upload{
+      float:left;
+      margin-top:rem(30);
+      @include wh(rem(157),rem(157));
+      background: url("../images/img/l_img1.png") no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+}
+
+.tz-neighbor-rule{
+  &.bottom-fixed{
+    background: none !important;
+    text-align: center;
+    padding-bottom:rem(30);
+    border-top:none;
+  }
+
+  a{
+    text-decoration: underline;
+    color:gray;
+  }
+}
