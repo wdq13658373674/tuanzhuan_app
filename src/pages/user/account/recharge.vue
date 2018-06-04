@@ -177,7 +177,7 @@
               _this.qrcodeUrl = result;
             }else{
               if(type=='alipay'){
-                $("body").html(result);
+                location.href = result;
                 console.log(result);
               }else if(type=='weixin'){
                 location.href = result;
