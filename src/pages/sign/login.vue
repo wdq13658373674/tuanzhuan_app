@@ -107,7 +107,7 @@
 
           this.$vux.toast.show('登陆成功');
           if(navigator.userAgent.indexOf('MicroMessenger')>-1){
-            location.href = global.API_HOST+'index/index/wxlogin?user_id='+res.data.user.user_id+'&returns='+encodeURI('http://'+location.host+'/#/user');
+            location.href = global.API_HOST+'index/wxlogin?user_id='+res.data.user.user_id+'&returns='+encodeURI('http://'+location.host+'/#/user');
             return;
           }
 
