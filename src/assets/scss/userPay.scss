@@ -1,0 +1,63 @@
+@import "../../core/base";
+
+.user-pay{
+  background: $primary;
+  color:#fff;
+  padding:0 rem(27);
+  overflow: hidden;
+
+  .p1{
+    font-size:rem(24);
+    margin-top:rem(60);
+  }
+  .p2{
+    font-size:rem(130);
+    margin:rem(10) 0 rem(30);
+  }
+}
+
+.user-pay-list{
+  .item{
+    font-size:rem(24);
+  }
+
+  .icon{
+    @extend %inline-block;
+    @include wh(rem(35),100%);
+    margin-right:rem(20);
+    &.icon1{
+      background: url("../images/img/i_pay1.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon2{
+      background: url("../images/img/i_pay2.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+  }
+}
+
+.user-pay-check{
+  text-align: center;
+  .p1{
+    font-size:rem(24);
+    margin:rem(30) 0;
+  }
+
+  .btn{
+    @include wh(rem(198),rem(66),rem(66));
+    @include border-radius(rem(8));
+    margin-bottom:rem(30);
+  }
+}
+
+.connect-box{
+  height:rem(83);
+  .bank-connect{
+    text-align: center;
+    font-size:rem(22);
+    color:#BBBBBB;
+    bottom:0;
+    position: absolute;
+    @include wh(100%,rem(83),rem(83));
+  }
+}

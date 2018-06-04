@@ -202,11 +202,12 @@
   }
 </script>
 <style lang="css" scoped>
-  @import '../../assets/css/neighbor.css';
   @import '../../assets/css/preview.css';
 </style>
 
-<style lang="css">
+<style lang="scss">
+  @import '../../assets/scss/neighbor.scss';
+
   .my-gallery figure{
     background: #fff;
     margin-top: .4rem;

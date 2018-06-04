@@ -1,0 +1,13 @@
+@import "../../core/base";
+
+.tz-wx-box{
+  border-top:1px solid $grayLight;
+
+  .ew-box{
+    @include wh(rem(366),rem(366));
+    margin:rem(110) auto;
+    img{
+      @include wh(100%,100%);
+    }
+  }
+}

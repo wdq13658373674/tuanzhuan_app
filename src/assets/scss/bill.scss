@@ -1,0 +1,30 @@
+@import "../../core/base";
+
+//生活缴费账单
+.life-bill{
+  background: #fff;
+  .p1{
+    font-size:rem(60);
+    color:$primary;
+    margin-top:rem(80);
+
+    .img{
+      @include wh(rem(174),rem(187));
+    }
+  }
+
+  .p2{
+    font-size: rem(40);
+  }
+
+  .msg-list{
+    margin-top:rem(110);
+    background: #fff;
+    border-top:1px solid $grayLight;
+
+    .item{
+      @extend %flex;
+      padding:rem(30) rem(27);
+    }
+  }
+}

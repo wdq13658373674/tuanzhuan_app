@@ -16,7 +16,7 @@ html, body {
   min-height: 100%;
   width: 100%;
   overflow-x: hidden;
-  -webkit-user-select: none
+  -webkit-user-select: none;
 }
 body {
   font-family: $baseFontFamily;
@@ -36,16 +36,21 @@ input, textarea, select, button {
   outline:none;
 }
 input[type='text'],input[type='password'],input[type='number']{
-  border:0;
+  border:none;
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
   appearance: none;
 }
+input[disabled]{color:#000;opacity:1}
 button,input,select,textarea {
   font: inherit;
   color: inherit;
+  border:none;
+  background: none;
+  outline: none;
 }
+
 a {
   color: $black;
   outline: none;

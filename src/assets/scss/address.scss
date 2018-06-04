@@ -1,0 +1,55 @@
+@import "../../core/base";
+
+/*商城-添加地址*/
+.address-add{
+  .item{
+    padding: 0 rem(27);
+  }
+
+  .area{
+    @extend %flex;
+    width:50%;
+    border-right:1px solid $grayLight;
+    font-size:rem(24);
+
+    &:last-child{
+      border-right:none;
+    }
+  }
+}
+
+.address-list{
+  .item{
+    background: #fff;
+    padding:rem(40) rem(27);
+    @extend %flex;
+    @include align-items(center);
+    //height:rem(205);
+    margin-bottom:rem(20);
+
+    @extend %active;
+  }
+
+  .cell{
+    width:100%;
+    @include align-items(center);
+  }
+
+  .txt{
+    width:100%;
+    padding:0 rem(40);
+    font-size:rem(24);
+  }
+
+  .p2{
+    @include ellipsis-line(2);
+    margin-top:rem(20);
+  }
+
+  .link{
+    @include wh(rem(100),100%,rem(125));
+    min-width: rem(100);
+    border-left:1px solid $grayLight;
+    text-align: center;
+  }
+}

@@ -9,12 +9,12 @@
       </div>
 
       <div class="shop-filter">
-        <span class="item" @click="tab(0)" :class="{'active':tabIndex==0}">销量优先</span>
-        <span class="item" @click="tab(1)" :class="{'active':tabIndex==1}">
+        <span class="item" @click="tab(0)" :class="{'active':condition.sales}">销量优先</span>
+        <span class="item" @click="tab(1)" :class="{'active':condition.price}">
           价格排序
           <i class="icon sort" :class="{'up':sortIndex==1 || sortIndex==3,'down':sortIndex==0 || sortIndex==2}"></i>
         </span>
-        <span class="item" @click="tab(2)" :class="{'active':tabIndex==2}">
+        <span class="item" @click="tab(2)" :class="{'active':condition.goods_price || condition.goods_price}">
           筛选
           <i class="icon filter"></i>
         </span>
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState,mapMutations} from 'vuex'
   import infiniteScroll from 'vue-infinite-scroll'
   import { LoadMore} from 'vux'
   export default {
@@ -114,17 +114,19 @@
       }
     },
     computed:{
-      ...mapState(['storeInfo']),
+      ...mapState(['storeInfo','categoryFilter']),
     },
     mounted(){
       this.loadMore();
     },
     methods: {
+      ...mapMutations(['update_category_filter']),
       /**
        * 获取分类搜索列表
        * flag:(true : 表示下拉加载)
        * **/
       getSearchLists(flag){
+        this.condition=this.categoryFilter;
         this.condition.keyword=this.keyword;
 
         let params={
@@ -171,7 +173,7 @@
         this.getSearchLists(true);
       },
       /**
-       * 筛选切换
+       * tab切换
        * **/
       tab(index) {
         this.tabIndex=index;
@@ -182,6 +184,7 @@
           this.reset();
           this.loadMore();
         }
+        this.update_category_filter(this.condition);
       },
       /**
        * 价格排序
@@ -245,13 +248,19 @@
           p1:this.p3,
           p2:this.p4,
         };
+
+        this.update_category_filter(this.condition);
+      },
+      beforeRouteLeave(to, from, next) {
+        const arr=['shopDetail'];
+
+        console.log(to);
+        if (arr.indexOf(to.name)==-1) {
+          this.update_category_filter({});
+        }
+        next();
       }
     },
-    //修改meta值设置为false,再次进入页面会重新请求数据。
-    beforeRouteLeave(to, from, next) {
-      from.meta.keepAlive = false;
-      next();
-    }
   }
 </script>
 <style lang="css" scoped>

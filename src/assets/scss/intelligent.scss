@@ -1,0 +1,142 @@
+@import "../../core/base";
+
+/*智能家居-搜索网关*/
+.intelligent-empty{
+  text-align: center;
+  position: absolute;
+  top:50%;
+  margin-top:rem(-43);
+  width:100%;
+
+  .img{
+    @include wh(rem(98),rem(86));
+  }
+
+  .img2{
+    @include wh(rem(85),rem(85));
+  }
+}
+
+/*登陆网关-切换房屋*/
+.tz-device-house{
+  .cell-list{
+    .name{
+      width:80%;
+      @include flex-wrap();
+    }
+  }
+}
+
+
+
+/*添加zigbee设备*/
+.tz-device-tips{
+  background: #fff;
+  overflow: hidden;
+  .img-box{
+    @include wh(rem(514),rem(460));
+    border:1px solid $grayLight;
+    margin:rem(100) auto 0;
+    @include border-radius(rem(8));
+
+    img{
+      @include wh(100%,100%);
+    }
+  }
+
+  .con{
+    width:rem(514);
+    text-align: center;
+    margin:rem(60) auto;
+  }
+}
+
+/**启动wifi设备**/
+.tz-start-device{
+  .arrow-cell-list{
+    .link{
+      p{
+        &:nth-child(2){
+          font-size:rem(22);
+          color:$gray;
+          margin-top:rem(10);
+        }
+      }
+    }
+  }
+}
+
+/*选择链接设备*/
+.tz-link-device{
+  .cell-list{
+    .cell{
+      @include align-items(center);
+    }
+    .name{
+      width:100%;
+      margin-left:rem(20);
+    }
+  }
+}
+
+/*房间管理*/
+.tz-device-room{
+  .m_icon{
+    float:left;
+    @include wh(rem(60), rem(90));
+    background-repeat: no-repeat;
+    background-size: 60% auto;
+    background-position: left center;
+  }
+}
+
+/*添加房间*/
+.tz-device-roomicon{
+  .roomicon-list{
+    background: #fff;
+    padding:0 0 rem(40) rem(27);
+
+    .item{
+      width:rem(158);
+      float: left;
+      text-align: center;
+      margin-top:rem(40);
+      margin-right:rem(20);
+
+      &:active{
+        .img-box{
+          background: $grayLight;
+        }
+      }
+    }
+
+    .img-box{
+      @include wh(rem(158),rem(158),rem(158));
+      background: $bg;
+
+      .m_icon{
+        @include wh(100%,100%);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: auto 30%;
+      }
+    }
+  }
+}
+
+/*智能摄像机*/
+.tz-intelligent-camera{
+  position:absolute;
+  @include wh(100%,100%);
+  @extend %flex;
+  @include flex-direction();
+
+  .camera-box{
+    height:100%;
+    background: #000;
+  }
+  .camera-control{
+    height:100%;
+  }
+}
+

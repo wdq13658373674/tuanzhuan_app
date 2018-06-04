@@ -1,0 +1,145 @@
+@import "../../core/base";
+
+.user-header{
+  background: $primary;
+  color:#fff;
+  overflow: hidden;
+  font-size:rem(24);
+  //min-height:rem(412);
+
+  .head-img{
+    text-align: center;
+    margin-top:rem(60);
+
+    .img-box{
+      @include wh(rem(130),rem(130));
+      @include border-radius(50%);
+      overflow: hidden;
+      text-align: center;
+      margin-left:auto;
+      margin-right:auto;
+      border:1px solid #fff;
+
+      img{
+        height:100%;
+      }
+    }
+  }
+
+  .p1{
+    text-align: center;
+    margin-top:rem(20);
+    height:rem(40);
+  }
+
+  .p2{
+    text-align: center;
+    margin-top:rem(10);
+    height:rem(40);
+  }
+}
+
+.user-menu{
+  @extend %flex;
+  .item{
+    width:100%;
+    margin:rem(20) 0 rem(36);
+    border-right:1px solid $grayLight;
+    text-align: center;
+
+    &:last-child{
+      border:none;
+    }
+
+    .p1{
+      height:rem(40);
+      font-size:rem(30);
+    }
+
+    .p2{
+      font-size:rem(24);
+      margin-top:rem(10);
+    }
+  }
+}
+
+.user-belong-list{
+  @extend %flex;
+  .item{
+    margin:rem(30) 0;
+    @include border-radius(rem(8));
+    @include wh(rem(155),rem(210));
+    padding:rem(20);
+    position: relative;
+
+    &:nth-child(1){
+      background: #FDF2EF;
+    }
+    &:nth-child(2){
+      background: #FCF6E6;
+    }
+    &:nth-child(3){
+      background: #F9FDEB;
+    }
+    &:nth-child(4){
+      background: #E8F5FC;
+    }
+  }
+
+  .p1{
+    font-size:rem(26);
+  }
+
+  .p2{
+    height:rem(90);
+    overflow: hidden;
+    font-size:rem(22);
+    margin-top:rem(10);
+  }
+
+  .icon{
+    position: absolute;
+    bottom:20px;
+    right:20px;
+    margin-top:rem(66);
+    float:right;
+  }
+}
+
+.user-func{
+  .h4{
+    height:auto;
+    span{
+      display:block;
+      @include wh(auto,30px,30px);
+      border-left:7px solid $primary;
+      margin:rem(30) 0;
+      padding-left:rem(15);
+    }
+  }
+
+  .user-func-list{
+    background: #fff;
+
+    .item{
+      @include wh(25%,rem(236));
+      text-align: center;
+      float:left;
+    }
+
+    .link{
+      display:block;
+      height:100%;
+    }
+
+    .img{
+      width: rem(51);
+      height: rem(51);
+      margin-top:rem(63)
+    }
+    .p1{
+      font-size:rem(24);
+      margin-top:rem(30);
+    }
+  }
+}

@@ -39,16 +39,18 @@
 .tips{
   @include wh(auto,rem(64),rem(64));
   overflow: hidden;
-  border-bottom:rem(1) solid $grayLight;
+  border-bottom:1px solid $grayLight;
 }
 
 .life-list{
-  @extend %flex;
+  width:rem(725);
+  padding-bottom:rem(40);
 
   .item{
     @include wh(rem(120),auto);
+    float:left;
+    margin:rem(40) rem(25) 0 0;
     text-align: center;
-    margin:rem(40) 0;
   }
 
   .img-box{

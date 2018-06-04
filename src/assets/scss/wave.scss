@@ -1,0 +1,40 @@
+@import "../../core/base";
+
+
+@keyframes move_wave {
+  0% {
+    transform: translateX(0) translateZ(0) scaleY(1)
+  }
+  50% {
+    transform: translateX(-25%) translateZ(0) scaleY(0.8)
+  }
+  100% {
+    transform: translateX(-50%) translateZ(0) scaleY(1)
+  }
+}
+
+.waveWrapper{
+  position: relative;
+  @include wh(100%,rem(60));
+  margin-top:rem(60);
+  overflow: hidden;
+}
+
+.wave{
+  @include wh(100%,100%);
+  position:absolute;
+  left:0;
+
+  &.waveTop{
+    background: url('../images/img/i_wave1.png') left bottom no-repeat;
+    background-size: 100% auto;
+  }
+  &.waveMiddle{
+    background: url('../images/img/i_wave2.png') left bottom rem(10) no-repeat;
+    background-size: 100% auto;
+  }
+  &.waveBottom{
+    background: url('../images/img/i_wave3.png') left bottom rem(20) no-repeat;
+    background-size: 100% auto;
+  }
+}

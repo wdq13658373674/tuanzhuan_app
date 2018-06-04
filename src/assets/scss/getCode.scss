@@ -1,0 +1,16 @@
+@import "../../core/base";
+
+.tz-getcode{
+  .h2{
+    margin:rem(27) 0;
+  }
+  .label{
+    margin-right:rem(20);
+    min-width:rem(150);
+  }
+
+  .form-code{
+    width:100%;
+    text-align: right;
+  }
+}

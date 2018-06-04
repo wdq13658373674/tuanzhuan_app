@@ -307,18 +307,6 @@
         }
       }
     },
-    /**
-     * 设置keepAlive
-     * 如果返回到 ShopCategory 页面就改变它的keepAlive 为true
-     * **/
-    beforeRouteLeave(to, from, next) {
-      if (to.name == "ShopCategory") {
-        to.meta.keepAlive = true;
-      } else {
-        to.meta.keepAlive = false;
-      }
-      next();
-    }
   }
 </script>
 <style lang="css" scoped>

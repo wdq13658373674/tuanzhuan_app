@@ -1,0 +1,31 @@
+@import "../../core/base";
+
+.h2{
+  @include wh(auto,rem(85),rem(85));
+}
+.btn-orange{
+  width:auto;
+  display:block;
+  margin:rem(60) rem(27) 0;
+  @include border-radius(rem(8));
+
+  &.disabled{
+    background: #F3A58E;
+  }
+}
+
+.bind-bank{
+  label{
+    min-width:rem(150);
+  }
+
+}
+
+.bank-rule{
+  font-size:rem(24);
+  text-align: center;
+  margin-top:rem(30);
+  a{
+    color:$green;
+  }
+}

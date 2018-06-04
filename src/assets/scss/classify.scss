@@ -1,0 +1,68 @@
+@import "../../core/base";
+
+/*商品全部分类,服务全部分类*/
+.classify-box{
+  background: #fff;
+  @extend %flex;
+  position: absolute;
+  height:100%;
+  width:100%;
+  padding-top:rem(88);
+  margin-top:rem(-88);
+  //bottom:0;
+  //left:0;
+}
+
+.classify-list{
+  border-right:1px solid $grayLight;
+  .item{
+    @include wh(rem(166),rem(90),rem(50));
+    padding:rem(20) 0;
+    text-align: center;
+    overflow: hidden;
+    font-size:rem(28);
+
+    &.active{
+      .txt{
+        color:$primary;
+        border-left:rem(8) solid $primary;
+
+        .span{
+          margin-left:rem(-8);
+        }
+      }
+    }
+  }
+
+  .txt{
+    display:block;
+  }
+}
+
+.classify-content{
+  @include wh(100%,auto);
+  padding:0 rem(47) rem(40);
+}
+
+.classify-content-list{
+  width:rem(510);
+  margin-bottom: rem(40);
+
+  .item{
+    float:left;
+    @include wh(rem(150),auto);
+    margin-top:rem(40);
+    margin-right:rem(20);
+  }
+
+  .img-box{
+    @include wh(rem(150),rem(150),rem(150));
+    overflow: hidden;
+  }
+
+  .txt{
+    font-size:rem(24);
+    margin-top:rem(29);
+    text-align: center;
+  }
+}

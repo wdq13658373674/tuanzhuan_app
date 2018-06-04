@@ -1,0 +1,52 @@
+@import "../../core/base";
+
+/*个人中心-个人中心资料*/
+.user-data-list{
+  .icon{
+    margin-right:rem(30);
+    @include wh(rem(24),100%);
+
+    &.icon1{
+      background: url("../images/img/i_icon1.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon2{
+      background: url("../images/img/i_icon3.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon3{
+      background: url("../images/img/i_icon2.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon4{
+      background: url("../images/img/i_icon4.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon5{
+      background: url("../images/img/i_icon5.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon6{
+      background: url("../images/img/i_icon6.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+    &.icon7{
+      background: url("../images/img/i_icon7.png") left center no-repeat;
+      background-size: 100% auto;
+    }
+  }
+
+  .user-img{
+    @include wh(rem(72),rem(72));
+    @include border-radius(50%);
+    border:1px solid $grayLight;
+    overflow: hidden;
+    margin-top:rem(10);
+
+    img{
+      height:100%;
+    }
+  }
+}
+
+/*修改名称、修改姓名、修改手机号*/

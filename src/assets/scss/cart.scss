@@ -1,0 +1,91 @@
+@import "../../core/base";
+
+/*购物车*/
+.cart-empty{
+  text-align: center;
+  font-size: rem(24);
+  @include wh(100%,auto);
+  position: absolute;
+  top:50%;
+  margin-top:rem(-231);
+
+  .p1{
+    img{
+      @include wh(rem(164),rem(162));
+    }
+  }
+  .p2{
+    margin-top:rem(60);
+  }
+  .link{
+    @include wh(rem(160),rem(80),rem(80));
+    @extend %orange-btn;
+    font-size:rem(28);
+    margin-top:rem(40);
+  }
+}
+
+.cart-shop-list{
+  .item{
+    background: #fff;
+    @extend %flex;
+    padding:rem(40) rem(27);
+    margin-bottom:rem(20);
+
+    label{
+      padding-top:rem(57);
+    }
+  }
+
+  .link{
+    width:100%;
+    margin-left:rem(20);
+
+    .product{
+      @extend %flex;
+    }
+
+    .img-box{
+      background: $grayLighter;
+      @include wh(rem(150),rem(150),rem(150));
+      min-width:rem(150);
+      margin-right:rem(30);
+    }
+
+    .con-box{
+      width:100%;
+      font-size:rem(24);
+
+      .p1{
+        @include wh(100%,rem(105),rem(35));
+        @include ellipsis-line(3);
+      }
+
+      .p2{
+        margin-top:rem(9);
+        @include wh(100%,rem(36),rem(36));
+        color:$gray;
+        overflow: hidden;
+      }
+    }
+
+    .bottom{
+      font-size:rem(22);
+      margin-top:rem(52);
+    }
+  }
+}
+
+.cart-radio{
+  @include wh(rem(100),rem(102),rem(102));
+  min-width:rem(100);
+  margin-left:rem(27);
+  @include align-items(center);
+}
+
+.cart-total{
+  @include wh(100%,100%,rem(51));
+  padding-right:rem(30);
+  text-align: right;
+  font-size: rem(22);
+}

@@ -1,0 +1,39 @@
+@import "../../core/base";
+
+.user-add-room{
+  .owner{
+    background: #fff;
+    @extend %flex;
+    align-items: center;
+    padding:rem(30) rem(27);
+
+    .img-box{
+      @include wh(rem(72),rem(72),rem(72));
+      text-align: center;
+      min-width:rem(72);
+      @include border-radius(50%);
+      border:1px solid $grayLight;
+    }
+
+    .con-box{
+      width:100%;
+      padding-left:rem(20);
+    }
+  }
+
+  .owner-list{
+    background: #fff;
+
+    .owner{
+      padding-left:rem(114);
+
+      &.active{
+        @extend %active;
+      }
+
+      .link{
+        display:block;
+      }
+    }
+  }
+}

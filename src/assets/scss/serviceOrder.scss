@@ -1,0 +1,40 @@
+@import "../../core/base";
+
+.tz-service-order{
+  .order-shop-list{
+    background: #fff;
+    .item{
+      font-size: rem(24);
+      padding:rem(40) rem(27);
+      @extend %active;
+      border-bottom:1px solid $grayLight;
+    }
+
+    .img-box{
+      @include wh(rem(150),rem(150),rem(150));
+      min-width: rem(150);
+    }
+
+    .title{
+      @include wh(100%,rem(31),rem(31));
+      font-size:rem(24);
+      @extend %ellipsis-basic;
+    }
+
+    .con-box{
+      padding-left:rem(20);
+      width:100%;
+      overflow: hidden;
+      @extend %flex;
+      @include flex-direction();
+      @include justify-content();
+
+      .p2{
+        font-size:rem(22);
+        max-height: rem(66);
+        color:$gray;
+        @include ellipsis-line(2);
+      }
+    }
+  }
+}

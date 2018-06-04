@@ -1,0 +1,168 @@
+@import "../../core/base";
+
+/*商品搜索结果页 商品分类详情*/
+.shop-search-list{
+  background: #fff;
+  overflow: hidden;
+  .item{
+    padding:rem(40) rem(27);
+    @extend %active;
+  }
+
+  .img-box{
+    @include wh(rem(250),rem(250),rem(250));
+    min-width:rem(250);
+    background: $bg;
+    text-align: center;
+  }
+
+  .title{
+    @include wh(auto,auto,rem(31));
+    @include ellipsis-line(4);
+  }
+
+  .con-box{
+    padding-left:rem(20);
+    width:100%;
+    @extend %flex;
+    @include flex-direction();
+    @include justify-content();
+  }
+
+  .shop-mark{
+    margin-left:0;
+    margin-right:rem(10);
+  }
+}
+
+.shop-filter{
+  position: relative;
+  @include wh(100%,rem(90),rem(90));
+  @extend %flex;
+  background: #fff;
+  padding:0 rem(27);
+  border-bottom:1px solid $grayLight;
+  font-size:rem(24);
+
+  .item{
+    padding:0 30px;
+    &.active{
+      color:$primary;
+
+      &:nth-child(2){
+        background: url("../images/icons/sort2.svg") center right no-repeat;
+        background-size: rem(18),rem(26);
+      }
+    }
+
+    &:nth-child(2){
+      background: url("../images/icons/sort2.svg") center right no-repeat;
+      background-size: rem(18),rem(26);
+    }
+
+    &:nth-child(3){
+      background: url("../images/icons/filter.svg") center right no-repeat;
+      background-size: rem(17),rem(20);
+    }
+  }
+}
+
+
+
+.sort-price{
+  .item{
+    padding:0 rem(27);
+    font-size:rem(24);
+    border-bottom:1px solid $grayLight;
+
+    &:last-child{
+      border-bottom:none;
+    }
+
+    @extend %active;
+  }
+}
+
+.sort-filter{
+  background: #fff;
+  overflow: hidden;
+  .item{
+    @extend %flex;
+    padding:0 rem(27);
+    font-size:rem(24);
+    margin-top:rem(30);
+    @include wh(100%,rem(60),rem(60));
+
+    .line{
+      color:gray;
+      margin:0 rem(28);
+    }
+
+    .tit{
+      min-width:rem(116);
+    }
+
+    input{
+      @include wh(100%,rem(60));
+      border: 1px solid $grayLight;
+      text-align:center;
+      @include border-radius(rem(8));
+    }
+  }
+
+  .bottom{
+    @extend %flex;
+    border-top:1px solid $grayLight;
+    margin-top:rem(40);
+    @include wh(auto,rem(75),rem(75));
+
+    .opera{
+      width:100%;
+      text-align: center;
+      @extend %active;
+      border-right:1px solid $grayLight;
+      &:last-child{border-right:none;}
+    }
+  }
+}.sort-filter{
+  background: #fff;
+  overflow: hidden;
+  .item{
+    @extend %flex;
+    padding:0 rem(27);
+    font-size:rem(24);
+    margin-top:rem(30);
+    @include wh(100%,rem(60),rem(60));
+
+    .line{
+      color:gray;
+      margin:0 rem(28);
+    }
+
+    .tit{
+      min-width:rem(116);
+    }
+
+    input{
+      @include wh(100%,rem(60));
+      border: 1px solid $grayLight;
+      text-align:center;
+      @include border-radius(rem(8));
+    }
+  }
+
+  .bottom{
+    @extend %flex;
+    border-top:1px solid $grayLight;
+    margin-top:rem(40);
+    @include wh(auto,rem(75),rem(75));
+
+    .opera{
+      width:100%;
+      text-align: center;
+      @extend %active;
+      border-right:1px solid $grayLight;
+      &:last-child{border-right:none;}
+    }
+  }
+}

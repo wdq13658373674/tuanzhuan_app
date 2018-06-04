@@ -1,0 +1,24 @@
+@import "../../core/base";
+
+/*智能家居-添加设备*/
+.tz-add-device{
+  background: #fff;
+  text-align: center;
+  padding:rem(80) 0;
+
+  .link-icon{
+    display:block;
+    @include wh(100%,rem(258));
+    margin:rem(20) 0 rem(40);
+
+    &.icon1{
+      background: url("../images/img/m_img3.png") center no-repeat;
+      background-size: auto 100%;
+    }
+
+    &.icon2{
+      background: url("../images/img/m_img4.png") center no-repeat;
+      background-size: auto 100%;
+    }
+  }
+}

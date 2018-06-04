@@ -1,0 +1,59 @@
+@import "../../core/base";
+
+/*支付详情*/
+.msg-list{
+  margin-bottom:rem(40);
+  .item{
+    margin-top:rem(40);
+    font-size:rem(24);
+    color:gray;
+  }
+  .con{
+    max-width:80%;
+    word-wrap:break-word;
+  }
+}
+
+/*确认支付*/
+.pay-money{
+  font-size:rem(26);
+  @include wh(100%,100%,rem(102));
+  margin:0 rem(20) 0 rem(27);
+  @extend %ellipsis-basic;
+}
+.pay-list{
+  background: #fff;
+
+  .img{
+    @include wh(rem(73),rem(73));
+    margin-right:rem(25);
+  }
+
+  .item{
+    @extend %flex;
+    @include align-items;
+    padding: rem(25) rem(27);
+    border-bottom: 1px solid $grayLight;
+
+    &:last-child{
+      border-bottom: none;
+    }
+
+    &:active{
+      background: $bg;
+    }
+
+    .p{
+      &:nth-child(1){
+        font-size:rem(28);
+      }
+      &:nth-child(2){
+        font-size:rem(20);
+      }
+    }
+  }
+
+  .cell{
+    @include align-items();
+  }
+}

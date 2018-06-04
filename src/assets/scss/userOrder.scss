@@ -1,0 +1,93 @@
+@import "../../core/base";
+
+.user-order-list{
+  .item{
+    font-size:rem(24);
+    padding:0 rem(27);
+    margin-top:rem(20);
+    background: #fff;
+  }
+
+  .top{
+    @include wh(auto,rem(72),rem(72));
+    border-bottom:1px solid $grayLight;
+
+    span{
+      @include wh(auto,rem(72),rem(72));
+    }
+  }
+
+  .pro{
+    padding:rem(30) 0;
+    @extend %flex;
+    border-bottom:1px solid $grayLight;
+    @extend %active;
+
+    .img-box{
+      border:1px solid $grayLight;
+      background:$grayLight ;
+      @include wh(rem(120),rem(120),rem(120));
+      min-width:rem(120);
+      overflow: hidden;
+
+      img{
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .con-box{
+      width:100%;
+      padding-left:rem(20);
+      overflow:hidden;
+
+      .cell{
+        .tit{
+          width:80%;
+          @extend %ellipsis-basic;
+        }
+        .num{}
+      }
+
+      p{
+        width:100%;
+        @extend %ellipsis-basic;
+      }
+
+      .p2{
+        color:$gray;
+        margin-top:rem(25);
+      }
+      .p3{
+        color:$gray;
+      }
+    }
+  }
+
+  .bottom{
+    @extend %flex;
+    padding-top:rem(20);
+    padding-bottom:rem(20);
+  }
+
+  .bottom2{
+    background: #fff;
+    padding-top:rem(20);
+    padding-bottom:rem(20);
+
+    .link{
+      margin-top:rem(20);
+    }
+  }
+
+  .link{
+    float:right;
+    text-align: center;
+    @include wh(rem(156),rem(50),rem(50));
+    @include border-radius(rem(8));
+    border:1px solid $gray;
+    margin-left:rem(20);
+
+    @extend %active;
+  }
+}

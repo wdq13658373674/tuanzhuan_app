@@ -1,0 +1,180 @@
+@import "../../core/base";
+
+.form-title{
+  margin-top:rem(460);
+  font-size:rem(56);
+  color:#fff;
+}
+
+.input-group{
+  @extend %flex;
+  margin-top:rem(50);
+  border-bottom:1px solid #fff;
+
+  &.no-border{
+    border:none;
+  }
+}
+
+.area-num{
+  color:#fff;
+  position: relative;
+  max-width:rem(99);
+  font-size:rem(24);
+  margin-right:rem(20);
+  border-bottom:1px solid #fff;
+
+  .add{
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    padding: rem(20) 0;
+  }
+
+  .input{
+    width:100%;
+    padding-left:rem(20);
+  }
+}
+
+.input{
+  background: none;
+  padding: rem(20) 0;
+  color:#fff;
+  width:100%;
+  font-size:rem(30);
+  border:none;
+  overflow: hidden;
+
+  &:-moz-placeholder{
+    font-size:rem(24);
+    color:rgb(245, 183, 149);
+  }
+  &::-moz-placeholder{
+    font-size:rem(24);
+    color:rgb(245, 183, 149);
+  }
+  &:-ms-input-placeholder{
+    font-size:rem(24);
+    color:rgb(245, 183, 149);
+  }
+  &::-webkit-input-placeholder{
+    font-size:rem(24);
+    color:rgb(245, 183, 149);
+  }
+}
+
+.input-box{
+  width:100%;
+  border-bottom:1px solid #fff;
+}
+
+.form-btn{
+  @include wh(100%,rem(118),rem(118));
+  border:1px solid #fff;
+  text-align: center;
+  @include border-radius(rem(8));
+  background: none;
+  font-size:rem(30);
+  color:#fff;
+  display: block;
+
+  &:active{
+
+  }
+}
+
+.form-code{
+  font-size:rem(28);
+  min-width:rem(190);
+  color: #fff;
+  padding:rem(20) 0;
+
+  &.disabled{
+    font-size:rem(28);
+    color:rgb(245, 183, 149);
+    background-color: transparent;
+    border:none;
+  }
+}
+.nav-bar{
+  background: none;
+  border-bottom:none;
+}
+
+/*登陆*/
+.login-wrap{
+  position: absolute;
+  @include wh(100%,auto);
+  min-height:100%;
+  top:0;
+  padding:0 rem(27);
+  background:#fd4e15 url("../images/img/a_bg.png") top center no-repeat;
+  background-size: 100% auto;
+  overflow: hidden;
+
+  .form-link{
+    text-align: center;
+    color:#fff;
+    font-size:rem(30);
+
+    .link{
+      color:rgb(245, 255, 0);
+      text-decoration: underline;
+    }
+  }
+
+  .form-phone{
+    color:#fff;
+    font-size:rem(24);
+    text-align: center;
+    margin-top:rem(80);
+    padding:rem(45) 0;
+    border-top:1px solid #fff;
+  }
+
+  .forget{
+    color:rgb(245, 183, 149);
+    padding: rem(20) 0;
+    min-width:rem(100);
+    font-size:rem(24);
+  }
+}
+
+/*注册*/
+.reg-wrap{
+  position: absolute;
+  top:0;
+  @include wh(100%,auto);
+  min-height:100%;
+  padding:0 rem(27);
+  background:#FD6715;
+  overflow: hidden;
+
+  .form-title{
+    margin-top:rem(221);
+  }
+
+  .form-text{
+    @include wh(auto,rem(100),rem(100));
+    .link{
+      float:right;
+      color:#fff;
+      font-size:rem(28);
+    }
+  }
+
+  .form-link{
+    font-size:rem(24);
+    color:#fff;
+    margin-top:rem(50);
+    text-align: center;
+
+    .link{
+      color:#fff;
+      text-decoration: underline;
+      margin-left:rem(10);
+    }
+  }
+}

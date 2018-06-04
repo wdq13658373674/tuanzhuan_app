@@ -1,0 +1,41 @@
+@import "../../core/base";
+
+.user-coupon-empty{
+  position: absolute;
+  top:50%;
+  left:0;
+  right:0;
+  @include wh(100%,rem(225));
+  text-align: center;
+  margin-top:rem(-112);
+
+  img {
+    @include wh(rem(154),rem(152));
+  }
+  p{
+    margin-top:rem(30);
+    font-size:rem(32);
+    text-align: center;
+  }
+}
+
+.user-coupon-list{
+  .item{
+    @include wh(rem(697),rem(226));
+    @include border-radius(rem(8));
+    margin:rem(30) auto 0;
+    overflow: hidden;
+  }
+  .cell{
+    color:#fff;
+    padding:rem(30);
+    background: $primary;
+  }
+  .p{
+    @include wh(100%,rem(65),rem(65));
+    color:$gray;
+    padding:0 rem(30);
+    font-size:rem(24);
+    background: #fff;
+  }
+}

@@ -1,0 +1,51 @@
+@import "../../core/base";
+
+.tz-step{
+  height:rem(151);
+  overflow: hidden;
+
+  .step-list{
+    @extend %flex;
+    background: #fff;
+    padding:rem(30) rem(83);
+    .item{
+      padding:0 rem(14);
+      background: #fff;
+      text-align: center;
+
+      &.active{
+        .circle{
+          border-color:$primary;
+          .dot{
+            background: $primary;
+          }
+        }
+        p{
+          color:$primary;
+        }
+      }
+    }
+
+    .circle{
+      border:1px solid $gray;
+      @include border-radius(50%);
+      @extend %inline-block;
+      .dot{
+        display:block;
+        @include wh(rem(30),rem(30));
+        @include border-radius(50%);
+        background: $gray;
+        border:rem(4) solid #fff;
+      }
+    }
+    p{
+      margin-top:rem(15);
+    }
+  }
+
+  .step-line{
+    @include wh(auto,rem(91));
+    border-top:1px solid $gray;
+    margin:rem(-106) rem(97);
+  }
+}
