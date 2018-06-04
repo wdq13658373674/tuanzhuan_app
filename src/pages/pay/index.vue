@@ -134,7 +134,7 @@
   import BarNav from '@/pages/layout/barNav'
   import {Popup} from 'vux'
   import {mapState} from 'vuex'
-  import Qrcode from '@xkeshi/vue-qrcode'
+  import Qrcode from 'vue-qrcode'
   import EnterPassword from '@/components/enterPassword'
   import gopay from '@/assets/js/payment/gopay'
   const qs = require("querystring");
