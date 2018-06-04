@@ -16,7 +16,7 @@
             <i class="tp"></i>
             <span class="f40 orange">{{orderType?orderInfo.goods_order_tcion:property_tcion}}</span>
             <span class="f32 gray ml20 mr20">或</span>
-            <span class="f40">¥{{orderType?orderInfo.goods_order_price:property_money_sum}}</span>
+            <span class="f40">￥{{orderType?orderInfo.goods_order_price:property_money_sum}}</span>
           </p>
           <p class="mt60 mb40 gray">*您可以选择用团票兑换或者人民币支付</p>
         </div>
@@ -73,7 +73,7 @@
           </div>
           <div class="cell">
             <span class="f28 mr10">我的余额</span>
-            <span class="f16 gray">¥</span>
+            <span class="f16 gray">￥</span>
             <span class="f28 mr10">{{pay_user.user_money}}</span>
             <input type="radio" name="pay" v-model="payType" value="balance" />
             <div class="radio">
@@ -103,7 +103,7 @@
       <div class="bottom-fixed cell">
         <div class="pay-money">
           {{title}}：
-          <span class="orange" v-if="payType=='balance'">¥{{payMoney}}</span>
+          <span class="orange" v-if="payType=='balance'">￥{{payMoney}}</span>
           <span class="orange" v-else-if="payType=='tcion'">{{payMoney}}</span>
           <span class="orange" v-else-if="payType=='ticket'">{{ticketTotal}}</span>
           <span class="orange" v-else>{{payMoney}}</span>
@@ -161,20 +161,20 @@
         payMoney:0,
         pay_list:{
           0:{
-              img:"./static/images/img/c_pay3.svg",
-              title:"支付宝支付",
-              type:"alipay",
+            img:"./static/images/img/c_pay3.svg",
+            title:"支付宝支付",
+            type:"alipay",
           },
           1:{
-              img:"./static/images/img/c_pay4.svg",
-              title:"微信支付",
-              type:"weixin",
+            img:"./static/images/img/c_pay4.svg",
+            title:"微信支付",
+            type:"weixin",
           },
-          2:{
+          /*2:{
               img:"./static/images/img/c_pay5.svg",
               title:"线下支付",
               type:"lixian",
-          }
+          }*/
         },
         orderType: true,  //true:默认商品订单支付，false:物业服务费
         property_money_sum:0,
@@ -182,7 +182,8 @@
         property_ticket: 0,
         qrcodeUrl:'',
         ticketTotal:0,
-        fromUrl:''
+        fromUrl:'',
+        order_numb: 0
       }
     },
     beforeRouteEnter(to, from, next){
@@ -300,31 +301,29 @@
             }
           }else if(this.payType=="lixian"){
             console.log('线下支付')
-
-
           } else {
-            console.log('支付接口');
-            console.log(this.payType);
+            //支付第三方接口
             let _this = this;
-            let type = this.payType;
-            let user_id = this.userInfo.user_id;
-            let total = this.payMoney;
-            let subject = this.paymentType+'充值';
-            console.log(this.paymentType);
-            gopay(subject,total,user_id,type,that.order_id,function(result,source){
+            let type = this.payType;                                //支付类型
+            let user_id = this.userInfo.user_id;                    //用户ID
+            let total = this.payMoney;                              //金额
+            let subject = this.payType+'支付';                       //支付消息
+            let out_trade_no = this.orderInfo.goods_order_numb;     //订单编号
+            gopay(subject,total,user_id,type,out_trade_no,function(result,source){
               if(source=='wap') {
                 location.href = result;
               }else if(source=='app'){
                 console.log(result);
               }else if(source=='wap') {
                 _this.popshow3=false;
-                console.log('生成二维码成功');
+                //生成二维码
                 _this.qrcodeUrl = result;
               }else{
                 if(type=='alipay'){
+                  //支付宝跳转
                   location.href = result;
-                  console.log(result);
                 }else if(type=='weixin'){
+                  //微信跳转
                   location.href = result;
                 }
               }
@@ -361,7 +360,7 @@
        * 获取订单信息
        */
       getOrderInfo:function () {
-      //获取店铺配置信息
+        //获取店铺配置信息
         var that=this;
         let param={
           goods_order_id:that.$route.query.order_id,
