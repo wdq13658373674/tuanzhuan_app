@@ -84,7 +84,7 @@
 <script>
   import {Popup} from 'vux'
   import {mapState} from 'vuex'
-  import Qrcode from '@xkeshi/vue-qrcode'
+  import Qrcode from 'vue-qrcode'
   import PassKeyBord from '@/components/passKeyBord'
   import EnterPassword from '@/components/enterPassword'
   import SelectPayment from '@/components/selectPayment'
