@@ -20,7 +20,7 @@
       <li ref="alipay" @click="selectPayment('alipay', $refs.alipay)">
         <label class="item cell p27">
           <span>支付宝</span>
-          <div>
+          <div class="checkBox">
             <input type="radio" name="pay" value="alipay" checked>
             <div class="radio">
               <i class="check"></i>
@@ -31,7 +31,7 @@
       <li ref="wexin" @click="selectPayment('weixin', $refs.wexin)" >
         <label class="item cell p27">
           <span>微信</span>
-          <div>
+          <div class="checkBox">
             <input type="radio" name="pay" value="wexin" >
             <div class="radio">
               <i class="check"></i>
@@ -42,7 +42,7 @@
 
 
     </ul>
-    <ul class="arrow-cell-list">
+    <!--<ul class="arrow-cell-list">
       <li class="item">
         <router-link to="/user/cards" class="link cell">
           <div>
@@ -51,7 +51,7 @@
           </div>
         </router-link>
       </li>
-    </ul>
+    </ul>-->
   </div>
 </template>
 
@@ -104,12 +104,10 @@
         }else {
           if(type == 'weixin'){
             paymentType = 'weixin';
-            console.log('weixin');
           }
 
           if(type == 'alipay'){
             paymentType = 'alipay';
-            console.log('alipay');
           }
           this.$emit('showPayment',paymentType);
         }
@@ -142,6 +140,10 @@
         background-size: 100% auto;
       }
     }
+  }
+  .checkBox{
+    display: flex;
+    align-items: center;
   }
 </style>
 

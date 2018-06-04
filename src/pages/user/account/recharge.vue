@@ -7,7 +7,7 @@
         </li>
         <li class="item">
           <div class="pay-input">
-            <span class="span">¥</span>
+            <span class="span">￥</span>
             <label class="label"  @click="popshow=true">
               <input class="input" type="text" v-model="val" placeholder="输入充值金额" disabled>
               <i class="icon close" v-show="val!=''" @click="empty"></i>
@@ -34,7 +34,7 @@
           确认付款
         </h1>
         <div class="con">
-          <p class="money">¥{{val}}</p>
+          <p class="money">￥{{val}}</p>
           <div class="type cell">
             <span>订单信息</span>
             <span>团转到家充值</span>
@@ -119,7 +119,6 @@
     methods:{
       /**输入金额*/
       enterMoney(value){
-        console.log(value);
         if(value[0] != 0){
           this.val=value.join('');
         }else {
@@ -146,7 +145,6 @@
         this.popshow2=true;
         this.popshow3=false;
         this.popshow4=false;
-        console.log(type);
         if(type == 'weixin'){
           this.paymentType = '微信';
           this.type = 'weixin';
@@ -159,27 +157,30 @@
         this.popshow2=false;
         this.popshow3=true;
       },
+      //支付第三方接口
       payment(val){
         if(val == 1){
           let _this = this;
-          let type = this.type;
-          let user_id = this.userInfo.user_id;
-          let total = (this.val);
-          let subject = this.paymentType+'充值';
-          gopay(subject,total,user_id,type,function(result,source){
+          let type = this.type;                             //支付类型
+          let user_id = this.userInfo.user_id;              //用户ID
+          let total = (this.val);                           //金额
+          let subject = this.paymentType+'充值';             //支付消息
+          let out_trade_no = '';                            //订单编号
+          gopay(subject,total,user_id,type,out_trade_no,function(result,source){
             if(source=='wap') {
               location.href = result;
             }else if(source=='app'){
               console.log(result);
             }else if(source=='wap') {
+              //生成二维码
               _this.popshow3=false;
-              console.log('生成二维码成功');
               _this.qrcodeUrl = result;
             }else{
               if(type=='alipay'){
+                //支付宝跳转
                 location.href = result;
-                console.log(result);
               }else if(type=='weixin'){
+                //微信跳转
                 location.href = result;
               }
             }

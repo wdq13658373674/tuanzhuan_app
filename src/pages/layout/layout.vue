@@ -31,9 +31,9 @@
       </div>
 
       <!--邻聚-详情页、发布页 -->
-      <a class="link pull-right" v-if="rightNav==='camera'" slot="right">
+      <router-link :to="{name:'NeighborPost'}" class="link pull-right" v-if="rightNav==='camera'" slot="right">
         <i class="icon camera"></i>
-      </a>
+      </router-link>
     </bar-nav>
 
     <div class="layout-page">
