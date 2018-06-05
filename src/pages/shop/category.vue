@@ -9,12 +9,12 @@
       </div>
 
       <div class="shop-filter">
-        <span class="item" @click="tab(0)" :class="{'active':condition.sales}">销量优先</span>
-        <span class="item" @click="tab(1)" :class="{'active':condition.price}">
+        <span class="item" @click="tab(0)" :class="{'active':condition.sales!=''}">销量优先</span>
+        <span class="item" @click="tab(1)" :class="{'active':condition.price!=''}">
           价格排序
           <i class="icon sort" :class="{'up':sortIndex==1 || sortIndex==3,'down':sortIndex==0 || sortIndex==2}"></i>
         </span>
-        <span class="item" @click="tab(2)" :class="{'active':condition.goods_price || condition.goods_price}">
+        <span class="item" @click="tab(2)" :class="{'active':condition.goods_price!='' || condition.goods_price!=''}">
           筛选
           <i class="icon filter"></i>
         </span>
@@ -114,13 +114,12 @@
       }
     },
     computed:{
-      ...mapState(['storeInfo','categoryFilter']),
+      ...mapState(['storeInfo']),
     },
     mounted(){
       this.loadMore();
     },
     methods: {
-      ...mapMutations(['update_category_filter']),
       /**
        * 获取分类搜索列表
        * flag:(true : 表示下拉加载)
@@ -184,7 +183,6 @@
           this.reset();
           this.loadMore();
         }
-        this.update_category_filter(this.condition);
       },
       /**
        * 价格排序
@@ -248,18 +246,7 @@
           p1:this.p3,
           p2:this.p4,
         };
-
-        this.update_category_filter(this.condition);
       },
-      beforeRouteLeave(to, from, next) {
-        const arr=['shopDetail'];
-
-        console.log(to);
-        if (arr.indexOf(to.name)==-1) {
-          this.update_category_filter({});
-        }
-        next();
-      }
     },
   }
 </script>
