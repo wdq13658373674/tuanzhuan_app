@@ -7,9 +7,9 @@
           <tabItem class="tab orange" v-for="(item,index) in tabMenus" :key="index+1" :selected="index===0" @on-item-click="tab">{{item}}</tabItem>
         </tab>
       </div>
-      <a class="link pull-right" slot="right">
+      <router-link :to="{name:'NeighborPost'}" class="link pull-right" slot="right">
         <i class="icon camera"></i>
-      </a>
+      </router-link>
     </BarNav>
 
     <section class="page-group">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="neighbor-content">{{item.bbs_content}}</div>
-            <p class="f28 orange mt20">全文{{index}}</p>
+            <router-link :to="{name:'NeighborDetail',query:{id:item.bbs_id}}" class="f28 orange mt20">全文</router-link>
           </a>
 
           <div class="content" v-if="item.bbs_image.length != 0">
@@ -50,8 +50,8 @@
           <div class="neighbor-bar">
             <div class="box">来自：<span class="orange">活动部落</span></div>
             <div class="box">
-              <i class="icon thumbs1"></i>
-              <i class="icon comment"></i>
+              <i class="icon thumbs1" @click="nice(item)"></i>
+              <i class="icon comment" @click="comment(item)"></i>
             </div>
           </div>
 
@@ -66,9 +66,6 @@
           </div>
         </li>
 
-
-
-
         <li v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
           <load-more class="load-more" tip="正在加载" v-show="load"></load-more>
           <h3 class="no-more mb40" v-show="!load">
@@ -79,12 +76,13 @@
     </section>
 
     <!--发表评论输入框-->
-    <footer>
+    <footer v-if="isComment">
       <div class="footer tz-msg-send">
         <div class="input-group">
-          <textarea name="" id="" cols="30" rows="10" class="input" placeholder="写评论"></textarea>
+          <textarea name="" id="" cols="30" rows="10" class="input" placeholder="写评论" v-model="bbsContent"></textarea>
         </div>
-        <div class="send">发送</div>
+        <div class="send" @click="isComment = false">取消</div>
+        <div class="send" @click="send">发送</div>
       </div>
     </footer>
   </div>
@@ -106,7 +104,7 @@
       LoadMore
     },
     computed:{
-      ...mapState(['roomInfo'])
+      ...mapState(['userInfo','roomInfo'])
     },
     data(){
       return {
@@ -120,83 +118,149 @@
         busy:false,
         load:false,
         flag: false,
+        goodsNum: 0,
+        isComment: false,
+        bbsId:0,
+        bbsContent:''
       }
     },
     mounted(){
       this.loadMore();
     },
-    methods:{
-
-      getBbsIndex(type){
-        let params={
+    methods: {
+      /*获取初始内容*/
+      getBbsIndex(type) {
+        let params = {
           village_id: this.roomInfo.village_id,
           type: type,
           page: this.page
         };
 
-        this.$axios.get(global.API_HOST+'bbs/getBobIndex',{
-          params:params
-        }).then(res=>{
-          res=res.data;
+        this.$axios.get(global.API_HOST + 'bbs/getBobIndex', {
+          params: params
+        }).then(res => {
+          res = res.data;
           /*菜单列表*/
           this.menuList = res.data.type;
 
           /*获取图片*/
-          res.data.bbs.data.map((item, index) =>{
+          res.data.bbs.data.map((item, index) => {
             let slide = [];
             let a = {};
-            item.bbs_image.map((img, i)=>{
+            item.bbs_image.map((img, i) => {
               a = {
-                src: IMG_HOST+img,
-                msrc: IMG_HOST+img,
-                w:600,
-                h:400
+                src: img,
+                msrc: img,
+                w: 600,
+                h: 400
               };
               slide.push(a);
             });
 
-            this.imgList['slide'+index] = slide;
+            this.imgList['slide' + index] = slide;
           });
-
           /*文章列表*/
-          if(res.data!=undefined){
-            if(this.flag){
-              if(res.data.bbs.data.length != 0){
+          if (res.data != undefined) {
+
+            if (this.flag) {
+
+              if (res.data.bbs.data.length != 0 && res.data.bbs.data.length == undefined) {
                 this.bobList.push(res.data.bbs.data);
               }
-              if(this.page >= res.data.bbs.last_page){
-                this.busy=true;
-                this.load=false;
-              }else {
-                this.busy=false;
-                this.load=true;
+              if (this.page >= res.data.bbs.last_page) {
+                this.busy = true;
+                this.load = false;
+              } else {
+                this.busy = false;
+                this.load = true;
               }
-            }else {
+            } else {
               //第一次加载
-              this.bobList=res.data.bbs.data;
-              this.busy=false;
-              this.load=false;
+              this.bobList = res.data.bbs.data;
+              this.busy = false;
+              this.load = false;
               this.flag = true;
             }
           }
           //console.log(this.bobList);
-        }).catch(err=>{
-          console.log('my err:'+err)
+        }).catch(err => {
+          console.log('my err:' + err)
         })
       },
-      tab(type){
+      tab(type) {
         /*选项卡切换*/
-        this.bbs_type = type+1;
+        this.bbs_type = type + 1;
         this.flag = false;
         this.page = 0;
         this.getBbsIndex(this.bbs_type);
       },
       /*下拉加载*/
-      loadMore:function(){
+      loadMore: function () {
         this.busy = true;
         this.load = true;
         this.page++;
         this.getBbsIndex(this.bbs_type);
+      },
+      /*点赞*/
+      nice(item) {
+        let params = {
+          user_id: this.userInfo.user_id,
+          bbs_id: item.bbs_id
+        };
+        this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
+          params: params
+        }).then(res => {
+          res = res.data;
+          if (res.status == 1) {
+            this.$vux.toast.text("您已经点过赞了！");
+          } else {
+            item.bbs_nice += 1;
+            this.$vux.toast.text(res.msg);
+          }
+        }).catch(err => {
+          console.log('my err:' + err)
+        })
+      },
+      /*发送评论*/
+      send() {
+        let params={
+          reply_user_id: this.userInfo.user_id,
+          reply_bbs_id: this.bbsId,
+          reply_content: this.bbsContent
+        };
+
+
+        this.$axios.get(global.API_HOST + 'bbs/add_user_reply', {
+          params: params
+        }).then(res => {
+          res = res.data;
+          if(res.status == 0){
+            this.bobList.map((item, index)=>{
+              if(item.bbs_id == this.bbsId){
+                let bbsContent = {
+                  reply_content:this.bbsContent,
+                  bbs_user: {
+                    user_nickname: this.userInfo.user_nickname
+                  },
+                  reply_user_id: this.userInfo.user_id,
+                  status: 0
+                };
+                item.reply.push(bbsContent);
+              }
+            });
+            this.bbsContent = '';
+            this.isComment = false;
+          }
+        }).catch(err => {
+          console.log('my err:' + err)
+        })
+
+
+
+      },
+      comment(item){
+        this.isComment = true;
+        this.bbsId = item.bbs_id;
       }
     }
   }

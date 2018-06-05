@@ -5,7 +5,7 @@
         <div class="content">
           <div class="neighbor">
             <div class="img-box">
-              <img src="@/assets/images/test/img6.png" alt="">
+              <img class="img" v-lazy="IMG_HOST+BobInfo.user_logo" alt="" />
             </div>
             <div class="con">
               <p class="p1">Marsbaby</p>
@@ -17,10 +17,7 @@
           </div>
 
           <div class="neighbor-content">
-            #30天安利ninebot#
-            +2017.12.28
-            关于你的故事：
-            每当这两个字划过，脑袋就像电影一样，往事也像流星一样。第一次，第二次。啦啦啦啦啦啦啦啦
+            {{BobInfo.bbs_content}}
           </div>
         </div>
 
@@ -133,14 +130,27 @@
     },
     data(){
       return {
-
+        IMG_HOST:global.IMG_HOST || "",
+        BobInfo:{}
       }
     },
     mounted(){
-
+      this.getBobInfo()
     },
     methods:{
-
+      getBobInfo(){
+        let params={
+          bbs_id: this.$route.query.id
+        };
+        this.$axios.get(global.API_HOST + 'bbs/getBobInfo', {
+          params: params
+        }).then(res => {
+          res = res.data;
+          this.BobInfo = res.data;
+        }).catch(err => {
+          console.log('my err:' + err)
+        })
+      }
     }
   }
 </script>

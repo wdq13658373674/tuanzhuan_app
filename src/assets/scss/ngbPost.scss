@@ -1,6 +1,14 @@
 @import "../../core/base";
 
 .tz-neighbor-post{
+  .select-type{
+    margin-top: rem(20);
+    width: 100%;
+    background-color: #fff;
+    padding:rem(12) rem(10);
+    border: rem(1) solid #fd4915;
+    border-radius: rem(8);
+  }
   .textarea{
     width:100%;
     padding:rem(32) 0;

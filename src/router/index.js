@@ -756,17 +756,15 @@ export default new Router({
             default:NeighborDetail,
           }
         },
-        {
-          path: '/neighbor/detail/post',
-          name: 'NeighborPost',
-          meta: {
-            title: '发布动态'
-          },
-          components:{
-            default:NeighborPost,
-          }
-        },
+
       ]
+    },
+    {
+      path: '/neighbor/detail/post',
+      name: 'NeighborPost',
+      components:{
+        default:NeighborPost,
+      }
     },
     {
       path: '/shop/buy/cart',
