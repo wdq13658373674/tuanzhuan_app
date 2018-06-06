@@ -8,7 +8,7 @@
               <img class="img" v-lazy="IMG_HOST+BobInfo.user_logo" alt="" />
             </div>
             <div class="con">
-              <p class="p1">Marsbaby</p>
+              <p class="p1">{{BobInfo.user_nickname}}</p>
               <p class="p2">
                 <em>重庆市-沙坪坝区</em>
                 <span>{{BobInfo.add_time| stampToDate(true)}}</span>
@@ -86,7 +86,8 @@
         <ul class="comment-list">
           <li class="item cell" v-for="(item, index) in BobInfo.reply">
             <div class="img-box">
-              <img src="@/assets/images/test/img6.png" alt="">
+              <!--<img src="@/assets/images/test/img6.png" alt="">-->
+              <img class="img" v-lazy="IMG_HOST+item.bbs_user.user_logo" alt="" />
             </div>
             <div class="con-box">
               <p class="blue">{{item.bbs_user.user_nickname}}</p>
@@ -143,6 +144,7 @@
           params: params
         }).then(res => {
           res = res.data;
+          console.log(res.data);
           /*获取图片*/
           let a= {};
           res.data.bbs_image.map((item, index) => {

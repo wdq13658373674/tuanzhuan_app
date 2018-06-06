@@ -46,7 +46,7 @@
 
       <div class="content mt20">
         <ul class="user-belong-list">
-          <router-link class="item" to="/property/service" tag="li">
+          <router-link class="item" to="/property/service" tag="li" @click="property">
             <p class="p1">物业账单</p>
             <!--<p class="p2">0元</p>-->
             <i class="icon arrow"></i>
@@ -184,6 +184,9 @@
         }).catch(err=>{
           console.log('my err:'+err)
         })
+      },
+      property(){
+        console.log(this.roomLists);
       }
     }
   }

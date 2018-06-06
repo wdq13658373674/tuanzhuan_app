@@ -16,6 +16,17 @@
           <textarea class="textarea" name="" id="" cols="30" rows="8" placeholder="说点什么吧" v-model="content"></textarea>
         </div>
 
+        <div class="addr-item clearfix">
+            <p class="address">{{addr}}</p>
+          <label>
+            <input name="isAddr" class="checkBox" type="checkbox" @click="isAddr = !isAddr">
+            <span class="radio">
+              <i class="check"></i>
+            </span>
+          </label>
+
+        </div>
+
         <div class="upload-img clearfix mt20">
           <!--图片列表-->
           <div class="img-list pull-left">
@@ -49,6 +60,7 @@
   import { Actionsheet, Tab } from 'vux'
   import BarNav from '../layout/barNav'
   import {compressImg} from '@/assets/js/upload/upload'
+  import {getCity} from '@/libs/bMap'
   export default {
     name: "Post",
     components:{
@@ -67,7 +79,9 @@
         content:'',
         imgListUrl:[],
         imgList:[],
-        bobData:[]
+        bobData:[],
+        addr:'',
+        isAddr: false
       }
     },
     mounted(){
@@ -75,6 +89,11 @@
     },
     methods:{
       getType(){
+        let _this = this;
+        getCity(this.roomInfo.lat,this.roomInfo.lng, function (site) {
+          _this.addr = site;
+        });
+
         let params={
           village_id: this.roomInfo.village_id
         };
@@ -152,19 +171,22 @@
           }
         });
 
+        let address = '';
+        if(this.isAddr){
+          address = this.addr;
+        }
+
         let params={
           bbs_type_id: bbs_type_id,
           bbs_image: JSON.parse(JSON.stringify(this.imgList)).join(","),
           bbs_user_id: this.userInfo.user_id,
           bbs_village_id: this.roomInfo.village_id,
-          bbs_content: this.content
+          bbs_content: this.content,
+          bbs_address: address
         };
-
-
         this.$axios.get(global.API_HOST+'bbs/addBbs',{
           params:params
         }).then(res=>{
-          console.log(params);
           res=res.data;
           if(res.status == 0){
             this.$vux.toast.text('发布成功');
@@ -173,15 +195,6 @@
         }).catch(err=>{
           console.log('my err:'+err)
         })
-      },
-
-      /**
-       * 入库
-       */
-      postSave(){
-
-        console.log(params);
-
       }
     }
   }
@@ -216,6 +229,28 @@
     .weui-actionsheet__cell{
       font-size:rem(26);
       padding:rem(34) 0;
+    }
+  }
+
+  .addr-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: rem(60);
+    background-color: #fff;
+    padding:{
+      left: .54rem;
+      right: .54rem;
+    }
+    margin-top: .4rem;
+    .address{
+      flex: 1;
+    }
+    label{
+      input{
+        display: none;
+      }
     }
   }
 </style>

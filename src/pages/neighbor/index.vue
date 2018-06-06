@@ -33,7 +33,7 @@
               <div class="con">
                 <p class="p1">{{item.user_nickname}}</p>
                 <p class="p2">
-                  <em>重庆市-沙坪坝区</em>
+                  <em>{{item.bbs_address}}</em>
                   <span>{{item.add_time | stampToDate(true)}}</span>
                 </p>
               </div>
@@ -50,7 +50,7 @@
           <div class="neighbor-bar">
             <div class="box">来自：<span class="orange">活动部落</span></div>
             <div class="box">
-              <i class="icon thumbs1" @click="nice(item)"></i>
+              <i class="icon thumbs1" :class="item.nice_user_id == null ? '' : 'active' " @click="nice(item)"></i>
               <i class="icon comment" @click="comment(item)"></i>
             </div>
           </div>
@@ -132,6 +132,7 @@
       /*获取初始内容*/
       getBbsIndex(type, type_bbs_id) {
         let params = {
+          user_id: this.userInfo.user_id,
           type_bbs_id: type_bbs_id,
           village_id: this.roomInfo.village_id,
           type: type,
@@ -209,19 +210,21 @@
           user_id: this.userInfo.user_id,
           bbs_id: item.bbs_id
         };
-        this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
-          params: params
-        }).then(res => {
-          res = res.data;
-          if (res.status == 1) {
-            this.$vux.toast.text("您已经点过赞了！");
-          } else {
+
+        if(item.nice_user_id){
+          this.$vux.toast.text("您已经点过赞了！");
+        }else {
+          this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
+            params: params
+          }).then(res => {
+            res = res.data;
             item.bbs_nice += 1;
+            item.nice_user_id = this.userInfo.user_id;
             this.$vux.toast.text(res.msg);
-          }
-        }).catch(err => {
-          console.log('my err:' + err)
-        })
+          }).catch(err => {
+            console.log('my err:' + err)
+          })
+        }
       },
       /*发送评论*/
       send() {

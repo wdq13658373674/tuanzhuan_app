@@ -41,5 +41,25 @@ const getPosition=function(address,callback){
   },'北京市');
 }
 
-export {getCurrentPosition,getPosition}
+
+/**
+ * 经纬度转城市地址
+ *lat：经度
+ *lng: 纬度
+ * callback： 回调函数
+ * */
+const getCity = function (lat,lng,callback) {
+  let point = new BMap.Point(lng,lat);
+  let geoc = new BMap.Geocoder();
+  geoc.getLocation(point, function(rs){
+    //addressComponents对象可以获取到详细的地址信息
+    let addComp = rs.addressComponents;
+    //let site = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+    // console.log(rs);
+    callback(rs.address)
+  });
+}
+
+
+export {getCurrentPosition,getPosition,getCity}
 

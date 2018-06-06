@@ -495,12 +495,12 @@ footer{
     @include wh(rem(27),rem(26));
     background: url("../images/icons/l_icon2.png") center no-repeat;
     background-size: rem(27),rem(26);
-
-    &:active{
+    &.active{
       background: url("../images/icons/l_iconh2.png") center no-repeat;
       background-size: rem(27),rem(26);
     }
   }
+
   &.thumbs2{
     @include wh(rem(27),rem(26));
     background: url("../images/icons/l_icon1.png") center no-repeat;
