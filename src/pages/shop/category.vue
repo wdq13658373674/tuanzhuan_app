@@ -125,7 +125,6 @@
        * flag:(true : 表示下拉加载)
        * **/
       getSearchLists(flag){
-        this.condition=this.categoryFilter;
         this.condition.keyword=this.keyword;
 
         let params={
