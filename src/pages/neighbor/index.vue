@@ -264,6 +264,7 @@
       bbsType(item){
         this.type_bbs_id = item.type_bbs_id;
         this.flag = false;
+        this.page=0;
         this.getBbsIndex(this.bbs_type, this.type_bbs_id);
       }
     }
