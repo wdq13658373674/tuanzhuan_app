@@ -14,7 +14,7 @@
 
     <section class="page-group">
       <div class="neighbor-menu clearfix">
-        <a v-for="(item, index) in menuList" href="#" class="item">
+        <a v-for="(item, index) in menuList" class="item" @click="bbsType(item)">
           <div class="img-box">
             <img class="img" v-lazy="IMG_HOST+item.type_bbs_logo" alt="" />
           </div>
@@ -121,7 +121,8 @@
         goodsNum: 0,
         isComment: false,
         bbsId:0,
-        bbsContent:''
+        bbsContent:'',
+        type_bbs_id:0
       }
     },
     mounted(){
@@ -129,8 +130,9 @@
     },
     methods: {
       /*获取初始内容*/
-      getBbsIndex(type) {
+      getBbsIndex(type, type_bbs_id) {
         let params = {
+          type_bbs_id: type_bbs_id,
           village_id: this.roomInfo.village_id,
           type: type,
           page: this.page
@@ -192,14 +194,14 @@
         this.bbs_type = type + 1;
         this.flag = false;
         this.page = 0;
-        this.getBbsIndex(this.bbs_type);
+        this.getBbsIndex(this.bbs_type, this.type_bbs_id);
       },
       /*下拉加载*/
       loadMore: function () {
         this.busy = true;
         this.load = true;
         this.page++;
-        this.getBbsIndex(this.bbs_type);
+        this.getBbsIndex(this.bbs_type, this.type_bbs_id);
       },
       /*点赞*/
       nice(item) {
@@ -254,13 +256,15 @@
         }).catch(err => {
           console.log('my err:' + err)
         })
-
-
-
       },
       comment(item){
         this.isComment = true;
         this.bbsId = item.bbs_id;
+      },
+      bbsType(item){
+        this.type_bbs_id = item.type_bbs_id;
+        this.flag = false;
+        this.getBbsIndex(this.bbs_type, this.type_bbs_id);
       }
     }
   }

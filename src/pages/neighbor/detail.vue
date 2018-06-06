@@ -11,7 +11,7 @@
               <p class="p1">Marsbaby</p>
               <p class="p2">
                 <em>重庆市-沙坪坝区</em>
-                <span>1小时前</span>
+                <span>{{BobInfo.add_time| stampToDate(true)}}</span>
               </p>
             </div>
           </div>
@@ -22,18 +22,21 @@
         </div>
 
         <ul class="neighbor-thumbs clearfix">
-          <li class="img-box">
-            <img class="img" src="@/assets/images/test/img7.png" alt="">
-          </li>
-          <li class="img-box">
-            <img class="img" src="@/assets/images/test/img7.png" alt="">
-          </li>
-          <li class="img-box">
-            <img class="img" src="@/assets/images/test/img7.png" alt="">
-          </li>
-          <li class="img-box">
-            <img class="img" src="@/assets/images/test/img7.png" alt="">
-          </li>
+          <vue-preview :slides="imgList" ></vue-preview>
+          <!--<li class="img-box" v-for="(item, index) in imgList">-->
+            <!--<img class="img" src="@/assets/images/test/img7.png" alt="">-->
+            <!--<img class="img" v-lazy="IMG_HOST+BobInfo.user_logo" alt="" />-->
+
+          <!--</li>-->
+          <!--<li class="img-box">-->
+            <!--<img class="img" src="@/assets/images/test/img7.png" alt="">-->
+          <!--</li>-->
+          <!--<li class="img-box">-->
+            <!--<img class="img" src="@/assets/images/test/img7.png" alt="">-->
+          <!--</li>-->
+          <!--<li class="img-box">-->
+            <!--<img class="img" src="@/assets/images/test/img7.png" alt="">-->
+          <!--</li>-->
           <!--说明:
               单张图片添加class='simple'
           -->
@@ -45,16 +48,16 @@
         <div class="neighbor-bar">
           <div class="box">来自：<span class="orange">活动部落</span></div>
           <div class="box">
-            <i class="icon thumbs1">
-              <em class="orange">+1</em>
+            <i class="icon thumbs1" @click="nice(BobInfo.bbs_id)">
+              <!--<em class="orange">+1</em>-->
             </i>
-            <i class="icon comment"></i>
+            <i class="icon comment" @click="isComment = true"></i>
           </div>
         </div>
 
         <div class="content total">
-          <span class="mr20 gray">评论 25</span>
-          <span>点赞 16</span>
+          <span class="mr20 gray">评论 {{replyNum}}</span>
+          <span>点赞 {{BobInfo.bbs_nice}}</span>
         </div>
 
         <!--点赞-->
@@ -81,57 +84,51 @@
 
         <!--评论-->
         <ul class="comment-list">
-          <li class="item cell">
+          <li class="item cell" v-for="(item, index) in BobInfo.reply">
             <div class="img-box">
               <img src="@/assets/images/test/img6.png" alt="">
             </div>
             <div class="con-box">
-              <p class="blue">全世界都会给你让路</p>
-              <p class="gray">1小时前</p>
+              <p class="blue">{{item.bbs_user.user_nickname}}</p>
+              <p class="gray">{{item.add_time | stampToDate(true)}}</p>
               <p class="con">
-                只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩
-              </p>
-            </div>
-          </li>
-          <li class="item cell">
-            <div class="img-box">
-              <img src="@/assets/images/test/img6.png" alt="">
-            </div>
-            <div class="con-box">
-              <p class="blue">全世界都会给你让路</p>
-              <p class="gray">1小时前</p>
-              <p class="con">
-                只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩只能在公园玩玩
+                {{item.reply_content || ''}}
               </p>
             </div>
           </li>
         </ul>
       </div>
     </section>
-    <footer>
+    <footer v-if="isComment">
       <div class="footer tz-msg-send">
         <div class="input-group">
-          <textarea name="" id="" cols="30" rows="10" class="input" placeholder="写评论"></textarea>
+          <textarea name="" id="" cols="30" rows="10" class="input" placeholder="写评论" v-model="bbsContent"></textarea>
         </div>
-        <div class="send">发送</div>
+        <div class="send" @click="isComment = false">取消</div>
+        <div class="send" @click="send">发送</div>
       </div>
     </footer>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: "Detail",
     components:{
 
     },
     computed:{
-
+      ...mapState(['userInfo','roomInfo'])
     },
     data(){
       return {
         IMG_HOST:global.IMG_HOST || "",
-        BobInfo:{}
+        BobInfo:{},
+        isComment: false,
+        replyNum:0,
+        bbsContent:'',
+        imgList: [],
       }
     },
     mounted(){
@@ -146,7 +143,69 @@
           params: params
         }).then(res => {
           res = res.data;
+          /*获取图片*/
+          let a= {};
+          res.data.bbs_image.map((item, index) => {
+            a = {
+              src: item,
+              msrc: item,
+              w: 600,
+              h: 400
+            };
+            this.imgList.push(a);
+          });
           this.BobInfo = res.data;
+          this.replyNum = res.data.reply.length;
+        }).catch(err => {
+          console.log('my err:' + err)
+        })
+      },
+      nice(bbsId){
+        let params = {
+          user_id: this.userInfo.user_id,
+          bbs_id: bbsId
+        };
+        this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
+          params: params
+        }).then(res => {
+          res = res.data;
+          if (res.status == 1) {
+            this.$vux.toast.text("您已经点过赞了！");
+          } else {
+            this.BobInfo.bbs_nice += 1;
+            this.$vux.toast.text(res.msg);
+          }
+        }).catch(err => {
+          console.log('my err:' + err)
+        })
+      },
+      /*发送评论*/
+      send() {
+        let params={
+          reply_user_id: this.userInfo.user_id,
+          reply_bbs_id: this.$route.query.id,
+          reply_content: this.bbsContent
+        };
+        this.$axios.get(global.API_HOST + 'bbs/add_user_reply', {
+          params: params
+        }).then(res => {
+          res = res.data;
+          if(res.status == 0){
+
+            let bbsContent = {
+              reply_content:this.bbsContent,
+              bbs_user: {
+                user_nickname: this.userInfo.user_nickname
+              },
+              reply_user_id: this.userInfo.user_id,
+              status: 0,
+              add_time: new Date().getTime()/1000
+            };
+            this.BobInfo.reply.push(bbsContent);
+            console.log(this.BobInfo.reply);
+            this.bbsContent = '';
+            this.isComment = false;
+          }
         }).catch(err => {
           console.log('my err:' + err)
         })
@@ -156,4 +215,24 @@
 </script>
 <style lang="scss">
   @import '../../assets/scss/ngbDetail.scss';
+</style>
+<style lang="scss">
+  @import '../../assets/scss/neighbor.scss';
+
+  .my-gallery figure{
+    background: #fff;
+    margin-top: .4rem;
+    width: 4.32rem;
+    height: 4.32rem;
+    line-height: 4.28rem;
+    border: 1px solid #e8e8e8;
+    float: left;
+    margin-right: .48rem;
+    text-align: center;
+  }
+  .my-gallery figure img{
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 1.6rem;
+  }
 </style>
