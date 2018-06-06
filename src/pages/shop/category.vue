@@ -7,14 +7,13 @@
           title:title
         }}" class="search-link">{{keyword || title}}</router-link>
       </div>
-
       <div class="shop-filter">
-        <span class="item" @click="tab(0)" :class="{'active':condition.sales!=''}">销量优先</span>
-        <span class="item" @click="tab(1)" :class="{'active':condition.price!=''}">
+        <span class="item" @click="tab(0)" :class="{'active':tabIndex==0}">销量优先</span>
+        <span class="item" @click="tab(1)" :class="{'active':tabIndex==1}">
           价格排序
           <i class="icon sort" :class="{'up':sortIndex==1 || sortIndex==3,'down':sortIndex==0 || sortIndex==2}"></i>
         </span>
-        <span class="item" @click="tab(2)" :class="{'active':condition.goods_price!='' || condition.goods_price!=''}">
+        <span class="item" @click="tab(2)" :class="{'active':tabIndex==2}">
           筛选
           <i class="icon filter"></i>
         </span>
@@ -52,7 +51,7 @@
           id:items.goods_id
         }}">
           <div class="img-box">
-            <img class="img" v-lazy="IMG_HOST+items.goods_logo" alt="">
+            <img class="img" v-lazy="items.goods_logo" alt="">
           </div>
           <div class="con-box">
             <p class="title">{{items.goods_name}}</p>
@@ -84,7 +83,7 @@
 </template>
 
 <script>
-  import {mapState,mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
   import infiniteScroll from 'vue-infinite-scroll'
   import { LoadMore} from 'vux'
   export default {
@@ -95,7 +94,6 @@
     },
     data () {
       return {
-        IMG_HOST:global.IMG_HOST || "",
         type_id:this.$route.query.id,
         title:this.$route.query.title,
         keyword:this.$route.query.keyword || '',
@@ -133,7 +131,7 @@
           condition:JSON.stringify(this.condition)
         }
 
-        this.$axios.get(global.API_HOST+'goods/searchAll',{
+        this.$axios.get(global.API_HOST+'/index/goods/searchAll',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -171,7 +169,7 @@
         this.getSearchLists(true);
       },
       /**
-       * tab切换
+       * 筛选切换
        * **/
       tab(index) {
         this.tabIndex=index;
@@ -206,14 +204,18 @@
         this.p3=this.p3 || 0;
         this.p4=this.p4 || 0;
 
-        this.condition.goods_price={
-          p1:this.p1,
-          p2:this.p2,
+        if(this.p1!=0 || this.p2!=0){
+          this.condition.goods_price={
+            p1:this.p1,
+            p2:this.p2,
+          }
         }
 
-        this.condition.goods_tcion={
-          p1:this.p3,
-          p2:this.p4,
+        if(this.p3!=0 || this.p4!=0){
+          this.condition.goods_tcion={
+            p1:this.p3,
+            p2:this.p4,
+          }
         }
 
         this.reset();
@@ -245,7 +247,7 @@
           p1:this.p3,
           p2:this.p4,
         };
-      },
+      }
     },
   }
 </script>
@@ -266,6 +268,10 @@
       height:auto;
     }
   }
+
+  /*.slide-down-box{
+    background: #fff;
+  }*/
 
   .vux-masker-fullscreen {
     position: fixed;
