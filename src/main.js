@@ -7,7 +7,7 @@ import VueLazyload from 'vue-lazyload'
 import App from './App'
 import vueg from 'vueg'
 import 'vueg/css/transition-min.css'
-import {getCurrentPosition} from '@/libs/bMap'
+import {getCurrentPosition,getLocalPosition} from '@/libs/bMap'
 import * as filters from '@/libs/filter'
 import utils from '@/libs/util.js'
 import { ToastPlugin , AlertPlugin ,ConfirmPlugin} from 'vux'
@@ -39,6 +39,11 @@ global.IMG_HOST="http://192.168.1.252";
  * 定位
  * **/
 getCurrentPosition();
+
+/**
+ * 获取当前定位
+ */
+getLocalPosition();
 
 /**
  * 全局过滤器

@@ -61,7 +61,9 @@
   import { Actionsheet, Tab } from 'vux'
   import BarNav from '../layout/barNav'
   import {compressImg} from '@/assets/js/upload/upload'
-  import {getCity} from '@/libs/bMap'
+  import {getCity,getLocalPosition} from '@/libs/bMap'
+
+  const storeJs=require('storejs');
   export default {
     name: "Post",
     components:{
@@ -91,10 +93,15 @@
     methods:{
       getType(){
         let _this = this;
-        getCity(this.roomInfo.lat,this.roomInfo.lng, function (site) {
+        let point = storeJs.get('pointInfo');
+        let nowTime = new Date().getTime()/1000;
+        if(nowTime - point.time >= 300000){
+          getLocalPosition();
+          return false;
+        }
+        getCity(point.lat,point.lng,function (site) {
           _this.addr = site;
         });
-
         let params={
           village_id: this.roomInfo.village_id
         };
@@ -117,14 +124,19 @@
         this.bbsType = this.typeList[key];
       },
       addImg(event){
-        let files = event.target.files[0];
-        this.imgListUrl.push(this.getObjectURL(files));
-        compressImg(event).then(params=>{
-          params.append('imgFile','image');
-          params.append('user_id',this.userInfo.user_id);
+        if(this.imgListUrl.length >= 9 || this.imgList.length >= 9){
+          this.$vux.toast.text('最多只能上传9张图片！');
+        }else {
+          let files = event.target.files[0];
+          this.imgListUrl.push(this.getObjectURL(files));
+          compressImg(event).then(params=>{
+            params.append('imgFile','image');
+            params.append('user_id',this.userInfo.user_id);
 
-          this.upload_ajax(params);
-        });
+            this.upload_ajax(params);
+          });
+        }
+
       },
       /**
        * 上传头像接口

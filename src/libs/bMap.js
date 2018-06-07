@@ -29,6 +29,26 @@ const getCurrentPosition=function(){
   }
 }
 
+
+const getLocalPosition = function () {
+  const geolocation = new BMap.Geolocation();
+  geolocation.getCurrentPosition(function(r){
+    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+      let point={
+        lat:r.point.lat,
+        lng:r.point.lng,
+        time: new Date().getTime()/1000
+      };
+      storeJs.set('pointInfo',point);
+    }
+    else {
+      console.log('定位失败！');
+      return false;
+    }
+  });
+}
+
+
 /**
  * 地址解析转换经纬度
  * address : 地址名称
@@ -40,6 +60,7 @@ const getPosition=function(address,callback){
       callback(point);
   },'北京市');
 }
+
 
 
 /**
@@ -61,5 +82,5 @@ const getCity = function (lat,lng,callback) {
 }
 
 
-export {getCurrentPosition,getPosition,getCity}
+export {getCurrentPosition,getPosition,getCity,getLocalPosition}
 

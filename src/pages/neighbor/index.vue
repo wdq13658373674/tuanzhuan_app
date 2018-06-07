@@ -24,7 +24,7 @@
 
       <ul class="neighbor-msg-list">
         <li class="item" v-for="(item, index) in bobList">
-          <a href="#" class="link">
+          <router-link :to="{name:'NeighborDetail',query:{id:item.bbs_id}}" class="link">
             <div class="neighbor">
               <div class="img-box">
                 <!--<img class="img" src="@/assets/images/test/img6.png" alt="">-->
@@ -41,7 +41,7 @@
 
             <div class="neighbor-content">{{item.bbs_content}}</div>
             <router-link :to="{name:'NeighborDetail',query:{id:item.bbs_id}}" class="f28 orange mt20">全文</router-link>
-          </a>
+          </router-link>
 
           <div class="content" v-if="item.bbs_image.length != 0">
             <vue-preview :slides="imgList['slide'+index]" ></vue-preview>
@@ -57,7 +57,24 @@
 
           <div class="neighbor-comment">
             <p><i class="icon thumbs2"></i>{{item.bbs_nice}}人点赞</p>
-            <ul class="comment-list mt20">
+            <ul class="comment-list mt20" v-if="item.reply.length > 3">
+              <li class="cell">
+                <em>{{item.reply[0].bbs_user.user_nickname}}:</em>
+                <span>{{item.reply[0].reply_content}}</span>
+              </li>
+              <li class="cell">
+                <em>{{item.reply[1].bbs_user.user_nickname}}:</em>
+                <span>{{item.reply[1].reply_content}}</span>
+              </li>
+              <li class="cell">
+                <em>{{item.reply[2].bbs_user.user_nickname}}:</em>
+                <span>{{item.reply[2].reply_content}}</span>
+              </li>
+              <li>
+                <router-link :to="{name:'NeighborDetail',query:{id:item.bbs_id}}" class="seeComment">查看全部评论</router-link>
+              </li>
+            </ul>
+            <ul v-else class="comment-list mt20">
               <li class="cell" v-for="(item_reply, index) in item.reply">
                 <em>{{item_reply.bbs_user.user_nickname}}:</em>
                 <span>{{item_reply.reply_content}}</span>
@@ -303,5 +320,8 @@
     max-width: 100%;
     max-height: 100%;
     min-width: 1.6rem;
+  }
+  .seeComment{
+    color: #fd4915;
   }
 </style>
