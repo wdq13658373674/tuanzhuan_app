@@ -48,7 +48,7 @@
           </div>
 
           <div class="neighbor-bar">
-            <div class="box">来自：<span class="orange">活动部落</span></div>
+            <div class="box">来自：<span class="orange">{{item.type_bbs_title}}</span></div>
             <div class="box">
               <i class="icon thumbs1" :class="item.nice_user_id == null ? '' : 'active' " @click="nice(item)"></i>
               <i class="icon comment" @click="comment(item)"></i>
@@ -144,8 +144,7 @@
         }).then(res => {
           res = res.data;
           if(res.msg == "没有分类"){
-            this.busy = true;
-            this.load = false;
+            this.$vux.toast.text("管理员未设置分类请联系管理员");
           }else{
             /*菜单列表*/
             this.menuList = res.data.type;

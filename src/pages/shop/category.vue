@@ -128,7 +128,6 @@
         if(storeJs.get('condition')){
           this.condition = storeJs.get('condition');
         }
-        console.log(this.condition);
         this.condition.keyword=this.keyword;
         let params={
           goods_store_id:this.storeInfo.store_id,
