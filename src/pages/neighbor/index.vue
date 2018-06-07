@@ -154,11 +154,13 @@
               let slide = [];
               let a = {};
               item.bbs_image.map((img, i) => {
+                let imgs = new Image();
+                imgs.src = img;
                 a = {
                   src: img,
                   msrc: img,
-                  w: 600,
-                  h: 400
+                  w: imgs.width,
+                  h: imgs.height
                 };
                 slide.push(a);
               });

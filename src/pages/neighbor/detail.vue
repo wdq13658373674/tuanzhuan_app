@@ -129,11 +129,13 @@
           if(res.data.bbs_image.length ){
             let a= {};
             res.data.bbs_image.map((item, index) => {
+              let imgs = new Image();
+              imgs.src = item;
               a = {
                 src: item,
                 msrc: item,
-                w: 600,
-                h: 400
+                w: imgs.width,
+                h: imgs.height
               };
               this.imgList.push(a);
             });
@@ -229,5 +231,8 @@
     max-width: 100%;
     max-height: 100%;
     min-width: 1.6rem;
+  }
+  .comment-list{
+    -webkit-animation:none;
   }
 </style>
