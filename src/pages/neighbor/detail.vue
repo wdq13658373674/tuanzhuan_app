@@ -10,8 +10,8 @@
             <div class="con">
               <p class="p1">{{BobInfo.user_nickname}}</p>
               <p class="p2">
-                <em>重庆市-沙坪坝区</em>
-                <span>{{BobInfo.add_time| stampToDate(true)}}</span>
+                <em>{{BobInfo.bbs_address}}</em>
+                <span>{{BobInfo.add_time | stampToDate(true)}}</span>
               </p>
             </div>
           </div>
@@ -46,9 +46,9 @@
         </ul>
 
         <div class="neighbor-bar">
-          <div class="box">来自：<span class="orange">活动部落</span></div>
+          <div class="box">来自：<span class="orange">{{BobInfo.type_bbs_title}}</span></div>
           <div class="box">
-            <i class="icon thumbs1" @click="nice(BobInfo.bbs_id)">
+            <i class="icon thumbs1" :class="BobInfo.nice_user_id == '' || BobInfo.nice_user_id == null?'':'active'" @click="nice(BobInfo)">
               <!--<em class="orange">+1</em>-->
             </i>
             <i class="icon comment" @click="isComment = true"></i>
@@ -60,27 +60,6 @@
           <span>点赞 {{BobInfo.bbs_nice}}</span>
         </div>
 
-        <!--点赞-->
-        <!--<ul class="thumbs-list">
-            <li class="item">
-                <div class="img-box">
-                    <img src="@/assets/images/test/img6.png" alt="">
-                </div>
-                <p>全世界都会给你让路</p>
-            </li>
-            <li class="item">
-                <div class="img-box">
-                    <img src="@/assets/images/test/img6.png" alt="">
-                </div>
-                <p>全世界都会给你让路</p>
-            </li>
-            <li class="item">
-                <div class="img-box">
-                    <img src="@/assets/images/test/img6.png" alt="">
-                </div>
-                <p>全世界都会给你让路</p>
-            </li>
-        </ul>-->
 
         <!--评论-->
         <ul class="comment-list">
@@ -129,7 +108,7 @@
         isComment: false,
         replyNum:0,
         bbsContent:'',
-        imgList: [],
+        imgList: []
       }
     },
     mounted(){
@@ -144,42 +123,48 @@
           params: params
         }).then(res => {
           res = res.data;
-          console.log(res.data);
+
           /*获取图片*/
-          let a= {};
-          res.data.bbs_image.map((item, index) => {
-            a = {
-              src: item,
-              msrc: item,
-              w: 600,
-              h: 400
-            };
-            this.imgList.push(a);
-          });
+          if(res.data.bbs_image.length ){
+            let a= {};
+            res.data.bbs_image.map((item, index) => {
+              a = {
+                src: item,
+                msrc: item,
+                w: 600,
+                h: 400
+              };
+              this.imgList.push(a);
+            });
+          }
+
           this.BobInfo = res.data;
           this.replyNum = res.data.reply.length;
         }).catch(err => {
           console.log('my err:' + err)
         })
       },
-      nice(bbsId){
+      /*点赞*/
+      nice(BobInfo){
         let params = {
           user_id: this.userInfo.user_id,
-          bbs_id: bbsId
+          bbs_id: BobInfo.bbs_id
         };
-        this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
-          params: params
-        }).then(res => {
-          res = res.data;
-          if (res.status == 1) {
-            this.$vux.toast.text("您已经点过赞了！");
-          } else {
+        if(BobInfo.nice_user_id == '' || BobInfo.nice_user_id == null){
+          this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
+            params: params
+          }).then(res => {
+            res = res.data;
             this.BobInfo.bbs_nice += 1;
+            BobInfo.nice_user_id = this.userInfo.user_id;
             this.$vux.toast.text(res.msg);
-          }
-        }).catch(err => {
-          console.log('my err:' + err)
-        })
+          }).catch(err => {
+            console.log('my err:' + err)
+          })
+        }else{
+          this.$vux.toast.text("您已经点过赞了！");
+        }
+
       },
       /*发送评论*/
       send() {

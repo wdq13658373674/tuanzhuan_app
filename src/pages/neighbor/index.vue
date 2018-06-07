@@ -143,48 +143,54 @@
           params: params
         }).then(res => {
           res = res.data;
-          /*菜单列表*/
-          this.menuList = res.data.type;
+          if(res.msg == "没有分类"){
+            this.busy = true;
+            this.load = false;
+          }else{
+            /*菜单列表*/
+            this.menuList = res.data.type;
 
-          /*获取图片*/
-          res.data.bbs.data.map((item, index) => {
-            let slide = [];
-            let a = {};
-            item.bbs_image.map((img, i) => {
-              a = {
-                src: img,
-                msrc: img,
-                w: 600,
-                h: 400
-              };
-              slide.push(a);
+            /*获取图片*/
+            res.data.bbs.data.map((item, index) => {
+              let slide = [];
+              let a = {};
+              item.bbs_image.map((img, i) => {
+                a = {
+                  src: img,
+                  msrc: img,
+                  w: 600,
+                  h: 400
+                };
+                slide.push(a);
+              });
+
+              this.imgList['slide' + index] = slide;
             });
+            /*文章列表*/
+            if (res.data != undefined) {
 
-            this.imgList['slide' + index] = slide;
-          });
-          /*文章列表*/
-          if (res.data != undefined) {
+              if (this.flag) {
 
-            if (this.flag) {
-
-              if (res.data.bbs.data.length != 0 && res.data.bbs.data.length == undefined) {
-                this.bobList.push(res.data.bbs.data);
-              }
-              if (this.page >= res.data.bbs.last_page) {
-                this.busy = true;
-                this.load = false;
+                if (res.data.bbs.data.length != 0 && res.data.bbs.data.length == undefined) {
+                  this.bobList.push(res.data.bbs.data);
+                }
+                if (this.page >= res.data.bbs.last_page) {
+                  this.busy = true;
+                  this.load = false;
+                } else {
+                  this.busy = false;
+                  this.load = true;
+                }
               } else {
+                //第一次加载
+                this.bobList = res.data.bbs.data;
                 this.busy = false;
-                this.load = true;
+                this.load = false;
+                this.flag = true;
               }
-            } else {
-              //第一次加载
-              this.bobList = res.data.bbs.data;
-              this.busy = false;
-              this.load = false;
-              this.flag = true;
             }
           }
+
           //console.log(this.bobList);
         }).catch(err => {
           console.log('my err:' + err)

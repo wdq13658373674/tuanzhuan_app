@@ -8,12 +8,12 @@
         }}" class="search-link">{{keyword || title}}</router-link>
       </div>
       <div class="shop-filter">
-        <span class="item" @click="tab(0)" :class="{'active':tabIndex==0}">销量优先</span>
-        <span class="item" @click="tab(1)" :class="{'active':tabIndex==1}">
+        <span class="item" @click="tab(0)" :class="condition.sales||tabIndex==0?'active':''">销量优先</span>
+        <span class="item" @click="tab(1)" :class="condition.price||tabIndex==1?'active':''">
           价格排序
-          <i class="icon sort" :class="{'up':sortIndex==1 || sortIndex==3,'down':sortIndex==0 || sortIndex==2}"></i>
+          <i class="icon sort" :class="{'up':sortIndex==1 || sortIndex==3 || condition.price == 2 || condition.price == 4,'down':sortIndex==0 || sortIndex==2 || condition.price==1 || condition.price==3}"></i>
         </span>
-        <span class="item" @click="tab(2)" :class="{'active':tabIndex==2}">
+        <span class="item" @click="tab(2)" :class="condition.keyword||tabIndex==2?'active':''">
           筛选
           <i class="icon filter"></i>
         </span>
@@ -86,6 +86,8 @@
   import {mapState} from 'vuex'
   import infiniteScroll from 'vue-infinite-scroll'
   import { LoadMore} from 'vux'
+
+  import storeJs from 'storejs'
   export default {
     name: "ShopCategory",
     directives: {infiniteScroll},
@@ -123,15 +125,18 @@
        * flag:(true : 表示下拉加载)
        * **/
       getSearchLists(flag){
+        if(storeJs.get('condition')){
+          this.condition = storeJs.get('condition');
+        }
+        console.log(this.condition);
         this.condition.keyword=this.keyword;
-
         let params={
           goods_store_id:this.storeInfo.store_id,
           goods_type_id:this.type_id || 0,
           condition:JSON.stringify(this.condition)
         }
 
-        this.$axios.get(global.API_HOST+'/index/goods/searchAll',{
+        this.$axios.get(global.API_HOST+'/goods/searchAll',{
           params:params
         }).then(res=>{
           res=res.data;
@@ -176,6 +181,7 @@
         if(index==0){
           this.condition.price='';
           this.condition.sales=1;
+          storeJs.set('condition', this.condition);
           this.sortIndex=10;
           this.reset();
           this.loadMore();
@@ -190,7 +196,7 @@
 
         this.condition.sales='';
         this.condition.price=index+1;
-
+        storeJs.set('condition', this.condition);
         this.reset();
         this.loadMore();
       },
@@ -217,7 +223,7 @@
             p2:this.p4,
           }
         }
-
+        storeJs.set('condition', this.condition);
         this.reset();
         this.loadMore();
       },
@@ -247,6 +253,7 @@
           p1:this.p3,
           p2:this.p4,
         };
+        storeJs.set('condition', this.condition);
       }
     },
   }

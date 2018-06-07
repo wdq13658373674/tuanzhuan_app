@@ -46,11 +46,11 @@
 
       <div class="content mt20">
         <ul class="user-belong-list">
-          <router-link class="item" to="/property/service" tag="li" @click="property">
+          <a class="item" tag="li" @click="property">
             <p class="p1">物业账单</p>
             <!--<p class="p2">0元</p>-->
             <i class="icon arrow"></i>
-          </router-link>
+          </a>
           <router-link class="item" to="/user/house" tag="li">
             <p class="p1">我的房屋</p>
             <p v-if="roomLists.village_name" class="p2">{{roomLists.village_name}}{{roomLists.unit_name}}{{roomLists.floor_name}}{{roomLists.room_code}}</p>
@@ -156,7 +156,7 @@
       }
     },
     computed:{
-      ...mapState(['userInfo'])
+      ...mapState(['userInfo','roomInfo'])
     },
     mounted(){
       this.getUserLists();
@@ -171,7 +171,7 @@
           params:params
         }).then(res=>{
           res=res.data;
-
+          console.log(res.data);
           if(res.status === 0){
             this.userLists=res.data.village.user;
             this.bankNum = res.data.bank_num;
@@ -187,6 +187,15 @@
       },
       property(){
         console.log(this.roomLists);
+        if(this.roomLists == 0){
+          this.$vux.confirm.show({
+            title: '提示',
+            content: '没有小区',
+            onConfirm(){}
+          });
+        }else {
+          this.$router.push({name: 'PropertyService'});
+        }
       }
     }
   }

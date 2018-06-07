@@ -885,6 +885,9 @@ export default new Router({
     {
       path: '/neighbor',
       name: 'Neighbor',
+      meta: {
+        requireAuth: true,
+      },
       components:{
         default:Neighbor,
       }

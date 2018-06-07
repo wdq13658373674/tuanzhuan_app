@@ -95,6 +95,7 @@
   import {mapState} from 'vuex'
   import Footer from '@/pages/layout/footer'
   import {Clocker,Swiper} from 'vux'
+  import storeJs from 'storejs'
   export default {
     name: "Shop",
     components:{
@@ -144,6 +145,8 @@
       },
       /**获取商品种类**/
       getCategorys:function(){
+
+        storeJs.remove('condition');
         let params={
           lat:this.roomInfo.lat,
           lng:this.roomInfo.lng,
