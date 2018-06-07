@@ -211,8 +211,9 @@
       },
       /*点赞*/
       nice(item) {
+        this.user_id = this.userInfo.user_id;
         let params = {
-          user_id: this.userInfo.user_id,
+          user_id: this.user_id,
           bbs_id: item.bbs_id
         };
 

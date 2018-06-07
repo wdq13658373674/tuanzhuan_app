@@ -32,6 +32,7 @@
           <div class="img-list pull-left">
             <div class="img-box" v-for="(item, index) in imgListUrl">
               <img class="img" v-lazy="item" alt="" />
+              <i class="icon close-black" @click="removeImg(index)">X</i>
             </div>
           </div>
           <!--上传-->
@@ -51,7 +52,7 @@
     </footer>
 
     <!--选择帖子类型 actionSheet-->
-    <actionsheet class="user-action-sheet" v-model="isType" :menus="typeList" @on-click-menu="changeType" show-cancel></actionsheet>
+    <actionsheet class="user-action-sheet" v-model="isType" :menus="typeList" @on-click-menu="changeType" show-cancel @on-click-menu-cancel="changeCancel"></actionsheet>
   </div>
 </template>
 
@@ -195,6 +196,14 @@
         }).catch(err=>{
           console.log('my err:'+err)
         })
+      },
+      changeCancel(){
+        this.bbsType="请选择分类";
+      },
+      removeImg(index){
+        console.log(index);
+        this.imgListUrl.splice(1,index);
+        this.imgList.splice(1,index);
       }
     }
   }
@@ -252,5 +261,20 @@
         display: none;
       }
     }
+  }
+  .img-box{
+    position: relative;
+  }
+  .close-black{
+    position: absolute;
+    width: rem(40);
+    height: rem(40);
+    border-radius: 50%;
+    text-align: center;
+    line-height: rem(40);
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    right: 0;
+    top: 0;
   }
 </style>

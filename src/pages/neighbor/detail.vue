@@ -116,6 +116,7 @@
     },
     methods:{
       getBobInfo(){
+
         let params={
           bbs_id: this.$route.query.id
         };
@@ -137,7 +138,6 @@
               this.imgList.push(a);
             });
           }
-
           this.BobInfo = res.data;
           this.replyNum = res.data.reply.length;
         }).catch(err => {
@@ -150,7 +150,10 @@
           user_id: this.userInfo.user_id,
           bbs_id: BobInfo.bbs_id
         };
-        if(BobInfo.nice_user_id == '' || BobInfo.nice_user_id == null){
+
+        if(BobInfo.nice_user_id == this.userInfo.user_id){
+          this.$vux.toast.text("您已经点过赞了！");
+        }else{
           this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
             params: params
           }).then(res => {
@@ -161,9 +164,14 @@
           }).catch(err => {
             console.log('my err:' + err)
           })
-        }else{
-          this.$vux.toast.text("您已经点过赞了！");
         }
+        //
+        //
+        // if(BobInfo.nice_user_id == '' || BobInfo.nice_user_id == null){
+        //
+        // }else{
+        //   this.$vux.toast.text("您已经点过赞了！");
+        // }
 
       },
       /*发送评论*/

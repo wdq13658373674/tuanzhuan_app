@@ -171,7 +171,6 @@
           params:params
         }).then(res=>{
           res=res.data;
-          console.log(res.data);
           if(res.status === 0){
             this.userLists=res.data.village.user;
             this.bankNum = res.data.bank_num;
