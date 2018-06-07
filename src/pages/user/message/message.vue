@@ -178,7 +178,6 @@
        * params ：接口接收参数
        * **/
       upload_ajax(params){
-        console.log(params);
         this.$axios.post(global.API_HOST+'User/kindUpload',params,{
           headers:{'Content-Type':'multipart/form-data'}//添加请求头
         }).then(res=>{
@@ -186,6 +185,7 @@
 
           if(res.status==0){
             this.userLists.user_logo=res.data;
+            this.$vux.toast.text('头像修改成功');
           }else{
             this.$vux.toast.text('图片过大,上传失败');
           }
