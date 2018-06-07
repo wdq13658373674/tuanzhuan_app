@@ -202,8 +202,8 @@
       },
       removeImg(index){
         console.log(index);
-        this.imgListUrl.splice(1,index);
-        this.imgList.splice(1,index);
+        this.imgListUrl.splice(index,1);
+        this.imgList.splice(index,1);
       }
     }
   }

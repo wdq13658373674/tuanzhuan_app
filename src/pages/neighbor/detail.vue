@@ -66,10 +66,10 @@
           <li class="item cell" v-for="(item, index) in BobInfo.reply">
             <div class="img-box">
               <!--<img src="@/assets/images/test/img6.png" alt="">-->
-              <img class="img" v-lazy="IMG_HOST+item.bbs_user.user_logo" alt="" />
+              <img class="img" v-lazy="IMG_HOST+item.user_logo" alt="" />
             </div>
             <div class="con-box">
-              <p class="blue">{{item.bbs_user.user_nickname}}</p>
+              <p class="blue">{{item.user_nickname}}</p>
               <p class="gray">{{item.add_time | stampToDate(true)}}</p>
               <p class="con">
                 {{item.reply_content || ''}}
@@ -124,18 +124,18 @@
           params: params
         }).then(res => {
           res = res.data;
-
           /*获取图片*/
           if(res.data.bbs_image.length ){
             let a= {};
+
             res.data.bbs_image.map((item, index) => {
-              let imgs = new Image();
-              imgs.src = item;
+              let oImg = new Image();
+              oImg.src = item;
               a = {
                 src: item,
                 msrc: item,
-                w: imgs.width,
-                h: imgs.height
+                w: oImg.width,
+                h: oImg.height
               };
               this.imgList.push(a);
             });
