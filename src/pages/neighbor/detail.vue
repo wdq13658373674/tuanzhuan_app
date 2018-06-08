@@ -148,13 +148,33 @@
       },
       /*点赞*/
       nice(BobInfo){
+        let _this = this;
         let params = {
           user_id: this.userInfo.user_id,
           bbs_id: BobInfo.bbs_id
         };
 
         if(BobInfo.nice_user_id == this.userInfo.user_id){
-          this.$vux.toast.text("您已经点过赞了！");
+
+          _this.$vux.confirm.show({
+            title: '提示',
+            content: '您确定要取消点赞吗！',
+            onConfirm(){
+              _this.$axios.get(global.API_HOST+'bbs/add_user_nice',{
+                params:params
+              }).then(res=>{
+                res=res.data;
+                if(res.status === 0){
+                  BobInfo.bbs_nice -= 1;
+                  BobInfo.nice_user_id = null;
+                  _this.$vux.toast.text(res.msg);
+                }
+              }).catch(err=>{
+                console.log('my err:'+err)
+              })
+            }
+          });
+
         }else{
           this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
             params: params
