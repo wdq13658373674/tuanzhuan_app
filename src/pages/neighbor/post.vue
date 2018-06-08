@@ -94,10 +94,8 @@
       getType(){
         let _this = this;
         let point = storeJs.get('pointInfo');
-        let nowTime = new Date().getTime()/1000;
-        if(nowTime - point.time >= 300000){
+        if(point.lat == null || point.lat == undefined){
           getLocalPosition();
-          return false;
         }
         getCity(point.lat,point.lng,function (site) {
           _this.addr = site;

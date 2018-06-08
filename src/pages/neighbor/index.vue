@@ -230,6 +230,7 @@
       },
       /*点赞*/
       nice(item) {
+        let _this = this;
         this.user_id = this.userInfo.user_id;
         let params = {
           user_id: this.user_id,
@@ -237,15 +238,33 @@
         };
 
         if(item.nice_user_id){
-          this.$vux.toast.text("您已经点过赞了！");
+          _this.$vux.confirm.show({
+            title: '提示',
+            content: '您确定要取消点赞吗！',
+            onConfirm(){
+              _this.$axios.get(global.API_HOST+'bbs/add_user_nice',{
+                params:params
+              }).then(res=>{
+                res=res.data;
+                if(res.status === 0){
+                  item.bbs_nice -= 1;
+                  item.nice_user_id = null;
+                  _this.$vux.toast.text("您已成功取消点赞！");
+                }
+              }).catch(err=>{
+                console.log('my err:'+err)
+              })
+            }
+          });
+
         }else {
-          this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
+          _this.$axios.get(global.API_HOST + 'bbs/add_user_nice', {
             params: params
           }).then(res => {
             res = res.data;
             item.bbs_nice += 1;
             item.nice_user_id = this.userInfo.user_id;
-            this.$vux.toast.text(res.msg);
+            _this.$vux.toast.text(res.msg);
           }).catch(err => {
             console.log('my err:' + err)
           })
