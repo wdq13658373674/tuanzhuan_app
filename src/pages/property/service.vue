@@ -1,5 +1,13 @@
 <template>
   <div>
+    <BarNav title="物业服务费">
+      <span @click="back" class="link pull-left" slot="left">
+          <slot name="leftIcon">
+               <i class="icon arrow2"></i>
+          </slot>
+      </span>
+    </BarNav>
+
     <section class="page-group">
       <router-link :to="{name:'PropertyRoom',query:{room_id:room.room_id}}" tag="h2" class="h2 clearfix">
         <i class="icon home"></i>
@@ -69,10 +77,14 @@
 </template>
 
 <script>
+  import BarNav from '@/pages/layout/barNav'
   import {mapState} from 'vuex'
   const qs = require("querystring")
   export default {
     name: "PropertyService",
+    components:{
+      BarNav
+    },
     data(){
       return {
         propertyList:{},
@@ -84,6 +96,11 @@
         room_id: 0,
         default_roomInfo:{}
       }
+    },
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
     },
     computed:{
       ...mapState(['roomInfo','userInfo']),
@@ -205,6 +222,20 @@
         let room_id = this.$route.query.room_id;
         // 将数据放在当前组件的数据内
         this.room_id = room_id;
+      },
+      back(){
+        if(this.fromUrl == "User"){
+          this.$router.push({
+            name:'User'
+          });
+          return;
+        }else if(this.fromUrl == "PropertyRoom" || this.fromUrl == "PropertyServiceDetail"){
+          this.$router.push({
+            name:'Property'
+          });
+          return;
+        }
+        this.$router ? this.$router.go(-1) : window.history.back();
       }
     },
     watch: {

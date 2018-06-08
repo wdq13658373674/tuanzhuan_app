@@ -185,7 +185,6 @@
         })
       },
       property(){
-        console.log(this.roomLists);
         if(this.roomLists == 0){
           this.$vux.confirm.show({
             title: '提示',

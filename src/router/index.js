@@ -166,15 +166,7 @@ export default new Router({
             title: '物业'
           }
         },
-        {
-          path: '/property/service',
-          name: 'PropertyService',
-          component: PropertyService,
-          meta: {
-            requireAuth: true,
-            title: '物业服务费'
-          }
-        },
+
         {
           path: '/property/service/room',
           name: 'PropertyRoom',
@@ -481,6 +473,7 @@ export default new Router({
             },
           ]
         },
+
         {
           path: '/user/account/recharge',
           name: 'UserRecharge',
@@ -927,6 +920,15 @@ export default new Router({
       },
       components:{
         default:OrderPay,
+      }
+    },
+    {
+      path: '/property/service',
+      name: 'PropertyService',
+      component: PropertyService,
+      meta: {
+        requireAuth: true,
+        title: '物业服务费'
       }
     },
   ]
