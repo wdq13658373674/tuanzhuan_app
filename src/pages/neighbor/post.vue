@@ -94,7 +94,8 @@
       getType(){
         let _this = this;
         let point = storeJs.get('pointInfo');
-        if(point.lat == null || point.lat == undefined){
+        console.log(point);
+        if(point == "undefined"){
           getLocalPosition();
         }
         getCity(point.lat,point.lng,function (site) {
