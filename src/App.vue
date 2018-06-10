@@ -51,7 +51,7 @@ mounted(){
 methods:{
   load_cord(){
 
-    /*检查是否有自动更新*/
+    /*APP端检查是否有自动更新*/
     chcp.fetchUpdate(function(error,data){
       if(!error){
         /*安装自动更新*/
