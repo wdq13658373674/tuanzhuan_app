@@ -9,6 +9,14 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
+        "id": "cordova-hot-code-push-plugin.chcp",
+        "pluginId": "cordova-hot-code-push-plugin",
+        "clobbers": [
+            "chcp"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-badge/www/badge.js",
         "id": "cordova-plugin-badge.Badge",
         "pluginId": "cordova-plugin-badge",
@@ -543,6 +551,7 @@ module.exports.metadata =
 // TOP OF METADATA
 {
     "cordova-alipay-chenyu": "1.1.2",
+    "cordova-hot-code-push-plugin": "1.5.3",
     "cordova-plugin-armsoft-datepicker": "0.8.9",
     "cordova-plugin-badge": "0.8.7",
     "cordova-plugin-bluetooth-status": "1.0.4",
