@@ -129,7 +129,7 @@ header{
   @include wh(100%,rem(88),rem(88));
 }
 footer{
-  @include wh(100%);
+  @include wh(100%,rem(102));
 }
 
 /*footer*/
@@ -295,7 +295,6 @@ footer{
 /*content*/
 .page-group{
   font-size:rem(24);
-  padding-bottom: 2.04rem;
 }
 .content{
   background: #fff;
@@ -312,7 +311,7 @@ footer{
   bottom:0;
   left:0;
   width:100%;
-
+  -webkit-overflow-scroll:touch;
   .btn{
     width:100%;
   }

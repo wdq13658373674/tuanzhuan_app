@@ -327,12 +327,12 @@
   .my-gallery figure{
     background: #fff;
     margin-top: .4rem;
-    width: 4.32rem;
-    height: 4.32rem;
+    width: 4.1rem;
+    height: 4.1rem;
     line-height: 4.28rem;
     border: 1px solid #e8e8e8;
     float: left;
-    margin-right: .48rem;
+    margin-right: .54rem;
     text-align: center;
   }
   .my-gallery figure img{
