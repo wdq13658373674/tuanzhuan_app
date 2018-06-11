@@ -43,7 +43,7 @@ getCurrentPosition();
 /**
  * 获取当前定位
  */
-getLocalPosition();
+//getLocalPosition();
 
 /**
  * 全局过滤器

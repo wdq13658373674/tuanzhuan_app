@@ -118,6 +118,7 @@
       getBobInfo(){
 
         let params={
+          user_id: this.userInfo.user_id,
           bbs_id: this.$route.query.id
         };
         this.$axios.get(global.API_HOST + 'bbs/getBobInfo', {

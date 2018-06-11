@@ -2,7 +2,7 @@
   <div>
     <section class="page-group">
       <ul class="user-income-list">
-        <li v-for="item in listData" class="item">
+        <li v-for="item in listData" class="item"  @click="propShow(item)">
           <p class="p1 cell">
             <span v-if="item.user_money_change_type === 'goods'">消费</span>
             <span v-else-if="item.user_money_change_type === 'refund'">退款</span>
@@ -27,28 +27,34 @@
         </li>
       </ul>
     </section>
+
+    <Invoice v-if="isShow" :childData="childData" @childEvent="close"></Invoice>
   </div>
 </template>
 
 <script>
   import infiniteScroll from 'vue-infinite-scroll'
+  import Invoice from '@/components/invoice'
   import {LoadMore} from 'vux'
   import {mapState} from 'vuex'
   export default {
     name: "IncomeMoney",
     directives: {infiniteScroll},
     components: {
-      LoadMore
+      LoadMore,
+      Invoice
     },
     computed:{
       ...mapState(['userInfo'])
     },
     data() {
       return {
-        listData:[],
-        page:0,
-        busy:false,
-        load:false,
+        listData: [],
+        page: 0,
+        busy: false,
+        load: false,
+        isShow: false,
+        childData:{}
       }
     },
     mounted(){
@@ -92,6 +98,16 @@
         this.load = true;
         this.page++;
         this.list(true);
+      },
+
+      propShow(item){
+        if(item.user_money_change_type === 'recharge'){
+          this.isShow = true;
+          this.childData = item;
+        }
+      },
+      close(Show){
+        this.isShow = Show;
       }
     }
   }

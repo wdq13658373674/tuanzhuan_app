@@ -6,9 +6,8 @@ const storeJs=require('storejs');
 
 let car={
   //当前购物车列表数据
-  cart_list:storeJs('cart_list'+storeJs('roomInfo').village_id)||[],
+  cart_list:storeJs('cart_list')||[],
   order_pay:storeJs('order_pay')||[],
-  old_village_id:storeJs('roomInfo').village_id||0,
 
   /**
    * 增加购物车(本地储存)
@@ -18,25 +17,24 @@ let car={
    * @returns {number}
      */
   addCart(goods_info,cart_sum,prop_id=""){
-    let village_id = storeJs('roomInfo').village_id;
-    let cart_list_vill = storeJs('cart_list'+village_id)||[];
-    if(cart_list_vill.length>0){
+
+    if(this.cart_list.length>0){
       var check=true;
       var stock=0;
-      cart_list_vill.forEach((item,index)=>{
+      this.cart_list.forEach((item,index)=>{
         if(!item.choose_prop_id){
           item.choose_prop_id='';
         }
 
         if(item.goods_id==goods_info.goods_id && item.choose_prop_id==prop_id){
           //console.log("add");
-          if(cart_sum>cart_list_vill[index].goods_stock && cart_list_vill[index].goods_stock>-1){
+          if(cart_sum>this.cart_list[index].goods_stock && this.cart_list[index].goods_stock>-1){
             stock=1;
-            cart_list_vill[index].cart_sum=cart_list_vill[index].goods_stock;
-            storeJs.set('cart_list'+village_id, cart_list_vill);
+            this.cart_list[index].cart_sum=this.cart_list[index].goods_stock;
+            storeJs.set('cart_list', this.cart_list);
           }else{
-            cart_list_vill[index].cart_sum=cart_sum;
-            storeJs.set('cart_list'+village_id, cart_list_vill);
+            this.cart_list[index].cart_sum=cart_sum;
+            storeJs.set('cart_list', this.cart_list);
           }
           check=false;
           return false;
@@ -60,7 +58,6 @@ let car={
       }
       this.setCartList(goods_info,cart_sum,prop_id)
     }
-
   },
 
   /**
@@ -70,11 +67,9 @@ let car={
    * @param prop_id   规格索引,格式 goods_id_index(索引)
    */
   setCartList(goods_info,cart_sum,prop_id){
-    let village_id = storeJs('roomInfo').village_id;
-    let cart_list_vill = storeJs('cart_list'+village_id)||[];
     goods_info.cart_sum=cart_sum;
-    cart_list_vill.push(JSON.parse(JSON.stringify(goods_info)));
-    storeJs.set('cart_list'+village_id, cart_list_vill);
+    this.cart_list.push(JSON.parse(JSON.stringify(goods_info)));
+    storeJs.set('cart_list', this.cart_list);
   },
 
   /**
@@ -86,15 +81,14 @@ let car={
      */
   getCartShopSum(goods_id=0,prop_id="",all=false){
     let catNum=0;
-    let village_id = storeJs('roomInfo').village_id;
-    let cart_list_vill = storeJs('cart_list'+village_id)||[];
-    if(cart_list_vill){
+    //console.log(this.cart_list);
+    if(storeJs('cart_list')){
       if(all){
-        cart_list_vill.find(item=>{
+        this.cart_list.find(item=>{
           catNum+=item.cart_sum;
         });
       }else{
-        cart_list_vill.find(item=>{
+        this.cart_list.find(item=>{
           if(!item.choose_prop_id){
             item.choose_prop_id='';
           }
@@ -107,7 +101,6 @@ let car={
         });
       }
     }
-
     return catNum;
   },
 
@@ -117,16 +110,13 @@ let car={
    * @param key
      */
   setCartStock(stock,key){
-    let village_id = storeJs('roomInfo').village_id;
-    let cart_list_vill = storeJs('cart_list'+village_id)||[];
     if(stock<=0){
       return false;
     }else{
-      cart_list_vill[key].cart_sum=stock;
+      this.cart_list[key].cart_sum=stock;
     }
 
-    storeJs.set('cart_list'+village_id, cart_list_vill);
-
+    storeJs.set('cart_list', this.cart_list);
   },
 
   /**
@@ -137,12 +127,10 @@ let car={
   getMoney(car_index=[]){
     var price=0;
     var tcion=0;
-    let village_id = storeJs('roomInfo').village_id;
-    let cart_list_vill = storeJs('cart_list'+village_id)||[];
     if(car_index.length>0){
       car_index.find(item=>{
-        price+=(cart_list_vill[item].now_price*cart_list_vill[item].cart_sum);
-        tcion+=(cart_list_vill[item].now_tcion*cart_list_vill[item].cart_sum);
+        price+=(this.cart_list[item].now_price*this.cart_list[item].cart_sum);
+        tcion+=(this.cart_list[item].now_tcion*this.cart_list[item].cart_sum);
       });
     }
 
@@ -171,24 +159,20 @@ let car={
    * @returns {{price: number, tcion: number}}
    */
   delGoods(car_index=[]){
-    let village_id = storeJs('roomInfo').village_id;
-    let cart_list_vill = storeJs('cart_list'+village_id)||[];
-
-    if(car_index.length>=cart_list_vill.length){
-      cart_list_vill=[];
-      storeJs.remove("cart_list"+village_id);
+    if(car_index.length>=this.cart_list.length){
+      this.cart_list=[];
+      storeJs.remove("cart_list");
     }else{
       var arr=[];
-      cart_list_vill.find((item,key)=>{
+      this.cart_list.find((item,key)=>{
         if($.inArray(key,car_index)<0){
           arr.push(item);
         }
       });
 
-      cart_list_vill=arr;
-      storeJs.set('cart_list'+village_id, arr);
+      this.cart_list=arr;
+      storeJs.set('cart_list', arr);
     }
-
     storeJs.remove("order_pay");
   },
 
@@ -196,8 +180,7 @@ let car={
    * 清空购物车
    */
   clearCart(){
-    let village_id = storeJs('roomInfo').village_id;
-    storeJs.remove("cart_list"+village_id);
+    storeJs.remove("cart_list");
   },
 };
 

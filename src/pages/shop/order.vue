@@ -205,7 +205,6 @@
 
       } else {
         //选中购物车商品
-        console.log(storeJs.get('buy_goods'));
         this.money = cart.getMoney(cart.order_pay).price;
         this.tcion = cart.getMoney(cart.order_pay).tcion;
         if (cart.order_pay.length > 0) {

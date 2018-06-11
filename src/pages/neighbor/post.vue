@@ -94,13 +94,14 @@
       getType(){
         let _this = this;
         let point = storeJs.get('pointInfo');
-        console.log(point);
-        if(point == "undefined"){
+        if(point == undefined){
           getLocalPosition();
+        }else {
+          getCity(point.lat,point.lng,function (site) {
+            _this.addr = site;
+          });
         }
-        getCity(point.lat,point.lng,function (site) {
-          _this.addr = site;
-        });
+
         let params={
           village_id: this.roomInfo.village_id
         };

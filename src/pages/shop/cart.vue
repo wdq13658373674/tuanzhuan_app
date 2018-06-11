@@ -3,7 +3,7 @@
     <cartNav :select="select" v-on:success="checkCart"></cartNav>
     <section class="page-group">
       <!--购物车为空-->
-      <div class="cart-empty" v-if="!cart_lists.length">
+      <div class="cart-empty" v-if="!cart_lists">
           <p class="p1"><img src="@/assets/images/icons/cart_empty.png" alt=""></p>
           <p class="p2">空空如也？快去挑选宝贝吧</p>
           <p>
@@ -68,9 +68,11 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import cartNav from '@/pages/layout/cartNav'
   import {XNumber} from 'vux'
   import cart from '@/assets/js/shop/cart'
+  const storeJs=require('storejs');
   export default {
     name: "Cart",
     components: {
@@ -80,13 +82,14 @@
     data () {
       return {
         IMG_HOST:global.IMG_HOST || "",
-        cart_lists:cart.cart_list,
+        cart_lists:[],
         price:0,
         tcion:0,
         select:[]
       }
     },
     computed:{
+      ...mapState(['roomInfo']),
       allSelect:{
         /**单选功能**/
         get(){
@@ -107,6 +110,7 @@
       }
     },
     mounted(){
+      this.cart_lists = storeJs('cart_list'+this.roomInfo.village_id);
       var selected=[];
       if(this.cart_lists.length>0){
         this.cart_lists.forEach(function(item,index){
@@ -127,7 +131,7 @@
           return false;
         }
         cart.setCartStock(stock,key);
-        this.cart_lists=cart.cart_list;
+        this.cart_lists=storeJs('cart_list'+this.roomInfo.village_id);
         var money=cart.getMoney(this.select);
         this.price=money.price;
         this.tcion=money.tcion;
@@ -158,7 +162,7 @@
         var money=cart.getMoney([]);
         this.price=money.price;
         this.tcion=money.tcion;
-        this.cart_lists=cart.cart_list;
+        this.cart_lists=storeJs('cart_list'+this.roomInfo.village_id);
         this.select=[];
       }
 

@@ -96,7 +96,7 @@
           params:params
         }).then(res=>{
           res=res.data;
-
+          console.log(res.data);
           if(res.status==0){
             this.addressList=res.data;
           }
