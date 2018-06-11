@@ -1,5 +1,12 @@
 <template>
   <div>
+    <BarNav title="物业">
+      <span @click="back" class="link pull-left" slot="left">
+          <slot name="leftIcon">
+               <i class="icon arrow2"></i>
+          </slot>
+      </span>
+    </BarNav>
     <section class="page-group">
       <h2 class="h2"><i class="icon address mr10"></i>{{roomInfo.village_name}}</h2>
       <div class="menu-property">
@@ -21,12 +28,21 @@
 </template>
 
 <script>
+  import BarNav from '@/pages/layout/barNav'
   import {mapState} from 'vuex'
 
   export default {
     name: "Property",
+    components:{
+      BarNav
+    },
     computed:{
       ...mapState(['roomInfo'])
+    },
+    beforeRouteEnter(to, from, next){
+      next(vm => {
+        vm.fromUrl = from.name;
+      })
     },
     mounted(){
 
@@ -44,6 +60,11 @@
             onConfirm(){}
           });
         }
+      },
+      back(){
+        this.$router.push({
+          name:'Index'
+        });
       }
     }
   }
