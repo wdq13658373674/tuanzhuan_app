@@ -6,9 +6,7 @@ const storeJs=require('storejs');
 
 let car={
   //当前购物车列表数据
-  cart_list:storeJs('cart_list'+storeJs('roomInfo').village_id)||[],
   order_pay:storeJs('order_pay')||[],
-  old_village_id:storeJs('roomInfo').village_id||0,
 
   /**
    * 增加购物车(本地储存)
