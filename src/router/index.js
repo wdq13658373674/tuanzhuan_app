@@ -279,6 +279,7 @@ export default new Router({
           path: '/shop/detail',
           name: 'ShopDetail',
           meta: {
+            requireAuth: true,
             title: '商品详情'
           },
           components:{
