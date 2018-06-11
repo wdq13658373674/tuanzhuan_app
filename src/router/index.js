@@ -159,15 +159,6 @@ export default new Router({
           }
         },
         {
-          path: '/property',
-          name: 'Property',
-          component: Property,
-          meta: {
-            title: '物业'
-          }
-        },
-
-        {
           path: '/property/service/room',
           name: 'PropertyRoom',
           component: PropertyRoom,
@@ -279,6 +270,7 @@ export default new Router({
           path: '/shop/detail',
           name: 'ShopDetail',
           meta: {
+            requireAuth: true,
             title: '商品详情'
           },
           components:{
@@ -751,6 +743,14 @@ export default new Router({
         },
 
       ]
+    },
+    {
+      path: '/property',
+      name: 'Property',
+      component: Property,
+      meta: {
+        title: '物业'
+      }
     },
     {
       path: '/neighbor/detail/post',

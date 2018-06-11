@@ -197,6 +197,24 @@ let car={
     let village_id = storeJs('roomInfo').village_id;
     storeJs.remove("cart_list"+village_id);
   },
+  /**
+   *查询购物车
+   *
+   */
+  query(goods_id, callBack){
+    let village_id = storeJs('roomInfo').village_id;
+    let cart_list_vill = storeJs('cart_list'+village_id)||[];
+    let flag;
+    cart_list_vill.find(item=>{
+      if(item.goods_id == goods_id){
+        flag = false;
+      }else {
+        flag = true;
+      }
+    });
+    callBack(flag);
+  }
+
 };
 
 

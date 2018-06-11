@@ -189,12 +189,13 @@
           address = this.addr;
         }
 
+        let content = this.content.replace(/[\r\n]/g, '<br/>').replace(/[\r]/g, '<br/>').replace(/[\n]/g, '<br/>').replace(/[\s]/g, '&nbsp;');
         let params={
           bbs_type_id: bbs_type_id,
           bbs_image: JSON.parse(JSON.stringify(this.imgList)).join(","),
           bbs_user_id: this.userInfo.user_id,
           bbs_village_id: this.roomInfo.village_id,
-          bbs_content: this.content,
+          bbs_content: content,
           bbs_address: address
         };
         this.$axios.get(global.API_HOST+'bbs/addBbs',{
