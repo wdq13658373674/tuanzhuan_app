@@ -50,12 +50,26 @@ mounted(){
 },
 methods:{
   load_cord(){
-    //cordova.plugins.notification.local.schedule({title:'您好欢迎使用团转到家1'});
 
-    cordova.plugins.notification.local.setDefaults({
-      led: { color: '#FD4915', on: 500, off: 500 },
-      vibrate: true
+    /*APP端检查是否有自动更新*/
+    chcp.fetchUpdate(function(error,data){
+      if(!error){
+        /*安装自动更新*/
+        if(confirm('有新的版本,是否更新?')){
+          chcp.installUpdate(function(error,data){
+            if(!error){
+              console.log('update success');
+            }else{
+              console.log(error);
+            }
+          });
+        }
+      }else{
+        console.log(error);
+      }
     });
+
+    /*注册监听通知点击事件*/
     cordova.plugins.notification.local.on("click", function(notifications,eopt){
       if(typeof notifications.data.outurl != 'undefined' && notifications.data.outurl != ''){
         cordova.InAppBrowser.open(notifications.data.outurl, '_blank', 'location=yes,hideurlbar=yes');
