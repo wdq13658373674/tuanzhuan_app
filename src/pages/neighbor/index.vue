@@ -39,7 +39,7 @@
               </div>
             </div>
 
-            <div class="neighbor-content">{{item.bbs_content}}</div>
+            <div class="neighbor-content" v-html="item.bbs_content"></div>
             <router-link :to="{name:'NeighborDetail',query:{id:item.bbs_id}}" class="f28 orange mt20">全文</router-link>
           </router-link>
 

@@ -68,7 +68,6 @@ let car={
    * @param prop_id   规格索引,格式 goods_id_index(索引)
    */
   setCartList(goods_info,cart_sum,prop_id){
-    console.log(goods_info);
     let village_id = storeJs('roomInfo').village_id;
     let cart_list_vill = storeJs('cart_list'+village_id)||[];
     goods_info.cart_sum=cart_sum;
