@@ -12,13 +12,13 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/':{
-        target:"http://192.168.1.252",
+        target:"http://svr.tuanzhuanw.com",
         changeOrigin:true,
       }
     },
 
     // Various Dev Server settings
-    host: '192.168.1.35', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -43,12 +43,12 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../dist/www/www/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
-    assetsPublicPath: 'http://www.localhost.com/tz/',
+    assetsRoot: path.resolve(__dirname, '../dist/www/www'),
+    assetsSubDirectory: '../../static',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
