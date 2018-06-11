@@ -55,15 +55,13 @@ methods:{
     chcp.fetchUpdate(function(error,data){
       if(!error){
         /*安装自动更新*/
-        if(confirm('有新的版本,是否更新?')){
-          chcp.installUpdate(function(error,data){
-            if(!error){
-              console.log('update success');
-            }else{
-              console.log(error);
-            }
-          });
-        }
+        chcp.installUpdate(function(error,data){
+          if(!error){
+            console.log('update success');
+          }else{
+            console.log(error);
+          }
+        });
       }else{
         console.log(error);
       }

@@ -42,12 +42,12 @@ module.exports = {
   },
 
   build: {
-    // Template for index.html
-    index: path.resolve(__dirname, '../dist/www/www/index.html'),
+    // Template for index.html , update needs directory name is www, APP自动更新文件生成命令需要目录名称为www
+    index: path.resolve(__dirname, '../www/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist/www/www'),
-    assetsSubDirectory: '../../static',
+    assetsRoot: path.resolve(__dirname, '../www'),
+    assetsSubDirectory: 'static',
     assetsPublicPath: './',
 
     /**
