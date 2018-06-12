@@ -210,8 +210,8 @@
         if (cart.order_pay.length > 0) {
           cart.order_pay.find(item => {
             this.cartList.push(storeJs('cart_list'+this.roomInfo.village_id)[item]);
-            this.package_price += parseFloat(this.cartList[item].goods_package_price);
-            this.package_tcion += parseFloat(this.cartList[item].goods_package_tcion);
+            this.package_price += parseFloat(storeJs('cart_list'+this.roomInfo.village_id)[item].goods_package_price);
+            this.package_tcion += parseFloat(storeJs('cart_list'+this.roomInfo.village_id)[item].goods_package_tcion);
           });
           this.money = parseFloat(cart.getMoney(cart.order_pay).price) + this.package_price;
           this.tcion = parseFloat(cart.getMoney(cart.order_pay).tcion) + this.package_tcion;
