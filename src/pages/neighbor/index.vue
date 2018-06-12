@@ -160,7 +160,7 @@
           params: params
         }).then(res => {
           res = res.data;
-          if(res.data){
+          if(res.data.length == ''){
             this.$vux.toast.text("未设置分类或暂未开放邻聚");
             this.busy=true;
             this.load=false;
