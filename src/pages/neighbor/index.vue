@@ -326,19 +326,35 @@
 
   .my-gallery figure{
     background: #fff;
-    margin-top: .4rem;
+    margin: {
+      top: .4rem;
+      left: .35rem;
+      right: .35rem;
+    };
     width: 4.1rem;
     height: 4.1rem;
+    overflow: hidden;
     line-height: 4.28rem;
     border: 1px solid #e8e8e8;
     float: left;
-    margin-right: .54rem;
     text-align: center;
+    &:nth-child(3n+3){
+      margin-right: 0;
+    }
+    &:nth-child(3n+1){
+      margin-left: 0;
+    }
+    a{
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   }
   .my-gallery figure img{
     max-width: 100%;
     max-height: 100%;
     min-width: 1.6rem;
+    vertical-align: center;
   }
   .seeComment{
     color: #fd4915;
