@@ -19,14 +19,14 @@
           <div v-show="qrcodeUrl" style="text-align:center;">
             <barcode :value="qrcodeUrl" :options="{ displayValue: true ,width:'2px',height:'90px',fontSize:'17px'}"></barcode>
           </div>
-          <p id="paymsg" style="font-size:19px;"></p>
+          <p id="paymsg" style="font-size:21px;"></p>
         </div>
       </div>
-      <div style='width:100%;height:168px;background-color:white;z-index:99999;position:fixed;bottom:0;left:0;text-align:center;font-size:19px;' id="scannav">
-        <div style="width:100%;height:42px;border-top:1px solid gray;line-height:42px;display:none;" id="scanopens" @click="scanopen">团 转 扫 码</div>
-        <div style="width:100%;height:42px;border-top:1px solid gray;line-height:42px;" @click="paybar('T',$event)">团转支付码(团票)</div>
-        <div style="width:100%;height:42px;border-top:1px solid gray;line-height:42px;" @click="paybar('Y',$event)">团转支付码(余额)</div>
-        <div style="width:100%;height:42px;border-top:1px solid gray;line-height:42px;" @click="scanclose">取 消</div>
+      <div style='width:100%;height:224px;background-color:white;z-index:99999;position:fixed;bottom:0;left:0;text-align:center;font-size:130%;' id="scannav">
+        <div style="width:100%;height:56px;border-top:1px solid gray;line-height:56px;display:none;" id="scanopens" @click="scanopen">团 转 扫 码</div>
+        <div style="width:100%;height:56px;border-top:1px solid gray;line-height:56px;" @click="paybar('T',$event)">团转支付码(团票)</div>
+        <div style="width:100%;height:56px;border-top:1px solid gray;line-height:56px;" @click="paybar('Y',$event)">团转支付码(余额)</div>
+        <div style="width:100%;height:56px;border-top:1px solid gray;line-height:56px;" @click="scanclose">取 消</div>
       </div>
     </div>
   </header>
