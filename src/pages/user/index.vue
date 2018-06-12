@@ -3,7 +3,7 @@
     <div class="user-header">
       <div class="head-img">
         <div class="img-box">
-          <img v-if="userLists.user_logo" :src="userLists.user_logo" alt="">
+          <img v-if="userLists.user_logo" :src="IMG_HOST+userLists.user_logo" alt="">
           <img src="@/assets/images/icons/u_head.png" alt="" v-else>
         </div>
       </div>
@@ -149,6 +149,7 @@
     },
     data(){
       return {
+        IMG_HOST:global.IMG_HOST || "",
         userLists:0,
         roomLists:0,
         bankNum:0,

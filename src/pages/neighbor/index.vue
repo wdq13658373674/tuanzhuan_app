@@ -160,8 +160,10 @@
           params: params
         }).then(res => {
           res = res.data;
-          if(res.msg == "没有分类"){
-            this.$vux.toast.text("管理员未设置分类请联系管理员");
+          if(res.data){
+            this.$vux.toast.text("未设置分类或暂未开放邻聚");
+            this.busy=true;
+            this.load=false;
           }else{
             /*菜单列表*/
             this.menuList = res.data.type;
