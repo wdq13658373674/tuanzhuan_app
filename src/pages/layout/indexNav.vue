@@ -79,9 +79,9 @@
           cordova.plugins.barcodeScanner.scan(
             function (result) {
               if(!result.cancelled){
-                var io = result.text.indexOf('.com/#/')
-                if(io>-1){
-                  window.location.href = result.text.substring(parseInt(io)+4);
+                var io = result.text.indexOf('#/')
+                if(io==0){
+                  window.location.hash = result.text;
                 }else{
                   alert('扫描结果: '+result.text);
                 }
