@@ -14,7 +14,6 @@ window.cdvfiletxt = function(callback,filename,data,isappend){
           }, function(){
             callback(false,'文件读取失败',{filename:filename});
           });
-          readFile(dirEntry,filename);
         }else{
           fileEntry.createWriter(function (fileWriter) {
             fileWriter.onwriteend = function() {
