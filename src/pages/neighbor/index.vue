@@ -167,7 +167,7 @@
           }else{
             /*菜单列表*/
             this.menuList = res.data.type;
-
+            var that = this;
             /*获取图片*/
             res.data.bbs.data.map((item, index) => {
               let slide = [];
@@ -175,16 +175,17 @@
               item.bbs_image.map((img, i) => {
                 let imgs = new Image();
                 imgs.src = img;
-                a = {
-                  src: img,
-                  msrc: img,
-                  w: imgs.width,
-                  h: imgs.height
+                imgs.onload = function(t){
+                  a = {
+                    src: img,
+                    msrc: img,
+                    w: t.currentTarget.width,
+                    h: t.currentTarget.width
+                  };
+                  slide.push(a);
+                  that.imgList['slide' + index] = slide;
                 };
-                slide.push(a);
               });
-
-              this.imgList['slide' + index] = slide;
             });
             /*文章列表*/
             if (res.data != undefined) {
