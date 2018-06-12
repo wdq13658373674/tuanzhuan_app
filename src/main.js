@@ -94,11 +94,11 @@ axios.interceptors.request.use(function (config) {
   return config;
 });
 
-/**图片懒加载**/
+/**图片懒加载 路径修复**/
 Vue.use(VueLazyload,{
   preLoad: 1.3,
-  error: '../static/images/404.png',
-  loading: '../static/images/loading.gif',
+  error: 'static/images/404.png',
+  loading: 'static/images/loading.gif',
   attempt: 1
 })
 
