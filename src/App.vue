@@ -51,6 +51,9 @@ mounted(){
 methods:{
   load_cord(){
 
+    /*隐藏手机状态栏*/
+    StatusBar.hide();
+
     /*APP端检查是否有自动更新*/
     chcp.fetchUpdate(function(error,data){
       if(!error){
