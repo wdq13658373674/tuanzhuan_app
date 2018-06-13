@@ -91,4 +91,7 @@
   .form-code.disabled{
     background: none;
   }
+  .tz-getcode .form-code{
+    width: auto;
+  }
 </style>

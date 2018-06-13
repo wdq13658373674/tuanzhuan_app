@@ -330,7 +330,6 @@
 
 <style lang="scss">
   @import '../../assets/scss/neighbor.scss';
-
   .my-gallery figure{
     background: #fff;
     margin: {
@@ -366,4 +365,5 @@
   .seeComment{
     color: #fd4915;
   }
+
 </style>
