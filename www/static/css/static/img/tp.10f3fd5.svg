@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="28" viewBox="0 0 60 28">
+    <g fill="none" fill-rule="evenodd">
+        <path stroke="#FD4915" d="M4 .5A3.5 3.5 0 0 0 .5 4v20A3.5 3.5 0 0 0 4 27.5h52a3.5 3.5 0 0 0 3.5-3.5V4A3.5 3.5 0 0 0 56 .5H4z"/>
+        <path stroke="#FD4915" d="M39.5 7.5h15v15h-15z"/>
+        <text fill="#FD4915" font-family="HelveticaNeue, Helvetica Neue" font-size="14" transform="translate(39 7)">
+            <tspan x="4" y="13">T</tspan>
+        </text>
+        <text fill="#FD4915" font-family="MicrosoftYaHei, Microsoft YaHei" font-size="16">
+            <tspan x="5" y="20">团票</tspan>
+        </text>
+    </g>
+</svg>

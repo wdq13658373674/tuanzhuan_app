@@ -103,7 +103,7 @@
     @include wh(auto,rem(70),rem(70));
     padding:0 rem(27);
     .box{
-      width:100%;
+      width:50%;
 
       &:nth-child(1){
         @extend %ellipsis-basic;
@@ -114,7 +114,7 @@
       }
 
       .icon{
-        @include wh(rem(70),100%);
+        @include wh(rem(70),rem(70));
       }
     }
   }
