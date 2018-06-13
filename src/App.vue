@@ -51,8 +51,10 @@ mounted(){
 methods:{
   load_cord(){
 
-    /*隐藏手机状态栏*/
-    StatusBar.hide();
+    /*非IphoneX隐藏手机状态栏*/
+    if(!(/iphone/gi.test(navigator.userAgent) && (screen.height==812 && screen.width==375))){
+      StatusBar.hide();
+    }
 
     /*APP端检查是否有自动更新*/
     chcp.fetchUpdate(function(error,data){
