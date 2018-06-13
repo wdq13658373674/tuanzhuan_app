@@ -162,16 +162,11 @@
       },
       /**获取天气日期**/
       getWeather:function(){
-        const url='https://bird.ioliu.cn/v1?url=';
         let location=this.roomInfo.lng + ',' + this.roomInfo.lat;
-
         const param={
-          location:location,
-          output:'json',
-          ak:'4ChzIxMmmkgsV1uhED0baRa3XsZVG777'
+          location:location
         }
-
-        this.$axios.get(url+'http://api.map.baidu.com/telematics/v3/weather',{
+        this.$axios.get(global.API_HOST+'index/getweather',{
           params:param
         }).then(res=>{
           res=res.data;
