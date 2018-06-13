@@ -176,6 +176,7 @@
                 let imgs = new Image();
                 imgs.src = img;
                 imgs.onload = function(t){
+
                   a = {
                     src: img,
                     msrc: img,
@@ -184,6 +185,9 @@
                   };
                   slide.push(a);
                   that.imgList['slide' + index] = slide;
+                  if(slide.length==i+1){
+                    that.loadMore()
+                  }
                 };
               });
             });
