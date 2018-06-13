@@ -102,7 +102,16 @@ Vue.use(VueLazyload,{
   attempt: 1
 })
 
-Vue.use(VuePreview);
+Vue.use(VuePreview, {
+  mainClass: 'pswp--minimal--dark',
+  barsSize: {top: 0, bottom: 0},
+  captionEl: true,
+  fullscreenEl: false,
+  shareEl: false,
+  bgOpacity: 0.85,
+  tapToClose: true,
+  tapToToggleControls: false
+});
 /**
  * store状态管理
  * **/
