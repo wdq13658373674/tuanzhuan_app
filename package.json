@@ -16,6 +16,7 @@
     "lrz": "^4.9.40",
     "solarlunar": "^2.0.2",
     "storejs": "^1.0.16",
+    "tzclientjs": "^1.0.6",
     "vue": "^2.5.2",
     "vue-barcode": "^1.1.0",
     "vue-infinite-scroll": "^2.0.2",
