@@ -56,6 +56,7 @@
           </div>
 
           <div class="neighbor-comment">
+            {{item.bbs_nice}}
             <p><i class="icon thumbs2"></i>{{item.bbs_nice}}人点赞</p>
             <ul class="comment-list mt20" v-if="item.reply.length > 3">
               <li class="cell">
@@ -167,8 +168,9 @@
           }else{
             /*菜单列表*/
             this.menuList = res.data.type;
-            var that = this;
+            let that = this;
             /*获取图片*/
+            let f = false;
             res.data.bbs.data.map((item, index) => {
               let slide = [];
               let a = {};
@@ -186,11 +188,15 @@
                   slide.push(a);
                   that.imgList['slide' + index] = slide;
                   if(slide.length==i+1){
-                    that.loadMore()
+                    f = true;
+
                   }
                 };
               });
             });
+            if(f){
+              this.loadMore();
+            }
             /*文章列表*/
             if (res.data != undefined) {
 
