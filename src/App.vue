@@ -10,6 +10,7 @@
 import '@/assets/js/public.js'
 import {Loading} from 'vux'
 import {mapState} from 'vuex'
+const storeJs=require('storejs');
 
 export default {
   name: 'App',
@@ -51,12 +52,21 @@ mounted(){
 methods:{
   load_cord(){
 
-    /*IphoneX适配*/
-    if(!(/iphone/gi.test(navigator.userAgent) && (screen.height==812 && screen.width==375))){
-    }
+    /*获取定位*/
+    navigator.geolocation.getCurrentPosition(function(position){
+        storeJs.set('roomInfo',{lat:position.coords.latitude,lng:position.coords.longitude});
+storeJs.set('pointInfo',{lat:position.coords.latitude,lng:position.coords.longitude,time:parseInt(position.timestamp)/1000});
+    }, function(error){
+        console.log("定位失败");
+    });
 
     /*隐藏状态栏*/
     StatusBar.hide();
+
+    /*IphoneX适配*/
+    if((/iphone/gi.test(navigator.userAgent) && (screen.height==812 && screen.width==375))){
+        console.log("你竟然用如此丑陋的苹果X");
+    }
 
     /*APP端检查是否有自动更新*/
     chcp.fetchUpdate(function(error,data){

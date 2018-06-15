@@ -46,9 +46,6 @@
     </section>
 
     <footer>
-      <div class="bottom-fixed tz-neighbor-rule">
-        <a href="#">邻聚管理规则说明</a>
-      </div>
     </footer>
 
     <!--选择帖子类型 actionSheet-->

@@ -34,17 +34,12 @@ global.API_HOST="http://svr.tuanzhuanw.com/index/";
 //全局图片域名地址
 global.IMG_HOST="http://svr.tuanzhuanw.com";
 
-
 /**
- * 定位
- * **/
-getCurrentPosition();
-
-/**
- * 获取当前定位
+ * 网页获取当前定位
  */
-//getLocalPosition();
-
+if(navigator.userAgent.indexOf('Tuanzhuanw')<0){
+    getCurrentPosition();
+}
 /**
  * 全局过滤器
  * **/

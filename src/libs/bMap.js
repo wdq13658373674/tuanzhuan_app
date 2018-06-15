@@ -8,44 +8,49 @@ const getCurrentPosition=function(){
   if(storeJs('roomInfo')){
     return;
   }else {
-    const geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function(r){
-      if(this.getStatus() == BMAP_STATUS_SUCCESS){
-        let point={
-          lat:r.point.lat,
-          lng:r.point.lng,
-        }
-
-        storeJs.set('roomInfo',point);
-
-        router.push('/location');
-      }
-      else {
-        console.log('定位失败！');
-        router.push('/location');
-        return false;
-      }
-    });
+      const geolocation = new BMap.Geolocation();
+      geolocation.getCurrentPosition(function(r){
+         if(this.getStatus() == BMAP_STATUS_SUCCESS){
+             let point={
+                 lat:r.point.lat,
+                 lng:r.point.lng,
+             }
+                                     alert(point.lat);
+             storeJs.set('roomInfo',point);
+         }else {
+             alert('百度地图定位失败！');
+             return false;
+         }
+     });
   }
 }
 
 
 const getLocalPosition = function () {
-  const geolocation = new BMap.Geolocation();
-  geolocation.getCurrentPosition(function(r){
-    if(this.getStatus() == BMAP_STATUS_SUCCESS){
-      let point={
-        lat:r.point.lat,
-        lng:r.point.lng,
-        time: new Date().getTime()/1000
-      };
-      storeJs.set('pointInfo',point);
+    if(navigator.userAgent.indexOf('Tuanzhuanw')<0){
+        const geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+       if(this.getStatus() == BMAP_STATUS_SUCCESS){
+           let point={
+               lat:r.point.lat,
+               lng:r.point.lng,
+               time: new Date().getTime()/1000
+           };
+           storeJs.set('pointInfo',point);
+       }
+       else {
+           console.log('百度地图定位失败！');
+           return false;
+       }
+       });
+    }else{
+        navigator.geolocation.getCurrentPosition(function(position){
+         storeJs.set('pointInfo',{lat:position.coords.latitude,lng:position.coords.longitude,time:parseInt(position.timestamp)/1000});
+         }, function(error){
+         console.log("定位失败");
+             return false;
+         });
     }
-    else {
-      console.log('定位失败！');
-      return false;
-    }
-  });
 }
 
 
