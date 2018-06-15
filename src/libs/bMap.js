@@ -15,10 +15,9 @@ const getCurrentPosition=function(){
                  lat:r.point.lat,
                  lng:r.point.lng,
              }
-                                     alert(point.lat);
              storeJs.set('roomInfo',point);
          }else {
-             alert('百度地图定位失败！');
+             console.log('百度地图定位失败！');
              return false;
          }
      });
