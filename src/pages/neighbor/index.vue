@@ -56,7 +56,6 @@
           </div>
 
           <div class="neighbor-comment">
-            {{item.bbs_nice}}
             <p><i class="icon thumbs2"></i>{{item.bbs_nice}}人点赞</p>
             <ul class="comment-list mt20" v-if="item.reply.length > 3">
               <li class="cell">
