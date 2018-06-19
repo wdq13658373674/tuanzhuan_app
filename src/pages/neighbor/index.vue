@@ -161,6 +161,7 @@
           params: params
         }).then(res => {
           res = res.data;
+          console.log(res.data);
           if(res.data.length == ''){
             this.$vux.toast.text("未设置分类或暂未开放邻聚");
             this.busy=true;
@@ -187,16 +188,14 @@
                   };
                   slide.push(a);
                   that.imgList['slide' + index] = slide;
-                  if(slide.length==i+1){
-                    f = true;
 
-                  }
                 };
               });
             });
-            if(f){
-              this.loadMore();
+            if(this.flag == false){
+              this.loadMore()
             }
+
             /*文章列表*/
             if (res.data != undefined) {
 
