@@ -35,7 +35,7 @@
             <p class="txt">呼叫管家</p>
           </a>
           <router-link to="/intelligent" class="item">
-            <img class="img" src="@/assets/images/icons/menu5.svg" alt="">
+            <img class="img" src="@/assets/images/icons/menu5.png" alt="">
             <p class="txt">智能家居</p>
           </router-link>
         </div>
