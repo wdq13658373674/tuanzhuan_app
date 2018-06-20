@@ -252,7 +252,7 @@
             title: '提示',
             content: '您确定要取消点赞吗！',
             onConfirm(){
-              _this.$axios.get(global.API_HOST+'bbs/add_user_nice',{
+              _this.$axios.get(global.API_HOST+'bbs/del_user_nice',{
                 params:params
               }).then(res=>{
                 res=res.data;
