@@ -378,4 +378,11 @@
       }
     }
   }
+  .tz-xnumber .vux-number-selector{
+    display: flex;
+    align-items: center;
+  }
+  .tz-xnumber .vux-number-selector svg{
+    margin-top: 0;
+  }
 </style>
