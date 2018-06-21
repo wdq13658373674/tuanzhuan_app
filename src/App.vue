@@ -68,21 +68,23 @@ storeJs.set('pointInfo',{lat:position.coords.latitude,lng:position.coords.longit
         console.log("你竟然用如此丑陋的苹果X");
     }
 
-    /*APP端检查是否有自动更新*/
-    chcp.fetchUpdate(function(error,data){
-      if(!error){
-        /*安装自动更新*/
-        chcp.installUpdate(function(error,data){
-          if(!error){
-            console.log('update success');
-          }else{
-            console.log(error);
-          }
-        });
-      }else{
-        console.log(error);
-      }
-    });
+    (function(){
+      /*检查并自动更新*/
+      chcp.fetchUpdate(function(error,data){
+        if(!error){
+          /*安装自动更新*/
+          chcp.installUpdate(function(error,data){
+            if(!error){
+              console.log('update success');
+            }else{
+              console.log(error);
+            }
+          });
+        }else{
+          console.log(error);
+        }
+      });
+    })();
 
     /*注册监听通知点击事件*/
     cordova.plugins.notification.local.on("click", function(notifications,eopt){
