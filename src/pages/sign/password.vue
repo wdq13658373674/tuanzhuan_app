@@ -37,10 +37,9 @@
       ...mapMutations(['update_userInfo','update_roomInfo','update_token']),
       /**注册表单提交*/
       submit:function () {
-          if(this.password==''){
-            this.$vux.toast.show('请输入密码')
-            return;
-          }
+        if(!this.check()){
+          return;
+        }
 
           const params={
             'mobile':this.phone,
@@ -65,6 +64,23 @@
           console.log('my err:'+err);
         })
       },
+      /**表单验证**/
+      check(){
+        let tips='';
+
+        if(this.password==''){
+          tips='请输入密码';
+        }else if(this.password.length < 6){
+          tips='密码至少6位';
+        }
+
+        if(tips==''){
+          return true;
+        }else{
+          this.$vux.toast.text(tips);
+          return false;
+        }
+      }
     }
   }
 </script>
