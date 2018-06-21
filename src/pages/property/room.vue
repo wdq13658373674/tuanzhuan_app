@@ -68,6 +68,6 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../../core/base";
 </style>

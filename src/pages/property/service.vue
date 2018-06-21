@@ -9,12 +9,15 @@
     </BarNav>
 
     <section class="page-group">
-      <router-link :to="{name:'PropertyRoom',query:{room_id:room.room_id}}" tag="h2" class="h2 clearfix">
-        <i class="icon home"></i>
-        <span class="mr10">{{room.village_name}}</span>
-        <span class="mr10">{{room.unit_name}}</span>
-        <span class="mr10">{{room.floor_name}}</span>
-        <span class="mr10">{{room.room_code}}号</span>
+      <router-link :to="{name:'PropertyRoom',query:{room_id:room.room_id}}" tag="h2" class="h2">
+        <div class="name">
+          <i class="icon home pull-left mr10"></i>
+          <span class="mr10">{{room.village_name}}</span>
+          <span class="mr10">{{room.unit_name}}</span>
+          <span class="mr10">{{room.floor_name}}</span>
+          <span class="mr10">{{room.room_code}}号</span>
+        </div>
+
         <span class="change">切换</span>
       </router-link>
 
@@ -243,6 +246,6 @@
     }
   }
 </script>
-<style lang="css">
+<style lang="css" scoped>
   @import '../../assets/css/property.css';
 </style>

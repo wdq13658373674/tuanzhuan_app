@@ -8,20 +8,24 @@
       </span>
     </BarNav>
     <section class="page-group">
-      <h2 class="h2"><i class="icon address mr10"></i>{{roomInfo.village_name}}</h2>
+      <h2 class="h2">
+        <span>
+          <i class="icon address mr10"></i>{{roomInfo.village_name}}
+        </span>
+      </h2>
       <div class="menu-property">
         <a class="menu" @click="isRoom">
           <img class="img" src="@/assets/images/img/c_img3.svg" alt="">
           <p class="p">物业服务费</p>
         </a>
-        <a class="menu" href="#">
+        <router-link class="menu" :to="{name:'CarBill'}">
           <img class="img" src="@/assets/images/img/c_img1.svg" alt="">
           <p class="p">预交停车费</p>
-        </a>
-        <a class="menu" href="#">
+        </router-link>
+        <router-link class="menu" :to="{name:'CarPay'}">
           <img class="img" src="@/assets/images/img/c_img2.svg" alt="">
           <p class="p">临停缴费</p>
-        </a>
+        </router-link>
       </div>
     </section>
   </div>
@@ -69,6 +73,6 @@
     }
   }
 </script>
-<style lang="css">
+<style lang="css" scoped>
   @import '../../assets/css/property.css';
 </style>
