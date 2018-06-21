@@ -16,7 +16,7 @@
             </div>
           </div>
 
-          <div class="neighbor-content" v-html="item.BobInfo.bbs_content"></div>
+          <div class="neighbor-content" v-html="BobInfo.bbs_content"></div>
         </div>
 
         <ul class="neighbor-thumbs clearfix">
@@ -238,12 +238,14 @@
   .my-gallery figure{
     background: #fff;
     margin-top: .4rem;
+    margin-left: .35rem;
+    margin-right: .35rem;
     width: 4.1rem;
     height: 4.1rem;
+    overflow: hidden;
     line-height: 4.28rem;
     border: 1px solid #e8e8e8;
     float: left;
-    margin-right: .48rem;
     text-align: center;
   }
   .my-gallery figure img{
