@@ -16,9 +16,7 @@
             </div>
           </div>
 
-          <div class="neighbor-content">
-            {{BobInfo.bbs_content}}
-          </div>
+          <div class="neighbor-content" v-html="item.BobInfo.bbs_content"></div>
         </div>
 
         <ul class="neighbor-thumbs clearfix">
