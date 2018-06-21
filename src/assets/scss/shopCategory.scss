@@ -48,21 +48,6 @@
     padding:0 30px;
     &.active{
       color:$primary;
-
-      &:nth-child(2){
-        background: url("../images/icons/sort2.svg") center right no-repeat;
-        background-size: rem(18),rem(26);
-      }
-    }
-
-    &:nth-child(2){
-      background: url("../images/icons/sort2.svg") center right no-repeat;
-      background-size: rem(18),rem(26);
-    }
-
-    &:nth-child(3){
-      background: url("../images/icons/filter.svg") center right no-repeat;
-      background-size: rem(17),rem(20);
     }
   }
 }
