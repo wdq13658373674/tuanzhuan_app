@@ -31,6 +31,11 @@ import LifeGas from '@/pages/life/gas'
 import LifeCheckDetail from '@/pages/life/detail'
 import LifePay from '@/pages/life/pay'
 
+/**停车缴费**/
+import CarBill from '@/pages/car/bill'
+import CarPay from '@/pages/car/pay'
+import CarSearch from '@/pages/car/search'
+
 /**邻聚**/
 import Neighbor from '@/pages/neighbor/index'
 import NeighborDetail from '@/pages/neighbor/detail'
@@ -234,6 +239,36 @@ export default new Router({
           },
           components:{
             default:LifePay
+          }
+        },
+        {
+          path: '/car/bill',
+          name: 'CarBill',
+          meta: {
+            title: '我的停车信息'
+          },
+          components:{
+            default:CarBill
+          }
+        },
+        {
+          path: '/car/pay',
+          name: 'CarPay',
+          meta: {
+            title: '临停缴费'
+          },
+          components:{
+            default:CarPay
+          }
+        },
+        {
+          path: '/car/pay/search',
+          name: 'CarSearch',
+          meta: {
+            title: '我的停车信息'
+          },
+          components:{
+            default:CarSearch
           }
         },
         {
