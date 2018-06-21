@@ -38,7 +38,7 @@ mounted(){
         /*websocket加入组*/
         wsocket.doSend({controller:'index',action:'joinGroup',result:{groupname:'house'}});
       },
-      {url:'ws://svr.tuanzhuanw.com:8282',token:{token:that.token.token},jsdoc:'./static/wm/'}
+      {url:'ws://192.168.1.252:8282'/* ws:svr.tuanzhuanw.com:8282 */,token:{token:that.token.token},jsdoc:'./static/wm/'}
     );
   }
 

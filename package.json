@@ -78,5 +78,11 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".postcssrc.js",
+  "repository": {
+    "type": "git",
+    "url": "http://git.fjhok.com/tecg2/tuanzhuan_app"
+  },
+  "license": "ISC"
 }
