@@ -19,7 +19,7 @@
           禁止点击状态；disabled
       -->
       <div class="btn-box">
-        <button type="submit" class="btn btn-orange mt60" @click="submit">进入</button>
+        <button type="submit" class="btn btn-orange mt60" @click.prevent="submit">进入</button>
       </div>
     </form>
   </section>

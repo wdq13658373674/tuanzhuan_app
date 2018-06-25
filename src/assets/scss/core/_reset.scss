@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+*,::before,::after{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  -webkit-touch-callout:none;
+  -webkit-text-size-adjust:none;
+  -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+  //  -webkit-user-select:none;
+  outline: none;
+}
+
+html, body {
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+}
+body {
+  font-family: $baseFontFamily;
+  font-size: rem($baseFontSize);
+  line-height:$baseLineHeight;
+  color: $black;
+  outline: 0;
+  background-color: $bg;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+
+}
+input, textarea, select, button {
+  font-size:100%;
+  outline:none;
+}
+input[type='text'],input[type='password'],input[type='number']{
+  border:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+}
+input[disabled]{color:#000;opacity:1}
+button,input,select,textarea {
+  font: inherit;
+  color: inherit;
+  border:none;
+  background: none;
+  outline: none;
+}
+
+a {
+  color: $black;
+  outline: none;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  &:hover{text-decoration: none;}
+  &:visited{text-decoration: none;}
+}
+ul,ol{
+  list-style:none;
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0
+}
+fieldset,img {
+  border:0
+}
+img{vertical-align: middle;}
+sub,sup{
+  font-size:75%;
+  line-height:0;
+  position:relative;
+  vertical-align:baseline
+}
+sup {
+  top:-.5em
+}
+sub {
+  bottom:-.25em
+}
+
+i, em {
+  font-style: normal;
+}
+
+h1,h2,h3,h4,h5{
+  font-weight: 300;
+  font-size:rem(22);
+}
+
+@if nth($placeholder,1) {
+  // Firefox 4-18
+  input:-moz-placeholder,
+  textarea:-moz-placeholder {
+    color: nth($placeholder,2);
+  }
+  // Firefox 19+
+  input::-moz-placeholder,
+  textarea::-moz-placeholder{
+    color: nth($placeholder,2);
+  }
+  // Internet Explorer 10+
+  input:-ms-input-placeholder,
+  textarea:-ms-input-placeholder{
+    color: nth($placeholder,2);
+  }
+  // Safari and Chrome
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder{
+    color: nth($placeholder,2);
+  }
+}
+
+i{
+  @extend %inline-block;
+}
+
+ul{
+  list-style-position: inside !important;
+}

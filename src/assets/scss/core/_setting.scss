@@ -1,0 +1,91 @@
+@charset "UTF-8";
+//-----------------------------------------------------	
+// setting scss
+//-----------------------------------------------------	
+
+// 开关设置
+//-----------------------------------------------------	
+$lte7: false !default; //是否兼容ie6-7
+$filter: false !default; //是否为ie6-8开启css3滤镜兼容，常用于渐变背景
+$printStyleSwitch: false !default; //是否开启打印样式
+
+// font相关
+//-----------------------------------------------------
+$rem: 50 !default;
+$baseFontSize: 24 !default;
+$baseLineHeight: 1.5 !default;
+$baseFontFamily: "Microsoft YaHei", "Helvetica Neue", Helvetica, sans-serif !default;
+$fontCn: "SimSun"; //宋体
+$fontHeiTi: "SimHei"; //黑体
+
+// 元素上下间距
+//-----------------------------------------------------	
+$baseGap: 20px !default;
+
+// 基本颜色
+// color function : http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html
+// lighten($color, $amount)
+// darken($color, $amount)
+// opacify($color, $amount)
+// mix($color1, $color2[, $amount])
+//-----------------------------------------------------	
+$bg: #f4f4f4 !default;
+
+$black: #464646 !default;
+$white: #fff !default;
+
+$gray: #999999 !default;
+$grayDark: #9f9f9f !default;
+$grayDarker: #bbbbbb !default;
+$grayLight: #e8e8e8 !default;
+$grayLighter: #f2f2f2 !default;
+
+$green: #5cb85c !default;
+$yellow: #FEA413 !default;
+$pink: #e57a7b !default;
+$red: #DE3909 !default;
+$blue: rgb(88,164,232) !default;
+
+$blueDark: #0064cd !default;
+$orange: #F47837 !default;
+$purple: #7a43b6 !default;
+
+$primary: #fd4915 !default; //主色
+
+// link
+//-----------------------------------------------------	
+// 如果只有一个值则滑过的值为这个值的darken 5%，如果
+// 有两个值则第二个值为滑过的值
+$linkColor: #08c !default;
+
+// scaffolding
+//-----------------------------------------------------	
+$bodyBgColor: $white !default;
+$textColor: $grayDarker !default;
+
+// placeholder
+//-----------------------------------------------------	
+// 变量分别为：是否输出表单的占位符placeholder样式，文本色
+$placeholder: true $grayDarker !default;
+
+// 交互配色
+// 警告，错误，成功，提示
+//-----------------------------------------------------	
+// 每个变量都有三个颜色值，分别为：文本色，背景色，边框色
+$warningColor: #514721 #FFF6BF #FFD324 !default;
+$errorColor: #8A1F11 #FBE3E4 #FBC2C4 !default;
+$successColor: #264409 #E6EFC2 #C6D880 !default;
+$infoColor: #205791 #D5EDF8 #92CAE4 !default;
+
+// radius
+//-----------------------------------------------------
+$baseRadius: 5px !default;
+$smallRadius: 3px !default;
+
+// z-index
+//-----------------------------------------------------
+$zindexDropdown: 10 !default;
+$zindexFixedTopbar: 20 !default;
+$zindexTooltip: 30 !default;
+$zindexAlert: 40 !default;
+$zindexModal: 50 !default;
